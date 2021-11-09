@@ -1,7 +1,8 @@
+import { ReactElement } from "react";
 import "./App.css";
 
-function App() {
+const App: React.FC = (): ReactElement => {
   return <div className="App">Hello world</div>;
-}
+};
 
 export default App;
