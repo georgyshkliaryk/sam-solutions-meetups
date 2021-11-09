@@ -21,8 +21,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint --ext .ts,.tsx src --fix",
+    "precommit": "lint-staged",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,json,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": false,
@@ -49,6 +56,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.4.1"
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.1"
   }
 }
