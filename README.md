@@ -2,15 +2,15 @@
 
 Full-stack web application built by Heorhi Shkliaryk for Sam-Solutions FE Internship.
 
-Technologies used in the project:
--React
--TypeScript
--MobX (?)
--ESLint
--Prettier
+Technologies used in the project:  
+-React  
+-TypeScript  
+-MobX (?)  
+-ESLint  
+-Prettier  
 -SCSS (?)
 
-Server is already built with NodeJs 16.x LTS + Express: https://gitlab.com/saminternship/meetups-api, but can be expanded by interns.
+Server is already built with NodeJs 16.x LTS + Express: https://gitlab.com/saminternship/meetups-api, but can be expanded by interns.  
 Figma layout for the project: https://www.figma.com/file/xu4vtVzCyKp9Thzpp7DkVj/Internship-Meetups-App?node-id=129%3A0
 
 ## Available Scripts
