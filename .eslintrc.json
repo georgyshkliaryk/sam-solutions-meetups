@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "react-app",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended", 
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2021,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "settings": {
+        "react": {
+          "pragma": "React",
+          "version": "^17.0.2"
+        }
+      },
+    "rules": {
+        "no-nonoctal-decimal-escape": 1,
+        "no-console": 1,
+        "react/react-in-jsx-scope": 0,
+        "@typescript-eslint/ban-ts-comment": 0,
+        "@typescript-eslint/ban-types": 0
+    }
+}
