@@ -21,14 +21,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint --ext .ts,.tsx src --fix",
-    "precommit": "lint-staged",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,json,scss}": [
       "prettier --write",
-      "git add"
+      "git add ."
     ]
   },
   "prettier": {
@@ -50,7 +54,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
-    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",
