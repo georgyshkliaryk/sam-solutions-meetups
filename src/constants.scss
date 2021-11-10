@@ -1,0 +1,17 @@
+@mixin font-normal {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
+@mixin gradient {
+  background: linear-gradient(63.5deg, #8065ec 16.63%, #314ad7 83.37%);
+}
+
+@mixin color-primary1 {
+  background: #8065ec;
+}
+
+@mixin color-primary2 {
+  background: #314ad7;
+}

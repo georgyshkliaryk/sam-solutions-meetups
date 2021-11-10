@@ -1,0 +1,9 @@
+@import "../../../constants.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 4.375rem;
+  @include gradient;
+  box-shadow: 0px 4px 8px rgba(60, 72, 97, 0.2);
+}
