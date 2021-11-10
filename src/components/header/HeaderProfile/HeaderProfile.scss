@@ -1,0 +1,18 @@
+.header-profile-wrapper {
+  display: flex;
+  align-items: center;
+  line-height: 19px;
+  width: 20rem;
+  justify-content: right;
+}
+
+.header-profile-wrapper__text {
+  margin-right: 0.75rem;
+  display: none;
+}
+
+@media (min-width: 950px) {
+  .header-profile-wrapper__text {
+    display: block;
+  }
+}

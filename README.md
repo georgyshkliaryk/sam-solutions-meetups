@@ -8,10 +8,17 @@ Technologies used in the project:
 -MobX (?)  
 -ESLint  
 -Prettier  
--SCSS (?)
+-SCSS
 
 Server is already built with NodeJs 16.x LTS + Express: https://gitlab.com/saminternship/meetups-api, but can be expanded by interns.  
 Figma layout for the project: https://www.figma.com/file/xu4vtVzCyKp9Thzpp7DkVj/Internship-Meetups-App?node-id=129%3A0
+
+## Quick start:
+
+`npm i`  
+This will install all required dependencies to start the app.  
+`npm start`  
+This will start the app in the development mode.
 
 ## Available Scripts
 
