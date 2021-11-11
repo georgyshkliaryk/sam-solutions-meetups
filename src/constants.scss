@@ -13,10 +13,16 @@
   background: #8065ec;
 }
 
+$color-primary1: #8065ec;
+
 @mixin color-primary2 {
   background: #314ad7;
 }
 
 @mixin color-primary-hover {
   background: #293fb6;
+}
+
+@mixin color-secondary-text {
+  color: #979797;
 }

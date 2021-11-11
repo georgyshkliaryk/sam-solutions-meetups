@@ -37,4 +37,22 @@ export const navItems: NavItems = {
       path: routes.news,
     },
   ],
+  meetups: [
+    {
+      title: "Темы",
+      path: routes.meetups.themes,
+    },
+    {
+      title: "Черновики",
+      path: routes.meetups.drafts,
+    },
+    {
+      title: "Будущие",
+      path: routes.meetups.future,
+    },
+    {
+      title: "Прошедшие",
+      path: routes.meetups.past,
+    },
+  ],
 };

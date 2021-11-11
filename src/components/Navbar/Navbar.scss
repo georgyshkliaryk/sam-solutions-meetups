@@ -5,3 +5,13 @@
   justify-content: space-between;
   width: 15rem;
 }
+
+.main-navbar {
+  display: flex;
+  align-items: center;
+  line-height: 19px;
+  justify-content: center;
+  margin: 2.4rem auto;
+  border-bottom: #e2e7ef solid 2px;
+  padding: 1rem 2rem;
+}

@@ -20,6 +20,25 @@
   color: black;
 }
 
+.link-grey {
+  text-decoration: none;
+  @include color-secondary-text;
+}
+
 .header-link-is-active {
   border-bottom: 2px solid white;
+}
+
+.main-link-item {
+  cursor: pointer;
+  padding: 1rem 2.5rem;
+}
+
+.main-link-item:hover {
+  background-color: rgba(128, 101, 236, 0.2);
+}
+
+.main-link-is-active {
+  border-bottom: $color-primary1 2px solid;
+  color: black;
 }
