@@ -13,6 +13,7 @@ const ThemesPage: React.FC = (): ReactElement => {
         <Navbar
           items={navItems.header}
           style={["header-navbar", "header-navbar__item"]}
+          containerWidth={"15rem"}
         />
         <HeaderProfile />
       </HeaderContainer>

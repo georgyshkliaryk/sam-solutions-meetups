@@ -6,11 +6,12 @@ import LinkComponent from "../LinkComponent/LinkComponent";
 interface IProps {
   items: NavItem[];
   style: string[];
+  containerWidth?: string;
 }
 
 const Navbar: React.FC<IProps> = (props): ReactElement => {
   return (
-    <nav className={props.style[0]}>
+    <nav className={props.style[0]} style={{ width: props.containerWidth }}>
       {props.items.map((item: NavItem, i: number) => (
         <div className={props.style[1]} key={i}>
           <LinkComponent

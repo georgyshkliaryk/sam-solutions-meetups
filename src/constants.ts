@@ -1,4 +1,13 @@
-export const routes = {
+interface RouteItems {
+  [key: string]: string;
+}
+
+interface Routes {
+  meetups: RouteItems;
+  news: string;
+}
+
+export const routes: Routes = {
   meetups: {
     themes: "/meetups/themes",
     drafts: "/meetups/drafts",
