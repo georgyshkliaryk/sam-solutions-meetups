@@ -16,7 +16,7 @@ const Navbar: React.FC<IProps> = (props): ReactElement => {
           <LinkComponent
             to={item.path}
             styles={"link-white header-link-item"}
-            activeClassStyle={"link-is-active"}
+            activeClassStyle={"header-link-is-active"}
           >
             {item.title}
           </LinkComponent>

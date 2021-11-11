@@ -6,7 +6,7 @@ const HeaderProfile: React.FC = (): ReactElement => {
   return (
     <div className="header-profile-wrapper">
       <div className="header-profile-wrapper__text">Name Surname</div>
-      <Avatar />
+      <Avatar sizes={"40px"} />
     </div>
   );
 };
