@@ -11,27 +11,28 @@ import NewsPage from "./pages/news/NewsPage";
 import DraftsPage from "./pages/meetups/drafts/DraftsPage";
 import FuturePage from "./pages/meetups/future/FuturePage";
 import PastPage from "./pages/meetups/past/PastPage";
+import { routes } from "./constants";
 
 const App: React.FC = (): ReactElement => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/meetups/themes">
+        <Route exact path={routes.meetups.themes}>
           <ThemesPage />
         </Route>
-        <Route exact path="/news">
+        <Route exact path={routes.news}>
           <NewsPage />
         </Route>
-        <Route exact path="/meetups/drafts">
+        <Route exact path={routes.meetups.drafts}>
           <DraftsPage />
         </Route>
-        <Route exact path="/meetups/future">
+        <Route exact path={routes.meetups.future}>
           <FuturePage />
         </Route>
-        <Route exact path="/meetups/past">
+        <Route exact path={routes.meetups.past}>
           <PastPage />
         </Route>
-        <Redirect to="/meetups/themes" />
+        <Redirect to={routes.meetups.themes} />
       </Switch>
     </Router>
   );
