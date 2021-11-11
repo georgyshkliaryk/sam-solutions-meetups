@@ -1,8 +1,22 @@
+@import "../../constants.scss";
+
 .link-white {
-    text-decoration: none;
-    color: white;
-  }
-  .link-black {
-    text-decoration: none;
-    color: black;
-  }
+  text-decoration: none;
+  color: white;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.link-white:hover {
+  @include color-primary-hover;
+}
+
+.link-black {
+  text-decoration: none;
+  color: black;
+}
+
+.link-is-active {
+  border-bottom: 2px solid white;
+}

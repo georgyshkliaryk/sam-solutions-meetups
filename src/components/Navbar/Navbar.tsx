@@ -22,7 +22,7 @@ const Navbar: React.FC<IProps> = (props): ReactElement<IProps2> => {
           <LinkComponent
             to={item.path}
             styles={"link-white"}
-            activeClassStyle={"is-active"}
+            activeClassStyle={"link-is-active"}
           >
             {item.title}
           </LinkComponent>

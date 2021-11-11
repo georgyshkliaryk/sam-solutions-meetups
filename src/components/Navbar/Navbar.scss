@@ -7,12 +7,3 @@
   justify-content: space-between;
   width: 15rem;
 }
-.header-navbar__item {
-  padding: 0.3rem 0.5rem;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.header-navbar__item:hover {
-  @include color-primary-hover;
-}
