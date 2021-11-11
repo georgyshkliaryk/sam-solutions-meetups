@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
 import "./Avatar.scss";
-import avatar from "./assets/avatar.png";
+import AvatarImg from "./assets/avatar.svg";
 
 const Avatar: React.FC = (): ReactElement => {
   return (
-    <>
-      <img src={avatar} alt="avatar" />
-    </>
+    <div className="avatar-wrapper">
+      <img src={AvatarImg} alt="user's avatar" />
+    </div>
   );
 };
 
