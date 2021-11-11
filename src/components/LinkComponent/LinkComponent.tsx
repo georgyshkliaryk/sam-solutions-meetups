@@ -4,9 +4,8 @@ import "./LinkComponent.scss";
 
 interface IProps {
   to: string;
-  styles: string;
-  activeClassStyle: string;
-  title: string;
+  styles?: string;
+  activeClassStyle?: string;
 }
 
 const LinkComponent: React.FC<IProps> = (props): ReactElement => {
@@ -17,7 +16,7 @@ const LinkComponent: React.FC<IProps> = (props): ReactElement => {
         activeClassName={props.activeClassStyle}
         className={props.styles}
       >
-        {props.title}
+        {props.children}
       </NavLink>
     </div>
   );

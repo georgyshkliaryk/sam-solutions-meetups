@@ -10,9 +10,8 @@ interface IProps {
 
 interface IProps2 {
   to: string;
-  styles: string;
-  activeClassStyle: string;
-  title: string;
+  styles?: string;
+  activeClassStyle?: string;
 }
 
 const Navbar: React.FC<IProps> = (props): ReactElement<IProps2> => {
@@ -22,10 +21,11 @@ const Navbar: React.FC<IProps> = (props): ReactElement<IProps2> => {
         <div className={props.style[1]} key={i}>
           <LinkComponent
             to={item.path}
-            title={item.title}
             styles={"link-white"}
             activeClassStyle={"is-active"}
-          />
+          >
+            {item.title}
+          </LinkComponent>
         </div>
       ))}
     </nav>

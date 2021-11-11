@@ -3,14 +3,9 @@ import HeaderContainer from "../../../components/header/HeaderContainer/HeaderCo
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../../components/LogoSam/LogoSam";
 import Navbar from "../../../components/Navbar/Navbar";
-import { NavItem, navItems } from "../../../constants";
+import { navItems } from "../../../constants";
 
-interface IProps {
-  items?: NavItem[];
-  style?: string[];
-}
-
-const ThemesPage: React.FC<IProps> = (): ReactElement => {
+const ThemesPage: React.FC = (): ReactElement => {
   return (
     <div>
       <HeaderContainer>
