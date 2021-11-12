@@ -30,9 +30,11 @@
 }
 
 .main-link-item {
+  display: block;
   cursor: pointer;
   padding: 1rem 2.5rem;
   border-bottom: #e2e7ef solid 2px;
+  margin-bottom: 2.25rem;
 }
 
 .main-link-item:hover {

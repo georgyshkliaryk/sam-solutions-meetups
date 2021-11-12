@@ -27,7 +27,7 @@ const PastPage: React.FC = (): ReactElement => {
         <Navbar
           items={navItems.meetups}
           styles={["main-navbar", "main-link-item"]}
-          containerWidth={"40rem"}
+          // containerWidth={"40rem"}
           color={"link-grey"}
           active={"main-link-is-active"}
         />
