@@ -7,6 +7,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import { navItems } from "../../../constants";
 import MainContainer from "../../../components/main/MainContainer/MainContainer";
 import MainTitle from "../../../components/main/MainTitle/MainTitle";
+import BottomLogo from "../../../components/BottomLogo/BottomLogo";
 
 const ThemesPage: React.FC = (): ReactElement => {
   return (
@@ -27,10 +28,11 @@ const ThemesPage: React.FC = (): ReactElement => {
         <Navbar
           items={navItems.meetups}
           styles={["main-navbar", "main-link-item"]}
-          containerWidth={"35rem"}
+          containerWidth={"40rem"}
           color={"link-grey"}
           active={"main-link-is-active"}
         />
+        <BottomLogo />
       </MainContainer>
     </div>
   );

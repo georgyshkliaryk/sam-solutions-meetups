@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import BottomLogo from "../../../components/BottomLogo/BottomLogo";
 import HeaderContainer from "../../../components/header/HeaderContainer/HeaderContainer";
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../../components/LogoSam/LogoSam";
@@ -26,10 +27,11 @@ const DraftsPage: React.FC = (): ReactElement => {
         <Navbar
           items={navItems.meetups}
           styles={["main-navbar", "main-link-item"]}
-          containerWidth={"35rem"}
+          containerWidth={"40rem"}
           color={"link-grey"}
           active={"main-link-is-active"}
         />
+        <BottomLogo />
       </MainContainer>
     </div>
   );

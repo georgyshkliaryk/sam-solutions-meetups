@@ -43,7 +43,7 @@ export const navItems: NavItems = {
       path: routes.meetups.themes,
     },
     {
-      title: "Черновики",
+      title: "На модерации",
       path: routes.meetups.drafts,
     },
     {
