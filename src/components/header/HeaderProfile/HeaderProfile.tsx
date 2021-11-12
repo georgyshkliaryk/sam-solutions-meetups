@@ -4,8 +4,8 @@ import Avatar from "../../Avatar/Avatar";
 
 const HeaderProfile: React.FC = (): ReactElement => {
   return (
-    <div className="header-profile-wrapper">
-      <div className="header-profile-wrapper__text">Name Surname</div>
+    <div className="header-profile">
+      <p className="header-profile__text">Name Surname</p>
       <Avatar />
     </div>
   );

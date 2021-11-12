@@ -1,4 +1,6 @@
-.header-profile-wrapper {
+@import "../../../constants.scss";
+
+.header-profile {
   display: flex;
   align-items: center;
   line-height: 19px;
@@ -7,13 +9,13 @@
   text-align: right;
 }
 
-.header-profile-wrapper__text {
+.header-profile__text {
   margin-right: 0.75rem;
   display: none;
 }
 
-@media (min-width: 950px) {
-  .header-profile-wrapper__text {
+@media (min-width: $mobile-width) {
+  .header-profile__text {
     display: block;
   }
 }
