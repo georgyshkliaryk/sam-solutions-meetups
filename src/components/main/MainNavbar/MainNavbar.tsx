@@ -14,7 +14,7 @@ const MainNavbar: React.FC<IProps> = (props): ReactElement => {
         <LinkComponent
           to={item.path}
           className={"link-grey main-link-item"}
-          activeClassStyle={"main-link-is-active"}
+          activeClassName={"main-link-is-active"}
           key={item.path}
         >
           {item.title}

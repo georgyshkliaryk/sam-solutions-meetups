@@ -5,14 +5,14 @@ import "./LinkComponent.scss";
 interface IProps {
   to: string;
   className?: string;
-  activeClassStyle?: string;
+  activeClassName?: string;
 }
 
 const LinkComponent: React.FC<IProps> = (props): ReactElement => {
   return (
     <NavLink
       to={props.to}
-      activeClassName={props.activeClassStyle}
+      activeClassName={props.activeClassName}
       className={props.className}
     >
       {props.children}
