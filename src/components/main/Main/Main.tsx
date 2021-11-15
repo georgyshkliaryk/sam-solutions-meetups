@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import "./MainContainer.scss";
+import "./Main.scss";
 
-const MainContainer: React.FC = (props): ReactElement => {
+const Main: React.FC = (props): ReactElement => {
   return (
     <div className="main">
       <div className="main-wrapper">{props.children}</div>
@@ -9,4 +9,4 @@ const MainContainer: React.FC = (props): ReactElement => {
   );
 };
 
-export default MainContainer;
+export default Main;

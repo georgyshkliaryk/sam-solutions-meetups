@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import HeaderContainer from "../../components/header/HeaderContainer/HeaderContainer";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../components/LogoSam/LogoSam";
-import MainContainer from "../../components/main/MainContainer/MainContainer";
+import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
 import Navbar from "../../components/Navbar/Navbar";
 import { navItems } from "../../constants";
@@ -22,9 +22,9 @@ const NewsPage: React.FC = (): ReactElement => {
         />
         <HeaderProfile />
       </HeaderContainer>
-      <MainContainer>
+      <Main>
         <MainTitle title={navItems.header[1].title} />
-      </MainContainer>
+      </Main>
     </div>
   );
 };

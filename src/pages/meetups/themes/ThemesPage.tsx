@@ -5,8 +5,8 @@ import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfil
 import LogoSam from "../../../components/LogoSam/LogoSam";
 import Navbar from "../../../components/Navbar/Navbar";
 import { navItems } from "../../../constants";
-import MainContainer from "../../../components/main/MainContainer/MainContainer";
 import MainTitle from "../../../components/main/MainTitle/MainTitle";
+import Main from "../../../components/main/Main/Main";
 
 const ThemesPage: React.FC = (): ReactElement => {
   return (
@@ -22,7 +22,7 @@ const ThemesPage: React.FC = (): ReactElement => {
         />
         <HeaderProfile />
       </HeaderContainer>
-      <MainContainer>
+      <Main>
         <MainTitle title={navItems.header[0].title} />
         <Navbar
           items={navItems.meetups}
@@ -31,7 +31,7 @@ const ThemesPage: React.FC = (): ReactElement => {
           color={"link-grey"}
           active={"main-link-is-active"}
         />
-      </MainContainer>
+      </Main>
     </div>
   );
 };
