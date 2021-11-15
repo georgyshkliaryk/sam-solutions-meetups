@@ -13,8 +13,8 @@ const HeaderNavbar: React.FC<IProps> = (props): ReactElement => {
       {props.items.map((item: NavItem) => (
         <LinkComponent
           to={item.path}
-          className={"link-white header__navbar-link-item"}
-          activeClassName={"header__navbar-link-item-is-active"}
+          className="link-white header__navbar-link-item"
+          activeClassName="header__navbar-link-item-is-active"
           key={item.path}
         >
           {item.title}

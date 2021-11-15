@@ -5,13 +5,14 @@ import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
 import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
+import MainNavbar from "../../components/main/MainNavbar/MainNavbar";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
 import { defaultUser, navItems, routes } from "../../constants";
-import "./NewsPage.scss";
+import "./MeetupsPage.scss";
 
-const NewsPage: React.FC = (): ReactElement => {
+const MeetupsPage: React.FC = (): ReactElement => {
   return (
-    <div className="news">
+    <div className="meetups">
       <Header className={"header-outer"}>
         <LinkComponent to={routes.meetups}>
           <LogoSam className={"header-logo-outer"} />
@@ -20,10 +21,10 @@ const NewsPage: React.FC = (): ReactElement => {
         <HeaderProfile user={defaultUser} />
       </Header>
       <Main>
-        <MainTitle>{navItems.header[1].title}</MainTitle>
+        <MainTitle>{navItems.header[0].title}</MainTitle>
       </Main>
     </div>
   );
 };
 
-export default NewsPage;
+export default MeetupsPage;

@@ -3,17 +3,12 @@ interface RouteItems {
 }
 
 interface Routes {
-  meetups: RouteItems;
+  meetups: string;
   news: string;
 }
 
 export const routes: Routes = {
-  meetups: {
-    themes: "/meetups/themes",
-    drafts: "/meetups/drafts",
-    future: "/meetups/future",
-    past: "/meetups/past",
-  },
+  meetups: "/meetups",
   news: "/news",
 };
 
@@ -30,7 +25,7 @@ export const navItems: NavItems = {
   header: [
     {
       title: "Митапы",
-      path: routes.meetups.themes,
+      path: routes.meetups,
     },
     {
       title: "Новости",
@@ -40,19 +35,19 @@ export const navItems: NavItems = {
   meetups: [
     {
       title: "Темы",
-      path: routes.meetups.themes,
+      path: routes.meetups,
     },
     {
       title: "На модерации",
-      path: routes.meetups.drafts,
+      path: routes.meetups,
     },
     {
       title: "Будущие",
-      path: routes.meetups.future,
+      path: routes.meetups,
     },
     {
       title: "Прошедшие",
-      path: routes.meetups.past,
+      path: routes.meetups,
     },
   ],
 };

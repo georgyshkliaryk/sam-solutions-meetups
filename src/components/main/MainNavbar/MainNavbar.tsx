@@ -13,8 +13,8 @@ const MainNavbar: React.FC<IProps> = (props): ReactElement => {
       {props.items.map((item: NavItem) => (
         <LinkComponent
           to={item.path}
-          className={"link-grey main__navbar-link-item"}
-          activeClassName={"main__navbar-link-item-is-active"}
+          className="link-grey main__navbar-link-item"
+          activeClassName="main__navbar-link-item-is-active"
           key={item.path}
         >
           {item.title}
