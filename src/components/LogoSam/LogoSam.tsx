@@ -1,19 +1,16 @@
 import React, { ReactElement } from "react";
 import "./LogoSam.scss";
 import LogoSamSolutions from "./assets/logoSam.svg";
-import { routes } from "../../constants";
-import LinkComponent from "../LinkComponent/LinkComponent";
+import classNames from "classnames";
 
-const LogoSam: React.FC = (): ReactElement => {
+interface IProps {
+  className?: string;
+}
+
+const LogoSam: React.FC<IProps> = (props): ReactElement => {
   return (
-    <div className="header-logo-wrapper">
-      <LinkComponent to={routes.meetups.themes}>
-        <img
-          className="header-logo-wrapper__img"
-          src={LogoSamSolutions}
-          alt="samsolutions company logo"
-        />
-      </LinkComponent>
+    <div className={classNames("header-logo", props.className)}>
+      <img src={LogoSamSolutions} alt="Samsolutions Company Logo" />
     </div>
   );
 };

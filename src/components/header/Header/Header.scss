@@ -16,6 +16,10 @@
   z-index: 10;
 }
 
+.header-logo-outer {
+  width: 20rem;
+}
+
 @media (min-width: $mobile-width) {
   .header {
     padding: 0 10%;
