@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import HeaderContainer from "../../../components/header/HeaderContainer/HeaderContainer";
+import Header from "../../../components/header/Header/Header";
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../../components/LogoSam/LogoSam";
 import Main from "../../../components/main/Main/Main";
@@ -11,7 +11,7 @@ import "./DraftsPage.scss";
 const DraftsPage: React.FC = (): ReactElement => {
   return (
     <div className="drafts">
-      <HeaderContainer>
+      <Header>
         <LogoSam />
         <Navbar
           items={navItems.header}
@@ -20,7 +20,7 @@ const DraftsPage: React.FC = (): ReactElement => {
           color={"link-white"}
         />
         <HeaderProfile user={defaultUser} />
-      </HeaderContainer>
+      </Header>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>
         <Navbar

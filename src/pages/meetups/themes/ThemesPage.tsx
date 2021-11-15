@@ -1,17 +1,17 @@
 import React, { ReactElement } from "react";
 import "./ThemesPage.scss";
-import HeaderContainer from "../../../components/header/HeaderContainer/HeaderContainer";
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../../components/LogoSam/LogoSam";
 import Navbar from "../../../components/Navbar/Navbar";
 import { defaultUser, navItems } from "../../../constants";
 import MainTitle from "../../../components/main/MainTitle/MainTitle";
 import Main from "../../../components/main/Main/Main";
+import Header from "../../../components/header/Header/Header";
 
 const ThemesPage: React.FC = (): ReactElement => {
   return (
     <div className="themes">
-      <HeaderContainer>
+      <Header>
         <LogoSam />
         <Navbar
           items={navItems.header}
@@ -21,7 +21,7 @@ const ThemesPage: React.FC = (): ReactElement => {
           active={"header-link-is-active"}
         />
         <HeaderProfile user={defaultUser} />
-      </HeaderContainer>
+      </Header>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>
         <Navbar
