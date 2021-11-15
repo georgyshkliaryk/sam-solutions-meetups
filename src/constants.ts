@@ -60,9 +60,11 @@ export const navItems: NavItems = {
 export interface IUser {
   firstName: string;
   lastName: string;
+  avatar: string;
 }
 
 export const defaultUser: IUser = {
   firstName: "Name",
   lastName: "Surname",
+  avatar: "",
 };

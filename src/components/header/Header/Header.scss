@@ -23,6 +23,11 @@
   width: 20rem;
 }
 
+.header-avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
 @media (min-width: $mobile-width) {
   .header {
     padding: 0 10%;

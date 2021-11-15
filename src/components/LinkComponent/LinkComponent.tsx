@@ -10,15 +10,13 @@ interface IProps {
 
 const LinkComponent: React.FC<IProps> = (props): ReactElement => {
   return (
-    <div className="link">
-      <NavLink
-        to={props.to}
-        activeClassName={props.activeClassStyle}
-        className={props.styles}
-      >
-        {props.children}
-      </NavLink>
-    </div>
+    <NavLink
+      to={props.to}
+      activeClassName={props.activeClassStyle}
+      className={props.styles}
+    >
+      {props.children}
+    </NavLink>
   );
 };
 
