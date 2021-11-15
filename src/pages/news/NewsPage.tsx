@@ -5,7 +5,7 @@ import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
 import Navbar from "../../components/Navbar/Navbar";
-import { navItems } from "../../constants";
+import { defaultUser, navItems } from "../../constants";
 import "./NewsPage.scss";
 
 const NewsPage: React.FC = (): ReactElement => {
@@ -20,7 +20,7 @@ const NewsPage: React.FC = (): ReactElement => {
           color={"link-white"}
           active={"header-link-is-active"}
         />
-        <HeaderProfile />
+        <HeaderProfile user={defaultUser} />
       </HeaderContainer>
       <Main>
         <MainTitle>{navItems.header[1].title}</MainTitle>

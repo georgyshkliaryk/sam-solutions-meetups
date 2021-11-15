@@ -5,7 +5,7 @@ import LogoSam from "../../../components/LogoSam/LogoSam";
 import Main from "../../../components/main/Main/Main";
 import MainTitle from "../../../components/main/MainTitle/MainTitle";
 import Navbar from "../../../components/Navbar/Navbar";
-import { navItems } from "../../../constants";
+import { defaultUser, navItems } from "../../../constants";
 import "./FuturePage.scss";
 
 const FuturePage: React.FC = (): ReactElement => {
@@ -19,7 +19,7 @@ const FuturePage: React.FC = (): ReactElement => {
           containerWidth={"15rem"}
           color={"link-white"}
         />
-        <HeaderProfile />
+        <HeaderProfile user={defaultUser} />
       </HeaderContainer>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>

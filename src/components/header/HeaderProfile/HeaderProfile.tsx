@@ -1,11 +1,18 @@
 import React, { ReactElement } from "react";
 import "./HeaderProfile.scss";
 import Avatar from "../../Avatar/Avatar";
+import { IUser } from "../../../constants";
 
-const HeaderProfile: React.FC = (): ReactElement => {
+interface IProps {
+  user: IUser;
+}
+
+const HeaderProfile: React.FC<IProps> = (props): ReactElement => {
   return (
     <div className="header-profile">
-      <p className="header-profile__text">Name Surname</p>
+      <p className="header-profile__text">
+        {props.user.firstName} {props.user.lastName}
+      </p>
       <Avatar />
     </div>
   );
