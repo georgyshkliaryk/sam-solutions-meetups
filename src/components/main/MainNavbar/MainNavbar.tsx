@@ -9,12 +9,12 @@ interface IProps {
 
 const MainNavbar: React.FC<IProps> = (props): ReactElement => {
   return (
-    <nav className="main-navbar">
+    <nav className="main__navbar">
       {props.items.map((item: NavItem) => (
         <LinkComponent
           to={item.path}
-          className={"link-grey main-link-item"}
-          activeClassName={"main-link-is-active"}
+          className={"link-grey main__navbar-link-item"}
+          activeClassName={"main__navbar-link-item-is-active"}
           key={item.path}
         >
           {item.title}

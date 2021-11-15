@@ -1,3 +1,20 @@
+@import "../../constants.scss";
 
+.link-white {
+  text-decoration: none;
+  color: white;
+}
 
+.link-white:hover {
+  @include color-primary-hover;
+}
 
+.link-black {
+  text-decoration: none;
+  color: black;
+}
+
+.link-grey {
+  text-decoration: none;
+  @include color-secondary-text;
+}

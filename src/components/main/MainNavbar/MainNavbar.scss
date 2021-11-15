@@ -1,4 +1,6 @@
-.main-navbar {
+@import "../../../constants.scss";
+
+.main__navbar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -6,4 +8,21 @@
   justify-content: center;
   margin: 2.4rem auto;
   padding: 1rem 2rem;
+}
+
+.main__navbar-link-item {
+  display: block;
+  cursor: pointer;
+  padding: 1rem 2.5rem;
+  border-bottom: #e2e7ef solid 2px;
+  margin-bottom: 2.25rem;
+}
+
+.main__navbar-link-item:hover {
+  background-color: rgba(128, 101, 236, 0.2);
+}
+
+.main__navbar-link-item-is-active {
+  border-bottom: $color-primary1 2px solid;
+  color: black !important;
 }
