@@ -12,9 +12,9 @@ import "./NewsPage.scss";
 const NewsPage: React.FC = (): ReactElement => {
   return (
     <div className="news">
-      <Header className={"header-outer"}>
+      <Header className="header-outer">
         <LinkComponent to={routes.meetups}>
-          <LogoSam className={"header-logo-outer"} />
+          <LogoSam className="header-logo-outer" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
         <HeaderProfile user={defaultUser} />

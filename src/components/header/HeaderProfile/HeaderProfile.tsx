@@ -13,7 +13,7 @@ const HeaderProfile: React.FC<IProps> = (props): ReactElement => {
       <p className="header-profile__text">
         {props.user.firstName} {props.user.lastName}
       </p>
-      <Avatar className={"header-avatar"} />
+      <Avatar className="header-avatar" />
     </div>
   );
 };
