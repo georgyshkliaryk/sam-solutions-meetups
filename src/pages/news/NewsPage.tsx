@@ -23,7 +23,7 @@ const NewsPage: React.FC = (): ReactElement => {
         <HeaderProfile />
       </HeaderContainer>
       <Main>
-        <MainTitle title={navItems.header[1].title} />
+        <MainTitle>{navItems.header[1].title}</MainTitle>
       </Main>
     </div>
   );

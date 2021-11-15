@@ -22,7 +22,7 @@ const FuturePage: React.FC = (): ReactElement => {
         <HeaderProfile />
       </HeaderContainer>
       <Main>
-        <MainTitle title={navItems.header[0].title} />
+        <MainTitle>{navItems.header[0].title}</MainTitle>
         <Navbar
           items={navItems.meetups}
           styles={["main-navbar", "main-link-item"]}
