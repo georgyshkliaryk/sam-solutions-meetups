@@ -1,7 +1,36 @@
+@import "../../../constants.scss";
+
 .main {
   height: 100%;
   padding-top: 8.75rem;
   background: url("./assets/BottomImg.svg") no-repeat;
   background-position: right bottom;
   background-attachment: fixed;
+}
+
+.main-link-item {
+  display: block;
+  cursor: pointer;
+  padding: 1rem 2.5rem;
+  border-bottom: #e2e7ef solid 2px;
+  margin-bottom: 2.25rem;
+}
+
+.main-link-item:hover {
+  background-color: rgba(128, 101, 236, 0.2);
+}
+
+.main-link-is-active {
+  border-bottom: $color-primary1 2px solid;
+  color: black;
+}
+
+.link-black {
+  text-decoration: none;
+  color: black;
+}
+
+.link-grey {
+  text-decoration: none;
+  @include color-secondary-text;
 }

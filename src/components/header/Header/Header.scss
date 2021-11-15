@@ -21,11 +21,31 @@
 
 .header-logo-outer {
   width: 20rem;
+  text-align: left;
 }
 
 .header-avatar {
   height: 2.5rem;
   width: 2.5rem;
+}
+
+.header-link-item {
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.header-link-is-active {
+  border-bottom: 2px solid white;
+}
+
+.link-white {
+  text-decoration: none;
+  color: white;
+}
+
+.link-white:hover {
+  @include color-primary-hover;
 }
 
 @media (min-width: $mobile-width) {
