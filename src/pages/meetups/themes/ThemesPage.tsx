@@ -12,7 +12,7 @@ import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 const ThemesPage: React.FC = (): ReactElement => {
   return (
     <div className="themes">
-      <Header>
+      <Header className={"header-outer"}>
         <LinkComponent to={routes.meetups.themes}>
           <LogoSam className={"header-logo-outer"} />
         </LinkComponent>
