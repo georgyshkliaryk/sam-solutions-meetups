@@ -1,5 +1,7 @@
-.main-wrapper {
+.main {
   min-height: 200vh;
   padding-top: 8.75rem;
-  position: relative;
+  background: url("./assets/BottomImg.svg") no-repeat;
+  background-position: right bottom;
+  background-attachment: fixed;
 }

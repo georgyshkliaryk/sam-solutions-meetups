@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import BottomLogo from "../../../components/BottomLogo/BottomLogo";
 import HeaderContainer from "../../../components/header/HeaderContainer/HeaderContainer";
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LogoSam from "../../../components/LogoSam/LogoSam";
@@ -31,7 +30,6 @@ const FuturePage: React.FC = (): ReactElement => {
           color={"link-grey"}
           active={"main-link-is-active"}
         />
-        <BottomLogo />
       </MainContainer>
     </div>
   );
