@@ -1,0 +1,30 @@
+@mixin font-normal {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+@mixin gradient {
+  background: linear-gradient(63.5deg, #8065ec 16.63%, #314ad7 83.37%);
+}
+
+@mixin color-primary1 {
+  background: #8065ec;
+}
+
+$color-primary1: #8065ec;
+
+@mixin color-primary2 {
+  background: #314ad7;
+}
+
+@mixin color-primary-hover {
+  background: #293fb6;
+}
+
+@mixin color-secondary-text {
+  color: #979797;
+}
+
+$mobile-width: 950px;

@@ -39,6 +39,16 @@
         "no-console": 1,
         "react/react-in-jsx-scope": 0,
         "@typescript-eslint/ban-ts-comment": 0,
-        "@typescript-eslint/ban-types": 0
+        "@typescript-eslint/ban-types": 0,
+        "react/jsx-curly-brace-presence": [
+            "error",
+            { "props": "never", "children": "never" }
+          ],
+        "prettier/prettier": [
+            "error",
+            {
+              "endOfLine": "auto"
+            }
+        ]
     }
 }

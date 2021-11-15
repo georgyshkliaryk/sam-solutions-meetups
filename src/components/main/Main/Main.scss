@@ -1,0 +1,14 @@
+@import "../../../constants.scss";
+
+.main {
+  min-height: 100%;
+  background: url("./assets/BottomImg.svg") no-repeat;
+  background-position: bottom right;
+  background-attachment: fixed;
+}
+
+.main__wrapper {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding-top: 8.75rem;
+}

@@ -1,0 +1,41 @@
+@import "../../../constants.scss";
+
+.header {
+  height: 4.375rem;
+  @include gradient;
+  box-shadow: 0px 4px 8px rgba(60, 72, 97, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+  font-weight: 500;
+  margin: 0 auto;
+}
+
+.header-outer {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.header-logo-outer {
+  width: 20rem;
+  text-align: left;
+}
+
+.header-avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+@media (min-width: $mobile-width) {
+  .header__wrapper {
+    max-width: 100rem;
+  }
+}
