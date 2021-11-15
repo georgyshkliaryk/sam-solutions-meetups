@@ -1,11 +1,12 @@
 import React, { ReactElement } from "react";
 import Header from "../../../components/header/Header/Header";
+import HeaderNavbar from "../../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../../components/header/HeaderProfile/HeaderProfile";
 import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../../components/LogoSam/LogoSam";
 import Main from "../../../components/main/Main/Main";
+import MainNavbar from "../../../components/main/MainNavbar/MainNavbar";
 import MainTitle from "../../../components/main/MainTitle/MainTitle";
-import Navbar from "../../../components/Navbar/Navbar";
 import { defaultUser, navItems, routes } from "../../../constants";
 import "./PastPage.scss";
 
@@ -16,23 +17,12 @@ const PastPage: React.FC = (): ReactElement => {
         <LinkComponent to={routes.meetups.themes}>
           <LogoSam className={"header-logo-outer"} />
         </LinkComponent>
-        <Navbar
-          items={navItems.header}
-          styles={["header-navbar", "header-link-item"]}
-          containerWidth={"15rem"}
-          color={"link-white"}
-        />
+        <HeaderNavbar items={navItems.header} />
         <HeaderProfile user={defaultUser} />
       </Header>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>
-        <Navbar
-          items={navItems.meetups}
-          styles={["main-navbar", "main-link-item"]}
-          // containerWidth={"40rem"}
-          color={"link-grey"}
-          active={"main-link-is-active"}
-        />
+        <MainNavbar items={navItems.meetups} />
       </Main>
     </div>
   );

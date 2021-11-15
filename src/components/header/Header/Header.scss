@@ -1,15 +1,20 @@
 @import "../../../constants.scss";
 
 .header {
-  display: flex;
-  align-items: center;
   height: 4.375rem;
   @include gradient;
   box-shadow: 0px 4px 8px rgba(60, 72, 97, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
   color: white;
   justify-content: space-between;
   font-weight: 500;
-  padding: 0 0.3rem;
+  margin: 0 auto;
 }
 
 .header-outer {
@@ -49,7 +54,9 @@
 }
 
 @media (min-width: $mobile-width) {
-  .header {
-    padding: 0 10%;
+  .header-wrapper {
+    max-width: 100rem;
+    justify-content: space-between;
+    margin: 0 auto;
   }
 }
