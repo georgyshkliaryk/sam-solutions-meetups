@@ -12,9 +12,6 @@ const ThemesPage: React.FC = (): ReactElement => {
         </button>
       </div>
       <ThemesCard />
-      <ThemesCard />
-      <ThemesCard />
-      <ThemesCard />
     </div>
   );
 };
