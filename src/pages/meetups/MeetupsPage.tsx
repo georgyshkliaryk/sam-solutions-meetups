@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
@@ -33,6 +33,7 @@ const MeetupsPage: React.FC = (): ReactElement => {
           <Route path={routes.drafts} element={<DraftsPage />} />
           <Route path={routes.future} element={<FuturePage />} />
           <Route path={routes.past} element={<PastPage />} />
+          <Route path="*" element={<Navigate replace to={routes.themes} />} />
         </Routes>
       </Main>
     </div>
