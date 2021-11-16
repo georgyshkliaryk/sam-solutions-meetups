@@ -2,14 +2,16 @@ import React, { ReactElement } from "react";
 import { NavItem } from "../../../constants";
 import LinkComponent from "../../LinkComponent/LinkComponent";
 import "./MainNavbar.scss";
+import classNames from "classnames";
 
 interface IProps {
   items: NavItem[];
+  className?: string;
 }
 
 const MainNavbar: React.FC<IProps> = (props): ReactElement => {
   return (
-    <nav className="main__navbar">
+    <nav className={classNames("main__navbar", props.className)}>
       {props.items.map((item: NavItem) => (
         <LinkComponent
           to={item.path}

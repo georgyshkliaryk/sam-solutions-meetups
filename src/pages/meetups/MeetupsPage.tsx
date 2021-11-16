@@ -27,7 +27,7 @@ const MeetupsPage: React.FC = (): ReactElement => {
       </Header>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>
-        <MainNavbar items={navItems.meetups} />
+        <MainNavbar items={navItems.meetups} className="main__navbar-outer" />
         <Routes>
           <Route path={routes.themes} element={<ThemesPage />} />
           <Route path={routes.drafts} element={<DraftsPage />} />
