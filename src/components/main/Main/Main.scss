@@ -2,9 +2,11 @@
 
 .main {
   min-height: 100%;
-  background: url("./assets/BottomImg.svg") no-repeat;
+  background: url("./assets/BottomImg.svg") no-repeat $background-primary;
   background-position: bottom right;
   background-attachment: fixed;
+  mix-blend-mode: multiply;
+  background-blend-mode: multiply;
 }
 
 .main__wrapper {

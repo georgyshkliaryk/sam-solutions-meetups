@@ -5,6 +5,13 @@
   font-weight: 500;
 }
 
+@mixin font-light {
+  font-size: 0.875rem;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
 @mixin gradient {
   background: linear-gradient(63.5deg, #8065ec 16.63%, #314ad7 83.37%);
 }
@@ -33,6 +40,17 @@ $color-primary1: #8065ec;
   border: 1px solid $color-primary1;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+@mixin card {
+  background: #ffffff;
+  box-shadow: 0px 4px 9px rgba(194, 203, 218, 0.25);
+  border-radius: 6px;
 }
 
 $mobile-width: 950px;
+
+$background-primary: #f4f6fc;
