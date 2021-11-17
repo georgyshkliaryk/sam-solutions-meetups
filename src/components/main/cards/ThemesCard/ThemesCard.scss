@@ -1,0 +1,51 @@
+@import "../../../../constants.scss";
+
+.themes-card {
+  @include card;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.themes-card-header__avatar {
+  height: 1.875rem;
+  width: 1.875rem;
+}
+
+.themes-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  @include font-light;
+}
+
+.themes-card-header__username {
+  margin-left: 0.625rem;
+}
+
+.themes-card-main {
+  margin: 1.125rem auto 2rem auto;
+  text-align: left;
+}
+
+.themes-card-main__title {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.themes-card-main__description,
+.themes-card-header__username {
+  @include font-light;
+}
+
+.themes-card-footer {
+  @include font-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.themes-card-footer-support {
+  @include color-secondary-text;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,20 @@
+@import "../../../constants.scss";
+
+.themes-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.themes-page-meetups-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.3rem;
+}
+
+.themes-page-meetups-quantity__button {
+  @include button-secondary;
+  @include font-normal;
+  padding: 0.625rem 1.25rem;
+}

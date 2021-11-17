@@ -1,0 +1,51 @@
+@import "../../../../constants.scss";
+
+.meetups-card {
+  @include card;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.meetups-card-footer__avatar {
+  height: 1.875rem;
+  width: 1.875rem;
+}
+
+.meetups-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  @include font-light;
+}
+
+.meetups-card-footer__username {
+  margin-left: 0.625rem;
+}
+
+.meetups-card-main {
+  margin: 1.125rem auto 2rem auto;
+  text-align: left;
+}
+
+.meetups-card-main__title {
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.meetups-card-main__description,
+.meetups-card-footer__username {
+  @include font-light;
+}
+
+.meetups-card-footer {
+  @include font-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meetups-card-footer-author {
+  @include color-secondary-text;
+  display: flex;
+  align-items: center;
+}

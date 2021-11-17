@@ -8,9 +8,9 @@ interface IProps {
 
 const Header: React.FC<IProps> = (props): ReactElement => {
   return (
-    <div className={classNames("header", props.className)}>
+    <header className={classNames("header", props.className)}>
       <div className="header__wrapper">{props.children}</div>
-    </div>
+    </header>
   );
 };
 
