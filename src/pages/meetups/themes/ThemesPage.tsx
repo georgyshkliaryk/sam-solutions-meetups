@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
 import "./ThemesPage.scss";
-import MeetupsQuantity from "../meetupsQuantity/MeetupsQuantity";
 
 interface IMeetup {
   id: string;
@@ -9,11 +8,11 @@ interface IMeetup {
   authorSurname: string;
   start?: string;
   title: string;
-  desc?: string;
+  description?: string;
   place?: string;
   goCount: number;
   status?: string;
-  isOver?: Boolean;
+  isOver?: boolean;
 }
 
 const ThemesPage: React.FC = (): ReactElement => {
@@ -23,7 +22,8 @@ const ThemesPage: React.FC = (): ReactElement => {
       authorName: "Joe",
       authorSurname: "Jackson",
       title: "EF Core от практикующих",
-      desc: "Основные темы, которые буду рассказывать: Database-first (EF Core), Db migrations, Software triggers, DbSet pre-filter (tenant-solution)",
+      description:
+        "Основные темы, которые буду рассказывать: Database-first (EF Core), Db migrations, Software triggers, DbSet pre-filter (tenant-solution)",
       goCount: 28,
     },
   ];
@@ -31,13 +31,16 @@ const ThemesPage: React.FC = (): ReactElement => {
   //   MeetupsStore.fetchMeetups();
   // }, []);
   return (
-    <section className="themes">
-      <MeetupsQuantity
-        text="Тем предложено:"
-        meetupsNumber={fakeMeetups.length}
-        btn
-      />
-      <div className="themes-wrapper">
+    <section className="themes-page">
+      <div className="themes-page-meetups-quantity">
+        <p className="themes-page-meetups-quantity__text">
+          Тем предложено: {fakeMeetups.length}
+        </p>
+        <button className="themes-page-meetups-quantity__button">
+          <span className="material-icons-round">add</span>Создать тему
+        </button>
+      </div>
+      <div className="themes-page-wrapper">
         {fakeMeetups.map((card: IMeetup) => (
           <ThemesCard key={card.id} item={card} />
         ))}

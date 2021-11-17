@@ -1,20 +1,11 @@
-interface Routes {
-  meetups: string;
-  news: string;
-  themes: string;
-  drafts: string;
-  future: string;
-  past: string;
-}
-
-export const routes: Routes = {
+export const routes = {
   meetups: "/meetups",
   news: "/news",
   themes: "themes",
   drafts: "drafts",
   future: "future",
   past: "past",
-};
+} as const;
 
 export interface NavItem {
   title: string;

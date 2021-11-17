@@ -32,7 +32,7 @@
   font-size: 1.125rem;
 }
 
-.themes-card-main__desc,
+.themes-card-main__description,
 .themes-card-header__username {
   @include font-light;
 }
@@ -44,9 +44,8 @@
   justify-content: space-between;
 }
 
-.themes-card-footer-left {
+.themes-card-footer-support {
   @include color-secondary-text;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
 }

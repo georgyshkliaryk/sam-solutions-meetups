@@ -1,6 +1,24 @@
-.past-wrapper {
+@import "../../../constants.scss";
+
+.past-page-wrapper {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
   gap: 1rem;
+}
+
+.past-page-meetups-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.3rem;
+}
+
+.past-page-meetups-quantity__text {
+  margin: 0.875rem 0 0.875rem 0;
+}
+
+.past-page-meetups-quantity__button {
+  @include button-secondary;
+  @include font-normal;
+  padding: 0.625rem 1.25rem;
 }

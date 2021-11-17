@@ -1,15 +1,18 @@
 import React, { ReactElement } from "react";
-import OthersCard from "../../../components/main/cards/OthersCard/OthersCard";
-import MeetupsQuantity from "../meetupsQuantity/MeetupsQuantity";
+import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
 import "./FuturePage.scss";
 
 const FuturePage: React.FC = (): ReactElement => {
   return (
-    <section className="future">
-      <MeetupsQuantity text="Опубликовано митапов:" meetupsNumber={0} />
-      <div className="future-wrapper">
-        <OthersCard />
-        <OthersCard />
+    <section className="future-page">
+      <div className="future-page-meetups-quantity">
+        <p className="future-page-meetups-quantity__text">
+          Опубликовано митапов: {0}
+        </p>
+      </div>
+      <div className="future-page-wrapper">
+        <MeetupsCard />
+        <MeetupsCard />
       </div>
     </section>
   );

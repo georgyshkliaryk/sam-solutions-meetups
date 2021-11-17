@@ -1,52 +1,51 @@
 @import "../../../../constants.scss";
 
-.others-card {
+.meetups-card {
   @include card;
   padding: 1rem 1.5rem;
   cursor: pointer;
 }
 
-.others-card-footer__avatar {
+.meetups-card-footer__avatar {
   height: 1.875rem;
   width: 1.875rem;
 }
 
-.others-card-header {
+.meetups-card-header {
   display: flex;
   align-items: center;
   justify-content: left;
   @include font-light;
 }
 
-.others-card-footer__username {
+.meetups-card-footer__username {
   margin-left: 0.625rem;
 }
 
-.others-card-main {
+.meetups-card-main {
   margin: 1.125rem auto 2rem auto;
   text-align: left;
 }
 
-.others-card-main__title {
+.meetups-card-main__title {
   margin-bottom: 0.5rem;
   font-size: 1.125rem;
 }
 
-.others-card-main__desc,
-.others-card-footer__username {
+.meetups-card-main__description,
+.meetups-card-footer__username {
   @include font-light;
 }
 
-.others-card-footer {
+.meetups-card-footer {
   @include font-light;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.others-card-footer-left {
+.meetups-card-footer-author {
   @include color-secondary-text;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
 }

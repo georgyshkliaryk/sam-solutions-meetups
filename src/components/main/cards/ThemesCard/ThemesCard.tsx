@@ -8,11 +8,11 @@ interface IMeetup {
   authorSurname: string;
   start?: string;
   title: string;
-  desc?: string;
+  description?: string;
   place?: string;
   goCount: number;
   status?: string;
-  isOver?: Boolean;
+  isOver?: boolean;
 }
 
 interface IProps {
@@ -24,19 +24,21 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
     <article className="themes-card">
       <div className="themes-card-header">
         <Avatar className="themes-card-header__avatar" />
-        <div className="themes-card-header__username">
+        <span className="themes-card-header__username">
           {props.item.authorName} {props.item.authorSurname}
-        </div>
+        </span>
       </div>
       <div className="themes-card-main">
-        <div className="themes-card-main__title">{props.item.title}</div>
-        <div className="themes-card-main__desc">{props.item.desc}</div>
+        <p className="themes-card-main__title">{props.item.title}</p>
+        <p className="themes-card-main__description">
+          {props.item.description}
+        </p>
       </div>
       <div className="themes-card-footer">
-        <div className="themes-card-footer-left">
+        <p className="themes-card-footer-support">
           <span className="material-icons-round">person</span>
           {props.item.goCount} поддерживают
-        </div>
+        </p>
       </div>
     </article>
   );
