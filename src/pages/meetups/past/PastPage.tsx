@@ -9,8 +9,8 @@ const PastPage: React.FC = (): ReactElement => {
         <p className="past-page-meetups-quantity__text">Прошло митапов: {0}</p>
       </div>
       <div className="past-page-wrapper">
-        <MeetupsCard />
-        <MeetupsCard />
+        {/* <MeetupsCard />
+        <MeetupsCard /> */}
       </div>
     </section>
   );

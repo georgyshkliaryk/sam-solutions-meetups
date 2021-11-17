@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
 import axios from "axios";
+import { makeAutoObservable } from "mobx";
 
 export interface IMeetup {
   id: string;
@@ -7,9 +7,9 @@ export interface IMeetup {
   authorSurname: string;
   start?: string;
   title: string;
-  description?: string;
+  description: string;
   place?: string;
-  goCount: number;
+  goCount?: number;
   status?: string;
   isOver?: boolean;
 }
@@ -22,35 +22,92 @@ interface IAuthor {
 interface IResponse {
   id: string;
   subject: string;
-  excerpt?: string;
-  goCount: number;
+  excerpt: string;
+  goCount?: number;
   author: IAuthor;
+  status: string;
+  start?: string;
+  place?: string;
 }
 
 class Meetups {
-  meetups: IMeetup[] = [];
+  themes: IMeetup[] = [];
+  drafts: IMeetup[] = [];
+  future: IMeetup[] = [];
+  past: IMeetup[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  fetchMeetups() {
-    this.meetups = [];
+  fetchThemes() {
+    this.themes = [];
     axios
       .get("/meetups")
       .then((response) => {
-        response.data.map((el: IResponse) => {
-          return this.meetups.push({
-            id: el.id,
-            title: el.subject,
-            description: el.excerpt,
-            goCount: el.goCount,
-            authorName: el.author.name,
-            authorSurname: el.author.surname,
+        response.data
+          .filter((el: IResponse) => el.status === "REQUEST")
+          .map((el: IResponse) => {
+            return this.themes.push({
+              id: el.id,
+              title: el.subject,
+              description: el.excerpt,
+              goCount: el.goCount,
+              authorName: el.author.name,
+              authorSurname: el.author.surname,
+            });
           });
-        });
-        console.log(JSON.parse(JSON.stringify(this.meetups)));
-        // this.meetups = [...this.meetups];
+        console.log(JSON.parse(JSON.stringify(this.themes)));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  fetchDrafts() {
+    this.drafts = [];
+    axios
+      .get("/meetups")
+      .then((response) => {
+        response.data
+          .filter((el: IResponse) => el.status === "DRAFT")
+          .map((el: IResponse) => {
+            return this.drafts.push({
+              id: el.id,
+              title: el.subject,
+              description: el.excerpt,
+              authorName: el.author.name,
+              authorSurname: el.author.surname,
+              start: el.start,
+              place: el.place,
+            });
+          });
+        console.log(JSON.parse(JSON.stringify(this.drafts)));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  fetchFuture() {
+    this.future = [];
+    axios
+      .get("/meetups")
+      .then((response) => {
+        response.data
+          .filter((el: IResponse) => el.status === "CONFIRMED")
+          .map((el: IResponse) => {
+            return this.future.push({
+              id: el.id,
+              title: el.subject,
+              description: el.excerpt,
+              authorName: el.author.name,
+              authorSurname: el.author.surname,
+              start: el.start,
+              place: el.place,
+            });
+          });
+        console.log(JSON.parse(JSON.stringify(this.future)));
       })
       .catch((error) => {
         console.log(error);
