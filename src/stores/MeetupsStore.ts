@@ -1,5 +1,6 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import dateFormat from "dateformat";
 
 export interface IMeetup {
   id: string;
@@ -57,7 +58,7 @@ class Meetups {
               authorSurname: el.author.surname,
             });
           });
-        console.log(JSON.parse(JSON.stringify(this.themes)));
+        //console.log(JSON.parse(JSON.stringify(this.themes)));
       })
       .catch((error) => {
         console.log(error);
@@ -78,7 +79,7 @@ class Meetups {
               description: el.excerpt,
               authorName: el.author.name,
               authorSurname: el.author.surname,
-              start: el.start,
+              start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
               place: el.place,
             });
           });
@@ -103,7 +104,7 @@ class Meetups {
               description: el.excerpt,
               authorName: el.author.name,
               authorSurname: el.author.surname,
-              start: el.start,
+              start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
               place: el.place,
             });
           });
