@@ -5,8 +5,8 @@ import "./OthersCard.scss";
 
 const OthersCard: React.FC = (): ReactElement => {
   return (
-    <div className="others-card">
-      <div className="others-card-top">Пон., 12 апреля 15:00 комн. 601b</div>
+    <article className="others-card">
+      <div className="others-card-header">Пон., 12 апреля 15:00 комн. 601b</div>
       <div className="others-card-main">
         <div className="others-card-main__title">Rollingstack</div>
         <div className="others-card-main__desc">
@@ -15,15 +15,15 @@ const OthersCard: React.FC = (): ReactElement => {
           приложения на...
         </div>
       </div>
-      <div className="others-card-bottom">
-        <div className="others-card-bottom-left">
-          <Avatar className="others-card-bottom__avatar" />
-          <div className="others-card-bottom__username">
+      <div className="others-card-footer">
+        <div className="others-card-footer-left">
+          <Avatar className="others-card-footer__avatar" />
+          <div className="others-card-footer__username">
             {defaultUser.firstName} {defaultUser.lastName}
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

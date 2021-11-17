@@ -3,23 +3,22 @@
 .others-card {
   @include card;
   padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
   cursor: pointer;
 }
 
-.others-card-bottom__avatar {
+.others-card-footer__avatar {
   height: 1.875rem;
   width: 1.875rem;
 }
 
-.others-card-top {
+.others-card-header {
   display: flex;
   align-items: center;
   justify-content: left;
   @include font-light;
 }
 
-.others-card-bottom__username {
+.others-card-footer__username {
   margin-left: 0.625rem;
 }
 
@@ -34,18 +33,18 @@
 }
 
 .others-card-main__desc,
-.others-card-bottom__username {
+.others-card-footer__username {
   @include font-light;
 }
 
-.others-card-bottom {
+.others-card-footer {
   @include font-light;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.others-card-bottom-left {
+.others-card-footer-left {
   @include color-secondary-text;
   display: flex;
   align-items: center;

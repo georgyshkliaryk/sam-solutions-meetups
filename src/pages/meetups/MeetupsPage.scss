@@ -3,16 +3,3 @@
 .meetups {
   height: 100%;
 }
-
-.meetups-quantity {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0.3rem;
-}
-
-.meetups-quantity__btn {
-  @include button-secondary;
-  @include font-normal;
-  padding: 0.625rem 1.25rem;
-}

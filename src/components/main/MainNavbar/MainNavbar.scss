@@ -12,7 +12,7 @@
   display: block;
   cursor: pointer;
   padding: 1rem 2.5rem;
-  border-bottom: #e2e7ef solid 2px;
+  border-bottom: #e2e7ef solid 0.125rem;
 }
 
 .main__navbar-link-item:hover {
@@ -20,6 +20,6 @@
 }
 
 .main__navbar-link-item-is-active {
-  border-bottom: $color-primary1 2px solid;
+  border-bottom: $color-primary1 0.125rem solid;
   color: black;
 }

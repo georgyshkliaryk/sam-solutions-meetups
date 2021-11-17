@@ -1,15 +1,17 @@
 import React, { ReactElement } from "react";
 import OthersCard from "../../../components/main/cards/OthersCard/OthersCard";
+import MeetupsQuantity from "../meetupsQuantity/MeetupsQuantity";
 import "./FuturePage.scss";
 
 const FuturePage: React.FC = (): ReactElement => {
   return (
-    <div className="future">
-      <div className="meetups-quantity">
-        <p className="meetups-quantity__text">Опубликовано митапов: 0</p>
+    <section className="future">
+      <MeetupsQuantity text="Опубликовано митапов:" meetupsNumber={0} />
+      <div className="future-wrapper">
+        <OthersCard />
+        <OthersCard />
       </div>
-      <OthersCard />
-    </div>
+    </section>
   );
 };
 

@@ -37,8 +37,8 @@ $color-primary1: #8065ec;
 @mixin button-secondary {
   text-align: center;
   color: $color-primary1;
-  border: 1px solid $color-primary1;
-  border-radius: 5px;
+  border: 0.063rem solid $color-primary1;
+  border-radius: 0.313rem;
   cursor: pointer;
   display: flex;
   flex-wrap: nowrap;
@@ -47,8 +47,8 @@ $color-primary1: #8065ec;
 
 @mixin card {
   background: #ffffff;
-  box-shadow: 0px 4px 9px rgba(194, 203, 218, 0.25);
-  border-radius: 6px;
+  box-shadow: 0 0.25rem 0.563rem rgba(194, 203, 218, 0.25);
+  border-radius: 0.375rem;
 }
 
 $mobile-width: 950px;

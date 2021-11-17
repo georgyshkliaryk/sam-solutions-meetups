@@ -3,23 +3,22 @@
 .themes-card {
   @include card;
   padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
   cursor: pointer;
 }
 
-.themes-card-top__avatar {
+.themes-card-header__avatar {
   height: 1.875rem;
   width: 1.875rem;
 }
 
-.themes-card-top {
+.themes-card-header {
   display: flex;
   align-items: center;
   justify-content: left;
   @include font-light;
 }
 
-.themes-card-top__username {
+.themes-card-header__username {
   margin-left: 0.625rem;
 }
 
@@ -34,18 +33,18 @@
 }
 
 .themes-card-main__desc,
-.themes-card-top__username {
+.themes-card-header__username {
   @include font-light;
 }
 
-.themes-card-bottom {
+.themes-card-footer {
   @include font-light;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.themes-card-bottom-left {
+.themes-card-footer-left {
   @include color-secondary-text;
   display: flex;
   align-items: center;
