@@ -41,78 +41,72 @@ class Meetups {
     makeAutoObservable(this);
   }
 
-  fetchThemes() {
+  async fetchThemes() {
     this.themes = [];
-    axios
-      .get("/meetups")
-      .then((response) => {
-        response.data
-          .filter((el: IResponse) => el.status === "REQUEST")
-          .map((el: IResponse) => {
-            return this.themes.push({
-              id: el.id,
-              title: el.subject,
-              description: el.excerpt,
-              goCount: el.goCount,
-              authorName: el.author.name,
-              authorSurname: el.author.surname,
-            });
+    try {
+      const response = await axios.get("/meetups");
+      response.data
+        .filter((el: IResponse) => el.status === "REQUEST")
+        .map((el: IResponse) => {
+          return this.themes.push({
+            id: el.id,
+            title: el.subject,
+            description: el.excerpt,
+            authorName: el.author.name,
+            authorSurname: el.author.surname,
+            goCount: el.goCount,
           });
-        //console.log(JSON.parse(JSON.stringify(this.themes)));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        });
+      console.log(JSON.parse(JSON.stringify(this.themes)));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  fetchDrafts() {
+  async fetchDrafts() {
     this.drafts = [];
-    axios
-      .get("/meetups")
-      .then((response) => {
-        response.data
-          .filter((el: IResponse) => el.status === "DRAFT")
-          .map((el: IResponse) => {
-            return this.drafts.push({
-              id: el.id,
-              title: el.subject,
-              description: el.excerpt,
-              authorName: el.author.name,
-              authorSurname: el.author.surname,
-              start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
-              place: el.place,
-            });
+    try {
+      const response = await axios.get("/meetups");
+      response.data
+        .filter((el: IResponse) => el.status === "REQUEST")
+        .map((el: IResponse) => {
+          return this.drafts.push({
+            id: el.id,
+            title: el.subject,
+            description: el.excerpt,
+            authorName: el.author.name,
+            authorSurname: el.author.surname,
+            start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
+            place: el.place,
           });
-        console.log(JSON.parse(JSON.stringify(this.drafts)));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        });
+      console.log(JSON.parse(JSON.stringify(this.drafts)));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  fetchFuture() {
+  async fetchFuture() {
     this.future = [];
-    axios
-      .get("/meetups")
-      .then((response) => {
-        response.data
-          .filter((el: IResponse) => el.status === "CONFIRMED")
-          .map((el: IResponse) => {
-            return this.future.push({
-              id: el.id,
-              title: el.subject,
-              description: el.excerpt,
-              authorName: el.author.name,
-              authorSurname: el.author.surname,
-              start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
-              place: el.place,
-            });
+    try {
+      const response = await axios.get("/meetups");
+      response.data
+        .filter((el: IResponse) => el.status === "REQUEST")
+        .map((el: IResponse) => {
+          return this.future.push({
+            id: el.id,
+            title: el.subject,
+            description: el.excerpt,
+            authorName: el.author.name,
+            authorSurname: el.author.surname,
+            start: dateFormat(el.start, "dddd, d mmmm ● H:MM"),
+            place: el.place,
           });
-        console.log(JSON.parse(JSON.stringify(this.future)));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        });
+      console.log(JSON.parse(JSON.stringify(this.future)));
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 
