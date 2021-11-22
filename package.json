@@ -11,7 +11,11 @@
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.2",
+    "axios": "^0.24.0",
     "classnames": "^2.3.1",
+    "dateformat": "^5.0.2",
+    "mobx": "^6.3.7",
+    "mobx-react-lite": "^3.2.2",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,7 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint --ext .ts,.tsx src --fix",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!i18n)/\"",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -55,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/dateformat": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
     "eslint-config-prettier": "^8.3.0",
@@ -66,5 +71,6 @@
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1"
-  }
+  },
+  "proxy": "http://localhost:8800/api"
 }

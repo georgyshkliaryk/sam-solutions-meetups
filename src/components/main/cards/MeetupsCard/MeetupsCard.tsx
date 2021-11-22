@@ -1,25 +1,36 @@
 import React, { ReactElement } from "react";
-import { defaultUser } from "../../../../constants";
+import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
+import dateFormat from "dateformat";
 
-const MeetupsCard: React.FC = (): ReactElement => {
+interface IProps {
+  item: IMeetup;
+}
+
+const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
   return (
     <article className="meetups-card">
-      <p className="meetups-card-header">Пон., 12 апреля 15:00 комн. 601b</p>
+      <p className="meetups-card-header">
+        <time>
+          {props.item.start
+            ? dateFormat(props.item.start, "dddd, d mmmm ● H:MM")
+            : "–"}
+        </time>
+        &nbsp;
+        {props.item.place && " ● " + props.item.place}
+      </p>
       <div className="meetups-card-main">
-        <p className="meetups-card-main__title">Rollingstack</p>
+        <p className="meetups-card-main__title">{props.item.title}</p>
         <p className="meetups-card-main__description">
-          Расскажу про один из проектов SaM Solutions - Rollingstack. Это
-          система, что помогает создавать, использовать и поддерживать
-          приложения на...
+          {props.item.description}
         </p>
       </div>
       <div className="meetups-card-footer">
         <div className="meetups-card-footer-author">
           <Avatar className="meetups-card-footer__avatar" />
           <span className="meetups-card-footer__username">
-            {defaultUser.firstName} {defaultUser.lastName}
+            {props.item.authorName} {props.item.authorSurname}
           </span>
         </div>
       </div>

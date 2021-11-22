@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import "./App.scss";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import NewsPage from "./pages/news/NewsPage";
 import { routes } from "./constants";
 import MeetupsPage from "./pages/meetups/MeetupsPage";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 const App: React.FC = (): ReactElement => {
   return (

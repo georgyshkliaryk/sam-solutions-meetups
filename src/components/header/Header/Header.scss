@@ -15,6 +15,7 @@
   justify-content: space-between;
   font-weight: 500;
   margin: 0 auto;
+  width: 95%;
 }
 
 .header-outer {
@@ -25,7 +26,7 @@
 }
 
 .header-logo-outer {
-  width: 20rem;
+  width: 10rem;
   text-align: left;
 }
 
@@ -37,5 +38,8 @@
 @media (min-width: $mobile-width) {
   .header__wrapper {
     max-width: 100rem;
+  }
+  .header-logo-outer {
+    width: 20rem;
   }
 }

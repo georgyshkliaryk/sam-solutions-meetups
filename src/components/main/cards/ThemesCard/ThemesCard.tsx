@@ -1,19 +1,7 @@
 import React, { ReactElement } from "react";
+import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./ThemesCard.scss";
-
-interface IMeetup {
-  id: string;
-  authorName: string;
-  authorSurname: string;
-  start?: string;
-  title: string;
-  description?: string;
-  place?: string;
-  goCount: number;
-  status?: string;
-  isOver?: boolean;
-}
 
 interface IProps {
   item: IMeetup;

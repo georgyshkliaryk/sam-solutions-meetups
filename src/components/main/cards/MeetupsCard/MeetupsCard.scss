@@ -16,6 +16,7 @@
   align-items: center;
   justify-content: left;
   @include font-light;
+  @include color-secondary-text;
 }
 
 .meetups-card-footer__username {
