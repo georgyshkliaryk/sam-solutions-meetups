@@ -1,12 +1,14 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useEffect } from "react";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
-import MeetupsStore, { IMeetup } from "../../../stores/MeetupsStore";
+import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
+import MeetupsRepository from "../../../repositories/MeetupsRepository/MeetupsRepository";
+import MeetupsStore from "../../../stores/MeetupsStore";
 import "./ThemesPage.scss";
 
 const ThemesPage: React.FC = observer((): ReactElement => {
   useEffect(() => {
-    MeetupsStore.fetchThemes();
+    MeetupsRepository.getMeetupsThemes();
   }, []);
   return (
     <section className="themes-page">

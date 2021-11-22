@@ -104,3 +104,15 @@ export const defaultUser: IUser = {
   lastName: "Surname",
   avatar: "",
 };
+
+export const meetupTypes = {
+  REQUEST: "REQUEST",
+  DRAFT: "DRAFT",
+  CONFIRMED: "CONFIRMED",
+  isOver: true,
+} as const;
+
+export const apiUrls = {
+  meetups: "/meetups",
+  users: "/users",
+} as const;

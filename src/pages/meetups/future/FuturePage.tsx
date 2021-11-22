@@ -1,12 +1,14 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useEffect } from "react";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import MeetupsStore, { IMeetup } from "../../../stores/MeetupsStore";
+import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
+import MeetupsRepository from "../../../repositories/MeetupsRepository/MeetupsRepository";
+import MeetupsStore from "../../../stores/MeetupsStore";
 import "./FuturePage.scss";
 
 const FuturePage: React.FC = observer((): ReactElement => {
   useEffect(() => {
-    MeetupsStore.fetchFuture();
+    MeetupsRepository.getMeetupsFuture();
   }, []);
   return (
     <section className="future-page">

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { IMeetup } from "../../../../stores/MeetupsStore";
+import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./ThemesCard.scss";
 
