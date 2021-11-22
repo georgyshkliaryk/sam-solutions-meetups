@@ -1,3 +1,4 @@
+import { apiUrls } from "./../../constants";
 import {
   IMeetupFromServer,
   INetworkRepository,
@@ -5,8 +6,8 @@ import {
 import axios from "axios";
 
 class NetworkRepository implements INetworkRepository {
-  async getAllMeetups(url: string): Promise<IMeetupFromServer[]> {
-    const response = await axios.get(url);
+  async getAllMeetups(): Promise<IMeetupFromServer[]> {
+    const response = await axios.get(apiUrls.meetups);
     return await response.data;
   }
 }

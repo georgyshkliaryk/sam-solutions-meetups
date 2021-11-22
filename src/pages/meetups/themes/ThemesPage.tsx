@@ -1,14 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import MeetupsStore from "../../../stores/MeetupsStore";
 import "./ThemesPage.scss";
 
 const ThemesPage: React.FC = observer((): ReactElement => {
-  useEffect(() => {
-    MeetupsStore.getMeetupsThemes();
-  }, []);
   return (
     <section className="themes-page">
       <div className="themes-page-meetups-quantity">

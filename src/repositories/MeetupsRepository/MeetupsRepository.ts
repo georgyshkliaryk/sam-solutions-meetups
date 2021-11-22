@@ -3,29 +3,26 @@ import {
   IMeetupsRepository,
 } from "./../interfaces/IMeetupsRepository";
 import { IMeetupFromServer } from "./../interfaces/INetworkRepository";
-import { apiUrls } from "./../../constants";
 import NetworkRepository from "../NetworkRepository/NetworkRepository";
 
 class MeetupsRepository implements IMeetupsRepository {
-  parsedMeetups: IMeetup[] = [];
-  async parseAllMeetups(): Promise<IMeetup[]> {
-    (await NetworkRepository.getAllMeetups(apiUrls.meetups)).map(
-      (m: IMeetupFromServer) => {
-        return this.parsedMeetups.push({
-          id: m.id,
-          title: m.subject,
-          description: m.excerpt,
-          authorName: m.author.name,
-          authorSurname: m.author.surname,
-          goCount: m.goCount,
-          start: m.start,
-          place: m.place,
-          status: m.status,
-          isOver: m.isOver,
-        });
-      }
-    );
-    return this.parsedMeetups;
+  async getAllMeetups(): Promise<IMeetup[]> {
+    const meetupsFromServer = await NetworkRepository.getAllMeetups();
+    return meetupsFromServer.map(this.parseMeetup);
+  }
+  private parseMeetup(meetup: IMeetupFromServer): IMeetup {
+    return {
+      id: meetup.id,
+      title: meetup.subject,
+      description: meetup.excerpt,
+      authorName: meetup.author.name,
+      authorSurname: meetup.author.surname,
+      goCount: meetup.goCount,
+      start: meetup.start,
+      place: meetup.place,
+      status: meetup.status,
+      isOver: meetup.isOver,
+    };
   }
 }
 

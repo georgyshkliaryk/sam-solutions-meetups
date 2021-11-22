@@ -1,49 +1,50 @@
+import { IMeetup } from "./../repositories/interfaces/IMeetupsRepository";
+import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
-import { meetupTypes } from "../constants";
-import { IMeetup } from "../repositories/interfaces/IMeetupsRepository";
 import MeetupsRepository from "../repositories/MeetupsRepository/MeetupsRepository";
 
 class MeetupsStore {
-  themes: IMeetup[] = [];
-  drafts: IMeetup[] = [];
-  future: IMeetup[] = [];
-  past: IMeetup[] = [];
+  meetups: IMeetup[] = [];
 
   constructor() {
     makeAutoObservable(this);
-    MeetupsRepository.parseAllMeetups();
   }
 
-  getMeetupsThemes() {
-    this.themes = [];
-    const filteredMeetups: IMeetup[] = MeetupsRepository.parsedMeetups.filter(
-      (m: IMeetup) => m.status === meetupTypes.REQUEST
-    );
-    this.themes = [...filteredMeetups];
+  private async getAllMeetups() {
+    this.meetups = [];
+    this.meetups = await MeetupsRepository.getAllMeetups();
   }
 
-  getMeetupsDrafts() {
-    this.drafts = [];
-    const filteredMeetups: IMeetup[] = MeetupsRepository.parsedMeetups.filter(
-      (m: IMeetup) => m.status === meetupTypes.DRAFT
+  get themes(): IMeetup[] {
+    if (this.meetups.length === 0) {
+      this.getAllMeetups();
+    }
+    return this.meetups.filter(
+      (m: IMeetup) => m.status === MeetupTypes.REQUEST
     );
-    this.drafts = [...filteredMeetups];
   }
 
-  getMeetupsFuture() {
-    this.future = [];
-    const filteredMeetups: IMeetup[] = MeetupsRepository.parsedMeetups.filter(
-      (m: IMeetup) => m.status === meetupTypes.CONFIRMED
-    );
-    this.future = [...filteredMeetups];
+  get drafts(): IMeetup[] {
+    if (this.meetups.length === 0) {
+      this.getAllMeetups();
+    }
+    return this.meetups.filter((m: IMeetup) => m.status === MeetupTypes.DRAFT);
   }
 
-  getMeetupsPast() {
-    this.past = [];
-    const filteredMeetups: IMeetup[] = MeetupsRepository.parsedMeetups.filter(
-      (m: IMeetup) => m.isOver
+  get future(): IMeetup[] {
+    if (this.meetups.length === 0) {
+      this.getAllMeetups();
+    }
+    return this.meetups.filter(
+      (m: IMeetup) => m.status === MeetupTypes.CONFIRMED
     );
-    this.past = [...filteredMeetups];
+  }
+
+  get past(): IMeetup[] {
+    if (this.meetups.length === 0) {
+      this.getAllMeetups();
+    }
+    return this.meetups.filter((m: IMeetup) => m.isOver);
   }
 }
 

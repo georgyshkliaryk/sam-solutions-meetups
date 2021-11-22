@@ -1,14 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import MeetupsStore from "../../../stores/MeetupsStore";
 import "./PastPage.scss";
 
 const PastPage: React.FC = observer((): ReactElement => {
-  useEffect(() => {
-    MeetupsStore.getMeetupsPast();
-  }, []);
   return (
     <section className="past-page">
       <div className="past-page-meetups-quantity">

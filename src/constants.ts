@@ -105,7 +105,7 @@ export const defaultUser: IUser = {
   avatar: "",
 };
 
-export enum meetupTypes {
+export enum MeetupTypes {
   REQUEST = "REQUEST",
   DRAFT = "DRAFT",
   CONFIRMED = "CONFIRMED",
