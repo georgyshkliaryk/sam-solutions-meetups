@@ -115,3 +115,15 @@ export const apiUrls = {
   meetups: "/meetups",
   users: "/users",
 } as const;
+
+interface IDeclination {
+  [key: string]: string[];
+}
+
+export const NumberDeclination: IDeclination = {
+  themes: ["тема предложена", "темы предложены", "тем предложено"],
+  drafts: ["митап на модерации", "митапа на модерации", "митапов на модерации"],
+  future: ["митап опубликован", "митапа опубликовано", "митапов опубликовано"],
+  past: ["митап прошел", "митапа прошло", "митапов прошло"],
+  participants: ["поддерживает", "поддерживают", "поддерживают"],
+};

@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
+import { NumberDeclination } from "../../../constants";
+import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import MeetupsStore from "../../../stores/MeetupsStore";
 import "./ThemesPage.scss";
@@ -10,7 +12,10 @@ const ThemesPage: React.FC = observer((): ReactElement => {
     <section className="themes-page">
       <div className="themes-page-meetups-quantity">
         <p className="themes-page-meetups-quantity__text">
-          Тем предложено: {MeetupsStore.themes.length}
+          {numberDeclination(
+            MeetupsStore.themes.length,
+            NumberDeclination.themes
+          )}
         </p>
         <button className="themes-page-meetups-quantity__button">
           <span className="material-icons-round">add</span>Создать тему

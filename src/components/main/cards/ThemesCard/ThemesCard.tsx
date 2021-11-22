@@ -1,4 +1,6 @@
 import React, { ReactElement } from "react";
+import { NumberDeclination } from "../../../../constants";
+import { numberDeclination } from "../../../../helpers/declination";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./ThemesCard.scss";
@@ -25,7 +27,10 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       <div className="themes-card-footer">
         <p className="themes-card-footer-support">
           <span className="material-icons-round">person</span>
-          {props.item.goCount} поддерживают
+          {numberDeclination(
+            props.item.goCount,
+            NumberDeclination.participants
+          )}
         </p>
       </div>
     </article>
