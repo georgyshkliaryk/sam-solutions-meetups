@@ -6,7 +6,7 @@
 }
 
 .link-white:hover {
-  @include color-primary-hover;
+  background: $color-primary-hover;
 }
 
 .link-black {
@@ -16,5 +16,5 @@
 
 .link-grey {
   text-decoration: none;
-  @include color-secondary-text;
+  color: $color-secondary-text;
 }

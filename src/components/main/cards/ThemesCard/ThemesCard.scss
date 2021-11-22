@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: left;
   @include font-light;
-  @include color-secondary-text;
+  color: $color-secondary-text;
 }
 
 .themes-card-header__username {
@@ -46,7 +46,7 @@
 }
 
 .themes-card-footer-support {
-  @include color-secondary-text;
+  color: $color-secondary-text;
   display: flex;
   align-items: center;
 }

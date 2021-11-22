@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: left;
   @include font-light;
-  @include color-secondary-text;
+  color: $color-secondary-text;
 }
 
 .meetups-card-footer__username {
@@ -46,7 +46,7 @@
 }
 
 .meetups-card-footer-author {
-  @include color-secondary-text;
+  color: $color-secondary-text;
   display: flex;
   align-items: center;
 }
