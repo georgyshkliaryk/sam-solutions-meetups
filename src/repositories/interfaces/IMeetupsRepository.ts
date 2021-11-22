@@ -14,5 +14,10 @@ export interface IMeetup {
 }
 
 export interface IMeetupsRepository {
-  allMeetups: IMeetupFromServer[];
+  // allMeetups: IMeetupFromServer[];
+  // getMeetupsThemes: () => IMeetup[];
+  // getMeetupsDrafts: () => IMeetup[];
+  // getMeetupsFuture: () => IMeetup[];
+  // getMeetupsPast: () => IMeetup[];
+  parseAllMeetups: (allMeetups: IMeetupFromServer[]) => Promise<IMeetup[]>;
 }

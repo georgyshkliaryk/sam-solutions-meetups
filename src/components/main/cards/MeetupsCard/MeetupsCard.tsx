@@ -12,9 +12,12 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
   return (
     <article className="meetups-card">
       <p className="meetups-card-header">
-        {props.item.start
-          ? dateFormat(props.item.start, "dddd, d mmmm ● H:MM")
-          : "–"}{" "}
+        <time>
+          {props.item.start
+            ? dateFormat(props.item.start, "dddd, d mmmm ● H:MM")
+            : "–"}
+        </time>
+        &nbsp;
         {props.item.place && " ● " + props.item.place}
       </p>
       <div className="meetups-card-main">

@@ -16,6 +16,5 @@ export interface IMeetupFromServer {
 }
 
 export interface INetworkRepository {
-  all: IMeetupFromServer[];
   getAllMeetups: (url: string) => Promise<IMeetupFromServer[]>;
 }

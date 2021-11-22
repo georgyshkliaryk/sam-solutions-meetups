@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   line-height: 1.188rem;
-  width: 20rem;
+  width: 5rem;
   justify-content: right;
   text-align: right;
 }
@@ -17,5 +17,8 @@
 @media (min-width: $mobile-width) {
   .header-profile__text {
     display: block;
+  }
+  .header-profile {
+    width: 20rem;
   }
 }

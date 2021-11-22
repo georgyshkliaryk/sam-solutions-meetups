@@ -105,12 +105,11 @@ export const defaultUser: IUser = {
   avatar: "",
 };
 
-export const meetupTypes = {
-  REQUEST: "REQUEST",
-  DRAFT: "DRAFT",
-  CONFIRMED: "CONFIRMED",
-  isOver: true,
-} as const;
+export enum meetupTypes {
+  REQUEST = "REQUEST",
+  DRAFT = "DRAFT",
+  CONFIRMED = "CONFIRMED",
+}
 
 export const apiUrls = {
   meetups: "/meetups",
