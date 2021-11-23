@@ -44,18 +44,15 @@ i18n.monthNames = [
   "декабря",
 ];
 
-test("Dateformat test 1", () => {
+test("Test for correct formatting of the date", () => {
   expect(dateFormat("2022-06-09T23:35:47.068Z", "dddd, d mmmm ● H:MM")).toBe(
     "Пятн., 10 июня ● 2:35"
   );
-});
-
-test("Dateformat test 2", () => {
   expect(
     dateFormat("2022-06-13T05:09:47.076Z", "dddd, mmmm dS, yyyy, h:MM:ss TT")
   ).toBe("Пон., июня 13th, 2022, 8:09:47 AM");
 });
 
-test("Dateformat test 3", () => {
+test("Test for displaying correct full date", () => {
   expect(dateFormat("Jun 9 2007", "fullDate")).toBe("Суб., июня 9, 2007");
 });
