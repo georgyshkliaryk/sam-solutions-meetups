@@ -1,0 +1,70 @@
+@import "../../constants.scss";
+
+.login-page {
+  background: url("./assets/login-background.svg") no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.login-page-container {
+  background-color: $background-primary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 3rem 2rem;
+  border-radius: 0.5rem;
+  gap: 1.5rem;
+}
+
+.login-page-container__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.login-page-container__label {
+  @include input-label;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.login-page-container__input {
+  @include input;
+  width: 15rem;
+}
+
+.login-page-container__input:focus {
+  @include input-focus;
+}
+
+.login-page-container__submit-button {
+  @include button-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  .material-icons-round {
+    margin-left: 0.4rem;
+  }
+}
+
+.login-page-container__submit-button:active {
+  @include button-primary-active;
+}
+
+.login-page-container__submit-button:disabled {
+  @include button-primary-disabled;
+}
+
+@media (min-width: $mobile-width) {
+  .login-page-container {
+    padding: 3rem 6rem;
+  }
+  .login-page-container__input {
+    width: 20rem;
+  }
+}

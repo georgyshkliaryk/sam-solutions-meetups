@@ -47,6 +47,7 @@ i18n.monthNames = [
 export const routes = {
   meetups: "/meetups",
   news: "/news",
+  login: "/login",
   themes: "themes",
   drafts: "drafts",
   future: "future",
