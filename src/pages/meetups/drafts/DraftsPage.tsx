@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
+import { NumberDeclination } from "../../../constants";
+import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import MeetupsStore from "../../../stores/MeetupsStore";
 import "./DraftsPage.scss";
@@ -10,7 +12,10 @@ const DraftsPage: React.FC = observer((): ReactElement => {
     <section className="drafts-page">
       <div className="drafts-page-meetups-quantity">
         <p className="drafts-page-meetups-quantity__text">
-          На модерации: {MeetupsStore.drafts.length}
+          {numberDeclination(
+            MeetupsStore.drafts.length,
+            NumberDeclination.drafts
+          )}
         </p>
       </div>
       <div className="drafts-page-wrapper">

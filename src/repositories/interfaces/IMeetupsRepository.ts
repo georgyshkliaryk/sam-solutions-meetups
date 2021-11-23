@@ -8,7 +8,7 @@ export interface IMeetup {
   title: string;
   description: string;
   place?: string;
-  goCount?: number;
+  goCount: number;
   status?: string;
   isOver?: boolean;
 }

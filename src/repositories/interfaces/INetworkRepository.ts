@@ -7,7 +7,7 @@ export interface IMeetupFromServer {
   id: string;
   subject: string;
   excerpt: string;
-  goCount?: number;
+  goCount: number;
   author: IAuthor;
   status: string;
   start?: string;
