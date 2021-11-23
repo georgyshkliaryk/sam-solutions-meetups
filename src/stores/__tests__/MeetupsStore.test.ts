@@ -101,14 +101,3 @@ describe("Parse meetups", () => {
     expect(result).toEqual(testParsedMeetups);
   });
 });
-
-// describe("Store test", () => {
-//   it("should return parsed meetups list", async () => {
-//     mockedAxios.get.mockResolvedValueOnce({ data: testMeetups });
-
-//     const result = MeetupsStore.drafts;
-
-//     expect(result).toBe(2);
-//     expect(result).toEqual(testParsedMeetups);
-//   });
-// });
