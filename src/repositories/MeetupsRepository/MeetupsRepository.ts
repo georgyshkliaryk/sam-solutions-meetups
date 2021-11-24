@@ -3,11 +3,14 @@ import {
   IMeetupsRepository,
 } from "./../interfaces/IMeetupsRepository";
 import { IMeetupFromServer } from "./../interfaces/INetworkRepository";
-import NetworkRepository from "../NetworkRepository/NetworkRepository";
+import { NetworkRepository } from "../NetworkRepository/NetworkRepository";
 
-class MeetupsRepository implements IMeetupsRepository {
+export class MeetupsRepository implements IMeetupsRepository {
+  constructor(private readonly networkRepository: NetworkRepository) {
+    this.networkRepository = networkRepository;
+  }
   async getAllMeetups(): Promise<IMeetup[]> {
-    const meetupsFromServer = await NetworkRepository.getAllMeetups();
+    const meetupsFromServer = await this.networkRepository.getAllMeetups();
     return meetupsFromServer.map(this.parseMeetup);
   }
   private parseMeetup(meetup: IMeetupFromServer): IMeetup {
@@ -25,5 +28,3 @@ class MeetupsRepository implements IMeetupsRepository {
     };
   }
 }
-
-export default new MeetupsRepository();
