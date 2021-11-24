@@ -81,7 +81,12 @@ $mobile-width: 950px;
 
 @mixin input-focus {
   outline: none;
-  border: 0.125rem solid $color-primary1;
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+  border: 0.063rem solid $background-primary;
+}
+
+@mixin input-hover {
+  background: #f4f6fc;
 }
 
 @mixin input-label {

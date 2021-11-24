@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = (): ReactElement => {
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,14 +25,6 @@ const LoginPage: React.FC = (): ReactElement => {
     };
     await networkRepository.login(loginData);
   };
-
-  useEffect(() => {
-    if (login === "" || password === "") {
-      setIsSubmitDisabled(true);
-    } else {
-      setIsSubmitDisabled(false);
-    }
-  }, [login, password]);
 
   return (
     <div className="login-page">
@@ -68,7 +59,7 @@ const LoginPage: React.FC = (): ReactElement => {
         <button
           className="login-page-form__submit-button"
           type="submit"
-          disabled={isSubmitDisabled}
+          disabled={login === "" || password === ""}
         >
           Войти <span className="material-icons-round">login</span>
         </button>

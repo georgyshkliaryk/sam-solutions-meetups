@@ -37,6 +37,10 @@
   width: 15rem;
 }
 
+.login-page-form__input:hover {
+  @include input-hover;
+}
+
 .login-page-form__input:focus {
   @include input-focus;
 }
