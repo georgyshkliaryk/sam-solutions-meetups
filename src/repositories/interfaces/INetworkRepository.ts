@@ -35,5 +35,7 @@ export interface ILoginData {
 
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
-  loginAttempt: (loginData: ILoginData) => Promise<ILoginResponse>;
+  login: (loginData: ILoginData) => Promise<ILoginResponse>;
+  loginWithCookies: () => Promise<ILoginResponse>;
+  logout: () => {};
 }

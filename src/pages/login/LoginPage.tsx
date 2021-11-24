@@ -24,7 +24,7 @@ const LoginPage: React.FC = (): ReactElement => {
       username: login,
       password: password,
     };
-    await networkRepository.loginAttempt(loginData);
+    await networkRepository.login(loginData);
   };
 
   useEffect(() => {

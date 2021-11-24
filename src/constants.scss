@@ -74,16 +74,14 @@ $mobile-width: 950px;
 @mixin input {
   background: #ffffff;
   border: 0.063rem solid #d5dce7;
-  box-sizing: border-box;
   border-radius: 0.313rem;
   padding: 0.75rem;
   @include font-semi-light;
 }
 
 @mixin input-focus {
-  border: 0.125rem solid $color-primary1;
   outline: none;
-  box-sizing: border-box;
+  border: 0.125rem solid $color-primary1;
 }
 
 @mixin input-label {

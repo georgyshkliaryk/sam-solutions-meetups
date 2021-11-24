@@ -116,6 +116,7 @@ export const apiUrls = {
   meetups: "/meetups",
   users: "/users",
   login: "/login",
+  logout: "/logout",
 } as const;
 
 interface IDeclination {

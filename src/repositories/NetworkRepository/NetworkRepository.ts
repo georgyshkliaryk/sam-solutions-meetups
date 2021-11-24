@@ -12,7 +12,7 @@ export class NetworkRepository implements INetworkRepository {
     const response = await axios.get(apiUrls.meetups);
     return await response.data;
   }
-  async loginAttempt(loginData: ILoginData): Promise<ILoginResponse> {
+  async login(loginData: ILoginData): Promise<ILoginResponse> {
     const response = await axios.post(apiUrls.login, loginData);
     console.log(response.status);
     if (response.status !== 200) {
@@ -20,5 +20,21 @@ export class NetworkRepository implements INetworkRepository {
     }
     console.log(response.data);
     return await response.data;
+  }
+  async loginWithCookies(): Promise<ILoginResponse> {
+    const response = await axios.get(apiUrls.login);
+    console.log(response.status);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    console.log(response.data);
+    return await response.data;
+  }
+  async logout() {
+    const response = await axios.get(apiUrls.logout);
+    console.log(response.status);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
   }
 }
