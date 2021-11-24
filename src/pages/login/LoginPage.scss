@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.login-page-container {
+.login-page-form {
   background-color: $background-primary;
   display: flex;
   flex-direction: column;
@@ -19,29 +19,29 @@
   gap: 1.5rem;
 }
 
-.login-page-container__title {
+.login-page-form__title {
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1.2;
   margin-bottom: 1.5rem;
 }
 
-.login-page-container__label {
+.login-page-form__label {
   @include input-label;
   text-align: left;
   margin-bottom: 0.5rem;
 }
 
-.login-page-container__input {
+.login-page-form__input {
   @include input;
   width: 15rem;
 }
 
-.login-page-container__input:focus {
+.login-page-form__input:focus {
   @include input-focus;
 }
 
-.login-page-container__submit-button {
+.login-page-form__submit-button {
   @include button-primary;
   display: flex;
   align-items: center;
@@ -52,19 +52,19 @@
   }
 }
 
-.login-page-container__submit-button:active {
+.login-page-form__submit-button:active {
   @include button-primary-active;
 }
 
-.login-page-container__submit-button:disabled {
+.login-page-form__submit-button:disabled {
   @include button-primary-disabled;
 }
 
 @media (min-width: $mobile-width) {
-  .login-page-container {
+  .login-page-form {
     padding: 3rem 6rem;
   }
-  .login-page-container__input {
+  .login-page-form__input {
     width: 20rem;
   }
 }

@@ -53,6 +53,7 @@ $mobile-width: 950px;
   background: rgba(128, 101, 236, 0.4);
   mix-blend-mode: normal;
   box-shadow: none;
+  cursor: not-allowed;
 }
 
 @mixin button-secondary {

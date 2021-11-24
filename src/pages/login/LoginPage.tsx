@@ -16,33 +16,28 @@ const LoginPage: React.FC = (): ReactElement => {
 
   return (
     <div className="login-page">
-      <form className="login-page-container">
-        <p className="login-page-container__title">
-          Войдите для просмотра митапов:
-        </p>
-        <div className="login-page-container__input-wrapper">
-          <label htmlFor="login-input" className="login-page-container__label">
+      <form className="login-page-form">
+        <p className="login-page-form__title">Войдите для просмотра митапов:</p>
+        <div className="login-page-form__input-wrapper">
+          <label htmlFor="login-input" className="login-page-form__label">
             Введите имя пользователя:
           </label>
           <input
             type="text"
-            className="login-page-container__input"
+            className="login-page-form__input"
             placeholder="Логин"
             id="login-input"
             ref={loginRef}
             onChange={handleInputChange}
           />
         </div>
-        <div className="login-page-container__input-wrapper">
-          <label
-            htmlFor="login-password"
-            className="login-page-container__label"
-          >
+        <div className="login-page-form__input-wrapper">
+          <label htmlFor="login-password" className="login-page-form__label">
             Введите пароль:
           </label>
           <input
             type="password"
-            className="login-page-container__input"
+            className="login-page-form__input"
             placeholder="Пароль"
             id="password-input"
             ref={passwordRef}
@@ -50,7 +45,7 @@ const LoginPage: React.FC = (): ReactElement => {
           />
         </div>
         <button
-          className="login-page-container__submit-button"
+          className="login-page-form__submit-button"
           type="submit"
           disabled={isSubmitDisabled}
         >
