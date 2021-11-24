@@ -3,7 +3,7 @@ import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
 import MeetupsRepository from "../repositories/MeetupsRepository/MeetupsRepository";
 
-class MeetupsStore {
+export class MeetupsStore {
   meetups: IMeetup[] = [];
 
   constructor() {
@@ -48,4 +48,4 @@ class MeetupsStore {
   }
 }
 
-export default new MeetupsStore();
+//export default new MeetupsStore();

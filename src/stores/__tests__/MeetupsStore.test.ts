@@ -1,10 +1,10 @@
 import NetworkRepository from "../../repositories/NetworkRepository/NetworkRepository";
 import { apiUrls } from "./../../constants";
 import { IMeetupFromServer } from "./../../repositories/interfaces/INetworkRepository";
-import MeetupsStore from "../MeetupsStore";
 import axios from "axios";
 import MeetupsRepository from "../../repositories/MeetupsRepository/MeetupsRepository";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
+import { MeetupsStore } from "../MeetupsStore";
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const testMeetups: IMeetupFromServer[] = [
@@ -69,12 +69,14 @@ const testParsedMeetups: IMeetup[] = [
   },
 ];
 
+const meetupsStore = new MeetupsStore();
+
 test("Initial state", () => {
-  expect(MeetupsStore.drafts.length).toEqual(0);
-  expect(MeetupsStore.themes.length).toEqual(0);
-  expect(MeetupsStore.past.length).toEqual(0);
-  expect(MeetupsStore.future.length).toEqual(0);
-  expect(MeetupsStore.meetups.length).toEqual(0);
+  expect(meetupsStore.drafts.length).toEqual(0);
+  expect(meetupsStore.themes.length).toEqual(0);
+  expect(meetupsStore.past.length).toEqual(0);
+  expect(meetupsStore.future.length).toEqual(0);
+  expect(meetupsStore.meetups.length).toEqual(0);
 });
 
 jest.mock("axios");
