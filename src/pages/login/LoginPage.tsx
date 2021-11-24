@@ -1,4 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
+import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
+import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = (): ReactElement => {
@@ -14,6 +16,17 @@ const LoginPage: React.FC = (): ReactElement => {
     setPassword(event.target.value);
   };
 
+  const networkRepository = new NetworkRepository();
+
+  const handleLoginAttempt = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const loginData: ILoginData = {
+      username: login,
+      password: password,
+    };
+    await networkRepository.loginAttempt(loginData);
+  };
+
   useEffect(() => {
     if (login === "" || password === "") {
       setIsSubmitDisabled(true);
@@ -24,7 +37,7 @@ const LoginPage: React.FC = (): ReactElement => {
 
   return (
     <div className="login-page">
-      <form className="login-page-form">
+      <form className="login-page-form" onSubmit={handleLoginAttempt}>
         <p className="login-page-form__title">Войдите для просмотра митапов:</p>
         <div className="login-page-form__input-wrapper">
           <label htmlFor="login-input" className="login-page-form__label">

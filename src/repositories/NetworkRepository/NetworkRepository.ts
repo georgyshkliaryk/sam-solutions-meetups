@@ -12,7 +12,7 @@ export class NetworkRepository implements INetworkRepository {
     const response = await axios.get(apiUrls.meetups);
     return await response.data;
   }
-  async login(loginData: ILoginData): Promise<ILoginResponse> {
+  async loginAttempt(loginData: ILoginData): Promise<ILoginResponse> {
     const response = await axios.post(apiUrls.login, loginData);
     console.log(response.status);
     if (response.status !== 200) {
