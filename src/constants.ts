@@ -115,6 +115,7 @@ export enum MeetupTypes {
 export const apiUrls = {
   meetups: "/meetups",
   users: "/users",
+  login: "/login",
 } as const;
 
 interface IDeclination {

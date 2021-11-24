@@ -15,6 +15,25 @@ export interface IMeetupFromServer {
   isOver?: boolean;
 }
 
+export interface IUser {
+  id: string;
+  name: string;
+  password: string;
+  surname: string;
+  post?: string;
+  roles?: string;
+}
+
+export interface ILoginResponse {
+  user: IUser;
+}
+
+export interface ILoginData {
+  username: string;
+  password: string;
+}
+
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
+  login: (loginData: ILoginData) => Promise<ILoginResponse>;
 }
