@@ -1,18 +1,26 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = (): ReactElement => {
-  const loginRef = React.createRef<HTMLInputElement>();
-  const passwordRef = React.createRef<HTMLInputElement>();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleInputChange = () => {
-    if (loginRef.current?.value === "" || passwordRef.current?.value === "") {
+  const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  useEffect(() => {
+    if (login === "" || password === "") {
       setIsSubmitDisabled(true);
     } else {
       setIsSubmitDisabled(false);
     }
-  };
+  }, [login, password]);
 
   return (
     <div className="login-page">
@@ -27,8 +35,8 @@ const LoginPage: React.FC = (): ReactElement => {
             className="login-page-form__input"
             placeholder="Логин"
             id="login-input"
-            ref={loginRef}
-            onChange={handleInputChange}
+            value={login}
+            onChange={handleLoginChange}
           />
         </div>
         <div className="login-page-form__input-wrapper">
@@ -40,8 +48,8 @@ const LoginPage: React.FC = (): ReactElement => {
             className="login-page-form__input"
             placeholder="Пароль"
             id="password-input"
-            ref={passwordRef}
-            onChange={handleInputChange}
+            value={password}
+            onChange={handlePasswordChange}
           />
         </div>
         <button
