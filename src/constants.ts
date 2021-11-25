@@ -94,18 +94,6 @@ export const navItems: NavItems = {
   ],
 };
 
-export interface IDefaultUser {
-  firstName: string;
-  lastName: string;
-  avatar: string;
-}
-
-export const defaultUser: IDefaultUser = {
-  firstName: "Name",
-  lastName: "Surname",
-  avatar: "",
-};
-
 export enum MeetupTypes {
   REQUEST = "REQUEST",
   DRAFT = "DRAFT",

@@ -21,7 +21,7 @@ const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
         {props.user.name} {props.user.surname}
       </p>
       <Avatar className="header-avatar" />
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout}>Выйти</button>
     </div>
   );
 });

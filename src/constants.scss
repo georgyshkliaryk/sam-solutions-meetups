@@ -3,6 +3,7 @@ $color-primary2: #314ad7;
 $color-primary-hover: #293fb6;
 $color-secondary-text: #979797;
 $background-primary: #f4f6fc;
+$color-error: #ef2f00;
 
 $gradient: linear-gradient(63.5deg, #8065ec 16.63%, #314ad7 83.37%);
 
@@ -82,7 +83,7 @@ $mobile-width: 950px;
 @mixin input-focus {
   outline: none;
   box-shadow: 0 0 0 0.125rem $color-primary1;
-  border: 0.063rem solid $background-primary;
+  border: 0.063rem solid #ffff;
 }
 
 @mixin input-hover {
@@ -93,4 +94,11 @@ $mobile-width: 950px;
   display: block;
   color: #aab6ca;
   @include font-semi-light;
+}
+
+@mixin input-error {
+  @include font-semi-light;
+  color: $color-error;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
 }

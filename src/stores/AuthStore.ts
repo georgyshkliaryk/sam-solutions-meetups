@@ -2,11 +2,11 @@ import {
   ILoginData,
   IUser,
 } from "./../repositories/interfaces/INetworkRepository";
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRepository";
 
 export class AuthStore {
-  user: IUser | {} = {};
+  user: IUser | undefined = undefined;
   private authenticated = false;
 
   constructor(private readonly networkRepository: NetworkRepository) {
@@ -20,8 +20,7 @@ export class AuthStore {
       this.setAuthenticated(true);
       this.user = response.user;
     } catch (err) {
-      this.setAuthenticated(false);
-      this.user = {};
+      this.resetAuth();
     }
   }
 
@@ -31,22 +30,25 @@ export class AuthStore {
       this.user = loginResponse.user;
       this.setAuthenticated(true);
     } catch (err) {
-      this.setAuthenticated(false);
-      this.user = {};
+      this.resetAuth();
     }
   }
 
   async logout() {
     await this.networkRepository.logout();
-    this.setAuthenticated(false);
-    this.user = {};
+    this.resetAuth();
   }
 
   private setAuthenticated(authenticated: boolean) {
     this.authenticated = authenticated;
   }
 
-  isAuthenticated() {
+  get isAuthenticated() {
     return this.authenticated;
+  }
+
+  private resetAuth() {
+    this.setAuthenticated(false);
+    this.user = undefined;
   }
 }

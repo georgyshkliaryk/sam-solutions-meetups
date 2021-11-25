@@ -19,28 +19,32 @@ import { observer } from "mobx-react-lite";
 
 const MeetupsPage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
-  return (
-    <div className="meetups">
-      <Header className="header-outer">
-        <LinkComponent to={routes.meetups}>
-          <LogoSam className="header-logo-outer" />
-        </LinkComponent>
-        <HeaderNavbar items={navItems.header} />
-        <HeaderProfile user={authStore.user} />
-      </Header>
-      <Main>
-        <MainTitle>{navItems.header[0].title}</MainTitle>
-        <MainNavbar items={navItems.meetups} className="main__navbar-outer" />
-        <Routes>
-          <Route path={routes.themes} element={<ThemesPage />} />
-          <Route path={routes.drafts} element={<DraftsPage />} />
-          <Route path={routes.future} element={<FuturePage />} />
-          <Route path={routes.past} element={<PastPage />} />
-          <Route path="*" element={<Navigate replace to={routes.themes} />} />
-        </Routes>
-      </Main>
-    </div>
-  );
+  if (authStore.user !== undefined) {
+    return (
+      <div className="meetups">
+        <Header className="header-outer">
+          <LinkComponent to={routes.meetups}>
+            <LogoSam className="header-logo-outer" />
+          </LinkComponent>
+          <HeaderNavbar items={navItems.header} />
+          <HeaderProfile user={authStore.user} />
+        </Header>
+        <Main>
+          <MainTitle>{navItems.header[0].title}</MainTitle>
+          <MainNavbar items={navItems.meetups} className="main__navbar-outer" />
+          <Routes>
+            <Route path={routes.themes} element={<ThemesPage />} />
+            <Route path={routes.drafts} element={<DraftsPage />} />
+            <Route path={routes.future} element={<FuturePage />} />
+            <Route path={routes.past} element={<PastPage />} />
+            <Route path="*" element={<Navigate replace to={routes.themes} />} />
+          </Routes>
+        </Main>
+      </div>
+    );
+  } else {
+    return <Navigate to={routes.login} />;
+  }
 });
 
 export default MeetupsPage;

@@ -1,7 +1,7 @@
-import { toJS } from "mobx";
+import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
@@ -12,13 +12,21 @@ const LoginPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [validationError, setValidationError] = useState(false);
+  const inputErrorStyle = "login-page-form__input-error";
+
+  if (authStore.isAuthenticated) {
+    return <Navigate to={routes.meetups} />;
+  }
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.target.value);
+    setValidationError(false);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setValidationError(false);
   };
 
   const handleLoginAttempt = async (event: React.FormEvent) => {
@@ -27,14 +35,12 @@ const LoginPage: React.FC = observer((): ReactElement => {
       username: login,
       password: password,
     };
-    try {
-      await authStore.login(loginData);
+    await authStore.login(loginData);
+    if (authStore.isAuthenticated) {
       navigate(routes.meetups);
-    } catch (err) {
-      console.log(err);
+    } else {
+      setValidationError(true);
     }
-    console.log(authStore.isAuthenticated());
-    console.log(toJS(authStore.user));
   };
 
   return (
@@ -47,7 +53,10 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </label>
           <input
             type="text"
-            className="login-page-form__input"
+            className={classNames(
+              "login-page-form__input",
+              validationError && inputErrorStyle
+            )}
             placeholder="Логин"
             id="login-input"
             value={login}
@@ -60,12 +69,26 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </label>
           <input
             type="password"
-            className="login-page-form__input"
+            className={classNames(
+              "login-page-form__input",
+              validationError && inputErrorStyle
+            )}
             placeholder="Пароль"
             id="password-input"
             value={password}
             onChange={handlePasswordChange}
           />
+          <p
+            className="login-page-form__error-text"
+            style={
+              validationError
+                ? { visibility: "visible" }
+                : { visibility: "hidden" }
+            }
+          >
+            <span className="material-icons-round">error_outline</span>&nbsp;
+            Неверный логин или пароль!
+          </p>
         </div>
         <button
           className="login-page-form__submit-button"

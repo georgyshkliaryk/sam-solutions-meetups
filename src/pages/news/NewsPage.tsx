@@ -1,4 +1,5 @@
 import React, { ReactElement, useContext } from "react";
+import { Navigate } from "react-router";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
@@ -12,20 +13,24 @@ import "./NewsPage.scss";
 
 const NewsPage: React.FC = (): ReactElement => {
   const { authStore } = useContext(StoreContext);
-  return (
-    <div className="news">
-      <Header className="header-outer">
-        <LinkComponent to={routes.meetups}>
-          <LogoSam className="header-logo-outer" />
-        </LinkComponent>
-        <HeaderNavbar items={navItems.header} />
-        <HeaderProfile user={authStore.user} />
-      </Header>
-      <Main>
-        <MainTitle>{navItems.header[1].title}</MainTitle>
-      </Main>
-    </div>
-  );
+  if (authStore.user !== undefined) {
+    return (
+      <div className="news">
+        <Header className="header-outer">
+          <LinkComponent to={routes.meetups}>
+            <LogoSam className="header-logo-outer" />
+          </LinkComponent>
+          <HeaderNavbar items={navItems.header} />
+          <HeaderProfile user={authStore.user} />
+        </Header>
+        <Main>
+          <MainTitle>{navItems.header[1].title}</MainTitle>
+        </Main>
+      </div>
+    );
+  } else {
+    return <Navigate to={routes.login} />;
+  }
 };
 
 export default NewsPage;

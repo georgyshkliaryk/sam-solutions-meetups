@@ -7,9 +7,7 @@ import { routes } from "../../constants";
 const PrivateRoute: React.FC = observer(({ children }): ReactElement => {
   const { authStore } = useContext(StoreContext);
   return (
-    <>
-      {authStore.isAuthenticated() ? children : <Navigate to={routes.login} />}
-    </>
+    <>{authStore.isAuthenticated ? children : <Navigate to={routes.login} />}</>
   );
 });
 

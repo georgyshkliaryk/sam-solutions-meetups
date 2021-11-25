@@ -45,6 +45,21 @@
   @include input-focus;
 }
 
+.login-page-form__error-text {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  @include input-error;
+  .material-icons-round {
+    font-size: 1.2rem;
+  }
+}
+
+.login-page-form__input-error {
+  box-shadow: 0 0 0 0.125rem $color-error;
+  border: 0.063rem solid #ffff;
+}
+
 .login-page-form__submit-button {
   @include button-primary;
   display: flex;
