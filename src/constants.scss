@@ -1,6 +1,7 @@
 $color-primary1: #8065ec;
 $color-primary2: #314ad7;
 $color-primary-hover: #293fb6;
+$color-secondary-hover: rgba(128, 101, 236, 0.2);
 $color-secondary-text: #979797;
 $background-primary: #f4f6fc;
 $color-error: #ef2f00;
@@ -59,11 +60,18 @@ $mobile-width: 950px;
 @mixin button-secondary {
   text-align: center;
   color: $color-primary1;
+  @include font-normal;
   border: 0.063rem solid $color-primary1;
   border-radius: 0.313rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: $background-primary;
+}
+
+@mixin button-secondary-hover {
+  background: $color-secondary-hover;
 }
 
 @mixin card {

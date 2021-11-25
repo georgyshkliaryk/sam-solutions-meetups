@@ -1,17 +1,25 @@
+@import "../../../constants.scss";
+
 .header__navbar {
   display: flex;
   align-items: center;
   line-height: 1.188rem;
   justify-content: space-between;
-  width: 15rem;
+  width: 9rem;
 }
 
 .header__navbar-link-item {
-  padding: 0.3rem 0.5rem;
+  padding: 0.3rem 0.3rem;
   cursor: pointer;
   border-radius: 0.313rem 0.313rem 0 0;
 }
 
 .header__navbar-link-item-is-active {
   border-bottom: 0.125rem solid white;
+}
+
+@media (min-width: $mobile-width) {
+  .header__navbar {
+    width: 15rem;
+  }
 }

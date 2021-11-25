@@ -18,3 +18,7 @@
   @include font-normal;
   padding: 0.625rem 1.25rem;
 }
+
+.themes-page-meetups-quantity__button:hover {
+  @include button-secondary-hover;
+}
