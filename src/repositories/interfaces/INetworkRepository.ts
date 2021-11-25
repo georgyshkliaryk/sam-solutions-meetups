@@ -16,10 +16,10 @@ export interface IMeetupFromServer {
 }
 
 export interface IUser {
-  id: string;
-  name: string;
-  password: string;
-  surname: string;
+  id?: string;
+  name?: string;
+  password?: string;
+  surname?: string;
   post?: string;
   roles?: string;
 }
@@ -37,5 +37,5 @@ export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
   login: (loginData: ILoginData) => Promise<ILoginResponse>;
   loginWithCookies: () => Promise<ILoginResponse>;
-  logout: () => {};
+  logout: () => void;
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
@@ -8,14 +8,17 @@ import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainNavbar from "../../components/main/MainNavbar/MainNavbar";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { defaultUser, navItems, routes } from "../../constants";
+import { navItems, routes } from "../../constants";
 import DraftsPage from "./drafts/DraftsPage";
 import "./MeetupsPage.scss";
 import ThemesPage from "./themes/ThemesPage";
 import FuturePage from "./future/FuturePage";
 import PastPage from "./past/PastPage";
+import { StoreContext } from "../../context/StoreContext";
+import { observer } from "mobx-react-lite";
 
-const MeetupsPage: React.FC = (): ReactElement => {
+const MeetupsPage: React.FC = observer((): ReactElement => {
+  const { authStore } = useContext(StoreContext);
   return (
     <div className="meetups">
       <Header className="header-outer">
@@ -23,7 +26,7 @@ const MeetupsPage: React.FC = (): ReactElement => {
           <LogoSam className="header-logo-outer" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
-        <HeaderProfile user={defaultUser} />
+        <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
         <MainTitle>{navItems.header[0].title}</MainTitle>
@@ -38,6 +41,6 @@ const MeetupsPage: React.FC = (): ReactElement => {
       </Main>
     </div>
   );
-};
+});
 
 export default MeetupsPage;

@@ -94,13 +94,13 @@ export const navItems: NavItems = {
   ],
 };
 
-export interface IUser {
+export interface IDefaultUser {
   firstName: string;
   lastName: string;
   avatar: string;
 }
 
-export const defaultUser: IUser = {
+export const defaultUser: IDefaultUser = {
   firstName: "Name",
   lastName: "Surname",
   avatar: "",

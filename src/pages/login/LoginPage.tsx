@@ -1,9 +1,15 @@
-import React, { ReactElement, useState } from "react";
+import { toJS } from "mobx";
+import { observer } from "mobx-react-lite";
+import React, { ReactElement, useContext, useState } from "react";
+import { useNavigate } from "react-router";
+import { routes } from "../../constants";
+import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
-import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 import "./LoginPage.scss";
 
-const LoginPage: React.FC = (): ReactElement => {
+const LoginPage: React.FC = observer((): ReactElement => {
+  const { authStore } = useContext(StoreContext);
+  const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,15 +21,20 @@ const LoginPage: React.FC = (): ReactElement => {
     setPassword(event.target.value);
   };
 
-  const networkRepository = new NetworkRepository();
-
   const handleLoginAttempt = async (event: React.FormEvent) => {
     event.preventDefault();
     const loginData: ILoginData = {
       username: login,
       password: password,
     };
-    await networkRepository.login(loginData);
+    try {
+      await authStore.login(loginData);
+      navigate(routes.meetups);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(authStore.isAuthenticated());
+    console.log(toJS(authStore.user));
   };
 
   return (
@@ -66,6 +77,6 @@ const LoginPage: React.FC = (): ReactElement => {
       </form>
     </div>
   );
-};
+});
 
 export default LoginPage;
