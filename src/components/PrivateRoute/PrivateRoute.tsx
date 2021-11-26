@@ -4,18 +4,24 @@ import { Navigate, useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { routes } from "../../constants";
 
-const PrivateRoute: React.FC = observer(({ children }): ReactElement => {
-  const location = useLocation();
-  const { authStore } = useContext(StoreContext);
-  return (
-    <>
-      {authStore.isAuthenticated ? (
-        children
-      ) : (
-        <Navigate to={routes.login} state={{ from: location }} />
-      )}
-    </>
-  );
-});
+interface IProps {
+  component: React.ComponentType;
+}
+
+const PrivateRoute: React.FC<IProps> = observer(
+  ({ component: RouteComponent }): ReactElement => {
+    const location = useLocation();
+    const { authStore } = useContext(StoreContext);
+    return (
+      <>
+        {authStore.isAuthenticated ? (
+          <RouteComponent />
+        ) : (
+          <Navigate to={routes.login} state={{ from: location }} />
+        )}
+      </>
+    );
+  }
+);
 
 export default PrivateRoute;

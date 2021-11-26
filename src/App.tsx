@@ -13,19 +13,11 @@ const App: React.FC = (): ReactElement => {
       <Routes>
         <Route
           path={`${routes.meetups}/*`}
-          element={
-            <PrivateRoute>
-              <MeetupsPage />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute component={MeetupsPage} />}
         />
         <Route
           path={routes.news}
-          element={
-            <PrivateRoute>
-              <NewsPage />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute component={NewsPage} />}
         />
         <Route path={routes.login} element={<LoginPage />} />
         <Route path="*" element={<Navigate replace to={routes.meetups} />} />
