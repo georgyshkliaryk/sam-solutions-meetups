@@ -19,6 +19,10 @@
   background-color: rgba(128, 101, 236, 0.2);
 }
 
+.main__navbar-link-item:active {
+  @include button-secondary-active;
+}
+
 .main__navbar-link-item-is-active {
   border-bottom: $color-primary1 0.125rem solid;
   color: black;

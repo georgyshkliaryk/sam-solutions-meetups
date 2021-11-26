@@ -26,13 +26,8 @@
 }
 
 .header-logo-outer {
-  width: 10rem;
+  width: 8rem;
   text-align: left;
-}
-
-.header-avatar {
-  height: 2.5rem;
-  width: 2.5rem;
 }
 
 @media (min-width: $mobile-width) {
@@ -40,6 +35,6 @@
     max-width: 100rem;
   }
   .header-logo-outer {
-    width: 20rem;
+    width: 30rem;
   }
 }

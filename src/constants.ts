@@ -47,6 +47,7 @@ i18n.monthNames = [
 export const routes = {
   meetups: "/meetups",
   news: "/news",
+  login: "/login",
   themes: "themes",
   drafts: "drafts",
   future: "future",
@@ -93,18 +94,6 @@ export const navItems: NavItems = {
   ],
 };
 
-export interface IUser {
-  firstName: string;
-  lastName: string;
-  avatar: string;
-}
-
-export const defaultUser: IUser = {
-  firstName: "Name",
-  lastName: "Surname",
-  avatar: "",
-};
-
 export enum MeetupTypes {
   REQUEST = "REQUEST",
   DRAFT = "DRAFT",
@@ -114,6 +103,8 @@ export enum MeetupTypes {
 export const apiUrls = {
   meetups: "/meetups",
   users: "/users",
+  login: "/login",
+  logout: "/logout",
 } as const;
 
 interface IDeclination {

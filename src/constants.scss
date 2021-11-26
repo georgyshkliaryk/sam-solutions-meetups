@@ -1,8 +1,11 @@
 $color-primary1: #8065ec;
 $color-primary2: #314ad7;
 $color-primary-hover: #293fb6;
+$color-secondary-hover: rgba(128, 101, 236, 0.2);
+$color-secondary-active: rgba(128, 101, 236, 0.4);
 $color-secondary-text: #979797;
 $background-primary: #f4f6fc;
+$color-error: #ef2f00;
 
 $gradient: linear-gradient(63.5deg, #8065ec 16.63%, #314ad7 83.37%);
 
@@ -16,25 +19,99 @@ $mobile-width: 950px;
   font-weight: 500;
 }
 
+@mixin font-semi-light {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @mixin font-light {
   font-size: 0.875rem;
+  line-height: 1rem;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
 }
 
+@mixin button-primary {
+  background: $gradient;
+  @include font-normal;
+  color: #ffffff;
+  padding: 0.688rem 1.375rem;
+  box-shadow: 0px 4px 8px rgba(60, 72, 97, 0.3);
+  border-radius: 0.313rem;
+  cursor: pointer;
+  width: 10.5rem;
+  border: none;
+}
+
+@mixin button-primary-active {
+  background: #2a40bf;
+  box-shadow: 0px 2px 3px rgba(60, 72, 97, 0.2);
+}
+
+@mixin button-primary-disabled {
+  background: rgba(128, 101, 236, 0.4);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
 @mixin button-secondary {
   text-align: center;
   color: $color-primary1;
+  @include font-normal;
   border: 0.063rem solid $color-primary1;
   border-radius: 0.313rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: $background-primary;
+}
+
+@mixin button-secondary-hover {
+  background: $color-secondary-hover;
+}
+
+@mixin button-secondary-active {
+  background: $color-secondary-active;
 }
 
 @mixin card {
   background: #ffffff;
   box-shadow: 0 0.25rem 0.563rem rgba(194, 203, 218, 0.25);
   border-radius: 0.375rem;
+}
+
+@mixin input {
+  background: #ffffff;
+  border: 0.063rem solid #d5dce7;
+  border-radius: 0.313rem;
+  padding: 0.75rem;
+  @include font-semi-light;
+}
+
+@mixin input-focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+  border: 0.063rem solid #ffff;
+}
+
+@mixin input-hover {
+  background: #f4f6fc;
+}
+
+@mixin input-label {
+  display: block;
+  color: #aab6ca;
+  @include font-semi-light;
+}
+
+@mixin input-error {
+  @include font-semi-light;
+  color: $color-error;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
 }

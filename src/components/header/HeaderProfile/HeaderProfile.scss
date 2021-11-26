@@ -14,11 +14,48 @@
   display: none;
 }
 
+.header-profile__avatar {
+  height: 2rem;
+  min-width: 2rem;
+}
+
+.header-profile-logout {
+  @include button-secondary;
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.3rem;
+}
+
+.header-profile-logout:hover {
+  @include button-secondary-hover;
+  color: #ffff;
+}
+
+.header-profile-logout:active {
+  @include button-primary-active;
+}
+
+.header-profile-logout__text {
+  display: none;
+}
+
 @media (min-width: $mobile-width) {
   .header-profile__text {
     display: block;
   }
   .header-profile {
-    width: 20rem;
+    width: 30rem;
+  }
+  .header-profile-logout {
+    @include button-secondary;
+    padding: 0.5rem 1rem;
+    margin-left: 2rem;
+  }
+  .header-profile-logout__text {
+    display: inline;
+    margin-right: 1rem;
+  }
+  .header-profile__avatar {
+    height: 2.5rem;
+    min-width: 2.5rem;
   }
 }

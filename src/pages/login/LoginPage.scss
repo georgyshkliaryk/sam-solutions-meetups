@@ -1,0 +1,94 @@
+@import "../../constants.scss";
+
+.login-page {
+  background: url("./assets/login-background.svg") no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.login-page-form {
+  background-color: $background-primary;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 3rem 2rem;
+  border-radius: 0.5rem;
+  gap: 1.5rem;
+}
+
+.login-page-form__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.login-page-form__label {
+  @include input-label;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.login-page-form__input {
+  @include input;
+  width: 15rem;
+}
+
+.login-page-form__input:hover {
+  @include input-hover;
+}
+
+.login-page-form__input:focus {
+  @include input-focus;
+}
+
+.login-page-form__error-text {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  visibility: hidden;
+  @include input-error;
+  .material-icons-round {
+    font-size: 1.2rem;
+  }
+}
+
+.login-page-form__error-text-visible {
+  visibility: visible;
+}
+
+.login-page-form__input-error {
+  box-shadow: 0 0 0 0.125rem $color-error;
+  border: 0.063rem solid #ffff;
+}
+
+.login-page-form__submit-button {
+  @include button-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  .material-icons-round {
+    margin-left: 0.4rem;
+  }
+}
+
+.login-page-form__submit-button:active {
+  @include button-primary-active;
+}
+
+.login-page-form__submit-button:disabled {
+  @include button-primary-disabled;
+}
+
+@media (min-width: $mobile-width) {
+  .login-page-form {
+    padding: 3rem 6rem;
+  }
+  .login-page-form__input {
+    width: 20rem;
+  }
+}

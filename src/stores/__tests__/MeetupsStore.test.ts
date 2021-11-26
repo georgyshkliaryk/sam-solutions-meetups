@@ -1,10 +1,10 @@
-import NetworkRepository from "../../repositories/NetworkRepository/NetworkRepository";
 import { apiUrls } from "./../../constants";
 import { IMeetupFromServer } from "./../../repositories/interfaces/INetworkRepository";
-import MeetupsStore from "../MeetupsStore";
 import axios from "axios";
-import MeetupsRepository from "../../repositories/MeetupsRepository/MeetupsRepository";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
+import { MeetupsStore } from "../MeetupsStore";
+import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
+import { MeetupsRepository } from "./../../repositories/MeetupsRepository/MeetupsRepository";
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const testMeetups: IMeetupFromServer[] = [
@@ -69,12 +69,16 @@ const testParsedMeetups: IMeetup[] = [
   },
 ];
 
+const networkRepository = new NetworkRepository();
+const meetupsRepository = new MeetupsRepository(networkRepository);
+const meetupsStore = new MeetupsStore(meetupsRepository);
+
 test("Initial state", () => {
-  expect(MeetupsStore.drafts.length).toEqual(0);
-  expect(MeetupsStore.themes.length).toEqual(0);
-  expect(MeetupsStore.past.length).toEqual(0);
-  expect(MeetupsStore.future.length).toEqual(0);
-  expect(MeetupsStore.meetups.length).toEqual(0);
+  expect(meetupsStore.drafts.length).toEqual(0);
+  expect(meetupsStore.themes.length).toEqual(0);
+  expect(meetupsStore.past.length).toEqual(0);
+  expect(meetupsStore.future.length).toEqual(0);
+  expect(meetupsStore.meetups.length).toEqual(0);
 });
 
 jest.mock("axios");
@@ -83,7 +87,7 @@ describe("Fetch meetups", () => {
   it("should return meetups list", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: testMeetups });
 
-    const result = await NetworkRepository.getAllMeetups();
+    const result = await networkRepository.getAllMeetups();
 
     expect(mockedAxios.get).toHaveBeenCalledWith(apiUrls.meetups);
     expect(result.length).toBe(2);
@@ -95,7 +99,7 @@ describe("Parse meetups", () => {
   it("should return parsed meetups list", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: testMeetups });
 
-    const result = await MeetupsRepository.getAllMeetups();
+    const result = await meetupsRepository.getAllMeetups();
 
     expect(result.length).toBe(2);
     expect(result).toEqual(testParsedMeetups);

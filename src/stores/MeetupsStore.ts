@@ -1,18 +1,18 @@
 import { IMeetup } from "./../repositories/interfaces/IMeetupsRepository";
 import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
-import MeetupsRepository from "../repositories/MeetupsRepository/MeetupsRepository";
+import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepository";
 
-class MeetupsStore {
+export class MeetupsStore {
   meetups: IMeetup[] = [];
 
-  constructor() {
+  constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
   }
 
   private async getAllMeetups() {
     this.meetups = [];
-    this.meetups = await MeetupsRepository.getAllMeetups();
+    this.meetups = await this.meetupsRepository.getAllMeetups();
   }
 
   get themes(): IMeetup[] {
@@ -47,5 +47,3 @@ class MeetupsStore {
     return this.meetups.filter((m: IMeetup) => m.isOver);
   }
 }
-
-export default new MeetupsStore();
