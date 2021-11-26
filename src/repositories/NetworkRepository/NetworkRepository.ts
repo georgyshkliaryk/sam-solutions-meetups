@@ -26,7 +26,7 @@ export class NetworkRepository implements INetworkRepository {
     }
     return await response.data;
   }
-  async logout() {
+  async logout(): Promise<void> {
     const response = await axios.get(apiUrls.logout);
     if (response.status !== 200) {
       throw new Error(response.data);

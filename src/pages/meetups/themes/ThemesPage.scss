@@ -22,3 +22,11 @@
 .themes-page-meetups-quantity__button:hover {
   @include button-secondary-hover;
 }
+
+.themes-page-meetups-quantity__button:focus {
+  @include input-focus;
+}
+
+.themes-page-meetups-quantity__button:active {
+  @include button-secondary-active;
+}

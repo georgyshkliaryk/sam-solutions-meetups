@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 import { routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
@@ -10,13 +11,16 @@ import "./LoginPage.scss";
 const LoginPage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState(false);
   const inputErrorStyle = "login-page-form__input-error";
 
+  const from = location.state?.from?.pathname || routes.meetups;
+
   if (authStore.isAuthenticated) {
-    return <Navigate to={routes.meetups} />;
+    return <Navigate to={from} />;
   }
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -30,6 +30,10 @@
   color: #ffff;
 }
 
+.header-profile-logout:active {
+  @include button-primary-active;
+}
+
 .header-profile-logout__text {
   display: none;
 }

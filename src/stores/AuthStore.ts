@@ -24,7 +24,7 @@ export class AuthStore {
     }
   }
 
-  async login(loginData: ILoginData) {
+  async login(loginData: ILoginData): Promise<void> {
     try {
       const loginResponse = await this.networkRepository.login(loginData);
       this.user = loginResponse.user;
@@ -34,7 +34,7 @@ export class AuthStore {
     }
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     await this.networkRepository.logout();
     this.resetAuth();
   }
@@ -43,7 +43,7 @@ export class AuthStore {
     this.authenticated = authenticated;
   }
 
-  get isAuthenticated() {
+  get isAuthenticated(): boolean {
     return this.authenticated;
   }
 
