@@ -15,9 +15,8 @@ const LoginPage: React.FC = observer((): ReactElement => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState(false);
-  const inputErrorStyle = "login-page-form__input-error";
 
-  const from = location.state?.from?.pathname || routes.meetups;
+  const from = location.state?.from?.pathname ?? routes.meetups;
 
   if (authStore.isAuthenticated) {
     return <Navigate to={from} />;
@@ -57,10 +56,9 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </label>
           <input
             type="text"
-            className={classNames(
-              "login-page-form__input",
-              validationError && inputErrorStyle
-            )}
+            className={classNames("login-page-form__input", {
+              "login-page-form__input-error": validationError,
+            })}
             placeholder="Логин"
             id="login-input"
             value={login}
@@ -73,22 +71,18 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </label>
           <input
             type="password"
-            className={classNames(
-              "login-page-form__input",
-              validationError && inputErrorStyle
-            )}
+            className={classNames("login-page-form__input", {
+              "login-page-form__input-error": validationError,
+            })}
             placeholder="Пароль"
             id="password-input"
             value={password}
             onChange={handlePasswordChange}
           />
           <p
-            className="login-page-form__error-text"
-            style={
-              validationError
-                ? { visibility: "visible" }
-                : { visibility: "hidden" }
-            }
+            className={classNames("login-page-form__error-text", {
+              "login-page-form__error-text-visible": validationError,
+            })}
           >
             <span className="material-icons-round">error_outline</span>&nbsp;
             Неверный логин или пароль!

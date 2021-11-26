@@ -49,10 +49,15 @@
   display: flex;
   align-items: center;
   text-align: left;
+  visibility: hidden;
   @include input-error;
   .material-icons-round {
     font-size: 1.2rem;
   }
+}
+
+.login-page-form__error-text-visible {
+  visibility: visible;
 }
 
 .login-page-form__input-error {
