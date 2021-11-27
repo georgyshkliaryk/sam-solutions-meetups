@@ -25,7 +25,12 @@ const PasswordInput: React.FC<IProps> = (props): ReactElement => {
         onChange={props.onChange}
         value={props.value}
       />
-      <input type="checkbox" id="showPassword" onChange={toggleShowPassword} />
+      <input
+        type="checkbox"
+        id="showPassword"
+        className="password-input-checkbox"
+        onChange={toggleShowPassword}
+      />
       <label
         htmlFor="showPassword"
         className="password-input__show-password-icon"

@@ -37,6 +37,10 @@
   width: 15rem;
 }
 
+.login-page-form__input-password {
+  width: 16.5rem;
+}
+
 .login-page-form__input:hover {
   @include input-hover;
 }
@@ -90,5 +94,8 @@
   }
   .login-page-form__input {
     width: 20rem;
+  }
+  .login-page-form__input-password {
+    width: 21.5rem;
   }
 }

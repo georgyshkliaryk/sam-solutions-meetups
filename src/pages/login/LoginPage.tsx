@@ -74,7 +74,11 @@ const LoginPage: React.FC = observer((): ReactElement => {
             id="password-input"
             onChange={handlePasswordChange}
             value={password}
-            className={validationError ? "login-page-form__input-error" : ""}
+            className={
+              validationError
+                ? "login-page-form__input-error login-page-form__input-password"
+                : "login-page-form__input-password"
+            }
           />
           <p
             className={classNames("login-page-form__error-text", {
