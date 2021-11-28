@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import { routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
@@ -69,15 +70,15 @@ const LoginPage: React.FC = observer((): ReactElement => {
           <label htmlFor="login-password" className="login-page-form__label">
             Введите пароль:
           </label>
-          <input
-            type="password"
-            className={classNames("login-page-form__input", {
-              "login-page-form__input-error": validationError,
-            })}
-            placeholder="Пароль"
+          <PasswordInput
             id="password-input"
-            value={password}
             onChange={handlePasswordChange}
+            value={password}
+            className={
+              validationError
+                ? "login-page-form__input-error login-page-form__input-password"
+                : "login-page-form__input-password"
+            }
           />
           <p
             className={classNames("login-page-form__error-text", {
