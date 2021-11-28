@@ -18,8 +18,7 @@ export interface IMeetupFromServer {
 export interface IUser {
   id: string;
   name: string;
-  password: string;
-  surname: string;
+  surname?: string;
   post?: string;
   roles?: string;
 }

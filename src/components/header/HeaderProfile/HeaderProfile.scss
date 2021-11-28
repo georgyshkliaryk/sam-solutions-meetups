@@ -17,6 +17,9 @@
 .header-profile__avatar {
   height: 2rem;
   min-width: 2rem;
+  border: white 0.125rem solid;
+  @include font-semi-light;
+  font-size: 1.25rem;
 }
 
 .header-profile-logout {
