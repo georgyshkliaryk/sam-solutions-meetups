@@ -9,10 +9,13 @@ export interface IMeetupFromServer {
   excerpt: string;
   goCount: number;
   author: IAuthor;
+  speakers: IParticipant[];
   status: string;
   start?: string;
+  finish?: string;
   place?: string;
   isOver?: boolean;
+  image?: string;
 }
 
 export interface IParticipant {

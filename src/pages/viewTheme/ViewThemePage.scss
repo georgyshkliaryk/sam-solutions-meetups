@@ -7,15 +7,20 @@
 .view-theme-data {
   display: flex;
   flex-direction: column;
-  gap: 1.725rem;
   text-align: left;
-  margin-top: 4rem;
+  margin-top: 2rem;
+}
+
+.view-theme-data-item {
+  margin-bottom: 1.725rem;
 }
 
 .view-theme-data-content {
   @include meetup-section;
   font-weight: 400;
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.813rem;
   align-items: center;
 }
 
@@ -33,7 +38,6 @@
   height: 2.2rem;
   width: 2.2rem;
   color: white;
-  margin-right: 0.813rem;
 }
 
 .view-theme-data-content-avatar-rest {
@@ -96,4 +100,12 @@
 
 .view-theme-data-item-last {
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: $mobile-width) {
+  .view-theme-data-buttons-button-back,
+  .view-theme-data-buttons-button-delete,
+  .view-theme-data-buttons-button-submit {
+    padding: 0.7rem 0.5rem;
+  }
 }

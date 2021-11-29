@@ -2,14 +2,20 @@
 
 .main {
   min-height: 100%;
-  background: url("./assets/BottomImg.svg") no-repeat $background-primary;
-  background-position: bottom right;
-  background-attachment: fixed;
-  background-blend-mode: multiply;
+  background: $background-primary;
 }
 
 .main__wrapper {
   max-width: 40rem;
   margin: 0 auto;
   padding-top: 8.75rem;
+}
+
+@media (min-width: $mobile-width) {
+  .main {
+    background: url("./assets/BottomImg.svg") no-repeat $background-primary;
+    background-position: bottom right;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+  }
 }

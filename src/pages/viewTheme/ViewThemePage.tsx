@@ -24,8 +24,6 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     meetupsStore.getParticipantsById(themeId.id);
   }, [meetupsStore, themeId.id]);
 
-  const firstParticipants = meetupsStore.participants.slice(0, 10);
-
   if (authStore.user !== undefined) {
     return (
       <div className="view-theme">
@@ -41,11 +39,9 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <article className="view-theme-data">
             <div className="view-theme-data-item">
               <p className="view-theme-data-label">Название</p>
-              <div className="view-theme-data-content">
-                <p className="view-theme-data-content__title">
-                  {meetupsStore.current?.title}
-                </p>
-              </div>
+              <p className="view-theme-data-content view-theme-data-content__title">
+                {meetupsStore.current?.title}
+              </p>
             </div>
             <div className="view-theme-data-item">
               <p className="view-theme-data-label">Автор</p>
@@ -74,17 +70,19 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             <div className="view-theme-data-item">
               <p className="view-theme-data-label">Поддерживают</p>
               <div className="view-theme-data-content">
-                {firstParticipants.map((p: IParticipant, i: number) => (
-                  <Avatar
-                    className="view-theme-data-content-avatar"
-                    user={{
-                      name: p.name,
-                      surname: p.surname,
-                    }}
-                    //  FIX LATER
-                    key={p.id + i}
-                  />
-                ))}
+                {meetupsStore.participants
+                  .slice(0, 10)
+                  .map((p: IParticipant, i: number) => (
+                    <Avatar
+                      className="view-theme-data-content-avatar"
+                      user={{
+                        name: p.name,
+                        surname: p.surname,
+                      }}
+                      //  FIX LATER
+                      key={p.id + i}
+                    />
+                  ))}
                 {meetupsStore.participants.length > 10 && (
                   <div className="view-theme-data-content-avatar-rest">
                     +{meetupsStore.participants.length - 10}

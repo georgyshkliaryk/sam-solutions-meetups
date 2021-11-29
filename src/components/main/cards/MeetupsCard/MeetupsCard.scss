@@ -6,6 +6,16 @@
   cursor: pointer;
 }
 
+.meetups-card-wrapper {
+  text-decoration: none;
+  color: black;
+  border-radius: 0.375rem;
+}
+
+.meetups-card-wrapper:hover {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+}
+
 .meetups-card-footer__avatar {
   height: 1.875rem;
   width: 1.875rem;
