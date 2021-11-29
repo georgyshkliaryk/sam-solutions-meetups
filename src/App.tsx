@@ -6,6 +6,7 @@ import MeetupsPage from "./pages/meetups/MeetupsPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import ViewThemePage from "./pages/viewTheme/ViewThemePage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -14,6 +15,10 @@ const App: React.FC = (): ReactElement => {
         <Route
           path={`${routes.meetups}/*`}
           element={<PrivateRoute component={MeetupsPage} />}
+        />
+        <Route
+          path={`${routes.meetups}/${routes.themes}/:id`}
+          element={<PrivateRoute component={ViewThemePage} />}
         />
         <Route
           path={routes.news}

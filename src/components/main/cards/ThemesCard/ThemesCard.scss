@@ -6,6 +6,10 @@
   cursor: pointer;
 }
 
+.themes-card:hover {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+}
+
 .themes-card-header__avatar {
   height: 1.875rem;
   width: 1.875rem;
@@ -50,4 +54,9 @@
   color: $color-secondary-text;
   display: flex;
   align-items: center;
+}
+
+.themes-card-wrapper {
+  text-decoration: none;
+  color: black;
 }

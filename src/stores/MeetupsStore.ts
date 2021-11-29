@@ -5,6 +5,7 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 
 export class MeetupsStore {
   meetups: IMeetup[] = [];
+  currentTheme: IMeetup | undefined = undefined;
 
   constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
@@ -45,5 +46,16 @@ export class MeetupsStore {
       this.getAllMeetups();
     }
     return this.meetups.filter((m: IMeetup) => m.isOver);
+  }
+
+  getMeetupById(id: string | undefined): void {
+    this.currentTheme = this.meetups.find((m: IMeetup) => m.id === id);
+  }
+
+  get current(): IMeetup | undefined {
+    if (this.meetups.length === 0) {
+      this.getAllMeetups();
+    }
+    return this.currentTheme;
   }
 }
