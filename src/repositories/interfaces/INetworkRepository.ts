@@ -15,6 +15,12 @@ export interface IMeetupFromServer {
   isOver?: boolean;
 }
 
+export interface IParticipant {
+  id: string;
+  name: string;
+  surname?: string;
+}
+
 export interface IUser {
   id: string;
   name: string;

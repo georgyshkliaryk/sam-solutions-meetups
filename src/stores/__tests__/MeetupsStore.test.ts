@@ -71,7 +71,7 @@ const testParsedMeetups: IMeetup[] = [
 
 const networkRepository = new NetworkRepository();
 const meetupsRepository = new MeetupsRepository(networkRepository);
-const meetupsStore = new MeetupsStore(meetupsRepository);
+const meetupsStore = new MeetupsStore(meetupsRepository, networkRepository);
 
 test("Initial state", () => {
   expect(meetupsStore.drafts.length).toEqual(0);

@@ -1,3 +1,5 @@
+import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRepository";
+import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
 import { IMeetup } from "./../repositories/interfaces/IMeetupsRepository";
 import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
@@ -5,9 +7,13 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 
 export class MeetupsStore {
   meetups: IMeetup[] = [];
-  currentTheme: IMeetup | undefined = undefined;
+  currentMeetup: IMeetup | undefined = undefined;
+  participants: IParticipant[] = [];
 
-  constructor(private readonly meetupsRepository: MeetupsRepository) {
+  constructor(
+    private readonly meetupsRepository: MeetupsRepository,
+    private readonly networkRepository: NetworkRepository
+  ) {
     makeAutoObservable(this);
   }
 
@@ -48,14 +54,21 @@ export class MeetupsStore {
     return this.meetups.filter((m: IMeetup) => m.isOver);
   }
 
+  async getParticipantsById(id: string | undefined): Promise<IParticipant[]> {
+    this.participants = await this.networkRepository.getParticipantsOfMeetup(
+      id
+    );
+    return this.participants;
+  }
+
   getMeetupById(id: string | undefined): void {
-    this.currentTheme = this.meetups.find((m: IMeetup) => m.id === id);
+    this.currentMeetup = this.meetups.find((m: IMeetup) => m.id === id);
   }
 
   get current(): IMeetup | undefined {
     if (this.meetups.length === 0) {
       this.getAllMeetups();
     }
-    return this.currentTheme;
+    return this.currentMeetup;
   }
 }

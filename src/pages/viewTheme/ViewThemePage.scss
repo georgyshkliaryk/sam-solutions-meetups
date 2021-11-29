@@ -36,6 +36,17 @@
   margin-right: 0.813rem;
 }
 
+.view-theme-data-content-avatar-rest {
+  height: 2.5rem;
+  width: 2.5rem;
+  color: white;
+  border-radius: 50%;
+  background: #aab6ca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .view-theme-data-buttons {
   @include meetup-section;
   display: flex;

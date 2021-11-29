@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -11,6 +11,7 @@ import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
 import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
+import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
@@ -18,6 +19,12 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   const { meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
   meetupsStore.getMeetupById(themeId.id);
+
+  useEffect(() => {
+    meetupsStore.getParticipantsById(themeId.id);
+  }, [meetupsStore, themeId.id]);
+
+  const firstParticipants = meetupsStore.participants.slice(0, 10);
 
   if (authStore.user !== undefined) {
     return (
@@ -66,7 +73,24 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             </div>
             <div className="view-theme-data-item">
               <p className="view-theme-data-label">Поддерживают</p>
-              <div className="view-theme-data-content"></div>
+              <div className="view-theme-data-content">
+                {firstParticipants.map((p: IParticipant, i: number) => (
+                  <Avatar
+                    className="view-theme-data-content-avatar"
+                    user={{
+                      name: p.name,
+                      surname: p.surname,
+                    }}
+                    //  FIX LATER
+                    key={p.id + i}
+                  />
+                ))}
+                {meetupsStore.participants.length > 10 && (
+                  <div className="view-theme-data-content-avatar-rest">
+                    +{meetupsStore.participants.length - 10}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="view-theme-data-item view-theme-data-item-last">
               <div className="view-theme-data-buttons">
