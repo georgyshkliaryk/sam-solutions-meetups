@@ -1,4 +1,4 @@
-import { generateAvatar } from "../helpers/avatarGenerator";
+import { generateAvatarData } from "../helpers/avatarGenerator";
 
 const testUsers = [
   {
@@ -26,30 +26,38 @@ const testUsers = [
 ];
 
 test("Test for correct avatar generation", () => {
-  expect(generateAvatar(testUsers[0])).toStrictEqual({
+  expect(
+    generateAvatarData(testUsers[0].name, testUsers[0].surname)
+  ).toStrictEqual({
     initials: "JW",
     color: "darkcyan",
   });
-  expect(generateAvatar(testUsers[1])).toStrictEqual({
+  expect(
+    generateAvatarData(testUsers[1].name, testUsers[1].surname)
+  ).toStrictEqual({
     initials: "FK",
     color: "darkviolet",
   });
-  expect(generateAvatar(testUsers[2])).toStrictEqual({
+  expect(
+    generateAvatarData(testUsers[2].name, testUsers[2].surname)
+  ).toStrictEqual({
     initials: "FL",
     color: "darkslategray",
   });
-  expect(generateAvatar(testUsers[3])).toStrictEqual({
+  expect(
+    generateAvatarData(testUsers[3].name, testUsers[3].surname)
+  ).toStrictEqual({
     initials: "DD",
     color: "darkslategray",
   });
 });
 
 test("Test for correct avatar generation without surname", () => {
-  expect(generateAvatar(testUsers[4])).toStrictEqual({
+  expect(generateAvatarData(testUsers[4].name)).toStrictEqual({
     initials: "D",
     color: "darkslateblue",
   });
-  expect(generateAvatar(testUsers[5])).toStrictEqual({
+  expect(generateAvatarData(testUsers[5].name)).toStrictEqual({
     initials: "A",
     color: "darkviolet",
   });

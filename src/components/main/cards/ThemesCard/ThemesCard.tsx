@@ -17,7 +17,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
   return (
     <article className="themes-card">
       <div className="themes-card-header">
-        <Avatar className="themes-card-header__avatar" userName={author} />
+        <Avatar className="themes-card-header__avatar" user={author} />
         <span className="themes-card-header__username">
           {props.item.authorName} {props.item.authorSurname}
         </span>

@@ -32,7 +32,7 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
       </div>
       <div className="meetups-card-footer">
         <div className="meetups-card-footer-author">
-          <Avatar className="meetups-card-footer__avatar" userName={author} />
+          <Avatar className="meetups-card-footer__avatar" user={author} />
           <span className="meetups-card-footer__username">
             {props.item.authorName} {props.item.authorSurname}
           </span>
