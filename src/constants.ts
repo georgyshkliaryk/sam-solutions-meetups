@@ -118,3 +118,16 @@ export const NumberDeclination: IDeclination = {
   past: ["митап прошел", "митапа прошло", "митапов прошло"],
   participants: ["поддерживает", "поддерживают", "поддерживают"],
 };
+
+export const avatarColors: string[] = [
+  "darkblue",
+  "darkcyan",
+  "darkolivegreen",
+  "darkmagenta",
+  "darkred",
+  "darkviolet",
+  "darkslategray",
+  "green",
+  "darkslateblue",
+  "crimson",
+];

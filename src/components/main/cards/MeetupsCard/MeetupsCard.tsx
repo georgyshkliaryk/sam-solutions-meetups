@@ -9,6 +9,10 @@ interface IProps {
 }
 
 const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
+  const author = {
+    name: props.item.authorName,
+    surname: props.item.authorSurname,
+  };
   return (
     <article className="meetups-card">
       <p className="meetups-card-header">
@@ -28,7 +32,7 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
       </div>
       <div className="meetups-card-footer">
         <div className="meetups-card-footer-author">
-          <Avatar className="meetups-card-footer__avatar" />
+          <Avatar className="meetups-card-footer__avatar" user={author} />
           <span className="meetups-card-footer__username">
             {props.item.authorName} {props.item.authorSurname}
           </span>

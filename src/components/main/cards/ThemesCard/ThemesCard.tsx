@@ -10,10 +10,14 @@ interface IProps {
 }
 
 const ThemesCard: React.FC<IProps> = (props): ReactElement => {
+  const author = {
+    name: props.item.authorName,
+    surname: props.item.authorSurname,
+  };
   return (
     <article className="themes-card">
       <div className="themes-card-header">
-        <Avatar className="themes-card-header__avatar" />
+        <Avatar className="themes-card-header__avatar" user={author} />
         <span className="themes-card-header__username">
           {props.item.authorName} {props.item.authorSurname}
         </span>
