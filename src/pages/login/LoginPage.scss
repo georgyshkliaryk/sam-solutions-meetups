@@ -55,8 +55,8 @@
   text-align: left;
   visibility: hidden;
   @include input-error;
-  .material-icons-round {
-    font-size: 1.2rem;
+  .login-page-form__error-text-icon {
+    font-size: 1rem;
   }
 }
 
@@ -75,7 +75,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
-  .material-icons-round {
+  .login-page-form__submit-button-icon {
     margin-left: 0.4rem;
   }
 }

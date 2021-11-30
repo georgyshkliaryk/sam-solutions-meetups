@@ -18,4 +18,5 @@ export interface IMeetup {
 
 export interface IMeetupsRepository {
   getAllMeetups: (allMeetups: IMeetupFromServer[]) => Promise<IMeetup[]>;
+  getParticipantsById: (id: string) => Promise<IParticipant[]>;
 }

@@ -18,13 +18,13 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
     <LinkComponent to={props.item.id} className="meetups-card-wrapper">
       <article className="meetups-card">
         <p className="meetups-card-header">
-          <time>
+          <time dateTime={props.item.start}>
             {props.item.start
-              ? dateFormat(props.item.start, "ddd, d mmmm ● H:MM")
+              ? dateFormat(props.item.start, "ddd, d mmmm • H:MM")
               : "–"}
           </time>
           &nbsp;
-          {props.item.place && " ● " + props.item.place}
+          {props.item.place && " • " + props.item.place}
         </p>
         <div className="meetups-card-main">
           <p className="meetups-card-main__title">{props.item.title}</p>

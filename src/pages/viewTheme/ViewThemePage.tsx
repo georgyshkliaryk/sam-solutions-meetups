@@ -18,10 +18,14 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
   const { meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
-  meetupsStore.getMeetupById(themeId.id);
+  if (themeId.id) {
+    meetupsStore.getMeetupById(themeId.id);
+  }
 
   useEffect(() => {
-    meetupsStore.getParticipantsById(themeId.id);
+    if (themeId.id) {
+      meetupsStore.getParticipantsList(themeId.id);
+    }
   }, [meetupsStore, themeId.id]);
 
   if (authStore.user !== undefined) {
@@ -56,8 +60,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                   />
                 )}
                 <span>
-                  {meetupsStore.current?.authorName}{" "}
-                  {meetupsStore.current?.authorSurname}
+                  {`${meetupsStore.current?.authorName} ${meetupsStore.current?.authorSurname}`}
                 </span>
               </div>
             </div>

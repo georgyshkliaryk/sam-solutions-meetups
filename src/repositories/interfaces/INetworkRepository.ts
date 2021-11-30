@@ -43,6 +43,7 @@ export interface ILoginData {
 
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
+  getParticipantsOfMeetup: (id: string) => Promise<IParticipant[]>;
   login: (loginData: ILoginData) => Promise<ILoginResponse>;
   loginWithCookies: () => Promise<ILoginResponse>;
   logout: () => void;

@@ -2,7 +2,10 @@ import {
   IMeetup,
   IMeetupsRepository,
 } from "./../interfaces/IMeetupsRepository";
-import { IMeetupFromServer } from "./../interfaces/INetworkRepository";
+import {
+  IMeetupFromServer,
+  IParticipant,
+} from "./../interfaces/INetworkRepository";
 import { NetworkRepository } from "../NetworkRepository/NetworkRepository";
 
 export class MeetupsRepository implements IMeetupsRepository {
@@ -12,6 +15,9 @@ export class MeetupsRepository implements IMeetupsRepository {
   async getAllMeetups(): Promise<IMeetup[]> {
     const meetupsFromServer = await this.networkRepository.getAllMeetups();
     return meetupsFromServer.map(this.parseMeetup);
+  }
+  async getParticipantsById(id: string): Promise<IParticipant[]> {
+    return await this.networkRepository.getParticipantsOfMeetup(id);
   }
   private parseMeetup(meetup: IMeetupFromServer): IMeetup {
     return {

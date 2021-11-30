@@ -17,9 +17,13 @@ export class MeetupsStore {
     makeAutoObservable(this);
   }
 
-  private async getAllMeetups() {
+  private async getAllMeetups(): Promise<void> {
     this.meetups = [];
     this.meetups = await this.meetupsRepository.getAllMeetups();
+  }
+
+  private async getParticipantsById(id: string): Promise<void> {
+    this.participants = await this.meetupsRepository.getParticipantsById(id);
   }
 
   get themes(): IMeetup[] {
@@ -54,14 +58,11 @@ export class MeetupsStore {
     return this.meetups.filter((m: IMeetup) => m.isOver);
   }
 
-  async getParticipantsById(id: string | undefined): Promise<IParticipant[]> {
-    this.participants = await this.networkRepository.getParticipantsOfMeetup(
-      id
-    );
-    return this.participants;
+  getParticipantsList(id: string): void {
+    this.getParticipantsById(id);
   }
 
-  getMeetupById(id: string | undefined): void {
+  getMeetupById(id: string): void {
     this.currentMeetup = this.meetups.find((m: IMeetup) => m.id === id);
   }
 

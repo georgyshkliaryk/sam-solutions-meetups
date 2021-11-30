@@ -19,10 +19,14 @@ const ViewMeetupPage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
   const { meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
-  meetupsStore.getMeetupById(themeId.id);
+  if (themeId.id) {
+    meetupsStore.getMeetupById(themeId.id);
+  }
 
   useEffect(() => {
-    meetupsStore.getParticipantsById(themeId.id);
+    if (themeId.id) {
+      meetupsStore.getParticipantsList(themeId.id);
+    }
   }, [meetupsStore, themeId.id]);
 
   if (authStore.user !== undefined) {
@@ -54,27 +58,38 @@ const ViewMeetupPage: React.FC = observer((): ReactElement => {
                 {meetupsStore.current?.start && (
                   <>
                     <p className="view-meetup-data-content-schedule__item">
-                      <span className="material-icons-round">
+                      <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                         calendar_today
                       </span>
-                      <span>
+                      <time dateTime={meetupsStore.current?.start}>
                         {dateFormat(
                           meetupsStore.current?.start,
                           "dddd, d mmmm"
                         )}
-                      </span>
+                      </time>
                     </p>
                     {meetupsStore.current.finish ? (
                       <p className="view-meetup-data-content-schedule__item">
-                        <span className="material-icons-round">schedule</span>
-                        <span>
-                          {dateFormat(meetupsStore.current?.start, "H:MM")} –{" "}
-                          {dateFormat(meetupsStore.current?.finish, "H:MM")}
+                        <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                          schedule
                         </span>
+                        <time
+                          dateTime={`${meetupsStore.current?.start}  – ${meetupsStore.current?.finish}`}
+                        >
+                          {`${dateFormat(
+                            meetupsStore.current?.start,
+                            "H:MM"
+                          )} – ${dateFormat(
+                            meetupsStore.current?.finish,
+                            "H:MM"
+                          )}`}
+                        </time>
                       </p>
                     ) : (
                       <p className="view-meetup-data-content-schedule__item">
-                        <span className="material-icons-round">schedule</span>
+                        <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                          schedule
+                        </span>
                         <span>
                           {dateFormat(meetupsStore.current?.start, "H:MM")}
                         </span>
@@ -84,7 +99,9 @@ const ViewMeetupPage: React.FC = observer((): ReactElement => {
                 )}
                 {meetupsStore.current?.place && (
                   <p className="view-meetup-data-content-schedule__item">
-                    <span className="material-icons-round">place</span>
+                    <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                      place
+                    </span>
                     <span>{meetupsStore.current?.place}</span>
                   </p>
                 )}
@@ -103,8 +120,7 @@ const ViewMeetupPage: React.FC = observer((): ReactElement => {
                   />
                 )}
                 <span>
-                  {meetupsStore.current?.speakers[0].name}{" "}
-                  {meetupsStore.current?.speakers[0].surname}
+                  {`${meetupsStore.current?.speakers[0].name} ${meetupsStore.current?.speakers[0].surname}`}
                 </span>
               </div>
             </div>
