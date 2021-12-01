@@ -26,6 +26,7 @@
   @include button-secondary;
   padding: 0.3rem 0.5rem;
   margin-left: 0.3rem;
+  background-color: #ffff;
 }
 
 .header-profile-logout:hover {
@@ -50,6 +51,7 @@
   }
   .header-profile-logout {
     @include button-secondary;
+    background-color: #ffff;
     padding: 0.5rem 1rem;
     margin-left: 2rem;
   }

@@ -5,19 +5,19 @@ import { observer } from "mobx-react-lite";
 import { routes } from "../../constants";
 
 interface IProps {
-  component: React.ComponentType;
+  type?: string;
 }
 
 const PrivateRoute: React.FC<IProps> = observer(
-  ({ component: RouteComponent }): ReactElement => {
+  ({ children }): ReactElement => {
     const location = useLocation();
     const { authStore } = useContext(StoreContext);
     return (
       <>
         {authStore.isAuthenticated ? (
-          <RouteComponent />
+          children
         ) : (
-          <Navigate to={routes.login} state={{ from: location }} />
+          <Navigate replace to={routes.login} state={{ from: location }} />
         )}
       </>
     );

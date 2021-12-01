@@ -1,11 +1,13 @@
 import { ReactElement } from "react";
 import "./App.scss";
 import NewsPage from "./pages/news/NewsPage";
-import { routes } from "./constants";
+import { MeetupPageTypes, routes } from "./constants";
 import MeetupsPage from "./pages/meetups/MeetupsPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import ViewThemePage from "./pages/viewTheme/ViewThemePage";
+import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -13,11 +15,51 @@ const App: React.FC = (): ReactElement => {
       <Routes>
         <Route
           path={`${routes.meetups}/*`}
-          element={<PrivateRoute component={MeetupsPage} />}
+          element={
+            <PrivateRoute>
+              <MeetupsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.themes}/:id`}
+          element={
+            <PrivateRoute>
+              <ViewThemePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.drafts}/:id`}
+          element={
+            <PrivateRoute>
+              <ViewMeetupPage type={MeetupPageTypes.DRAFT} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.future}/:id`}
+          element={
+            <PrivateRoute>
+              <ViewMeetupPage type={MeetupPageTypes.FUTURE} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.past}/:id`}
+          element={
+            <PrivateRoute>
+              <ViewMeetupPage type={MeetupPageTypes.PAST} />
+            </PrivateRoute>
+          }
         />
         <Route
           path={routes.news}
-          element={<PrivateRoute component={NewsPage} />}
+          element={
+            <PrivateRoute>
+              <NewsPage />
+            </PrivateRoute>
+          }
         />
         <Route path={routes.login} element={<LoginPage />} />
         <Route path="*" element={<Navigate replace to={routes.meetups} />} />

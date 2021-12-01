@@ -4,6 +4,7 @@ import {
   ILoginResponse,
   IMeetupFromServer,
   INetworkRepository,
+  IParticipant,
 } from "./../interfaces/INetworkRepository";
 import axios from "axios";
 
@@ -12,6 +13,12 @@ export class NetworkRepository implements INetworkRepository {
     const response = await axios.get(apiUrls.meetups);
     return await response.data;
   }
+
+  async getParticipantsOfMeetup(id: string): Promise<IParticipant[]> {
+    const response = await axios.get(`${apiUrls.meetups}/${id}/participants`);
+    return await response.data;
+  }
+
   async login(loginData: ILoginData): Promise<ILoginResponse> {
     const response = await axios.post(apiUrls.login, loginData);
     if (response.status !== 200) {
@@ -19,6 +26,7 @@ export class NetworkRepository implements INetworkRepository {
     }
     return await response.data;
   }
+
   async loginWithCookies(): Promise<ILoginResponse> {
     const response = await axios.get(apiUrls.login);
     if (response.status !== 200) {
@@ -26,6 +34,7 @@ export class NetworkRepository implements INetworkRepository {
     }
     return await response.data;
   }
+
   async logout(): Promise<void> {
     const response = await axios.get(apiUrls.logout);
     if (response.status !== 200) {

@@ -15,6 +15,13 @@ const testMeetups: IMeetupFromServer[] = [
       name: "employee",
       surname: "Gerlach",
     },
+    speakers: [
+      {
+        id: "206c074c-eaa8-44bc-aa8e-be04916950c4",
+        name: "Maya",
+        surname: "Shanahan",
+      },
+    ],
     subject: "Reverse-engineered even-keeled standardization",
     excerpt:
       "Nemo pariatur dolores ut vero velit non. Quidem temporibus quod nihil amet recusandae atque provident voluptatum iste. Aut architecto cum sit rerum aliquam maxime. Ratione voluptate optio id molestias quia quidem ipsam. Eius voluptatem quia dolores enim assumenda. Consequuntur cupiditate error earum hic est numquam vero.",
@@ -30,6 +37,13 @@ const testMeetups: IMeetupFromServer[] = [
       name: "Lavern",
       surname: "Gerlach",
     },
+    speakers: [
+      {
+        id: "206c074c-eaa8-44bc-aa8e-be04916950c4",
+        name: "Maya",
+        surname: "Shanahan",
+      },
+    ],
     subject: "Universal real-time info-mediaries",
     excerpt:
       "Quae commodi qui. Voluptas et totam consectetur aut. Dolor fugiat soluta aliquid aliquam assumenda illo corporis est placeat. Numquam facilis occaecati.",
@@ -46,6 +60,13 @@ const testParsedMeetups: IMeetup[] = [
     start: "2022-06-09T23:35:47.068Z",
     authorName: "employee",
     authorSurname: "Gerlach",
+    speakers: [
+      {
+        id: "206c074c-eaa8-44bc-aa8e-be04916950c4",
+        name: "Maya",
+        surname: "Shanahan",
+      },
+    ],
     title: "Reverse-engineered even-keeled standardization",
     description:
       "Nemo pariatur dolores ut vero velit non. Quidem temporibus quod nihil amet recusandae atque provident voluptatum iste. Aut architecto cum sit rerum aliquam maxime. Ratione voluptate optio id molestias quia quidem ipsam. Eius voluptatem quia dolores enim assumenda. Consequuntur cupiditate error earum hic est numquam vero.",
@@ -59,6 +80,13 @@ const testParsedMeetups: IMeetup[] = [
     start: "2022-08-22T01:44:16.955Z",
     authorName: "Lavern",
     authorSurname: "Gerlach",
+    speakers: [
+      {
+        id: "206c074c-eaa8-44bc-aa8e-be04916950c4",
+        name: "Maya",
+        surname: "Shanahan",
+      },
+    ],
     title: "Universal real-time info-mediaries",
     description:
       "Quae commodi qui. Voluptas et totam consectetur aut. Dolor fugiat soluta aliquid aliquam assumenda illo corporis est placeat. Numquam facilis occaecati.",

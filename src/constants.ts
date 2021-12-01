@@ -1,13 +1,6 @@
 import { i18n } from "dateformat";
 
 i18n.dayNames = [
-  "Воскресенье",
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
   "Воскр.",
   "Пон.",
   "Вт.",
@@ -15,6 +8,13 @@ i18n.dayNames = [
   "Четв.",
   "Пятн.",
   "Суб.",
+  "Воскресенье",
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
 ];
 
 i18n.monthNames = [
@@ -98,6 +98,12 @@ export enum MeetupTypes {
   REQUEST = "REQUEST",
   DRAFT = "DRAFT",
   CONFIRMED = "CONFIRMED",
+}
+
+export enum MeetupPageTypes {
+  DRAFT = "DRAFT",
+  FUTURE = "FUTURE",
+  PAST = "PAST",
 }
 
 export const apiUrls = {

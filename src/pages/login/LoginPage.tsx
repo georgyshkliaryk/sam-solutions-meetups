@@ -20,7 +20,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
   const from = location.state?.from?.pathname ?? routes.meetups;
 
   if (authStore.isAuthenticated) {
-    return <Navigate to={from} />;
+    return <Navigate replace to={from} />;
   }
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,8 +85,10 @@ const LoginPage: React.FC = observer((): ReactElement => {
               "login-page-form__error-text-visible": validationError,
             })}
           >
-            <span className="material-icons-round">error_outline</span>&nbsp;
-            Неверный логин или пароль!
+            <span className="material-icons-round login-page-form__error-text-icon">
+              error_outline
+            </span>
+            &nbsp; Неверный логин или пароль!
           </p>
         </div>
         <button
@@ -94,7 +96,10 @@ const LoginPage: React.FC = observer((): ReactElement => {
           type="submit"
           disabled={login === "" || password === ""}
         >
-          Войти <span className="material-icons-round">login</span>
+          Войти{" "}
+          <span className="material-icons-round login-page-form__submit-button-icon">
+            login
+          </span>
         </button>
       </form>
     </div>

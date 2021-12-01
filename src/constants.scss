@@ -68,7 +68,32 @@ $mobile-width: 950px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $background-primary;
+  background-color: transparent;
+}
+
+@mixin button-default {
+  text-align: center;
+  color: $color-secondary-text;
+  @include font-normal;
+  border: 0.063rem solid $color-secondary-text;
+  border-radius: 0.313rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+@mixin button-default-hover {
+  background: linear-gradient(
+    0deg,
+    rgba(132, 143, 165, 0.1),
+    rgba(132, 143, 165, 0.1)
+  );
+}
+
+@mixin button-default-active {
+  background: rgba(132, 143, 165, 0.2);
 }
 
 @mixin button-secondary-hover {
@@ -114,4 +139,11 @@ $mobile-width: 950px;
   color: $color-error;
   font-size: 0.75rem;
   margin-top: 0.25rem;
+}
+
+@mixin meetup-section {
+  background-color: #ffff;
+  padding: 1rem 1.375rem;
+  border-radius: 0.313rem;
+  box-shadow: 0px 4px 7px rgba(215, 221, 232, 0.398055);
 }
