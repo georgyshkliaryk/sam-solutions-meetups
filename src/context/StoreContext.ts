@@ -10,7 +10,7 @@ interface IStoreContext {
 }
 const networkRepository = new NetworkRepository();
 const meetupsRepository = new MeetupsRepository(networkRepository);
-const meetupsStore = new MeetupsStore(meetupsRepository, networkRepository);
+const meetupsStore = new MeetupsStore(meetupsRepository);
 const authStore = new AuthStore(networkRepository);
 
 export const StoreContext = React.createContext<IStoreContext>({

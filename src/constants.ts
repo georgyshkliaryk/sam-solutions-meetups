@@ -100,6 +100,12 @@ export enum MeetupTypes {
   CONFIRMED = "CONFIRMED",
 }
 
+export enum MeetupPageTypes {
+  DRAFT = "DRAFT",
+  FUTURE = "FUTURE",
+  PAST = "PAST",
+}
+
 export const apiUrls = {
   meetups: "/meetups",
   users: "/users",

@@ -4,6 +4,18 @@
   height: 100%;
 }
 
+.view-meetup__header {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.view-meetup__header-logo {
+  width: 8rem;
+  text-align: left;
+}
+
 .view-meetup-data {
   display: flex;
   flex-direction: column;
@@ -120,5 +132,11 @@
   .view-meetup-data-buttons-button-delete,
   .view-meetup-data-buttons-button-submit {
     padding: 0.7rem 0.5rem;
+  }
+}
+
+@media (min-width: $mobile-width) {
+  .view-meetup__header-logo {
+    width: 30rem;
   }
 }

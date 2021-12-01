@@ -20,7 +20,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
   const from = location.state?.from?.pathname ?? routes.meetups;
 
   if (authStore.isAuthenticated) {
-    return <Navigate to={from} />;
+    return <Navigate replace to={from} />;
   }
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
