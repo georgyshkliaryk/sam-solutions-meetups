@@ -27,7 +27,7 @@ export class MeetupsStore {
       this.getAllMeetups();
     }
     return this.meetups.filter(
-      (m: IMeetup) => m.status === MeetupTypes.REQUEST
+      (m: IMeetup) => m.status === MeetupTypes.REQUEST && !m.isOver
     );
   }
 
@@ -35,7 +35,9 @@ export class MeetupsStore {
     if (this.meetups.length === 0) {
       this.getAllMeetups();
     }
-    return this.meetups.filter((m: IMeetup) => m.status === MeetupTypes.DRAFT);
+    return this.meetups.filter(
+      (m: IMeetup) => m.status === MeetupTypes.DRAFT && !m.isOver
+    );
   }
 
   get future(): IMeetup[] {
@@ -43,7 +45,7 @@ export class MeetupsStore {
       this.getAllMeetups();
     }
     return this.meetups.filter(
-      (m: IMeetup) => m.status === MeetupTypes.CONFIRMED
+      (m: IMeetup) => m.status === MeetupTypes.CONFIRMED && !m.isOver
     );
   }
 
