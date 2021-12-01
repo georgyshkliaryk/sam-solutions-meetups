@@ -16,6 +16,17 @@
   text-align: left;
 }
 
+.create-meetup-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.create-meetup-nav-item {
+  cursor: pointer;
+}
+
 .create-meetup__description {
   @include font-semi-light;
   color: $color-secondary-text;
@@ -43,6 +54,27 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+}
+
+.create-meetup-data-content-input-wrapper-date {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.create-meetup-data-content-dragndrop {
+  text-align: center;
+  padding: 3rem 0;
+  border: 1px dashed #d5dce7;
+  border-radius: 5px;
+  background-color: rgba(244, 246, 252, 0.2);
+}
+
+.create-meetup-data-content-input-date {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .create-meetup-data-content__label {
@@ -78,6 +110,7 @@
 
 .create-meetup-data-buttons {
   @include meetup-section;
+  padding: 1rem 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -104,6 +137,10 @@
 
 .create-meetup-data-buttons-button-submit:active {
   @include button-primary-active;
+}
+
+.create-meetup-data-buttons-button-submit:disabled {
+  @include button-primary-disabled;
 }
 
 .create-meetup-data-buttons-right {
