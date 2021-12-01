@@ -52,6 +52,7 @@ export const routes = {
   drafts: "drafts",
   future: "future",
   past: "past",
+  create: "create",
 } as const;
 
 export interface NavItem {

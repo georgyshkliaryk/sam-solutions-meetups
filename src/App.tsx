@@ -8,6 +8,7 @@ import LoginPage from "./pages/login/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewThemePage from "./pages/viewTheme/ViewThemePage";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
+import CreateMeetupPage from "./pages/createMeetup/CreateMeetupPage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -50,6 +51,14 @@ const App: React.FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <ViewMeetupPage type={MeetupPageTypes.PAST} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.create}`}
+          element={
+            <PrivateRoute>
+              <CreateMeetupPage />
             </PrivateRoute>
           }
         />

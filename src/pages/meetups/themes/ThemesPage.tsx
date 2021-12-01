@@ -1,7 +1,8 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
+import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
-import { NumberDeclination } from "../../../constants";
+import { NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
@@ -18,9 +19,12 @@ const ThemesPage: React.FC = observer((): ReactElement => {
             NumberDeclination.themes
           )}
         </p>
-        <button className="themes-page-meetups-quantity__button">
+        <LinkComponent
+          className="themes-page-meetups-quantity__button"
+          to={`${routes.meetups}/${routes.create}`}
+        >
           <span className="material-icons-round">add</span>Создать тему
-        </button>
+        </LinkComponent>
       </div>
       <div className="themes-page-wrapper">
         {meetupsStore.themes.map((card: IMeetup) => (
