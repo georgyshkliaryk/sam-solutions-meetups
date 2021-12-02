@@ -22,8 +22,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [title, setTitle] = useState("");
   const [speaker, setSpeaker] = useState("");
   const [description, setDescription] = useState("");
-  const [dateStart, setDateStart] = useState("");
-  const [dateFinish, setDateFinish] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [finishDate, setFinishDate] = useState(startDate);
   const [place, setPlace] = useState("");
 
   useEffect(() => {
@@ -52,18 +52,6 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
     setDescription(event.target.value);
   };
 
-  const handleDateStartChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDateStart(event.target.value);
-  };
-
-  const handleDateFinishChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDateFinish(event.target.value);
-  };
-
   const handlePlaceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlace(event.target.value);
   };
@@ -71,6 +59,21 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const handleClickNext = (event: React.FormEvent) => {
     event.preventDefault();
     setRequiredTabOpen(false);
+  };
+
+  const handleCreateMeetup = (event: React.FormEvent) => {
+    event.preventDefault();
+    const meetupObj = {
+      title,
+      description,
+      speaker,
+      start: startDate,
+      finish: finishDate,
+      place,
+      authorName: authStore.user?.name,
+      authorSurname: authStore.user?.surname,
+    };
+    console.log(meetupObj);
   };
 
   if (authStore.user === undefined) {
@@ -131,7 +134,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           Заполните необходимые поля ниже наиболее подробно, это даст полную
           информацию о предстоящем событии.
         </p>
-        <form className="create-meetup-data">
+        <form className="create-meetup-data" onSubmit={handleCreateMeetup}>
           {requiredTabOpen ? (
             <>
               <fieldset className="create-meetup-data-content">
@@ -213,12 +216,19 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     >
                       Начало
                     </label>
-                    <input
-                      type="date"
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date: Date) => {
+                        setStartDate(date);
+                        setFinishDate(date);
+                      }}
+                      showTimeSelect
+                      minDate={new Date()}
+                      minTime={new Date()}
+                      maxTime={new Date(new Date().setHours(23, 30))}
+                      dateFormat="dd.MM.yyyy HH:mm"
+                      timeFormat="HH:mm"
                       className="create-meetup-data-content__input"
-                      id="createDateStart"
-                      onChange={handleDateStartChange}
-                      value={dateStart}
                     />
                   </div>
                   <div className="create-meetup-data-content-input-wrapper-date">
@@ -228,20 +238,18 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     >
                       Конец
                     </label>
-                    <input
-                      type="date"
+                    <DatePicker
+                      selected={finishDate}
+                      onChange={(date: Date) => setFinishDate(date)}
+                      minDate={startDate}
+                      minTime={startDate}
+                      maxTime={new Date(new Date().setHours(23, 30))}
+                      showTimeSelect
+                      dateFormat="dd.MM.yyyy HH:mm"
+                      timeFormat="HH:mm"
                       className="create-meetup-data-content__input"
-                      id="createDateEnd"
-                      onChange={handleDateFinishChange}
-                      value={dateFinish}
                     />
                   </div>
-                  {/* <DatePicker
-                    selected={dateStart}
-                    onChange={() => false}
-                    showTimeSelect
-                    dateFormat="Pp"
-                  /> */}
                 </div>
                 <div className="create-meetup-data-content-input-wrapper">
                   <label
