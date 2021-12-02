@@ -106,8 +106,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
             }}
           />
           <label className="create-meetup-nav-item" htmlFor="requiredTab">
-            <span className="create-meetup-nav-item__icon">1</span>Обязательные
-            поля
+            <span className="create-meetup-nav-item__icon">1</span>
+            Обязательные поля
           </label>
           <input
             type="radio"

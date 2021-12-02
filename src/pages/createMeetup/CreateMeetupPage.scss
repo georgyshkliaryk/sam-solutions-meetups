@@ -25,10 +25,26 @@
   margin-bottom: 3rem;
 }
 
-.create-meetup-nav:focus-within {
+.create-meetup-nav:focus-within
+  .create-meetup-nav-radio:checked
+  + .create-meetup-nav-item {
   @include input-focus;
   border-radius: 0.313rem;
   border: none;
+  border-bottom: 2px solid $color-primary2;
+}
+
+.create-meetup-nav-item:hover {
+  background-color: $color-secondary-hover;
+}
+
+.create-meetup-nav-item:active {
+  background-color: $color-secondary-active;
+}
+
+.create-meetup-nav-radio:disabled + .create-meetup-nav-item:hover,
+.create-meetup-nav-item:active {
+  background-color: $background-primary;
 }
 
 .create-meetup-nav-radio {
