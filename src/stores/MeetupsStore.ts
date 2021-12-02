@@ -8,6 +8,7 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   currentMeetup: IMeetup | undefined = undefined;
   participants: IParticipant[] = [];
+  //error state
 
   constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
