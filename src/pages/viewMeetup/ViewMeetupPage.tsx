@@ -134,7 +134,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 />
               )}
               <span>
-                {`${currentMeetup.speakers[0].name} ${currentMeetup.speakers[0].surname}`}
+                {currentMeetup.speakers
+                  ? `${currentMeetup.speakers[0].name} ${currentMeetup.speakers[0].surname}`
+                  : "Спикер не задан"}
               </span>
             </div>
           </div>

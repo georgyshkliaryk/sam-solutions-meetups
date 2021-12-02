@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
@@ -16,14 +16,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
+  const navigate = useNavigate();
   const { authStore } = useContext(StoreContext);
+  const { meetupsStore } = useContext(StoreContext);
   const [requiredFilled, setRequiredFilled] = useState(false);
   const [requiredTabOpen, setRequiredTabOpen] = useState(true);
   const [title, setTitle] = useState("");
   const [speaker, setSpeaker] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
-  const [finishDate, setFinishDate] = useState(startDate);
+  const [finishDate, setFinishDate] = useState(
+    new Date(new Date().setMinutes(startDate.getMinutes() + 10))
+  );
   const [place, setPlace] = useState("");
 
   useEffect(() => {
@@ -37,6 +41,10 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
       setRequiredFilled(true);
     }
   }, [description, speaker, title]);
+
+  if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -61,19 +69,30 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
     setRequiredTabOpen(false);
   };
 
-  const handleCreateMeetup = (event: React.FormEvent) => {
+  const handleCreateMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
-    const meetupObj = {
-      title,
-      description,
-      speaker,
-      start: startDate,
-      finish: finishDate,
-      place,
-      authorName: authStore.user?.name,
-      authorSurname: authStore.user?.surname,
-    };
-    console.log(meetupObj);
+    if (authStore.user === undefined) {
+      navigate(routes.meetups);
+    } else {
+      const meetupData = {
+        start: startDate.toString(),
+        finish: finishDate.toString(),
+        authorId: authStore.user.id,
+        authorName: authStore.user.name,
+        authorSurname: authStore.user.surname,
+        speakers: [
+          {
+            name: speaker,
+            surname: speaker,
+          },
+        ],
+        title,
+        description,
+        place,
+      };
+      await meetupsStore.createNewMeetup(meetupData);
+      navigate(routes.meetups);
+    }
   };
 
   if (authStore.user === undefined) {
@@ -229,7 +248,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                           ? new Date()
                           : new Date(new Date().setHours(0, 0))
                       }
-                      maxTime={new Date(new Date().setHours(23, 30))}
+                      maxTime={new Date(new Date().setHours(23, 59))}
                       dateFormat="dd.MM.yyyy HH:mm"
                       timeFormat="HH:mm"
                       className="create-meetup-data-content__input"
@@ -251,7 +270,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                           ? startDate
                           : new Date(new Date().setHours(0, 0))
                       }
-                      maxTime={new Date(new Date().setHours(23, 30))}
+                      maxTime={new Date(new Date().setHours(23, 59))}
                       showTimeSelect
                       dateFormat="dd.MM.yyyy HH:mm"
                       timeFormat="HH:mm"

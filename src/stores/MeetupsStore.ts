@@ -1,5 +1,8 @@
 import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
-import { IMeetup } from "./../repositories/interfaces/IMeetupsRepository";
+import {
+  IMeetup,
+  INewMeetup,
+} from "./../repositories/interfaces/IMeetupsRepository";
 import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
 import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepository";
@@ -14,7 +17,7 @@ export class MeetupsStore {
     makeAutoObservable(this);
   }
 
-  private async getAllMeetups(): Promise<void> {
+  async getAllMeetups(): Promise<void> {
     this.meetups = [];
     this.meetups = await this.meetupsRepository.getAllMeetups();
   }
@@ -70,5 +73,13 @@ export class MeetupsStore {
       this.getAllMeetups();
     }
     return this.currentMeetup;
+  }
+
+  async createNewMeetup(meetupData: INewMeetup): Promise<void> {
+    if (this.meetups.length === 0) {
+      await this.getAllMeetups();
+    }
+    const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
+    this.meetups.push(newMeetup);
   }
 }

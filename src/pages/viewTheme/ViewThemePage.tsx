@@ -95,26 +95,33 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Поддерживают</p>
-            <div className="view-theme-data-content">
-              {meetupsStore.participants
-                .slice(0, 10)
-                .map((p: IParticipant, i: number) => (
-                  <Avatar
-                    className="view-theme-data-content-avatar"
-                    user={{
-                      name: p.name,
-                      surname: p.surname,
-                    }}
-                    // TODO: FIX LATER
-                    key={p.id + i}
-                  />
-                ))}
-              {meetupsStore.participants.length > 10 && (
-                <div className="view-theme-data-content-avatar-rest">
-                  +{meetupsStore.participants.length - 10}
-                </div>
-              )}
-            </div>
+
+            {meetupsStore.participants.length !== 0 ? (
+              <div className="view-theme-data-content">
+                {meetupsStore.participants
+                  .slice(0, 10)
+                  .map((p: IParticipant, i: number) => (
+                    <Avatar
+                      className="view-theme-data-content-avatar"
+                      user={{
+                        name: p.name,
+                        surname: p.surname,
+                      }}
+                      // TODO: FIX LATER
+                      key={p.id + i}
+                    />
+                  ))}
+                {meetupsStore.participants.length > 10 && (
+                  <div className="view-theme-data-content-avatar-rest">
+                    +{meetupsStore.participants.length - 10}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="view-theme-data-content">
+                <i>Пока никто не поддержал тему</i>
+              </div>
+            )}
           </div>
           <div className="view-theme-data-item view-theme-data-item-last">
             <div className="view-theme-data-buttons">
