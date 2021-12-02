@@ -224,7 +224,11 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       }}
                       showTimeSelect
                       minDate={new Date()}
-                      minTime={new Date()}
+                      minTime={
+                        new Date().getDate() === startDate.getDate()
+                          ? new Date()
+                          : new Date(new Date().setHours(0, 0))
+                      }
                       maxTime={new Date(new Date().setHours(23, 30))}
                       dateFormat="dd.MM.yyyy HH:mm"
                       timeFormat="HH:mm"
@@ -242,7 +246,11 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       selected={finishDate}
                       onChange={(date: Date) => setFinishDate(date)}
                       minDate={startDate}
-                      minTime={startDate}
+                      minTime={
+                        finishDate.getDate() === startDate.getDate()
+                          ? startDate
+                          : new Date(new Date().setHours(0, 0))
+                      }
                       maxTime={new Date(new Date().setHours(23, 30))}
                       showTimeSelect
                       dateFormat="dd.MM.yyyy HH:mm"

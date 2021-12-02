@@ -2,13 +2,14 @@
 
 .create-meetup {
   height: 100%;
+  overflow: auto;
 }
 
 .create-meetup__header {
-  position: fixed;
-  right: 0;
-  left: 0;
+  position: sticky;
+  top: 0;
   z-index: 10;
+  margin-bottom: 2rem;
 }
 
 .create-meetup__header-logo {
@@ -21,7 +22,6 @@
   align-items: center;
   justify-content: center;
   line-height: 1.25rem;
-  margin-top: -3rem;
   margin-bottom: 3rem;
 }
 
@@ -79,7 +79,6 @@
   @include font-semi-light;
   color: $color-secondary-text;
   line-height: 1.375rem;
-  margin-top: 2rem;
 }
 
 .create-meetup-data {
