@@ -11,10 +11,11 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   currentMeetup: IMeetup | undefined = undefined;
   participants: IParticipant[] = [];
-  //error state
+  errorState = false;
 
   constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
+    this.errorState = false;
   }
 
   async getAllMeetups(): Promise<void> {
@@ -64,14 +65,19 @@ export class MeetupsStore {
     this.getParticipantsById(id);
   }
 
-  getMeetupById(id: string): void {
+  async getMeetupById(id: string): Promise<void> {
+    if (this.meetups.length === 0) {
+      await this.getAllMeetups();
+    }
     this.currentMeetup = this.meetups.find((m: IMeetup) => m.id === id);
+    if (this.currentMeetup === undefined) {
+      this.errorState = true;
+    } else {
+      this.errorState = false;
+    }
   }
 
   get current(): IMeetup | undefined {
-    if (this.meetups.length === 0) {
-      this.getAllMeetups();
-    }
     return this.currentMeetup;
   }
 

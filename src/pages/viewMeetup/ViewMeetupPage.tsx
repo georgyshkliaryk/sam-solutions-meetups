@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -25,11 +25,17 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   const { meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
 
-  if (themeId.id) {
-    meetupsStore.getMeetupById(themeId.id);
-  }
+  useEffect(() => {
+    if (themeId.id) {
+      meetupsStore.getMeetupById(themeId.id);
+    }
+  }, [meetupsStore, themeId.id]);
 
   if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
+  if (meetupsStore.errorState === true) {
     return <Navigate to={routes.login} />;
   }
 
@@ -134,9 +140,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 />
               )}
               <span>
-                {currentMeetup.speakers
-                  ? `${currentMeetup.speakers[0].name} ${currentMeetup.speakers[0].surname}`
-                  : "Спикер не задан"}
+                {`${currentMeetup.speakers[0].name} ${currentMeetup.speakers[0].surname}`}
               </span>
             </div>
           </div>
