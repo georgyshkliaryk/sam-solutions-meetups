@@ -122,7 +122,7 @@
 .create-meetup-data-content-input-wrapper-date {
   display: flex;
   flex-direction: column;
-  width: 45%;
+  flex-wrap: wrap;
 }
 
 .create-meetup-data-content-dragndrop {
@@ -131,6 +131,54 @@
   border: 1px dashed #d5dce7;
   border-radius: 5px;
   background-color: rgba(244, 246, 252, 0.2);
+  margin-top: 1rem;
+}
+
+.create-meetup-data-content-dragndrop__label {
+  cursor: pointer;
+  color: $color-primary2;
+}
+
+.create-meetup-data-content-uploaded-image {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-meetup-data-content-uploaded-image-icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px dashed #d5dce7;
+  border-radius: 5px;
+  margin: 0 auto 0 0;
+}
+
+.create-meetup-data-content-uploaded-image-icon__image {
+  color: $color-primary2;
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.create-meetup-data-content-uploaded-image-icon-text {
+  margin-right: 2rem;
+}
+
+.create-meetup-data-content-uploaded-image-icon-text-filesize {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: $color-secondary-text;
+}
+
+.create-meetup-data-content-uploaded-image-icon-text-delete:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  color: $color-error;
+}
+
+.create-meetup-data-content-uploaded-image-pic {
+  max-height: 20rem;
+  object-fit: contain;
+  margin-top: 1rem;
 }
 
 .create-meetup-data-content-input-date {
@@ -138,6 +186,8 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .create-meetup-data-content__label {
@@ -179,6 +229,7 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
 .create-meetup-data-buttons-button-back {
@@ -209,6 +260,91 @@
 
 .create-meetup-data-buttons-right {
   display: flex;
+}
+
+//datepicker styles
+.react-datepicker-popper {
+  .react-datepicker {
+    border: 0.063rem solid #d5dce7;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  .react-datepicker__header {
+    background-color: #ffff;
+    border-bottom: 0.063rem solid #d5dce7;
+  }
+}
+
+.react-datepicker-popper[data-placement^="bottom"]
+  .react-datepicker
+  .react-datepicker__triangle::after {
+  border-bottom-color: #ffff;
+}
+
+.react-datepicker-popper[data-placement^="top"]
+  .react-datepicker
+  .react-datepicker__triangle::after {
+  border-bottom-color: #ffff;
+}
+
+.react-datepicker {
+  .react-datepicker__day--selected {
+    background-color: $color-primary1;
+  }
+
+  .react-datepicker__time-container {
+    border-left: 0.063rem solid #d5dce7;
+  }
+
+  .react-datepicker__day--selected:hover {
+    background-color: $color-primary1;
+  }
+
+  .react-datepicker__day--keyboard-selected {
+    background-color: $color-primary2;
+  }
+
+  .react-datepicker__day--keyboard-selected:hover {
+    background-color: $color-primary1;
+  }
+
+  .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list
+    .react-datepicker__time-list-item--selected {
+    background-color: $color-primary1;
+  }
+
+  .react-datepicker__time-container
+    .react-datepicker__time
+    .react-datepicker__time-box
+    .react-datepicker__time-list
+    .react-datepicker__time-list-item--selected:hover {
+    background-color: $color-primary2;
+  }
+}
+
+.react-datepicker-wrapper
+  .react-datepicker__input-container
+  .react-datepicker__close-icon::after {
+  background-color: $color-primary2;
+  font-size: 1rem;
+}
+
+.react-datepicker-wrapper
+  .react-datepicker__input-container
+  .react-datepicker__close-icon:hover::after {
+  background-color: $color-primary1 !important;
+  transform: scale(1.2);
+}
+
+.react-datepicker__time-container {
+  .react-datepicker__time-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  .react-datepicker__time-list::-webkit-scrollbar-thumb {
+    @include scrollbar;
+  }
 }
 
 @media (min-width: $mobile-width) {

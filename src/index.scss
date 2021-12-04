@@ -27,3 +27,11 @@ h1 {
 fieldset {
   all: unset;
 }
+
+::-webkit-scrollbar-thumb {
+  @include scrollbar;
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+}

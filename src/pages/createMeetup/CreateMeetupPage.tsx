@@ -14,6 +14,7 @@ import "./CreateMeetupPage.scss";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { INewMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -24,11 +25,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [title, setTitle] = useState("");
   const [speaker, setSpeaker] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
-  const [finishDate, setFinishDate] = useState(
-    new Date(new Date().setMinutes(startDate.getMinutes() + 10))
-  );
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [finishDate, setFinishDate] = useState<Date | null>(null);
   const [place, setPlace] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+
+  console.log(file);
 
   useEffect(() => {
     if (
@@ -74,9 +76,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
     if (authStore.user === undefined) {
       navigate(routes.meetups);
     } else {
-      const meetupData = {
-        start: startDate.toString(),
-        finish: finishDate.toString(),
+      const meetupData: INewMeetup = {
         authorId: authStore.user.id,
         authorName: authStore.user.name,
         authorSurname: authStore.user.surname,
@@ -88,8 +88,17 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
         ],
         title,
         description,
-        place,
       };
+      if (place !== "") {
+        meetupData.place = place;
+      }
+      if (startDate !== null) {
+        meetupData.start = startDate.toISOString();
+      }
+      if (finishDate !== null) {
+        meetupData.start = finishDate.toISOString();
+      }
+
       await meetupsStore.createNewMeetup(meetupData);
       navigate(routes.meetups);
     }
@@ -236,17 +245,24 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       Начало
                     </label>
                     <DatePicker
+                      onFocus={(e) => e.target.blur()}
+                      isClearable
                       selected={startDate}
                       onChange={(date: Date) => {
                         setStartDate(date);
-                        setFinishDate(date);
+                        setFinishDate(null);
                       }}
                       showTimeSelect
                       minDate={new Date()}
                       minTime={
+                        startDate !== null &&
                         new Date().getDate() === startDate.getDate()
-                          ? new Date()
-                          : new Date(new Date().setHours(0, 0))
+                          ? new Date(
+                              new Date().setMinutes(
+                                new Date().getMinutes() + 30
+                              )
+                            )
+                          : new Date(new Date().setHours(0, 30))
                       }
                       maxTime={new Date(new Date().setHours(23, 59))}
                       dateFormat="dd.MM.yyyy HH:mm"
@@ -262,10 +278,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       Конец
                     </label>
                     <DatePicker
+                      onFocus={(e) => e.target.blur()}
+                      disabled={startDate === null}
                       selected={finishDate}
                       onChange={(date: Date) => setFinishDate(date)}
                       minDate={startDate}
                       minTime={
+                        startDate !== null &&
+                        finishDate !== null &&
                         finishDate.getDate() === startDate.getDate()
                           ? startDate
                           : new Date(new Date().setHours(0, 0))
@@ -293,9 +313,56 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     value={place}
                   />
                 </div>
-                <div className="create-meetup-data-content-dragndrop">
-                  Перетащите изображения сюда или загрузите
-                </div>
+                {file ? (
+                  <div className="create-meetup-data-content-uploaded-image">
+                    <p className="create-meetup-data-content__label">
+                      Загруженные изображения
+                    </p>
+                    <div className="create-meetup-data-content-uploaded-image-icon">
+                      <span className="material-icons-outlined create-meetup-data-content-uploaded-image-icon__image">
+                        image
+                      </span>
+                      <div className="create-meetup-data-content-uploaded-image-icon-text">
+                        <p>{file.name}</p>
+                        <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
+                          File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb
+                        </p>
+                      </div>
+                      <span
+                        className="material-icons-outlined create-meetup-data-content-uploaded-image-icon-text-delete"
+                        onClick={() => {
+                          setFile(null);
+                        }}
+                      >
+                        close
+                      </span>
+                    </div>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt="preview"
+                      className="create-meetup-data-content-uploaded-image-pic"
+                    />
+                  </div>
+                ) : (
+                  <div className="create-meetup-data-content-dragndrop">
+                    Перетащите изображение сюда или{" "}
+                    <label
+                      htmlFor="image-upload"
+                      className="create-meetup-data-content-dragndrop__label"
+                    >
+                      загрузите
+                    </label>
+                    <input
+                      type="file"
+                      id="image-upload"
+                      accept=".png,.jpeg,.jpg"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setFile(e.target.files ? e.target.files[0] : null);
+                      }}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                )}
               </fieldset>
               <div className="create-meetup-data-buttons">
                 <button

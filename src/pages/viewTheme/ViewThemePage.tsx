@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -19,17 +19,23 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
   const { meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
-  if (themeId.id) {
-    meetupsStore.getMeetupById(themeId.id);
-  }
+  const [loading, setLoading] = useState(true);
+
+  console.log(meetupsStore.errorState);
 
   useEffect(() => {
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);
+      setLoading(false);
+      meetupsStore.getMeetupById(themeId.id);
     }
   }, [meetupsStore, themeId.id]);
 
   if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
+  if (meetupsStore.errorState === true) {
     return <Navigate to={routes.login} />;
   }
 
@@ -52,6 +58,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
       </div>
     );
   }
+
   return (
     <div className="view-theme">
       <Header className="view-theme__header">
@@ -96,7 +103,8 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Поддерживают</p>
 
-            {meetupsStore.participants.length !== 0 ? (
+            {meetupsStore.participants !== undefined &&
+            meetupsStore.participants.length !== 0 ? (
               <div className="view-theme-data-content">
                 {meetupsStore.participants
                   .slice(0, 10)
@@ -117,9 +125,31 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                   </div>
                 )}
               </div>
-            ) : (
+            ) : meetupsStore.participants !== undefined &&
+              meetupsStore.participants.length === 0 ? (
               <div className="view-theme-data-content">
                 <i>Пока никто не поддержал тему</i>
+              </div>
+            ) : (
+              <div className="view-theme-data-content">
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
               </div>
             )}
           </div>

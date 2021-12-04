@@ -10,6 +10,7 @@ import "./ThemesPage.scss";
 
 const ThemesPage: React.FC = observer((): ReactElement => {
   const { meetupsStore } = useContext(StoreContext);
+
   return (
     <section className="themes-page">
       <div className="themes-page-meetups-quantity">

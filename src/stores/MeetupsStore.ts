@@ -10,12 +10,11 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   currentMeetup: IMeetup | undefined = undefined;
-  participants: IParticipant[] = [];
+  participants: IParticipant[] | undefined = undefined;
   errorState = false;
 
   constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
-    this.errorState = false;
   }
 
   async getAllMeetups(): Promise<void> {
@@ -24,6 +23,7 @@ export class MeetupsStore {
   }
 
   private async getParticipantsById(id: string): Promise<void> {
+    this.participants = undefined;
     this.participants = await this.meetupsRepository.getParticipantsById(id);
   }
 
@@ -66,6 +66,7 @@ export class MeetupsStore {
   }
 
   async getMeetupById(id: string): Promise<void> {
+    this.errorState = false;
     if (this.meetups.length === 0) {
       await this.getAllMeetups();
     }
