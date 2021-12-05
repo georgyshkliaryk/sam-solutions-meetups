@@ -138,3 +138,5 @@ export const avatarColors: string[] = [
   "darkslateblue",
   "crimson",
 ];
+
+export const fileMaxSize = 1000000;

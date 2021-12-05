@@ -134,6 +134,17 @@
   margin-top: 1rem;
 }
 
+.create-meetup-data-content-dragndrop__error-visible {
+  display: block;
+  color: $color-error;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+}
+
+.create-meetup-data-content-dragndrop__error-hidden {
+  display: none;
+}
+
 .create-meetup-data-content-dragndrop__label {
   cursor: pointer;
   color: $color-primary2;

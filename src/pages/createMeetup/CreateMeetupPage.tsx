@@ -8,13 +8,14 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { fileMaxSize, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./CreateMeetupPage.scss";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { INewMeetup } from "../../repositories/interfaces/IMeetupsRepository";
+import { getBase64 } from "../../helpers/getBase64";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -29,8 +30,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [finishDate, setFinishDate] = useState<Date | null>(null);
   const [place, setPlace] = useState("");
   const [file, setFile] = useState<File | null>(null);
-
-  console.log(file);
+  const [maxSizeError, setMaxSizeError] = useState(false);
 
   useEffect(() => {
     if (
@@ -43,6 +43,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
       setRequiredFilled(true);
     }
   }, [description, speaker, title]);
+
+  useEffect(() => {
+    if (file !== null && file.size > fileMaxSize) {
+      setMaxSizeError(true);
+    } else {
+      setMaxSizeError(false);
+    }
+  }, [file]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -98,8 +106,15 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
       if (finishDate !== null) {
         meetupData.start = finishDate.toISOString();
       }
+      if (file !== null) {
+        const imageBase64 = await getBase64(file);
+        if (typeof imageBase64 === "string" && imageBase64 !== undefined) {
+          meetupData.image = imageBase64;
+        }
+      }
 
       await meetupsStore.createNewMeetup(meetupData);
+      console.log(meetupData);
       navigate(routes.meetups);
     }
   };
@@ -313,7 +328,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     value={place}
                   />
                 </div>
-                {file ? (
+                {file !== null && file.size < fileMaxSize ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
                       Загруженные изображения
@@ -325,7 +340,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       <div className="create-meetup-data-content-uploaded-image-icon-text">
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
-                          File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb
+                          File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
                         </p>
                       </div>
                       <span
@@ -361,6 +376,15 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       }}
                       style={{ display: "none" }}
                     />
+                    <p
+                      className={
+                        maxSizeError
+                          ? "create-meetup-data-content-dragndrop__error-visible"
+                          : "create-meetup-data-content-dragndrop__error-hidden"
+                      }
+                    >
+                      Максимальный размер файла: 1 Mb!
+                    </p>
                   </div>
                 )}
               </fieldset>
