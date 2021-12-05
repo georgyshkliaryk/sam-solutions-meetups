@@ -140,3 +140,5 @@ export const avatarColors: string[] = [
 ];
 
 export const fileMaxSize = 1000000;
+
+export const imageTypesRegex = /^image\/(jpe?g|png)$/;

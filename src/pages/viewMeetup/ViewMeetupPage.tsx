@@ -36,7 +36,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    alert("Meetup not found!");
+    //alert("Meetup not found!");
     return <Navigate to={routes.login} />;
   }
 

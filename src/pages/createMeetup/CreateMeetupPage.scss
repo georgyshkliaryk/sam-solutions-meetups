@@ -128,10 +128,14 @@
 .create-meetup-data-content-dragndrop {
   text-align: center;
   padding: 3rem 0;
-  border: 1px dashed #d5dce7;
+  border: 2px dashed #d5dce7;
   border-radius: 5px;
   background-color: rgba(244, 246, 252, 0.2);
   margin-top: 1rem;
+}
+
+.create-meetup-data-content-dragndrop-active {
+  border: 2px solid $color-primary1;
 }
 
 .create-meetup-data-content-dragndrop__error-visible {

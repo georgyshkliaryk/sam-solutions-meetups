@@ -96,7 +96,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Описание</p>
-            <div className="view-theme-data-content">
+            <div className="view-theme-data-content view-theme-data-content__description">
               {currentMeetup.description}
             </div>
           </div>

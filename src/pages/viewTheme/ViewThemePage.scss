@@ -37,6 +37,10 @@
   align-items: center !important;
 }
 
+.view-theme-data-content__description {
+  white-space: pre-line;
+}
+
 .view-theme-data-label {
   font-size: 0.875rem;
   color: $color-secondary-text;

@@ -8,7 +8,12 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { fileMaxSize, navItems, routes } from "../../constants";
+import {
+  fileMaxSize,
+  imageTypesRegex,
+  navItems,
+  routes,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./CreateMeetupPage.scss";
 
@@ -16,6 +21,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { INewMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import { getBase64 } from "../../helpers/getBase64";
+import { useDropzone } from "react-dropzone";
+import classNames from "classnames";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -31,6 +38,13 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [place, setPlace] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [maxSizeError, setMaxSizeError] = useState(false);
+  const { getRootProps, isDragActive } = useDropzone({
+    accept: "image/jpeg, image/png, image/jpg",
+    onDrop: (acceptedFiles: File[]) => {
+      setFile(acceptedFiles[0]);
+    },
+    maxFiles: 1,
+  });
 
   useEffect(() => {
     if (
@@ -328,7 +342,9 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     value={place}
                   />
                 </div>
-                {file !== null && file.size < fileMaxSize ? (
+                {file !== null &&
+                imageTypesRegex.test(file.type) &&
+                file.size < fileMaxSize ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
                       Загруженные изображения
@@ -341,6 +357,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
                           File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
+                          {file.type}
                         </p>
                       </div>
                       <span
@@ -359,7 +376,17 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     />
                   </div>
                 ) : (
-                  <div className="create-meetup-data-content-dragndrop">
+                  <div
+                    {...getRootProps({
+                      className: classNames(
+                        "create-meetup-data-content-dragndrop",
+                        {
+                          "create-meetup-data-content-dragndrop-active":
+                            isDragActive,
+                        }
+                      ),
+                    })}
+                  >
                     Перетащите изображение сюда или{" "}
                     <label
                       htmlFor="image-upload"
@@ -367,6 +394,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     >
                       загрузите
                     </label>
+                    &nbsp;(jpeg, png, jpg)
                     <input
                       type="file"
                       id="image-upload"
