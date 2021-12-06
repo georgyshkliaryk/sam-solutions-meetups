@@ -8,6 +8,7 @@ import "./ThemesCard.scss";
 
 interface IProps {
   item: IMeetup;
+  editRights: boolean;
 }
 
 const ThemesCard: React.FC<IProps> = (props): ReactElement => {
@@ -15,6 +16,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
     name: props.item.authorName,
     surname: props.item.authorSurname,
   };
+
   return (
     <LinkComponent to={props.item.id} className="themes-card-wrapper">
       <article className="themes-card">
@@ -39,6 +41,11 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
             )}
           </p>
         </div>
+        {props.editRights && (
+          <button className="themes-card-delete-button" title="Удалить тему">
+            <span className="material-icons-outlined">delete</span>
+          </button>
+        )}
       </article>
     </LinkComponent>
   );

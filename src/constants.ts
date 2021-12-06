@@ -107,6 +107,11 @@ export enum MeetupPageTypes {
   PAST = "PAST",
 }
 
+export enum UserRoles {
+  EMPLOYEE = "EMPLOYEE",
+  CHIEF = "CHIEF",
+}
+
 export const apiUrls = {
   meetups: "/meetups",
   users: "/users",
