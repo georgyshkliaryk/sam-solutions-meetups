@@ -16,7 +16,7 @@ import {
 } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./CreateMeetupPage.scss";
-import DropZoneIcon from "./assets/drop-zone.svg";
+import DropZoneIcon from "./assets/dropzone-icon.svg";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -141,7 +141,6 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
       }
 
       await meetupsStore.createNewMeetup(meetupData);
-      console.log(meetupData);
       navigate(routes.meetups);
     }
   };
@@ -357,6 +356,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                 </div>
                 {file !== null &&
                 fileRejections.length === 0 &&
+                imageTypesRegex.test(file.type) &&
                 !maxSizeError ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">

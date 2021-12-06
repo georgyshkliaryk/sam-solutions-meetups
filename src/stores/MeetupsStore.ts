@@ -87,9 +87,6 @@ export class MeetupsStore {
   }
 
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
-    // if (this.meetups.length === 0) {
-    //   await this.getAllMeetups();
-    // }
     const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
     this.meetups.push(newMeetup);
   }
