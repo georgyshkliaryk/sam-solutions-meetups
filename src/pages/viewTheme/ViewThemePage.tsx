@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -16,20 +16,28 @@ import "./ViewThemePage.scss";
 import Loader from "react-loader-spinner";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
-  const { authStore } = useContext(StoreContext);
-  const { meetupsStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
-  if (themeId.id) {
-    meetupsStore.getMeetupById(themeId.id);
-  }
+
+  useEffect(() => {
+    return () => {
+      meetupsStore.resetErrorState();
+    };
+  }, []);
 
   useEffect(() => {
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);
+      meetupsStore.getMeetupById(themeId.id);
     }
   }, [meetupsStore, themeId.id]);
 
   if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
+  if (meetupsStore.errorState === true) {
+    //alert("Theme not found!");
     return <Navigate to={routes.login} />;
   }
 
@@ -52,6 +60,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
       </div>
     );
   }
+
   return (
     <div className="view-theme">
       <Header className="view-theme__header">
@@ -89,32 +98,62 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Описание</p>
-            <div className="view-theme-data-content">
+            <div className="view-theme-data-content view-theme-data-content__description">
               {currentMeetup.description}
             </div>
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Поддерживают</p>
-            <div className="view-theme-data-content">
-              {meetupsStore.participants
-                .slice(0, 10)
-                .map((p: IParticipant, i: number) => (
-                  <Avatar
-                    className="view-theme-data-content-avatar"
-                    user={{
-                      name: p.name,
-                      surname: p.surname,
-                    }}
-                    // TODO: FIX LATER
-                    key={p.id + i}
-                  />
-                ))}
-              {meetupsStore.participants.length > 10 && (
-                <div className="view-theme-data-content-avatar-rest">
-                  +{meetupsStore.participants.length - 10}
-                </div>
-              )}
-            </div>
+
+            {meetupsStore.participants !== undefined &&
+            meetupsStore.participants.length !== 0 ? (
+              <div className="view-theme-data-content">
+                {meetupsStore.participants
+                  .slice(0, 10)
+                  .map((p: IParticipant, i: number) => (
+                    <Avatar
+                      className="view-theme-data-content-avatar"
+                      user={{
+                        name: p.name,
+                        surname: p.surname,
+                      }}
+                      // TODO: FIX LATER
+                      key={p.id + i}
+                    />
+                  ))}
+                {meetupsStore.participants.length > 10 && (
+                  <div className="view-theme-data-content-avatar-rest">
+                    +{meetupsStore.participants.length - 10}
+                  </div>
+                )}
+              </div>
+            ) : meetupsStore.participants !== undefined &&
+              meetupsStore.participants.length === 0 ? (
+              <div className="view-theme-data-content">
+                <i>Пока никто не поддержал тему</i>
+              </div>
+            ) : (
+              <div className="view-theme-data-content">
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height={30}
+                  width={30}
+                />
+              </div>
+            )}
           </div>
           <div className="view-theme-data-item view-theme-data-item-last">
             <div className="view-theme-data-buttons">

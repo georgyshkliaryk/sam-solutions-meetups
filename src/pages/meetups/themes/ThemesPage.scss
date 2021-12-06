@@ -17,6 +17,7 @@
   @include button-secondary;
   @include font-normal;
   padding: 0.625rem 1.25rem;
+  text-decoration: none;
 }
 
 .themes-page-meetups-quantity__button:hover {

@@ -12,6 +12,7 @@ const testMeetups: IMeetupFromServer[] = [
     id: "2de0306f-a712-4078-b1f0-b223c2f4246b",
     start: "2022-06-09T23:35:47.068Z",
     author: {
+      id: "12313",
       name: "employee",
       surname: "Gerlach",
     },
@@ -34,6 +35,7 @@ const testMeetups: IMeetupFromServer[] = [
     id: "234c96f4-f156-47f0-93fd-912c89dc4884",
     start: "2022-08-22T01:44:16.955Z",
     author: {
+      id: "1231323",
       name: "Lavern",
       surname: "Gerlach",
     },
@@ -58,6 +60,7 @@ const testParsedMeetups: IMeetup[] = [
   {
     id: "2de0306f-a712-4078-b1f0-b223c2f4246b",
     start: "2022-06-09T23:35:47.068Z",
+    authorId: "12313",
     authorName: "employee",
     authorSurname: "Gerlach",
     speakers: [
@@ -78,6 +81,7 @@ const testParsedMeetups: IMeetup[] = [
   {
     id: "234c96f4-f156-47f0-93fd-912c89dc4884",
     start: "2022-08-22T01:44:16.955Z",
+    authorId: "1231323",
     authorName: "Lavern",
     authorSurname: "Gerlach",
     speakers: [

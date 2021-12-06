@@ -2,13 +2,14 @@
 
 .view-theme {
   height: 100%;
+  overflow: auto;
 }
 
 .view-theme__header {
-  position: fixed;
-  right: 0;
-  left: 0;
+  position: sticky;
+  top: 0;
   z-index: 10;
+  margin-bottom: 2rem;
 }
 
 .view-theme__header-logo {
@@ -33,12 +34,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.813rem;
-  align-items: center;
+  align-items: center !important;
+}
+
+.view-theme-data-content__description {
+  white-space: pre-line;
 }
 
 .view-theme-data-label {
   font-size: 0.875rem;
   color: $color-secondary-text;
+  line-height: 1.5rem;
 }
 
 .view-theme-data-content__title {

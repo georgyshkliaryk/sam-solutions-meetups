@@ -52,6 +52,7 @@ export const routes = {
   drafts: "drafts",
   future: "future",
   past: "past",
+  create: "create",
 } as const;
 
 export interface NavItem {
@@ -137,3 +138,7 @@ export const avatarColors: string[] = [
   "darkslateblue",
   "crimson",
 ];
+
+export const fileMaxSize = 1000000;
+
+export const imageTypesRegex = /^image\/(jpe?g|png)$/;

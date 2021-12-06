@@ -3,6 +3,7 @@ import {
   ILoginData,
   ILoginResponse,
   IMeetupFromServer,
+  IMeetupToServer,
   INetworkRepository,
   IParticipant,
 } from "./../interfaces/INetworkRepository";
@@ -16,6 +17,14 @@ export class NetworkRepository implements INetworkRepository {
 
   async getParticipantsOfMeetup(id: string): Promise<IParticipant[]> {
     const response = await axios.get(`${apiUrls.meetups}/${id}/participants`);
+    return await response.data;
+  }
+
+  async createMeetup(meetupData: IMeetupToServer): Promise<IMeetupFromServer> {
+    const response = await axios.post(apiUrls.meetups, meetupData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
     return await response.data;
   }
 

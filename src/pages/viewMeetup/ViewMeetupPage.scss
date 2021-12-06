@@ -2,13 +2,14 @@
 
 .view-meetup {
   height: 100%;
+  overflow: auto;
 }
 
 .view-meetup__header {
-  position: fixed;
-  right: 0;
-  left: 0;
+  position: sticky;
+  top: 0;
   z-index: 10;
+  margin-bottom: 2rem;
 }
 
 .view-meetup__header-logo {
@@ -44,6 +45,7 @@
 .view-meetup-data-label {
   font-size: 0.875rem;
   color: $color-secondary-text;
+  line-height: 1.5rem;
 }
 
 .view-meetup-data-content__title {

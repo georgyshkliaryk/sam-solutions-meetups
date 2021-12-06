@@ -1,5 +1,8 @@
 import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
-import { IMeetup } from "./../repositories/interfaces/IMeetupsRepository";
+import {
+  IMeetup,
+  INewMeetup,
+} from "./../repositories/interfaces/IMeetupsRepository";
 import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
 import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepository";
@@ -7,18 +10,20 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   currentMeetup: IMeetup | undefined = undefined;
-  participants: IParticipant[] = [];
+  participants: IParticipant[] | undefined = undefined;
+  errorState = false;
 
   constructor(private readonly meetupsRepository: MeetupsRepository) {
     makeAutoObservable(this);
   }
 
-  private async getAllMeetups(): Promise<void> {
+  async getAllMeetups(): Promise<void> {
     this.meetups = [];
     this.meetups = await this.meetupsRepository.getAllMeetups();
   }
 
   private async getParticipantsById(id: string): Promise<void> {
+    this.participants = undefined;
     this.participants = await this.meetupsRepository.getParticipantsById(id);
   }
 
@@ -60,14 +65,29 @@ export class MeetupsStore {
     this.getParticipantsById(id);
   }
 
-  getMeetupById(id: string): void {
+  async getMeetupById(id: string): Promise<void> {
+    this.errorState = false;
+    if (this.meetups.length === 0) {
+      await this.getAllMeetups();
+    }
     this.currentMeetup = this.meetups.find((m: IMeetup) => m.id === id);
+    if (this.currentMeetup === undefined) {
+      this.errorState = true;
+    } else {
+      this.errorState = false;
+    }
+  }
+
+  resetErrorState() {
+    this.errorState = false;
   }
 
   get current(): IMeetup | undefined {
-    if (this.meetups.length === 0) {
-      this.getAllMeetups();
-    }
     return this.currentMeetup;
+  }
+
+  async createNewMeetup(meetupData: INewMeetup): Promise<void> {
+    const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
+    this.meetups.push(newMeetup);
   }
 }

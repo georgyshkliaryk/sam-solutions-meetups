@@ -147,3 +147,9 @@ $mobile-width: 950px;
   border-radius: 0.313rem;
   box-shadow: 0px 4px 7px rgba(215, 221, 232, 0.398055);
 }
+
+@mixin scrollbar {
+  background: #c8cdd4;
+  box-shadow: 0px 2px 4px rgba(132, 143, 165, 0.162308);
+  border-radius: 3px;
+}

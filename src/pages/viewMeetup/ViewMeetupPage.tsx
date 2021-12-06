@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -21,15 +21,27 @@ interface IProps {
 }
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
-  const { authStore } = useContext(StoreContext);
-  const { meetupsStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
 
-  if (themeId.id) {
-    meetupsStore.getMeetupById(themeId.id);
-  }
+  useEffect(() => {
+    return () => {
+      meetupsStore.resetErrorState();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (themeId.id) {
+      meetupsStore.getMeetupById(themeId.id);
+    }
+  }, [meetupsStore, themeId.id]);
 
   if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
+  if (meetupsStore.errorState === true) {
+    //alert("Meetup not found!");
     return <Navigate to={routes.login} />;
   }
 
