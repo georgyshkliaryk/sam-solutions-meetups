@@ -1,0 +1,27 @@
+@import "../../constants.scss";
+
+.validation-for-input {
+  color: $color-error;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  display: none;
+  align-items: center;
+  margin-left: 0.2rem;
+}
+
+.validation-for-input-success {
+  color: $color-success;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  display: none;
+  align-items: center;
+  margin-left: 0.2rem;
+}
+
+.validation-for-input-visible {
+  display: flex;
+}
+
+.validation-for-input-icon {
+  font-size: 1rem;
+}

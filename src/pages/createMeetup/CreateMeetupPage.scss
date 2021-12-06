@@ -127,6 +127,10 @@
   margin-bottom: 1rem;
 }
 
+.create-meetup-data-content-input-wrapper-with-validation {
+  margin-bottom: 0.25rem;
+}
+
 .create-meetup-data-content-input-wrapper-date {
   display: flex;
   flex-direction: column;
@@ -258,6 +262,16 @@
 
 .create-meetup-data-content__textarea:focus {
   @include input-focus;
+}
+
+.create-meetup-data-content__input-error:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem $color-error;
+}
+
+.create-meetup-data-content__input-success:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem $color-success;
 }
 
 .create-meetup-data-buttons {

@@ -24,6 +24,7 @@ import { INewMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import { getBase64 } from "../../helpers/getBase64";
 import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
+import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -221,7 +222,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           {requiredTabOpen ? (
             <>
               <fieldset className="create-meetup-data-content">
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
                   <label
                     htmlFor="createTitle"
                     className="create-meetup-data-content__label"
@@ -230,13 +231,19 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   </label>
                   <input
                     type="text"
-                    className="create-meetup-data-content__input"
+                    className={classNames(
+                      "create-meetup-data-content__input",
+                      title.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     id="createTitle"
                     onChange={handleTitleChange}
                     value={title}
                   />
+                  <ValidationForInput inputData={title} />
                 </div>
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
                   <label
                     htmlFor="createSpeaker"
                     className="create-meetup-data-content__label"
@@ -245,14 +252,20 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   </label>
                   <input
                     type="text"
-                    className="create-meetup-data-content__input"
+                    className={classNames(
+                      "create-meetup-data-content__input",
+                      speaker.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     id="createSpeaker"
                     onChange={handleSpeakerChange}
                     value={speaker}
                   />
+                  <ValidationForInput inputData={speaker} />
                 </div>
 
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
                   <label
                     htmlFor="createDescription"
                     className="create-meetup-data-content__label"
@@ -260,7 +273,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     Описание
                   </label>
                   <textarea
-                    className="create-meetup-data-content__textarea"
+                    className={classNames(
+                      "create-meetup-data-content__textarea",
+                      description.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     name="createDescription"
                     id="createDescription"
                     onChange={handleDescriptionChange}
@@ -268,6 +286,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     cols={30}
                     rows={10}
                   ></textarea>
+                  <ValidationForInput inputData={description} />
                 </div>
               </fieldset>
               <div className="create-meetup-data-buttons">
