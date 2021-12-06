@@ -38,19 +38,18 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [place, setPlace] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [urlImage, setUrlImage] = useState("");
-  const [maxSizeError, setMaxSizeError] = useState(false);
-  const { getRootProps, isDragActive, fileRejections, isDragReject } =
-    useDropzone({
-      accept: "image/jpeg, image/png, image/jpg",
-      onDrop: (acceptedFiles: File[]) => {
-        if (!isDragReject) {
-          setFile(acceptedFiles[0]);
-          URL.revokeObjectURL(urlImage);
-          setUrlImage(URL.createObjectURL(acceptedFiles[0]));
-        }
-      },
-      maxFiles: 1,
-    });
+  const [fileError, setFileError] = useState(false);
+  const { getRootProps, isDragActive, isDragReject } = useDropzone({
+    accept: "image/jpeg, image/png, image/jpg",
+    onDrop: (acceptedFiles: File[]) => {
+      if (!isDragReject) {
+        setFile(acceptedFiles[0]);
+        URL.revokeObjectURL(urlImage);
+        setUrlImage(URL.createObjectURL(acceptedFiles[0]));
+      }
+    },
+    maxFiles: 1,
+  });
 
   useEffect(() => {
     if (
@@ -65,14 +64,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   }, [description, speaker, title]);
 
   useEffect(() => {
-    if (fileRejections.length > 0) {
-      setMaxSizeError(true);
+    if (isDragReject) {
+      setFileError(true);
     } else if (file !== null && file.size > fileMaxSize) {
-      setMaxSizeError(true);
+      setFileError(true);
     } else {
-      setMaxSizeError(false);
+      setFileError(false);
     }
-  }, [file, fileRejections.length]);
+  }, [file, isDragReject]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -370,8 +369,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   />
                 </div>
                 {file !== null &&
-                !isDragReject &&
-                !maxSizeError &&
+                !fileError &&
                 imageTypesRegex.test(file.type) ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
@@ -409,6 +407,10 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         {
                           "create-meetup-data-content-dragndrop-active":
                             isDragActive,
+                        },
+                        {
+                          "create-meetup-data-content-dragndrop-rejected":
+                            isDragReject,
                         }
                       ),
                     })}
@@ -440,7 +442,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     />
                     <p
                       className={
-                        maxSizeError
+                        fileError
                           ? "create-meetup-data-content-dragndrop__error-visible"
                           : "create-meetup-data-content-dragndrop__error-hidden"
                       }

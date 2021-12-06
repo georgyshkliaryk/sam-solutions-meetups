@@ -152,6 +152,10 @@
   border: 2px solid $color-primary1;
 }
 
+.create-meetup-data-content-dragndrop-rejected {
+  border: 2px solid $color-error;
+}
+
 .create-meetup-data-content-dragndrop__error-visible {
   display: block;
   color: $color-error;
