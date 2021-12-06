@@ -4,6 +4,7 @@
   @include card;
   padding: 1rem 1.5rem;
   cursor: pointer;
+  position: relative;
 }
 
 .meetups-card-wrapper {
@@ -60,4 +61,28 @@
   color: $color-secondary-text;
   display: flex;
   align-items: center;
+}
+
+.meetups-card-buttons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.meetups-card-delete-button,
+.meetups-card-edit-button {
+  border: none;
+  cursor: pointer;
+  color: $color-secondary-text;
+  background-color: transparent;
+}
+
+.meetups-card-delete-button:hover {
+  color: $color-error;
+  transform: scale(1.2);
+}
+
+.meetups-card-edit-button:hover {
+  color: $color-primary1;
+  transform: scale(1.2);
 }

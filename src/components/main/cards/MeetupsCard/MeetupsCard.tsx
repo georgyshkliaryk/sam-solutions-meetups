@@ -7,6 +7,7 @@ import LinkComponent from "../../../LinkComponent/LinkComponent";
 
 interface IProps {
   item: IMeetup;
+  editRights: boolean;
 }
 
 const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
@@ -40,6 +41,22 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
             </span>
           </div>
         </div>
+        {props.editRights && (
+          <div className="meetups-card-buttons">
+            <button
+              className="meetups-card-delete-button"
+              title="Удалить митап"
+            >
+              <span className="material-icons-outlined">delete</span>
+            </button>
+            <button
+              className="meetups-card-edit-button"
+              title="Редактировать митап"
+            >
+              <span className="material-icons-outlined">edit</span>
+            </button>
+          </div>
+        )}
       </article>
     </LinkComponent>
   );
