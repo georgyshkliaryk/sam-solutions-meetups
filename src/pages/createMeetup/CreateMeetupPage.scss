@@ -134,6 +134,12 @@
   margin-top: 1rem;
 }
 
+.create-meetup-data-content-dragndrop-icon {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
 .create-meetup-data-content-dragndrop-active {
   border: 2px solid $color-primary1;
 }
@@ -182,6 +188,11 @@
   font-size: 0.75rem;
   line-height: 1rem;
   color: $color-secondary-text;
+}
+
+.create-meetup-data-content-uploaded-image-icon-text-delete {
+  border: none;
+  background-color: #ffff;
 }
 
 .create-meetup-data-content-uploaded-image-icon-text-delete:hover {

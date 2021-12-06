@@ -16,6 +16,7 @@ import {
 } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./CreateMeetupPage.scss";
+import DropZoneIcon from "./assets/drop-zone.svg";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -26,8 +27,7 @@ import classNames from "classnames";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
-  const { authStore } = useContext(StoreContext);
-  const { meetupsStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
   const [requiredFilled, setRequiredFilled] = useState(false);
   const [requiredTabOpen, setRequiredTabOpen] = useState(true);
   const [title, setTitle] = useState("");
@@ -37,11 +37,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [finishDate, setFinishDate] = useState<Date | null>(null);
   const [place, setPlace] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [urlImage, setUrlImage] = useState("");
   const [maxSizeError, setMaxSizeError] = useState(false);
-  const { getRootProps, isDragActive } = useDropzone({
+  const { getRootProps, isDragActive, fileRejections } = useDropzone({
     accept: "image/jpeg, image/png, image/jpg",
     onDrop: (acceptedFiles: File[]) => {
       setFile(acceptedFiles[0]);
+      URL.revokeObjectURL(urlImage);
+      setUrlImage(URL.createObjectURL(acceptedFiles[0]));
     },
     maxFiles: 1,
   });
@@ -59,12 +62,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   }, [description, speaker, title]);
 
   useEffect(() => {
-    if (file !== null && file.size > fileMaxSize) {
+    if (fileRejections.length > 0) {
+      setMaxSizeError(true);
+    } else if (file !== null && file.size > fileMaxSize) {
       setMaxSizeError(true);
     } else {
       setMaxSizeError(false);
     }
-  }, [file]);
+  }, [file, fileRejections.length]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -91,6 +96,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const handleClickNext = (event: React.FormEvent) => {
     event.preventDefault();
     setRequiredTabOpen(false);
+  };
+
+  const handleResetFile = () => {
+    setFile(null);
+    if (urlImage !== "") {
+      URL.revokeObjectURL(urlImage);
+      setUrlImage("");
+    }
   };
 
   const handleCreateMeetup = async (event: React.FormEvent) => {
@@ -343,8 +356,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   />
                 </div>
                 {file !== null &&
-                imageTypesRegex.test(file.type) &&
-                file.size < fileMaxSize ? (
+                fileRejections.length === 0 &&
+                !maxSizeError ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
                       Загруженные изображения
@@ -357,20 +370,17 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
                           File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
-                          {file.type}
                         </p>
                       </div>
-                      <span
+                      <button
                         className="material-icons-outlined create-meetup-data-content-uploaded-image-icon-text-delete"
-                        onClick={() => {
-                          setFile(null);
-                        }}
+                        onClick={handleResetFile}
                       >
                         close
-                      </span>
+                      </button>
                     </div>
                     <img
-                      src={URL.createObjectURL(file)}
+                      src={urlImage}
                       alt="preview"
                       className="create-meetup-data-content-uploaded-image-pic"
                     />
@@ -387,6 +397,11 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       ),
                     })}
                   >
+                    <img
+                      src={DropZoneIcon}
+                      alt="Drop zone"
+                      className="create-meetup-data-content-dragndrop-icon"
+                    />
                     Перетащите изображение сюда или{" "}
                     <label
                       htmlFor="image-upload"
@@ -394,13 +409,16 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     >
                       загрузите
                     </label>
-                    &nbsp;(jpeg, png, jpg)
+                    &nbsp;(.jpeg, .png, .jpg)
                     <input
                       type="file"
                       id="image-upload"
                       accept=".png,.jpeg,.jpg"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setFile(e.target.files ? e.target.files[0] : null);
+                        if (e.target.files !== null) {
+                          setUrlImage(URL.createObjectURL(e.target.files[0]));
+                        }
                       }}
                       style={{ display: "none" }}
                     />
@@ -411,7 +429,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                           : "create-meetup-data-content-dragndrop__error-hidden"
                       }
                     >
-                      Максимальный размер файла: 1 Mb!
+                      Максимальный размер файла: 1 Mb <br />
+                      Разрешенные форматы: .png .jpg .jpeg
                     </p>
                   </div>
                 )}

@@ -21,9 +21,14 @@ interface IProps {
 }
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
-  const { authStore } = useContext(StoreContext);
-  const { meetupsStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
+
+  useEffect(() => {
+    return () => {
+      meetupsStore.resetErrorState();
+    };
+  }, []);
 
   useEffect(() => {
     if (themeId.id) {

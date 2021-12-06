@@ -78,14 +78,18 @@ export class MeetupsStore {
     }
   }
 
+  resetErrorState() {
+    this.errorState = false;
+  }
+
   get current(): IMeetup | undefined {
     return this.currentMeetup;
   }
 
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
-    if (this.meetups.length === 0) {
-      await this.getAllMeetups();
-    }
+    // if (this.meetups.length === 0) {
+    //   await this.getAllMeetups();
+    // }
     const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
     this.meetups.push(newMeetup);
   }

@@ -16,17 +16,18 @@ import "./ViewThemePage.scss";
 import Loader from "react-loader-spinner";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
-  const { authStore } = useContext(StoreContext);
-  const { meetupsStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
-  const [loading, setLoading] = useState(true);
 
-  console.log(meetupsStore.errorState);
+  useEffect(() => {
+    return () => {
+      meetupsStore.resetErrorState();
+    };
+  }, []);
 
   useEffect(() => {
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);
-      setLoading(false);
       meetupsStore.getMeetupById(themeId.id);
     }
   }, [meetupsStore, themeId.id]);
@@ -36,6 +37,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
+    //alert("Theme not found!");
     return <Navigate to={routes.login} />;
   }
 
