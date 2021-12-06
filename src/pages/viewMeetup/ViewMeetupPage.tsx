@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupPageTypes, navItems, routes } from "../../constants";
+import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -166,12 +166,24 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
-                  <button className="view-meetup-data-buttons-button-submit">
-                    Опубликовать
-                  </button>
+                  {(authStore.user.id === currentMeetup.authorId ||
+                    authStore.user.roles === UserRoles.CHIEF) && (
+                    <>
+                      <button className="view-meetup-data-buttons-button-edit">
+                        <span className="material-icons-round">
+                          drive_file_rename_outline
+                        </span>
+                      </button>
+                      <button className="view-meetup-data-buttons-button-delete">
+                        Удалить
+                      </button>
+                    </>
+                  )}
+                  {authStore.user.roles === UserRoles.CHIEF && (
+                    <button className="view-meetup-data-buttons-button-submit">
+                      Опубликовать
+                    </button>
+                  )}
                 </div>
               </div>
             ) : props.type === MeetupPageTypes.FUTURE ? (
@@ -183,9 +195,19 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
+                  {(authStore.user.id === currentMeetup.authorId ||
+                    authStore.user.roles === UserRoles.CHIEF) && (
+                    <>
+                      <button className="view-meetup-data-buttons-button-edit">
+                        <span className="material-icons-round">
+                          drive_file_rename_outline
+                        </span>
+                      </button>
+                      <button className="view-meetup-data-buttons-button-delete">
+                        Удалить
+                      </button>
+                    </>
+                  )}
                   <button className="view-meetup-data-buttons-button-submit">
                     Пойду
                   </button>
@@ -199,11 +221,19 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 >
                   Назад
                 </LinkComponent>
-                <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
-                </div>
+                {(authStore.user.id === currentMeetup.authorId ||
+                  authStore.user.roles === UserRoles.CHIEF) && (
+                  <div className="view-meetup-data-buttons-right">
+                    <button className="view-meetup-data-buttons-button-edit">
+                      <span className="material-icons-round">
+                        drive_file_rename_outline
+                      </span>
+                    </button>
+                    <button className="view-meetup-data-buttons-button-delete">
+                      Удалить
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

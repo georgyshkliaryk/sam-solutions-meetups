@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
@@ -164,12 +164,17 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 Назад
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
-                <button className="view-theme-data-buttons-button-delete">
-                  Удалить
-                </button>
-                <button className="view-theme-data-buttons-button-submit">
-                  Одобрить тему
-                </button>
+                {(authStore.user.id === currentMeetup.authorId ||
+                  authStore.user.roles === UserRoles.CHIEF) && (
+                  <button className="view-theme-data-buttons-button-delete">
+                    Удалить
+                  </button>
+                )}
+                {authStore.user.roles === UserRoles.CHIEF && (
+                  <button className="view-theme-data-buttons-button-submit">
+                    Одобрить тему
+                  </button>
+                )}
               </div>
             </div>
           </div>
