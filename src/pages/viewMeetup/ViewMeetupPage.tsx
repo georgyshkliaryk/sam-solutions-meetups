@@ -28,7 +28,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     return () => {
       meetupsStore.resetErrorState();
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (themeId.id) {

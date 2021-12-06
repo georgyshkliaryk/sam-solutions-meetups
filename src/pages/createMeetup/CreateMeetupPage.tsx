@@ -39,15 +39,18 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [file, setFile] = useState<File | null>(null);
   const [urlImage, setUrlImage] = useState("");
   const [maxSizeError, setMaxSizeError] = useState(false);
-  const { getRootProps, isDragActive, fileRejections } = useDropzone({
-    accept: "image/jpeg, image/png, image/jpg",
-    onDrop: (acceptedFiles: File[]) => {
-      setFile(acceptedFiles[0]);
-      URL.revokeObjectURL(urlImage);
-      setUrlImage(URL.createObjectURL(acceptedFiles[0]));
-    },
-    maxFiles: 1,
-  });
+  const { getRootProps, isDragActive, fileRejections, isDragReject } =
+    useDropzone({
+      accept: "image/jpeg, image/png, image/jpg",
+      onDrop: (acceptedFiles: File[]) => {
+        if (!isDragReject) {
+          setFile(acceptedFiles[0]);
+          URL.revokeObjectURL(urlImage);
+          setUrlImage(URL.createObjectURL(acceptedFiles[0]));
+        }
+      },
+      maxFiles: 1,
+    });
 
   useEffect(() => {
     if (
@@ -175,7 +178,19 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
             }}
           />
           <label className="create-meetup-nav-item" htmlFor="requiredTab">
-            <span className="create-meetup-nav-item__icon">1</span>
+            <span
+              className={classNames("create-meetup-nav-item__icon", {
+                "create-meetup-nav-item__icon-success": requiredFilled,
+              })}
+            >
+              {requiredTabOpen ? (
+                "1"
+              ) : (
+                <span className="material-icons-outlined create-meetup-nav-item__icon-success-tick">
+                  done
+                </span>
+              )}
+            </span>
             Обязательные поля
           </label>
           <input
@@ -355,9 +370,9 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   />
                 </div>
                 {file !== null &&
-                fileRejections.length === 0 &&
-                imageTypesRegex.test(file.type) &&
-                !maxSizeError ? (
+                !isDragReject &&
+                !maxSizeError &&
+                imageTypesRegex.test(file.type) ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
                       Загруженные изображения
@@ -369,7 +384,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       <div className="create-meetup-data-content-uploaded-image-icon-text">
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
-                          File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
+                          Размер файла: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
+                          Mb{" "}
                         </p>
                       </div>
                       <button

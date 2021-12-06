@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -23,7 +23,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     return () => {
       meetupsStore.resetErrorState();
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (themeId.id) {

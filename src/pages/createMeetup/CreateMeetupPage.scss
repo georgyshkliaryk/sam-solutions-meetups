@@ -61,7 +61,7 @@
   width: 50%;
   padding: 1rem 0;
   color: #000;
-  border-bottom: 1px solid #bec2c9;
+  border-bottom: 2px solid #bec2c9;
 }
 
 .create-meetup-nav-radio:checked + .create-meetup-nav-item {
@@ -89,6 +89,14 @@
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 1rem;
+}
+
+.create-meetup-nav-item__icon-success {
+  background-color: #7ed321;
+}
+
+.create-meetup-nav-item__icon-success-tick {
+  font-size: 1rem;
 }
 
 .create-meetup__description {

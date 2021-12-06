@@ -78,7 +78,7 @@ export class MeetupsStore {
     }
   }
 
-  resetErrorState() {
+  resetErrorState(): void {
     this.errorState = false;
   }
 
