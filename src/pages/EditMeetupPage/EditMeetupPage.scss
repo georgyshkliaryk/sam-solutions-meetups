@@ -24,6 +24,13 @@
   text-align: left;
   margin-top: 2rem;
   padding: 2rem 2.5rem;
+  gap: 1rem;
+}
+
+.edit-meetup__image {
+  width: 100%;
+  border-radius: 0.313rem;
+  margin-bottom: 1rem;
 }
 
 .edit-meetup-data-item {
@@ -35,6 +42,80 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.edit-meetup-data-item-date-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-meetup-data-item__input,
+.edit-meetup-data-item__textarea {
+  @include input;
+}
+
+.edit-meetup-data-item__textarea {
+  resize: none;
+}
+
+.edit-meetup-data-item__label {
+  color: $color-secondary-text;
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.edit-meetup-data-buttons {
+  @include meetup-section;
+  padding: 1rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+.edit-meetup-data-buttons-button-back {
+  @include button-default;
+  padding: 0.688rem 1.375rem;
+  text-decoration: none;
+}
+
+.edit-meetup-data-buttons-button-back:hover {
+  @include button-default-hover;
+}
+
+.edit-meetup-data-buttons-button-back:active {
+  @include button-default-active;
+}
+
+.edit-meetup-data-buttons-button-submit {
+  @include button-primary;
+}
+
+.edit-meetup-data-buttons-button-submit:active {
+  @include button-primary-active;
+}
+
+.edit-meetup-data-buttons-button-submit:disabled {
+  @include button-primary-disabled;
+}
+
+.edit-meetup-data-buttons-right {
+  display: flex;
+}
+
+.edit-meetup-data-buttons-button-preview {
+  @include button-secondary;
+  padding: 0.688rem 1.375rem;
+  margin-right: 0.625rem;
+}
+
+.edit-meetup-data-buttons-button-preview:hover {
+  @include button-secondary-hover;
+}
+
+.edit-meetup-data-buttons-button-preview:active {
+  @include button-secondary-active;
 }
 
 @media (min-width: $mobile-width) {

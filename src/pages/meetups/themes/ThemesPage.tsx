@@ -3,8 +3,9 @@ import React, { ReactElement, useContext } from "react";
 import { Navigate } from "react-router";
 import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
-import { NumberDeclination, routes, UserRoles } from "../../../constants";
+import { NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
+import { checkUserRights } from "../../../helpers/checkUserRights";
 import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import "./ThemesPage.scss";
@@ -12,7 +13,9 @@ import "./ThemesPage.scss";
 const ThemesPage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
 
-  if (authStore.user === undefined) {
+  const currentUser = authStore.user;
+
+  if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
 
@@ -37,10 +40,7 @@ const ThemesPage: React.FC = observer((): ReactElement => {
           <ThemesCard
             key={card.id}
             item={card}
-            editRights={
-              authStore.user?.id === card.authorId ||
-              authStore.user?.roles === UserRoles.CHIEF
-            }
+            editRights={checkUserRights(currentUser, card)}
           />
         ))}
       </div>

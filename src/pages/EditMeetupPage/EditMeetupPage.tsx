@@ -10,6 +10,7 @@ import MainTitle from "../../components/main/MainTitle/MainTitle";
 import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
+import DefaultImage from "./assets/EditDefaultImage.svg";
 
 const EditMeetupPage: React.FC = (): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
@@ -29,37 +30,114 @@ const EditMeetupPage: React.FC = (): ReactElement => {
       </Header>
       <Main>
         <MainTitle>Редактирование митапа</MainTitle>
-        <form className="edit-meetup-data">
-          <div className="edit-meetup-data-item">
-            <label htmlFor="editTitle">Тема</label>
-            <input type="text" id="editTitle" />
-          </div>
-          <fieldset className="edit-meetup-data-item-date">
-            <div>
-              <label htmlFor="editStartDate">Начало</label>
-              <input type="date" id="editStartDate" />
+        <form>
+          <div className="edit-meetup-data">
+            <img
+              src={DefaultImage}
+              alt="Edit meetup"
+              className="edit-meetup__image"
+            />
+            <div className="edit-meetup-data-item">
+              <label
+                htmlFor="editTitle"
+                className="edit-meetup-data-item__label"
+              >
+                Тема
+              </label>
+              <input
+                type="text"
+                id="editTitle"
+                className="edit-meetup-data-item__input"
+              />
             </div>
-            <div>
-              <label htmlFor="">Окончание</label>
-              <input type="date" id="editEndDate" />
+            <fieldset className="edit-meetup-data-item-date">
+              <div className="edit-meetup-data-item-date-item">
+                <label
+                  htmlFor="editStartDate"
+                  className="edit-meetup-data-item__label"
+                >
+                  Начало
+                </label>
+                <input
+                  type="date"
+                  id="editStartDate"
+                  className="edit-meetup-data-item__input"
+                />
+              </div>
+              <div className="edit-meetup-data-item-date-item">
+                <label
+                  htmlFor="editEndDate"
+                  className="edit-meetup-data-item__label"
+                >
+                  Окончание
+                </label>
+                <input
+                  type="date"
+                  id="editEndDate"
+                  className="edit-meetup-data-item__input"
+                />
+              </div>
+            </fieldset>
+            <div className="edit-meetup-data-item">
+              <label
+                htmlFor="editPlace"
+                className="edit-meetup-data-item__label"
+              >
+                Место проведения
+              </label>
+              <input
+                type="text"
+                id="editPlace"
+                className="edit-meetup-data-item__input"
+              />
             </div>
-          </fieldset>
-          <div className="edit-meetup-data-item">
-            <label htmlFor="editPlace">Место проведения</label>
-            <input type="text" id="editPlace" />
+            <div className="edit-meetup-data-item">
+              <label
+                htmlFor="editSpeaker"
+                className="edit-meetup-data-item__label"
+              >
+                Спикер
+              </label>
+              <input
+                type="text"
+                id="editSpeaker"
+                className="edit-meetup-data-item__input"
+              />
+            </div>
+            <div className="edit-meetup-data-item">
+              <label
+                htmlFor="editDescription"
+                className="edit-meetup-data-item__label"
+              >
+                Описание
+              </label>
+              <textarea
+                name="editDescription"
+                id="editDescription"
+                className="edit-meetup-data-item__textarea"
+                cols={30}
+                rows={10}
+              ></textarea>
+            </div>
           </div>
-          <div className="edit-meetup-data-item">
-            <label htmlFor="editSpeaker">Спикер</label>
-            <input type="text" id="editSpeaker" />
-          </div>
-          <div className="edit-meetup-data-item">
-            <label htmlFor="editDescription">Описание</label>
-            <textarea
-              name="editDescription"
-              id="editDescription"
-              cols={30}
-              rows={10}
-            ></textarea>
+          <div className="edit-meetup-data-buttons">
+            <button className="edit-meetup-data-buttons-button-back">
+              Назад
+            </button>
+            <div className="edit-meetup-data-buttons-right">
+              <button
+                type="submit"
+                className="edit-meetup-data-buttons-button-preview"
+              >
+                Предпросмотр
+              </button>
+              <button
+                type="submit"
+                className="edit-meetup-data-buttons-button-submit"
+              >
+                Сохранить
+              </button>
+            </div>
           </div>
         </form>
       </Main>

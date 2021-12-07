@@ -80,7 +80,7 @@ const App: React.FC = (): ReactElement => {
           }
         />
         <Route
-          path={`${routes.meetups}/${routes.future}/:id/edit`}
+          path={`${routes.meetups}/${routes.past}/:id/edit`}
           element={
             <PrivateRoute>
               <EditMeetupPage />

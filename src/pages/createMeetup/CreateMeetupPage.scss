@@ -127,7 +127,9 @@
   margin-bottom: 1rem;
 }
 
-.create-meetup-data-content-input-wrapper-with-validation {
+.create-meetup-data-content-input-wrapper-validation {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.25rem;
 }
 

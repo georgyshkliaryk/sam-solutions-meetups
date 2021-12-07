@@ -4,10 +4,12 @@ import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
 import dateFormat from "dateformat";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
+import { routes } from "../../../../constants";
 
 interface IProps {
   item: IMeetup;
   editRights: boolean;
+  type: string;
 }
 
 const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
@@ -49,12 +51,17 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
             >
               <span className="material-icons-outlined">delete</span>
             </button>
-            <button
+            <LinkComponent
+              to={`${routes.meetups}/${props.type}/${props.item.id}/edit`}
               className="meetups-card-edit-button"
-              title="Редактировать митап"
             >
-              <span className="material-icons-outlined">edit</span>
-            </button>
+              <span
+                className="material-icons-outlined"
+                title="Редактировать митап"
+              >
+                edit
+              </span>
+            </LinkComponent>
           </div>
         )}
       </article>

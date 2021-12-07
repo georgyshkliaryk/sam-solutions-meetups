@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { NumberDeclination, UserRoles } from "../../../constants";
+import { NumberDeclination, routes, UserRoles } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
@@ -25,6 +25,7 @@ const PastPage: React.FC = observer((): ReactElement => {
               authStore.user?.id === card.authorId ||
               authStore.user?.roles === UserRoles.CHIEF
             }
+            type={routes.past}
           />
         ))}
       </div>

@@ -222,7 +222,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           {requiredTabOpen ? (
             <>
               <fieldset className="create-meetup-data-content">
-                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createTitle"
                     className="create-meetup-data-content__label"
@@ -243,7 +243,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   />
                   <ValidationForInput inputData={title} />
                 </div>
-                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createSpeaker"
                     className="create-meetup-data-content__label"
@@ -265,7 +265,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   <ValidationForInput inputData={speaker} />
                 </div>
 
-                <div className="create-meetup-data-content-input-wrapper create-meetup-data-content-input-wrapper-with-validation">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createDescription"
                     className="create-meetup-data-content__label"

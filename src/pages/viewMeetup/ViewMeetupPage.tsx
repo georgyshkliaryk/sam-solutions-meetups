@@ -15,6 +15,7 @@ import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
 import dateFormat from "dateformat";
 import Loader from "react-loader-spinner";
+import { checkUserRights } from "../../helpers/checkUserRights";
 
 interface IProps {
   type: string;
@@ -166,14 +167,16 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  {(authStore.user.id === currentMeetup.authorId ||
-                    authStore.user.roles === UserRoles.CHIEF) && (
+                  {checkUserRights(authStore.user, currentMeetup) && (
                     <>
-                      <button className="view-meetup-data-buttons-button-edit">
+                      <LinkComponent
+                        to={`${routes.meetups}/${routes.drafts}/${themeId.id}/edit`}
+                        className="view-meetup-data-buttons-button-edit"
+                      >
                         <span className="material-icons-round">
                           drive_file_rename_outline
                         </span>
-                      </button>
+                      </LinkComponent>
                       <button className="view-meetup-data-buttons-button-delete">
                         Удалить
                       </button>
@@ -195,14 +198,16 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  {(authStore.user.id === currentMeetup.authorId ||
-                    authStore.user.roles === UserRoles.CHIEF) && (
+                  {checkUserRights(authStore.user, currentMeetup) && (
                     <>
-                      <button className="view-meetup-data-buttons-button-edit">
+                      <LinkComponent
+                        to={`${routes.meetups}/${routes.future}/${themeId.id}/edit`}
+                        className="view-meetup-data-buttons-button-edit"
+                      >
                         <span className="material-icons-round">
                           drive_file_rename_outline
                         </span>
-                      </button>
+                      </LinkComponent>
                       <button className="view-meetup-data-buttons-button-delete">
                         Удалить
                       </button>
@@ -221,14 +226,16 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 >
                   Назад
                 </LinkComponent>
-                {(authStore.user.id === currentMeetup.authorId ||
-                  authStore.user.roles === UserRoles.CHIEF) && (
+                {checkUserRights(authStore.user, currentMeetup) && (
                   <div className="view-meetup-data-buttons-right">
-                    <button className="view-meetup-data-buttons-button-edit">
+                    <LinkComponent
+                      to={`${routes.meetups}/${routes.past}/${themeId.id}/edit`}
+                      className="view-meetup-data-buttons-button-edit"
+                    >
                       <span className="material-icons-round">
                         drive_file_rename_outline
                       </span>
-                    </button>
+                    </LinkComponent>
                     <button className="view-meetup-data-buttons-button-delete">
                       Удалить
                     </button>

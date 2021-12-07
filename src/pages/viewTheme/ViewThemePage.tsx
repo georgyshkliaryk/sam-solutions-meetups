@@ -14,6 +14,7 @@ import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
 import Loader from "react-loader-spinner";
+import { checkUserRights } from "../../helpers/checkUserRights";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
@@ -164,8 +165,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 Назад
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
-                {(authStore.user.id === currentMeetup.authorId ||
-                  authStore.user.roles === UserRoles.CHIEF) && (
+                {checkUserRights(authStore.user, currentMeetup) && (
                   <button className="view-theme-data-buttons-button-delete">
                     Удалить
                   </button>
