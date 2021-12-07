@@ -28,6 +28,14 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async editMeetup(meetupData: any) {
+    const response = await axios.put(apiUrls.meetups, meetupData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
   async login(loginData: ILoginData): Promise<ILoginResponse> {
     const response = await axios.post(apiUrls.login, loginData);
     if (response.status !== 200) {

@@ -1,5 +1,5 @@
-import React, { ReactElement, useContext } from "react";
-import { Navigate } from "react-router";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
@@ -11,13 +11,84 @@ import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
+import Loader from "react-loader-spinner";
+import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 
 const EditMeetupPage: React.FC = (): ReactElement => {
+  const networkRepository = new NetworkRepository();
   const { authStore, meetupsStore } = useContext(StoreContext);
+  const meetupId = useParams();
+
+  useEffect(() => {
+    return () => {
+      meetupsStore.resetErrorState();
+    };
+  });
+
+  useEffect(() => {
+    if (meetupId.id) {
+      meetupsStore.getMeetupById(meetupId.id);
+    }
+  }, [meetupsStore, meetupId.id]);
+
+  const currentMeetup = meetupsStore.current;
+
+  const [title, setTitle] = useState(currentMeetup?.title);
+  const [description, setDescription] = useState(currentMeetup?.description);
+  const [place, setPlace] = useState(currentMeetup?.place);
+
+  if (meetupsStore.errorState === true) {
+    //alert("Meetup not found!");
+    return <Navigate to={routes.login} />;
+  }
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
   }
+
+  if (currentMeetup === undefined) {
+    return (
+      <div className="edit-meetup">
+        <Header className="edit-meetup__header">
+          <LinkComponent to={routes.meetups}>
+            <LogoSam className="edit-meetup__header-logo" />
+          </LinkComponent>
+          <HeaderNavbar items={navItems.header} />
+          <HeaderProfile user={authStore.user} />
+        </Header>
+        <Main>
+          <MainTitle>Загрузка...</MainTitle>
+          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+        </Main>
+      </div>
+    );
+  }
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  const handlePlaceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPlace(event.target.value);
+  };
+
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDescription(event.target.value);
+  };
+
+  const handleEditMeetup = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const editedData = {
+      id: meetupId.id,
+      subject: title,
+      excerpt: description,
+      place,
+    };
+
+    await networkRepository.editMeetup(editedData);
+  };
 
   return (
     <div className="edit-meetup">
@@ -30,7 +101,7 @@ const EditMeetupPage: React.FC = (): ReactElement => {
       </Header>
       <Main>
         <MainTitle>Редактирование митапа</MainTitle>
-        <form>
+        <form onSubmit={handleEditMeetup}>
           <div className="edit-meetup-data">
             <img
               src={DefaultImage}
@@ -48,6 +119,8 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 type="text"
                 id="editTitle"
                 className="edit-meetup-data-item__input"
+                defaultValue={currentMeetup.title}
+                onChange={handleTitleChange}
               />
             </div>
             <fieldset className="edit-meetup-data-item-date">
@@ -89,6 +162,8 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 type="text"
                 id="editPlace"
                 className="edit-meetup-data-item__input"
+                defaultValue={currentMeetup.place}
+                onChange={handlePlaceChange}
               />
             </div>
             <div className="edit-meetup-data-item">
@@ -117,6 +192,8 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 className="edit-meetup-data-item__textarea"
                 cols={30}
                 rows={10}
+                defaultValue={currentMeetup.description}
+                onChange={handleDescriptionChange}
               ></textarea>
             </div>
           </div>

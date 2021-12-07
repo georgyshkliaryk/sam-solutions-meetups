@@ -23,7 +23,7 @@ interface IProps {
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
-  const themeId = useParams();
+  const meetupId = useParams();
 
   useEffect(() => {
     return () => {
@@ -32,10 +32,10 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   });
 
   useEffect(() => {
-    if (themeId.id) {
-      meetupsStore.getMeetupById(themeId.id);
+    if (meetupId.id) {
+      meetupsStore.getMeetupById(meetupId.id);
     }
-  }, [meetupsStore, themeId.id]);
+  }, [meetupsStore, meetupId.id]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -153,7 +153,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           </div>
           <div className="view-meetup-data-item">
             <p className="view-meetup-data-label">Описание</p>
-            <div className="view-meetup-data-content">
+            <div className="view-meetup-data-content view-meetup-data-content__description">
               {currentMeetup.description}
             </div>
           </div>
@@ -170,7 +170,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   {checkUserRights(authStore.user, currentMeetup) && (
                     <>
                       <LinkComponent
-                        to={`${routes.meetups}/${routes.drafts}/${themeId.id}/edit`}
+                        to={`${routes.meetups}/${routes.drafts}/${meetupId.id}/edit`}
                         className="view-meetup-data-buttons-button-edit"
                       >
                         <span className="material-icons-round">
@@ -201,7 +201,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   {checkUserRights(authStore.user, currentMeetup) && (
                     <>
                       <LinkComponent
-                        to={`${routes.meetups}/${routes.future}/${themeId.id}/edit`}
+                        to={`${routes.meetups}/${routes.future}/${meetupId.id}/edit`}
                         className="view-meetup-data-buttons-button-edit"
                       >
                         <span className="material-icons-round">
@@ -229,7 +229,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 {checkUserRights(authStore.user, currentMeetup) && (
                   <div className="view-meetup-data-buttons-right">
                     <LinkComponent
-                      to={`${routes.meetups}/${routes.past}/${themeId.id}/edit`}
+                      to={`${routes.meetups}/${routes.past}/${meetupId.id}/edit`}
                       className="view-meetup-data-buttons-button-edit"
                     >
                       <span className="material-icons-round">
