@@ -349,7 +349,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateEnd"
                       className="create-meetup-data-content__label"
                     >
-                      Конец
+                      Окончание
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}

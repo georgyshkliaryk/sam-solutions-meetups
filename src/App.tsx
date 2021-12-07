@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewThemePage from "./pages/viewTheme/ViewThemePage";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import CreateMeetupPage from "./pages/createMeetup/CreateMeetupPage";
+import EditMeetupPage from "./pages/EditMeetupPage/EditMeetupPage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -59,6 +60,30 @@ const App: React.FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <CreateMeetupPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.drafts}/:id/edit`}
+          element={
+            <PrivateRoute>
+              <EditMeetupPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.future}/:id/edit`}
+          element={
+            <PrivateRoute>
+              <EditMeetupPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${routes.meetups}/${routes.future}/:id/edit`}
+          element={
+            <PrivateRoute>
+              <EditMeetupPage />
             </PrivateRoute>
           }
         />

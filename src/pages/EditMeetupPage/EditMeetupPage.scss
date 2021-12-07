@@ -1,0 +1,44 @@
+@import "../../constants.scss";
+
+.edit-meetup {
+  height: 100%;
+  overflow: auto;
+}
+
+.edit-meetup__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.edit-meetup__header-logo {
+  width: 8rem;
+  text-align: left;
+}
+
+.edit-meetup-data {
+  @include meetup-section;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 2rem;
+  padding: 2rem 2.5rem;
+}
+
+.edit-meetup-data-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-meetup-data-item-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: $mobile-width) {
+  .edit-meetup__header-logo {
+    width: 30rem;
+  }
+}
