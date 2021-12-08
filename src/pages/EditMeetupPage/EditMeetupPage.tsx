@@ -13,11 +13,13 @@ import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
 import Loader from "react-loader-spinner";
 import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
+import DatePicker from "react-datepicker";
 
 const EditMeetupPage: React.FC = (): ReactElement => {
   const networkRepository = new NetworkRepository();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
+  console.log(meetupId.id);
 
   useEffect(() => {
     return () => {
@@ -26,7 +28,7 @@ const EditMeetupPage: React.FC = (): ReactElement => {
   });
 
   useEffect(() => {
-    if (meetupId.id) {
+    if (meetupId.id !== undefined) {
       meetupsStore.getMeetupById(meetupId.id);
     }
   }, [meetupsStore, meetupId.id]);
@@ -36,13 +38,20 @@ const EditMeetupPage: React.FC = (): ReactElement => {
   const [title, setTitle] = useState(currentMeetup?.title);
   const [description, setDescription] = useState(currentMeetup?.description);
   const [place, setPlace] = useState(currentMeetup?.place);
+  const [speaker, setSpeaker] = useState(currentMeetup?.speakers[0].name);
+  const [startDate, setStartDate] = useState<Date | null>(
+    new Date(currentMeetup?.start ?? "")
+  );
+  const [finishDate, setFinishDate] = useState<Date | null>(
+    new Date(currentMeetup?.finish ?? "")
+  );
 
-  if (meetupsStore.errorState === true) {
-    //alert("Meetup not found!");
+  if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
   }
 
-  if (authStore.user === undefined) {
+  if (meetupsStore.errorState === true) {
+    //alert("Meetup not found!");
     return <Navigate to={routes.login} />;
   }
 
@@ -131,9 +140,28 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 >
                   Начало
                 </label>
-                <input
-                  type="date"
+                <DatePicker
                   id="editStartDate"
+                  onFocus={(e) => e.target.blur()}
+                  isClearable
+                  selected={startDate}
+                  onChange={(date: Date) => {
+                    setStartDate(date);
+                    setFinishDate(null);
+                  }}
+                  showTimeSelect
+                  minDate={new Date()}
+                  minTime={
+                    startDate !== null &&
+                    new Date().getDate() === startDate.getDate()
+                      ? new Date(
+                          new Date().setMinutes(new Date().getMinutes() + 30)
+                        )
+                      : new Date(new Date().setHours(0, 30))
+                  }
+                  maxTime={new Date(new Date().setHours(23, 59))}
+                  dateFormat="dd.MM.yyyy HH:mm"
+                  timeFormat="HH:mm"
                   className="edit-meetup-data-item__input"
                 />
               </div>
@@ -144,9 +172,24 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 >
                   Окончание
                 </label>
-                <input
-                  type="date"
+                <DatePicker
                   id="editEndDate"
+                  onFocus={(e) => e.target.blur()}
+                  disabled={startDate === null}
+                  selected={finishDate}
+                  onChange={(date: Date) => setFinishDate(date)}
+                  minDate={startDate}
+                  minTime={
+                    startDate !== null &&
+                    finishDate !== null &&
+                    finishDate.getDate() === startDate.getDate()
+                      ? startDate
+                      : new Date(new Date().setHours(0, 0))
+                  }
+                  maxTime={new Date(new Date().setHours(23, 59))}
+                  showTimeSelect
+                  dateFormat="dd.MM.yyyy HH:mm"
+                  timeFormat="HH:mm"
                   className="edit-meetup-data-item__input"
                 />
               </div>
@@ -177,6 +220,7 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 type="text"
                 id="editSpeaker"
                 className="edit-meetup-data-item__input"
+                defaultValue={speaker}
               />
             </div>
             <div className="edit-meetup-data-item">
@@ -198,7 +242,10 @@ const EditMeetupPage: React.FC = (): ReactElement => {
             </div>
           </div>
           <div className="edit-meetup-data-buttons">
-            <button className="edit-meetup-data-buttons-button-back">
+            <button
+              className="edit-meetup-data-buttons-button-back"
+              // onClick={() => navigate(-1)}
+            >
               Назад
             </button>
             <div className="edit-meetup-data-buttons-right">
