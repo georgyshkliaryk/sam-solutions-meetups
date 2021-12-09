@@ -19,14 +19,13 @@ import {
 } from "../../repositories/interfaces/IMeetupsRepository";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
   const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
-
-  console.log(meetup?.start);
 
   useEffect(() => {
     return () => {
@@ -36,7 +35,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
 
   useEffect(() => {
     async function getMeetup() {
-      setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+      if (meetupId.id !== undefined) {
+        setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+      }
     }
     if (meetupId.id) {
       meetupsStore.getParticipantsList(meetupId.id);
@@ -48,12 +49,8 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   const [description, setDescription] = useState(meetup?.description);
   const [place, setPlace] = useState(meetup?.place);
   const [speaker, setSpeaker] = useState(meetup?.speakers[0].name);
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date(meetup?.start || 0)
-  );
-  const [finishDate, setFinishDate] = useState<Date | null>(
-    new Date(meetup?.finish || 0)
-  );
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [finishDate, setFinishDate] = useState<Date | null>(null);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -179,16 +176,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     setFinishDate(null);
                   }}
                   showTimeSelect
-                  minDate={new Date()}
-                  minTime={
-                    startDate !== null &&
-                    new Date().getDate() === startDate.getDate()
-                      ? new Date(
-                          new Date().setMinutes(new Date().getMinutes() + 30)
-                        )
-                      : new Date(new Date().setHours(0, 30))
-                  }
-                  maxTime={new Date(new Date().setHours(23, 59))}
                   dateFormat="dd.MM.yyyy HH:mm"
                   timeFormat="HH:mm"
                   className="edit-meetup-data-item__input"
@@ -208,15 +195,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   disabled={startDate === null}
                   selected={finishDate}
                   onChange={(date: Date) => setFinishDate(date)}
-                  minDate={startDate}
-                  minTime={
-                    startDate !== null &&
-                    finishDate !== null &&
-                    finishDate.getDate() === startDate.getDate()
-                      ? startDate
-                      : new Date(new Date().setHours(0, 0))
-                  }
-                  maxTime={new Date(new Date().setHours(23, 59))}
                   showTimeSelect
                   dateFormat="dd.MM.yyyy HH:mm"
                   timeFormat="HH:mm"

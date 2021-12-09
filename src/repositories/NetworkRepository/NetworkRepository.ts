@@ -16,6 +16,11 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async getMeetupById(id: string): Promise<IMeetupFromServer> {
+    const response = await axios.get(`${apiUrls.meetups}/${id}`);
+    return await response.data;
+  }
+
   async getParticipantsOfMeetup(id: string): Promise<IParticipant[]> {
     const response = await axios.get(`${apiUrls.meetups}/${id}/participants`);
     return await response.data;

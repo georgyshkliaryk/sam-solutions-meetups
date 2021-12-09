@@ -30,7 +30,9 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
 
   useEffect(() => {
     async function getMeetup() {
-      setMeetup(await meetupsStore.getMeetupById(themeId.id));
+      if (themeId.id !== undefined) {
+        setMeetup(await meetupsStore.getMeetupById(themeId.id));
+      }
     }
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);

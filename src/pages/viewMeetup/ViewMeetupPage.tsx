@@ -35,7 +35,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
 
   useEffect(() => {
     async function getMeetup() {
-      setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+      if (meetupId.id !== undefined) {
+        setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+      }
     }
     if (meetupId.id) {
       meetupsStore.getParticipantsList(meetupId.id);

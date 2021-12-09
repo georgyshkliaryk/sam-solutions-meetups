@@ -18,7 +18,6 @@ export class MeetupsStore {
   }
 
   async getAllMeetups(): Promise<void> {
-    this.meetups = [];
     this.meetups = await this.meetupsRepository.getAllMeetups();
   }
 
@@ -65,17 +64,15 @@ export class MeetupsStore {
     this.getParticipantsById(id);
   }
 
-  async getMeetupById(id: string | undefined): Promise<IMeetup | undefined> {
+  async getMeetupById(id: string): Promise<IMeetup | undefined> {
     this.errorState = false;
-    if (this.meetups.length === 0) {
-      await this.getAllMeetups();
-    }
-    if (this.meetups.find((m: IMeetup) => (m.id === id) === undefined)) {
-      this.errorState = true;
-    } else {
+    try {
+      const response = await this.meetupsRepository.getMeetupById(id);
       this.errorState = false;
+      return response;
+    } catch {
+      this.errorState = true;
     }
-    return this.meetups.find((m: IMeetup) => m.id === id);
   }
 
   resetErrorState(): void {

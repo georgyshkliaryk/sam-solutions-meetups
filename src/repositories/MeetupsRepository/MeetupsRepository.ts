@@ -22,6 +22,11 @@ export class MeetupsRepository implements IMeetupsRepository {
     return meetupsFromServer.map(this.parseMeetup);
   }
 
+  async getMeetupById(id: string): Promise<IMeetup> {
+    const meetupFromServer = await this.networkRepository.getMeetupById(id);
+    return this.parseMeetup(meetupFromServer);
+  }
+
   async createMeetup(meetupData: INewMeetup): Promise<IMeetup> {
     const newMeetupForServer = this.parseMeetupForServer(meetupData);
     const response = await this.networkRepository.createMeetup(
