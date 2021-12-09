@@ -5,7 +5,7 @@ import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
 import { NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
-import { checkUserRights } from "../../../helpers/checkUserRights";
+import { hasUserRights } from "../../../helpers/hasUserRights";
 import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import "./ThemesPage.scss";
@@ -40,7 +40,7 @@ const ThemesPage: React.FC = observer((): ReactElement => {
           <ThemesCard
             key={card.id}
             item={card}
-            editRights={checkUserRights(currentUser, card)}
+            editRights={hasUserRights(currentUser, card)}
           />
         ))}
       </div>

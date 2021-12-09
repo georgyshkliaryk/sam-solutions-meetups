@@ -1,14 +1,22 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { NumberDeclination, routes, UserRoles } from "../../../constants";
+import { NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
+import { hasUserRights } from "../../../helpers/hasUserRights";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import "./PastPage.scss";
 
 const PastPage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
+  const currentUser = authStore.user;
+
+  if (currentUser === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
   return (
     <section className="past-page">
       <div className="past-page-meetups-quantity">
@@ -21,10 +29,7 @@ const PastPage: React.FC = observer((): ReactElement => {
           <MeetupsCard
             key={card.id}
             item={card}
-            editRights={
-              authStore.user?.id === card.authorId ||
-              authStore.user?.roles === UserRoles.CHIEF
-            }
+            editRights={hasUserRights(currentUser, card)}
             type={routes.past}
           />
         ))}

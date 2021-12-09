@@ -18,7 +18,7 @@ import { StoreContext } from "../../context/StoreContext";
 import { observer } from "mobx-react-lite";
 
 const MeetupsPage: React.FC = observer((): ReactElement => {
-  const { authStore, meetupsStore } = useContext(StoreContext);
+  const { authStore } = useContext(StoreContext);
 
   if (authStore.user !== undefined) {
     return (

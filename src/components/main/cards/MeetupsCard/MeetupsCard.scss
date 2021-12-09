@@ -3,11 +3,10 @@
 .meetups-card {
   @include card;
   padding: 1rem 1.5rem;
-  cursor: pointer;
   position: relative;
 }
 
-.meetups-card-wrapper:hover {
+.meetups-card:hover {
   box-shadow: 0 0 0 0.125rem $color-primary1;
 }
 
@@ -35,6 +34,7 @@
   text-align: left;
   text-decoration: none;
   color: #000;
+  cursor: pointer;
 }
 
 .meetups-card-main__title {

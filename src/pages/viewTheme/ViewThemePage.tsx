@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -14,22 +14,27 @@ import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
 import Loader from "react-loader-spinner";
-import { checkUserRights } from "../../helpers/checkUserRights";
+import { hasUserRights } from "../../helpers/hasUserRights";
+import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
+  const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
 
   useEffect(() => {
     return () => {
       meetupsStore.resetErrorState();
     };
-  });
+  }, []);
 
   useEffect(() => {
+    async function getMeetup() {
+      setMeetup(await meetupsStore.getMeetupById(themeId.id));
+    }
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);
-      meetupsStore.getMeetupById(themeId.id);
+      getMeetup();
     }
   }, [meetupsStore, themeId.id]);
 
@@ -42,9 +47,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     return <Navigate to={routes.login} />;
   }
 
-  const currentMeetup = meetupsStore.current;
-
-  if (currentMeetup === undefined) {
+  if (meetup === undefined) {
     return (
       <div className="view-meetup">
         <Header className="view-meetup__header">
@@ -77,30 +80,28 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Название</p>
             <p className="view-theme-data-content view-theme-data-content__title">
-              {currentMeetup.title}
+              {meetup.title}
             </p>
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Автор</p>
             <div className="view-theme-data-content">
-              {currentMeetup && (
+              {meetup && (
                 <Avatar
                   className="view-theme-data-content-avatar"
                   user={{
-                    name: currentMeetup.authorName,
-                    surname: currentMeetup.authorSurname,
+                    name: meetup.authorName,
+                    surname: meetup.authorSurname,
                   }}
                 />
               )}
-              <span>
-                {`${currentMeetup.authorName} ${currentMeetup.authorSurname}`}
-              </span>
+              <span>{`${meetup.authorName} ${meetup.authorSurname}`}</span>
             </div>
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Описание</p>
             <div className="view-theme-data-content view-theme-data-content__description">
-              {currentMeetup.description}
+              {meetup.description}
             </div>
           </div>
           <div className="view-theme-data-item">
@@ -165,7 +166,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 Назад
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
-                {checkUserRights(authStore.user, currentMeetup) && (
+                {hasUserRights(authStore.user, meetup) && (
                   <button className="view-theme-data-buttons-button-delete">
                     Удалить
                   </button>

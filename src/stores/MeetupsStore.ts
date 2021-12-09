@@ -10,7 +10,6 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 
 export class MeetupsStore {
   meetups: IMeetup[] = [];
-  currentMeetup: IMeetup | undefined = undefined;
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
 
@@ -66,25 +65,21 @@ export class MeetupsStore {
     this.getParticipantsById(id);
   }
 
-  async getMeetupById(id: string): Promise<void> {
+  async getMeetupById(id: string | undefined): Promise<IMeetup | undefined> {
     this.errorState = false;
     if (this.meetups.length === 0) {
       await this.getAllMeetups();
     }
-    this.currentMeetup = this.meetups.find((m: IMeetup) => m.id === id);
-    if (this.currentMeetup === undefined) {
+    if (this.meetups.find((m: IMeetup) => (m.id === id) === undefined)) {
       this.errorState = true;
     } else {
       this.errorState = false;
     }
+    return this.meetups.find((m: IMeetup) => m.id === id);
   }
 
   resetErrorState(): void {
     this.errorState = false;
-  }
-
-  get current(): IMeetup | undefined {
-    return this.currentMeetup;
   }
 
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
@@ -94,6 +89,5 @@ export class MeetupsStore {
 
   async editMeetup(meetupData: IEditedMeetup): Promise<void> {
     await this.meetupsRepository.editMeetup(meetupData);
-    this.getAllMeetups();
   }
 }
