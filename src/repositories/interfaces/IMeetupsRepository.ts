@@ -34,6 +34,16 @@ export interface INewMeetup {
   image?: string;
 }
 
+export interface IEditedMeetup {
+  id: string;
+  start?: string | null;
+  finish?: string | null;
+  title?: string;
+  description?: string;
+  place?: string;
+  image?: string;
+}
+
 export interface IMeetupsRepository {
   getAllMeetups: (allMeetups: IMeetupFromServer[]) => Promise<IMeetup[]>;
   createMeetup: (meetupData: INewMeetup) => Promise<IMeetup>;

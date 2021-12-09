@@ -1,5 +1,6 @@
 import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
 import {
+  IEditedMeetup,
   IMeetup,
   INewMeetup,
 } from "./../repositories/interfaces/IMeetupsRepository";
@@ -89,5 +90,10 @@ export class MeetupsStore {
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
     const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
     this.meetups.push(newMeetup);
+  }
+
+  async editMeetup(meetupData: IEditedMeetup): Promise<void> {
+    await this.meetupsRepository.editMeetup(meetupData);
+    this.getAllMeetups();
   }
 }

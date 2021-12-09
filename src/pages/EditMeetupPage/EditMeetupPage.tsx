@@ -12,14 +12,16 @@ import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
 import Loader from "react-loader-spinner";
-import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 import DatePicker from "react-datepicker";
+import { IEditedMeetup } from "../../repositories/interfaces/IMeetupsRepository";
+import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-const EditMeetupPage: React.FC = (): ReactElement => {
-  const networkRepository = new NetworkRepository();
+const EditMeetupPage: React.FC = observer((): ReactElement => {
+  const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
-  console.log(meetupId.id);
+  //console.log(meetupId.id);
 
   useEffect(() => {
     return () => {
@@ -28,7 +30,7 @@ const EditMeetupPage: React.FC = (): ReactElement => {
   });
 
   useEffect(() => {
-    if (meetupId.id !== undefined) {
+    if (meetupId.id) {
       meetupsStore.getMeetupById(meetupId.id);
     }
   }, [meetupsStore, meetupId.id]);
@@ -89,14 +91,34 @@ const EditMeetupPage: React.FC = (): ReactElement => {
 
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
-    const editedData = {
-      id: meetupId.id,
-      subject: title,
-      excerpt: description,
-      place,
-    };
+    if (meetupId.id !== undefined) {
+      const editedData: IEditedMeetup = {
+        id: meetupId.id,
+        place,
+      };
 
-    await networkRepository.editMeetup(editedData);
+      if (title !== undefined) {
+        editedData.title = title;
+      }
+      if (description !== undefined) {
+        editedData.description = description;
+      }
+
+      if (startDate !== null) {
+        editedData.start = startDate.toISOString();
+      } else {
+        editedData.start = null;
+      }
+      if (finishDate !== null) {
+        editedData.finish = finishDate.toISOString();
+      } else {
+        editedData.finish = null;
+      }
+
+      await meetupsStore.editMeetup(editedData);
+      navigate(routes.meetups);
+      console.log(editedData);
+    }
   };
 
   return (
@@ -174,6 +196,7 @@ const EditMeetupPage: React.FC = (): ReactElement => {
                 </label>
                 <DatePicker
                   id="editEndDate"
+                  isClearable
                   onFocus={(e) => e.target.blur()}
                   disabled={startDate === null}
                   selected={finishDate}
@@ -267,6 +290,6 @@ const EditMeetupPage: React.FC = (): ReactElement => {
       </Main>
     </div>
   );
-};
+});
 
 export default EditMeetupPage;

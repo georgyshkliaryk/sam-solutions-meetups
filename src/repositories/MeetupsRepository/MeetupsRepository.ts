@@ -1,9 +1,11 @@
 import {
+  IEditedMeetup,
   IMeetup,
   IMeetupsRepository,
   INewMeetup,
 } from "./../interfaces/IMeetupsRepository";
 import {
+  IEditedMeetupToServer,
   IMeetupFromServer,
   IMeetupToServer,
   IParticipant,
@@ -26,6 +28,11 @@ export class MeetupsRepository implements IMeetupsRepository {
       newMeetupForServer
     );
     return this.parseMeetup(response);
+  }
+
+  async editMeetup(meetupData: IEditedMeetup): Promise<void> {
+    const editedMeetup = this.parseEditedMeetupForServer(meetupData);
+    await this.networkRepository.editMeetup(editedMeetup);
   }
 
   async getParticipantsById(id: string): Promise<IParticipant[]> {
@@ -60,6 +67,19 @@ export class MeetupsRepository implements IMeetupsRepository {
         surname: meetup.authorSurname,
       },
       speakers: meetup.speakers,
+      start: meetup.start,
+      finish: meetup.finish,
+      place: meetup.place,
+    };
+  }
+
+  private parseEditedMeetupForServer(
+    meetup: IEditedMeetup
+  ): IEditedMeetupToServer {
+    return {
+      id: meetup.id,
+      subject: meetup.title,
+      excerpt: meetup.description,
       start: meetup.start,
       finish: meetup.finish,
       place: meetup.place,

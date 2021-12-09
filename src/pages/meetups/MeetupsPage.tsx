@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
@@ -18,7 +18,8 @@ import { StoreContext } from "../../context/StoreContext";
 import { observer } from "mobx-react-lite";
 
 const MeetupsPage: React.FC = observer((): ReactElement => {
-  const { authStore } = useContext(StoreContext);
+  const { authStore, meetupsStore } = useContext(StoreContext);
+
   if (authStore.user !== undefined) {
     return (
       <div className="meetups">
