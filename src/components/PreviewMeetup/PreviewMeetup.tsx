@@ -101,9 +101,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
             {props.description}
           </div>
         </div>
-        <div className="preview-meetup-data-item preview-theme-data-item-last">
-          buttons
-        </div>
+        {props.children}
       </article>
     </>
   );

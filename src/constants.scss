@@ -59,6 +59,13 @@ $mobile-width: 950px;
   cursor: not-allowed;
 }
 
+@mixin button-secondary-disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+  color: rgba(128, 101, 236, 0.4);
+  border-color: rgba(128, 101, 236, 0.4);
+}
+
 @mixin button-secondary {
   text-align: center;
   color: $color-primary1;

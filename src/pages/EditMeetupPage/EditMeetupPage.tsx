@@ -278,7 +278,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                 </button>
                 <div className="edit-meetup-data-buttons-right">
                   <button
-                    type="submit"
+                    disabled={
+                      title?.trim() === "" || description?.trim() === ""
+                    }
                     className="edit-meetup-data-buttons-button-preview"
                     onClick={() => setPreviewOpen(true)}
                   >
@@ -303,9 +305,27 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
             description={description ?? meetup.description}
             start={startDate?.toISOString() ?? meetup.start}
             finish={finishDate?.toISOString() ?? meetup.finish}
-            place={place ?? meetup.finish}
+            place={place ?? meetup.place}
             image={meetup.image}
-          />
+          >
+            <div className="edit-meetup-data-buttons">
+              <button
+                className="edit-meetup-data-buttons-button-back"
+                onClick={() => setPreviewOpen(false)}
+              >
+                Назад
+              </button>
+              <div className="edit-meetup-data-buttons-right">
+                <button
+                  disabled={title?.trim() === "" || description?.trim() === ""}
+                  type="submit"
+                  className="edit-meetup-data-buttons-button-submit"
+                >
+                  Опубликовать
+                </button>
+              </div>
+            </div>
+          </PreviewMeetup>
         )}
       </Main>
     </div>

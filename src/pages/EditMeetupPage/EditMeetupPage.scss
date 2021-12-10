@@ -133,6 +133,10 @@
   @include button-secondary-active;
 }
 
+.edit-meetup-data-buttons-button-preview:disabled {
+  @include button-secondary-disabled;
+}
+
 @media (min-width: $mobile-width) {
   .edit-meetup__header-logo {
     width: 30rem;
