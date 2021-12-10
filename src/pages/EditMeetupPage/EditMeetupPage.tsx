@@ -21,12 +21,14 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import classNames from "classnames";
+import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
   const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -135,158 +137,176 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Редактирование митапа</MainTitle>
-        <form onSubmit={handleEditMeetup}>
-          <div className="edit-meetup-data">
-            <img
-              src={DefaultImage}
-              alt="Edit meetup"
-              className="edit-meetup__image"
-            />
-            <div className="edit-meetup-data-item">
-              <label
-                htmlFor="editTitle"
-                className="edit-meetup-data-item__label"
-              >
-                Тема
-              </label>
-              <input
-                type="text"
-                id="editTitle"
-                className={classNames(
-                  "edit-meetup-data-item__input",
-                  title !== undefined && title.trim() === ""
-                    ? "edit-meetup-data-item__input-error"
-                    : "edit-meetup-data-item__input-success"
-                )}
-                defaultValue={meetup.title}
-                onChange={handleTitleChange}
-              />
-              {title !== undefined && <ValidationForInput inputData={title} />}
-            </div>
-            <fieldset className="edit-meetup-data-item-date">
-              <div className="edit-meetup-data-item-date-item">
-                <label
-                  htmlFor="editStartDate"
-                  className="edit-meetup-data-item__label"
-                >
-                  Начало
-                </label>
-                <DatePicker
-                  id="editStartDate"
-                  onFocus={(e) => e.target.blur()}
-                  isClearable
-                  selected={startDate}
-                  onChange={(date: Date) => {
-                    setStartDate(date);
-                    setFinishDate(null);
-                  }}
-                  showTimeSelect
-                  dateFormat="dd.MM.yyyy HH:mm"
-                  timeFormat="HH:mm"
-                  className="edit-meetup-data-item__input"
+        {!previewOpen ? (
+          <>
+            <MainTitle>Редактирование митапа</MainTitle>
+            <form onSubmit={handleEditMeetup}>
+              <div className="edit-meetup-data">
+                <img
+                  src={DefaultImage}
+                  alt="Edit meetup"
+                  className="edit-meetup__image"
                 />
+                <div className="edit-meetup-data-item">
+                  <label
+                    htmlFor="editTitle"
+                    className="edit-meetup-data-item__label"
+                  >
+                    Тема
+                  </label>
+                  <input
+                    type="text"
+                    id="editTitle"
+                    className={classNames(
+                      "edit-meetup-data-item__input",
+                      title !== undefined && title.trim() === ""
+                        ? "edit-meetup-data-item__input-error"
+                        : "edit-meetup-data-item__input-success"
+                    )}
+                    defaultValue={meetup.title}
+                    onChange={handleTitleChange}
+                  />
+                  {title !== undefined && (
+                    <ValidationForInput inputData={title} />
+                  )}
+                </div>
+                <fieldset className="edit-meetup-data-item-date">
+                  <div className="edit-meetup-data-item-date-item">
+                    <label
+                      htmlFor="editStartDate"
+                      className="edit-meetup-data-item__label"
+                    >
+                      Начало
+                    </label>
+                    <DatePicker
+                      id="editStartDate"
+                      onFocus={(e) => e.target.blur()}
+                      isClearable
+                      selected={startDate}
+                      onChange={(date: Date) => {
+                        setStartDate(date);
+                        setFinishDate(null);
+                      }}
+                      showTimeSelect
+                      dateFormat="dd.MM.yyyy HH:mm"
+                      timeFormat="HH:mm"
+                      className="edit-meetup-data-item__input"
+                    />
+                  </div>
+                  <div className="edit-meetup-data-item-date-item">
+                    <label
+                      htmlFor="editEndDate"
+                      className="edit-meetup-data-item__label"
+                    >
+                      Окончание
+                    </label>
+                    <DatePicker
+                      id="editEndDate"
+                      isClearable
+                      onFocus={(e) => e.target.blur()}
+                      disabled={startDate === null}
+                      selected={finishDate}
+                      onChange={(date: Date) => setFinishDate(date)}
+                      showTimeSelect
+                      dateFormat="dd.MM.yyyy HH:mm"
+                      timeFormat="HH:mm"
+                      className="edit-meetup-data-item__input"
+                    />
+                  </div>
+                </fieldset>
+                <div className="edit-meetup-data-item">
+                  <label
+                    htmlFor="editPlace"
+                    className="edit-meetup-data-item__label"
+                  >
+                    Место проведения
+                  </label>
+                  <input
+                    type="text"
+                    id="editPlace"
+                    className="edit-meetup-data-item__input"
+                    defaultValue={meetup.place}
+                    onChange={handlePlaceChange}
+                  />
+                </div>
+                <div className="edit-meetup-data-item">
+                  <label
+                    htmlFor="editSpeaker"
+                    className="edit-meetup-data-item__label"
+                  >
+                    Спикер
+                  </label>
+                  <input
+                    type="text"
+                    id="editSpeaker"
+                    className="edit-meetup-data-item__input"
+                    defaultValue={speaker}
+                  />
+                </div>
+                <div className="edit-meetup-data-item">
+                  <label
+                    htmlFor="editDescription"
+                    className="edit-meetup-data-item__label"
+                  >
+                    Описание
+                  </label>
+                  <textarea
+                    name="editDescription"
+                    id="editDescription"
+                    className={classNames(
+                      "edit-meetup-data-item__textarea",
+                      description !== undefined && description.trim() === ""
+                        ? "edit-meetup-data-item__input-error"
+                        : "edit-meetup-data-item__input-success"
+                    )}
+                    cols={30}
+                    rows={10}
+                    defaultValue={meetup.description}
+                    onChange={handleDescriptionChange}
+                  ></textarea>
+                  {description !== undefined && (
+                    <ValidationForInput inputData={description} />
+                  )}
+                </div>
               </div>
-              <div className="edit-meetup-data-item-date-item">
-                <label
-                  htmlFor="editEndDate"
-                  className="edit-meetup-data-item__label"
+              <div className="edit-meetup-data-buttons">
+                <button
+                  className="edit-meetup-data-buttons-button-back"
+                  onClick={() => navigate(-1)}
                 >
-                  Окончание
-                </label>
-                <DatePicker
-                  id="editEndDate"
-                  isClearable
-                  onFocus={(e) => e.target.blur()}
-                  disabled={startDate === null}
-                  selected={finishDate}
-                  onChange={(date: Date) => setFinishDate(date)}
-                  showTimeSelect
-                  dateFormat="dd.MM.yyyy HH:mm"
-                  timeFormat="HH:mm"
-                  className="edit-meetup-data-item__input"
-                />
+                  Отмена
+                </button>
+                <div className="edit-meetup-data-buttons-right">
+                  <button
+                    type="submit"
+                    className="edit-meetup-data-buttons-button-preview"
+                    onClick={() => setPreviewOpen(true)}
+                  >
+                    Предпросмотр
+                  </button>
+                  <button
+                    disabled={
+                      title?.trim() === "" || description?.trim() === ""
+                    }
+                    type="submit"
+                    className="edit-meetup-data-buttons-button-submit"
+                  >
+                    Сохранить
+                  </button>
+                </div>
               </div>
-            </fieldset>
-            <div className="edit-meetup-data-item">
-              <label
-                htmlFor="editPlace"
-                className="edit-meetup-data-item__label"
-              >
-                Место проведения
-              </label>
-              <input
-                type="text"
-                id="editPlace"
-                className="edit-meetup-data-item__input"
-                defaultValue={meetup.place}
-                onChange={handlePlaceChange}
-              />
-            </div>
-            <div className="edit-meetup-data-item">
-              <label
-                htmlFor="editSpeaker"
-                className="edit-meetup-data-item__label"
-              >
-                Спикер
-              </label>
-              <input
-                type="text"
-                id="editSpeaker"
-                className="edit-meetup-data-item__input"
-                defaultValue={speaker}
-              />
-            </div>
-            <div className="edit-meetup-data-item">
-              <label
-                htmlFor="editDescription"
-                className="edit-meetup-data-item__label"
-              >
-                Описание
-              </label>
-              <textarea
-                name="editDescription"
-                id="editDescription"
-                className={classNames(
-                  "edit-meetup-data-item__textarea",
-                  description !== undefined && description.trim() === ""
-                    ? "edit-meetup-data-item__input-error"
-                    : "edit-meetup-data-item__input-success"
-                )}
-                cols={30}
-                rows={10}
-                defaultValue={meetup.description}
-                onChange={handleDescriptionChange}
-              ></textarea>
-              {description !== undefined && (
-                <ValidationForInput inputData={description} />
-              )}
-            </div>
-          </div>
-          <div className="edit-meetup-data-buttons">
-            <button
-              className="edit-meetup-data-buttons-button-back"
-              onClick={() => navigate(-1)}
-            >
-              Отмена
-            </button>
-            <div className="edit-meetup-data-buttons-right">
-              <button
-                type="submit"
-                className="edit-meetup-data-buttons-button-preview"
-              >
-                Предпросмотр
-              </button>
-              <button
-                disabled={title?.trim() === "" || description?.trim() === ""}
-                type="submit"
-                className="edit-meetup-data-buttons-button-submit"
-              >
-                Сохранить
-              </button>
-            </div>
-          </div>
-        </form>
+            </form>
+          </>
+        ) : (
+          <PreviewMeetup
+            title={title ?? meetup.title}
+            description={description ?? meetup.description}
+            start={startDate?.toISOString() ?? meetup.start}
+            finish={finishDate?.toISOString() ?? meetup.finish}
+            place={place ?? meetup.finish}
+            image={meetup.image}
+          />
+        )}
       </Main>
     </div>
   );
