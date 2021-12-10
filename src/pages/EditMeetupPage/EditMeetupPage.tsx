@@ -73,6 +73,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     if (meetup && meetup.description) {
       setDescription(meetup.description);
     }
+    if (meetup && meetup.speakers) {
+      setSpeaker(meetup.speakers[0].name);
+    }
   }, [meetup]);
 
   if (authStore.user === undefined) {
@@ -323,6 +326,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
           <PreviewMeetup
             title={title ?? meetup.title}
             description={description ?? meetup.description}
+            speaker={speaker ?? meetup.speakers[0].name}
             start={startDate?.toISOString() ?? meetup.start}
             finish={finishDate?.toISOString() ?? meetup.finish}
             place={place ?? meetup.place}

@@ -13,7 +13,7 @@ interface IProps {
   start?: string;
   finish?: string;
   place?: string;
-  speaker?: ISpeaker[];
+  speaker?: string;
   image?: string;
 }
 
@@ -85,14 +85,12 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
               <Avatar
                 className="preview-meetup-data-content-avatar"
                 user={{
-                  name: props.speaker[0].name,
-                  surname: props.speaker[0].surname,
+                  name: props.speaker,
+                  surname: props.speaker,
                 }}
               />
             )}
-            {/* <span>
-              {`${props.speaker[0].name} ${props.speaker[0].surname}`}
-            </span> */}
+            <span>{`${props.speaker}`}</span>
           </div>
         </div>
         <div className="preview-meetup-data-item">
