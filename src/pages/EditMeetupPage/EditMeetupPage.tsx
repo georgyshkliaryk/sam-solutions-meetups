@@ -14,19 +14,14 @@ import DefaultImage from "./assets/EditDefaultImage.svg";
 import Loader from "react-loader-spinner";
 import DatePicker from "react-datepicker";
 import { getBase64 } from "../../helpers/getBase64";
-import {
-  IEditedMeetup,
-  IMeetup,
-} from "../../repositories/interfaces/IMeetupsRepository";
+import { IEditedMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
-import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
-  const networkRepository = new NetworkRepository();
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
@@ -159,7 +154,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
         await wrap();
       }
 
-      networkRepository.editMeetup(editedData);
+      await meetupsStore.editMeetup(editedData);
       navigate(routes.meetups);
     }
   };
