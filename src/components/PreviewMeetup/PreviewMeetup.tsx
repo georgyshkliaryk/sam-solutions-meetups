@@ -21,24 +21,24 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
   return (
     <>
       <MainTitle>Предпросмотр митапа</MainTitle>
-      <article className="view-meetup-data">
-        <div className="view-meetup-data-item">
+      <article className="preview-meetup-data">
+        <div className="preview-meetup-data-item">
           <img
-            className="view-meetup-data-item__image"
+            className="preview-meetup-data-item__image"
             src={props.image ?? MeetupDefaultImage}
             alt="Meetup cover"
           />
-          <p className="view-meetup-data-content view-meetup-data-content__title">
+          <p className="preview-meetup-data-content preview-meetup-data-content__title">
             {props.title}
           </p>
         </div>
-        <div className="view-meetup-data-item">
-          <p className="view-meetup-data-label">Время и место проведения</p>
-          <div className="view-meetup-data-content view-meetup-data-content-schedule">
+        <div className="preview-meetup-data-item">
+          <p className="preview-meetup-data-label">Время и место проведения</p>
+          <div className="preview-meetup-data-content preview-meetup-data-content-schedule">
             {props.start && (
               <>
-                <p className="view-meetup-data-content-schedule__item">
-                  <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                <p className="preview-meetup-data-content-schedule__item">
+                  <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                     calendar_today
                   </span>
                   <time dateTime={props.start}>
@@ -46,8 +46,8 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                   </time>
                 </p>
                 {props.finish ? (
-                  <p className="view-meetup-data-content-schedule__item">
-                    <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                  <p className="preview-meetup-data-content-schedule__item">
+                    <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                       schedule
                     </span>
                     <time dateTime={props.start}>
@@ -59,8 +59,8 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     </time>
                   </p>
                 ) : (
-                  <p className="view-meetup-data-content-schedule__item">
-                    <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                  <p className="preview-meetup-data-content-schedule__item">
+                    <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                       schedule
                     </span>
                     <span>{dateFormat(props.start, "H:MM")}</span>
@@ -69,8 +69,8 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
               </>
             )}
             {props.place && (
-              <p className="view-meetup-data-content-schedule__item">
-                <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+              <p className="preview-meetup-data-content-schedule__item">
+                <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                   place
                 </span>
                 <span>{props.place}</span>
@@ -78,12 +78,12 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
             )}
           </div>
         </div>
-        <div className="view-meetup-data-item">
-          <p className="view-meetup-data-label">Спикер</p>
-          <div className="view-meetup-data-content">
+        <div className="preview-meetup-data-item">
+          <p className="preview-meetup-data-label">Спикер</p>
+          <div className="preview-meetup-data-content">
             {props.speaker && (
               <Avatar
-                className="view-meetup-data-content-avatar"
+                className="preview-meetup-data-content-avatar"
                 user={{
                   name: props.speaker[0].name,
                   surname: props.speaker[0].surname,
@@ -95,13 +95,13 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
             </span> */}
           </div>
         </div>
-        <div className="view-meetup-data-item">
-          <p className="view-meetup-data-label">Описание</p>
-          <div className="view-meetup-data-content view-meetup-data-content__description">
+        <div className="preview-meetup-data-item">
+          <p className="preview-meetup-data-label">Описание</p>
+          <div className="preview-meetup-data-content preview-meetup-data-content__description">
             {props.description}
           </div>
         </div>
-        <div className="view-meetup-data-item view-theme-data-item-last">
+        <div className="preview-meetup-data-item preview-theme-data-item-last">
           buttons
         </div>
       </article>
