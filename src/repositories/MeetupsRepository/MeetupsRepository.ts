@@ -59,6 +59,7 @@ export class MeetupsRepository implements IMeetupsRepository {
       place: meetup.place,
       status: meetup.status,
       isOver: meetup.isOver,
+      image: meetup.image,
     };
   }
 
@@ -75,6 +76,7 @@ export class MeetupsRepository implements IMeetupsRepository {
       start: meetup.start,
       finish: meetup.finish,
       place: meetup.place,
+      image: meetup.image,
     };
   }
 
@@ -88,6 +90,7 @@ export class MeetupsRepository implements IMeetupsRepository {
       start: meetup.start,
       finish: meetup.finish,
       place: meetup.place,
+      image: meetup.image,
     };
   }
 }

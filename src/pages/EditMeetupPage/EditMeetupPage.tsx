@@ -13,6 +13,7 @@ import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
 import Loader from "react-loader-spinner";
 import DatePicker from "react-datepicker";
+import { getBase64 } from "../../helpers/getBase64";
 import {
   IEditedMeetup,
   IMeetup,
@@ -38,6 +39,8 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   const [speaker, setSpeaker] = useState(meetup?.speakers[0].name);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [finishDate, setFinishDate] = useState<Date | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [image, setImage] = useState(meetup?.image);
 
   useEffect(() => {
     return () => {
@@ -75,6 +78,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     }
     if (meetup && meetup.speakers) {
       setSpeaker(meetup.speakers[0].name);
+    }
+    if (meetup && meetup.image) {
+      setImage(meetup.image);
     }
   }, [meetup]);
 
@@ -133,7 +139,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       if (description !== undefined) {
         editedData.description = description;
       }
-
       if (startDate !== null) {
         editedData.start = startDate.toISOString();
       } else {
@@ -144,6 +149,15 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       } else {
         editedData.finish = null;
       }
+      if (file !== null) {
+        getBase64(file).then((imageBase64) => {
+          if (typeof imageBase64 === "string" && imageBase64 !== undefined) {
+            editedData.image = imageBase64;
+          }
+        });
+      }
+
+      console.log(editedData);
 
       await meetupsStore.editMeetup(editedData);
       navigate(routes.meetups);
@@ -165,11 +179,32 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
             <MainTitle>Редактирование митапа</MainTitle>
             <form onSubmit={handleEditMeetup}>
               <div className="edit-meetup-data">
-                <img
-                  src={DefaultImage}
-                  alt="Edit meetup"
-                  className="edit-meetup__image"
-                />
+                <div className="edit-meetup__image-wrapper">
+                  <img
+                    src={image ?? DefaultImage}
+                    alt="Edit meetup"
+                    className="edit-meetup__image"
+                  />
+                  <input
+                    type="file"
+                    id="editImage"
+                    className="edit-meetup__image-input"
+                    accept=".png,.jpeg,.jpg"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      image && URL.revokeObjectURL(image);
+                      setFile(e.target.files ? e.target.files[0] : null);
+                      if (e.target.files !== null) {
+                        setImage(URL.createObjectURL(e.target.files[0]));
+                      }
+                    }}
+                  />
+                  <label
+                    htmlFor="editImage"
+                    className="edit-meetup__image-label"
+                  >
+                    <span className="material-icons-round">file_upload</span>
+                  </label>
+                </div>
                 <div className="edit-meetup-data-item">
                   <label
                     htmlFor="editTitle"
@@ -330,7 +365,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
             start={startDate?.toISOString() ?? meetup.start}
             finish={finishDate?.toISOString() ?? meetup.finish}
             place={place ?? meetup.place}
-            image={meetup.image}
+            image={image ?? meetup.image}
           >
             <div className="edit-meetup-data-buttons">
               <button
@@ -341,8 +376,8 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               </button>
               <div className="edit-meetup-data-buttons-right">
                 <button
+                  onClick={handleEditMeetup}
                   disabled={title?.trim() === "" || description?.trim() === ""}
-                  type="submit"
                   className="edit-meetup-data-buttons-button-submit"
                 >
                   Опубликовать

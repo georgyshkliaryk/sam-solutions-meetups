@@ -29,8 +29,18 @@
 
 .edit-meetup__image {
   width: 100%;
+  height: 20rem;
+  object-fit: contain;
   border-radius: 0.313rem;
   margin-bottom: 1rem;
+}
+
+.edit-meetup__image-label {
+  cursor: pointer;
+}
+
+.edit-meetup__image-input {
+  display: none;
 }
 
 .edit-meetup-data-item {
