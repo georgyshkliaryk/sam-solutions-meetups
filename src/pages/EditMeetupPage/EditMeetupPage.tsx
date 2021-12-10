@@ -27,8 +27,17 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
-  const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
+  const [meetup, setMeetup] = useState(
+    meetupsStore.meetups.find((m) => m.id === meetupId.id)
+  );
   const [previewOpen, setPreviewOpen] = useState(false);
+
+  const [title, setTitle] = useState(meetup?.title);
+  const [description, setDescription] = useState(meetup?.description);
+  const [place, setPlace] = useState(meetup?.place);
+  const [speaker, setSpeaker] = useState(meetup?.speakers[0].name);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [finishDate, setFinishDate] = useState<Date | null>(null);
 
   useEffect(() => {
     return () => {
@@ -38,22 +47,33 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
 
   useEffect(() => {
     async function getMeetup() {
-      if (meetupId.id !== undefined) {
+      if (meetup === undefined && meetupId.id !== undefined) {
         setMeetup(await meetupsStore.getMeetupById(meetupId.id));
       }
     }
+    getMeetup();
     if (meetupId.id) {
       meetupsStore.getParticipantsList(meetupId.id);
-      getMeetup();
     }
-  }, [meetupsStore, meetupId.id]);
+  }, [meetupId.id]);
 
-  const [title, setTitle] = useState(meetup?.title);
-  const [description, setDescription] = useState(meetup?.description);
-  const [place, setPlace] = useState(meetup?.place);
-  const [speaker, setSpeaker] = useState(meetup?.speakers[0].name);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [finishDate, setFinishDate] = useState<Date | null>(null);
+  useEffect(() => {
+    if (meetup && meetup.start) {
+      setStartDate(new Date(meetup.start));
+    }
+    if (meetup && meetup.finish) {
+      setFinishDate(new Date(meetup.finish));
+    }
+    if (meetup && meetup.place) {
+      setPlace(meetup.place);
+    }
+    if (meetup && meetup.title) {
+      setTitle(meetup.title);
+    }
+    if (meetup && meetup.description) {
+      setDescription(meetup.description);
+    }
+  }, [meetup]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -163,7 +183,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                         ? "edit-meetup-data-item__input-error"
                         : "edit-meetup-data-item__input-success"
                     )}
-                    defaultValue={meetup.title}
+                    defaultValue={title}
                     onChange={handleTitleChange}
                   />
                   {title !== undefined && (
@@ -225,7 +245,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     type="text"
                     id="editPlace"
                     className="edit-meetup-data-item__input"
-                    defaultValue={meetup.place}
+                    defaultValue={place}
                     onChange={handlePlaceChange}
                   />
                 </div>
@@ -261,7 +281,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     )}
                     cols={30}
                     rows={10}
-                    defaultValue={meetup.description}
+                    defaultValue={description}
                     onChange={handleDescriptionChange}
                   ></textarea>
                   {description !== undefined && (
