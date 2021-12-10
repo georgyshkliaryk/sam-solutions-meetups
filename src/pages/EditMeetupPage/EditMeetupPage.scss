@@ -54,6 +54,21 @@
   @include input;
 }
 
+.edit-meetup-data-item__input:focus,
+.edit-meetup-data-item__textarea:focus {
+  @include input-focus;
+}
+
+.edit-meetup-data-item__input-error:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem $color-error;
+}
+
+.edit-meetup-data-item__input-success:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.125rem $color-success;
+}
+
 .edit-meetup-data-item__textarea {
   resize: none;
 }

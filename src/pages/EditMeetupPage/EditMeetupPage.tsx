@@ -19,7 +19,8 @@ import {
 } from "../../repositories/interfaces/IMeetupsRepository";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { toJS } from "mobx";
+import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
+import classNames from "classnames";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -121,7 +122,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
 
       await meetupsStore.editMeetup(editedData);
       navigate(routes.meetups);
-      console.log(editedData);
     }
   };
 
@@ -153,10 +153,16 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <input
                 type="text"
                 id="editTitle"
-                className="edit-meetup-data-item__input"
+                className={classNames(
+                  "edit-meetup-data-item__input",
+                  title !== undefined && title.trim() === ""
+                    ? "edit-meetup-data-item__input-error"
+                    : "edit-meetup-data-item__input-success"
+                )}
                 defaultValue={meetup.title}
                 onChange={handleTitleChange}
               />
+              {title !== undefined && <ValidationForInput inputData={title} />}
             </div>
             <fieldset className="edit-meetup-data-item-date">
               <div className="edit-meetup-data-item-date-item">
@@ -241,20 +247,28 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <textarea
                 name="editDescription"
                 id="editDescription"
-                className="edit-meetup-data-item__textarea"
+                className={classNames(
+                  "edit-meetup-data-item__textarea",
+                  description !== undefined && description.trim() === ""
+                    ? "edit-meetup-data-item__input-error"
+                    : "edit-meetup-data-item__input-success"
+                )}
                 cols={30}
                 rows={10}
                 defaultValue={meetup.description}
                 onChange={handleDescriptionChange}
               ></textarea>
+              {description !== undefined && (
+                <ValidationForInput inputData={description} />
+              )}
             </div>
           </div>
           <div className="edit-meetup-data-buttons">
             <button
               className="edit-meetup-data-buttons-button-back"
-              // onClick={() => navigate(-1)}
+              onClick={() => navigate(-1)}
             >
-              Назад
+              Отмена
             </button>
             <div className="edit-meetup-data-buttons-right">
               <button
@@ -264,6 +278,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                 Предпросмотр
               </button>
               <button
+                disabled={title?.trim() === "" || description?.trim() === ""}
                 type="submit"
                 className="edit-meetup-data-buttons-button-submit"
               >
