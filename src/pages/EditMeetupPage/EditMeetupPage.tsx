@@ -23,8 +23,10 @@ import { observer } from "mobx-react-lite";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
+import { NetworkRepository } from "../../repositories/NetworkRepository/NetworkRepository";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
+  const networkRepository = new NetworkRepository();
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
@@ -149,17 +151,15 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       } else {
         editedData.finish = null;
       }
+
       if (file !== null) {
-        getBase64(file).then((imageBase64) => {
-          if (typeof imageBase64 === "string" && imageBase64 !== undefined) {
-            editedData.image = imageBase64;
-          }
-        });
+        const wrap = async () => {
+          editedData.image = await getBase64(file);
+        };
+        await wrap();
       }
 
-      console.log(editedData);
-
-      await meetupsStore.editMeetup(editedData);
+      networkRepository.editMeetup(editedData);
       navigate(routes.meetups);
     }
   };
