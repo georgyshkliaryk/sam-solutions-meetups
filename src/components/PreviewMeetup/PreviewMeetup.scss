@@ -18,8 +18,8 @@
 
 .preview-meetup-data-item__image {
   width: 100%;
-  height: 20rem;
-  object-fit: contain;
+  max-height: 20rem;
+  object-fit: cover;
   border-radius: 0.313rem 0.313rem 0 0;
 }
 
