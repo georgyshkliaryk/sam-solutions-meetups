@@ -16,7 +16,7 @@ export interface IMeetupFromServer {
   finish?: string;
   place?: string;
   isOver: boolean;
-  image?: string;
+  image?: string | null;
 }
 
 export interface IMeetupToServer {
@@ -30,7 +30,7 @@ export interface IMeetupToServer {
   finish?: string;
   place?: string;
   isOver?: boolean;
-  image?: string;
+  image?: string | null;
 }
 
 export interface IEditedMeetupToServer {
@@ -40,7 +40,8 @@ export interface IEditedMeetupToServer {
   start?: string | null;
   finish?: string | null;
   place?: string;
-  image?: string;
+  image?: string | null;
+  status?: string;
 }
 
 export interface IParticipant {

@@ -18,7 +18,7 @@ export interface IMeetup {
   goCount: number;
   status: string;
   isOver: boolean;
-  image?: string;
+  image?: string | null;
 }
 
 export interface INewMeetup {
@@ -31,7 +31,7 @@ export interface INewMeetup {
   title: string;
   description: string;
   place?: string;
-  image?: string;
+  image?: string | null;
 }
 
 export interface IEditedMeetup {
@@ -41,7 +41,8 @@ export interface IEditedMeetup {
   title?: string;
   description?: string;
   place?: string;
-  image?: string;
+  image?: string | null;
+  status?: string;
 }
 
 export interface IMeetupsRepository {

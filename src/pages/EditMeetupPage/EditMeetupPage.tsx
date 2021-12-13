@@ -150,6 +150,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       if (file !== null) {
         editedData.image = await getBase64(file);
       }
+      if (file === null && image === undefined) {
+        editedData.image = null;
+      }
 
       await meetupsStore.editMeetup(editedData);
       navigate(routes.meetups);
@@ -193,9 +196,32 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   <label
                     htmlFor="editImage"
                     className="edit-meetup__image-label"
+                    title="Выбрать фотографию для митапа"
                   >
-                    <span className="material-icons-round">file_upload</span>
+                    <span className="material-icons-round edit-meetup__image-label-icon">
+                      file_upload
+                    </span>
                   </label>
+                  <button
+                    className={classNames(
+                      "edit-meetup__image-delete",
+                      (file !== null || image) &&
+                        "edit-meetup__image-delete-visible"
+                    )}
+                    title="Удалить фотографию"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setFile(null);
+                      if (image) {
+                        URL.revokeObjectURL(image);
+                      }
+                      setImage(undefined);
+                    }}
+                  >
+                    <span className="material-icons-round edit-meetup__image-delete-icon">
+                      delete_forever
+                    </span>
+                  </button>
                 </div>
                 <div className="edit-meetup-data-item">
                   <label
@@ -357,7 +383,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
             start={startDate?.toISOString() ?? meetup.start}
             finish={finishDate?.toISOString() ?? meetup.finish}
             place={place ?? meetup.place}
-            image={image ?? meetup.image}
+            image={image}
           >
             <div className="edit-meetup-data-buttons">
               <button

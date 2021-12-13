@@ -1,11 +1,9 @@
 import React, { ReactElement } from "react";
-import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import MainTitle from "../main/MainTitle/MainTitle";
 import "./PreviewMeetup.scss";
 import MeetupDefaultImage from "../../pages/viewMeetup/assets/MeetupDefaultImage.svg";
 import dateFormat from "dateformat";
 import Avatar from "../Avatar/Avatar";
-import { ISpeaker } from "../../repositories/interfaces/INetworkRepository";
 
 interface IProps {
   title: string;
@@ -14,7 +12,7 @@ interface IProps {
   finish?: string;
   place?: string;
   speaker?: string;
-  image?: string;
+  image?: string | null;
 }
 
 const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
