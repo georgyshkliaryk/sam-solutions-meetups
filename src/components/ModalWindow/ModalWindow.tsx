@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useCallback, useEffect } from "react";
 import "./ModalWindow.scss";
 
 interface IProps {
@@ -9,8 +9,21 @@ interface IProps {
 }
 
 const ModalWindow: React.FC<IProps> = (props): ReactElement => {
+  useEffect(() => {
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
   const resetActive = (): void => {
     props.setActive(false);
+  };
+
+  const closeOnEscape = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      resetActive();
+    }
   };
 
   return (
