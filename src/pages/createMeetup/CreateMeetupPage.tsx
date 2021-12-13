@@ -137,10 +137,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
         meetupData.start = finishDate.toISOString();
       }
       if (file !== null) {
-        const wrap = async () => {
-          meetupData.image = await getBase64(file);
-        };
-        await wrap();
+        meetupData.image = await getBase64(file);
       }
 
       await meetupsStore.createNewMeetup(meetupData);

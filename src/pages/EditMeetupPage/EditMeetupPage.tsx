@@ -148,10 +148,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       }
 
       if (file !== null) {
-        const wrap = async () => {
-          editedData.image = await getBase64(file);
-        };
-        await wrap();
+        editedData.image = await getBase64(file);
       }
 
       await meetupsStore.editMeetup(editedData);
@@ -325,7 +322,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <div className="edit-meetup-data-buttons">
                 <button
                   className="edit-meetup-data-buttons-button-back"
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigate(routes.meetups)}
                 >
                   Отмена
                 </button>
