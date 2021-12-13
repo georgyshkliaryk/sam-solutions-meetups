@@ -91,6 +91,7 @@ export class MeetupsRepository implements IMeetupsRepository {
       finish: meetup.finish,
       place: meetup.place,
       image: meetup.image,
+      status: meetup.status,
     };
   }
 }

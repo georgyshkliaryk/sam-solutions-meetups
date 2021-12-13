@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
@@ -9,7 +9,13 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
+import {
+  MeetupPageTypes,
+  MeetupTypes,
+  navItems,
+  routes,
+  UserRoles,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -17,6 +23,7 @@ import dateFormat from "dateformat";
 import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 
 interface IProps {
   type: string;
@@ -24,8 +31,11 @@ interface IProps {
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
+  const navigate = useNavigate();
   const meetupId = useParams();
   const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
+  const [modalDeleteActive, setModalDeleteActive] = useState<boolean>(false);
+  const [modalPublishActive, setModalPublishActive] = useState<boolean>(false);
 
   useEffect(() => {
     return () => {
@@ -72,6 +82,14 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     );
   }
 
+  const publishTheme = async () => {
+    await meetupsStore.editMeetup({
+      id: meetup.id,
+      status: MeetupTypes.CONFIRMED,
+    });
+    navigate(`${routes.meetups}/${routes.drafts}`);
+  };
+
   return (
     <div className="view-meetup">
       <Header className="view-meetup__header">
@@ -94,52 +112,62 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
               {meetup.title}
             </p>
           </div>
-          <div className="view-meetup-data-item">
-            <p className="view-meetup-data-label">Время и место проведения</p>
-            <div className="view-meetup-data-content view-meetup-data-content-schedule">
-              {meetup.start && (
-                <>
-                  <p className="view-meetup-data-content-schedule__item">
-                    <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
-                      calendar_today
-                    </span>
-                    <time dateTime={meetup.start}>
-                      {dateFormat(meetup.start, "dddd, d mmmm yyyy")}
-                    </time>
-                  </p>
-                  {meetup.finish ? (
+          {!meetup.start && !meetup.finish && !meetup.place ? (
+            <div className="view-meetup-data-item">
+              <p className="view-meetup-data-label">Время и место проведения</p>
+              <p className="view-theme-data-content">
+                <i>Время и место проведения не указано</i>
+              </p>
+            </div>
+          ) : (
+            <div className="view-meetup-data-item">
+              <p className="view-meetup-data-label">Время и место проведения</p>
+              <div className="view-meetup-data-content view-meetup-data-content-schedule">
+                {meetup.start && (
+                  <>
                     <p className="view-meetup-data-content-schedule__item">
                       <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
-                        schedule
+                        calendar_today
                       </span>
                       <time dateTime={meetup.start}>
-                        {dateFormat(meetup.start, "H:MM")}
-                      </time>
-                      &nbsp;–&nbsp;
-                      <time dateTime={meetup.finish}>
-                        {dateFormat(meetup.finish, "H:MM")}
+                        {dateFormat(meetup.start, "dddd, d mmmm yyyy")}
                       </time>
                     </p>
-                  ) : (
-                    <p className="view-meetup-data-content-schedule__item">
-                      <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
-                        schedule
-                      </span>
-                      <span>{dateFormat(meetup.start, "H:MM")}</span>
-                    </p>
-                  )}
-                </>
-              )}
-              {meetup.place && (
-                <p className="view-meetup-data-content-schedule__item">
-                  <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
-                    place
-                  </span>
-                  <span>{meetup.place}</span>
-                </p>
-              )}
+                    {meetup.finish ? (
+                      <p className="view-meetup-data-content-schedule__item">
+                        <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                          schedule
+                        </span>
+                        <time dateTime={meetup.start}>
+                          {dateFormat(meetup.start, "H:MM")}
+                        </time>
+                        &nbsp;–&nbsp;
+                        <time dateTime={meetup.finish}>
+                          {dateFormat(meetup.finish, "H:MM")}
+                        </time>
+                      </p>
+                    ) : (
+                      <p className="view-meetup-data-content-schedule__item">
+                        <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                          schedule
+                        </span>
+                        <span>{dateFormat(meetup.start, "H:MM")}</span>
+                      </p>
+                    )}
+                  </>
+                )}
+                {meetup.place && (
+                  <p className="view-meetup-data-content-schedule__item">
+                    <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
+                      place
+                    </span>
+                    <span>{meetup.place}</span>
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
+          )}
+
           <div className="view-meetup-data-item">
             <p className="view-meetup-data-label">Спикер</p>
             <div className="view-meetup-data-content">
@@ -163,6 +191,51 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
               {meetup.description}
             </div>
           </div>
+          <ModalWindow
+            active={modalDeleteActive}
+            setActive={setModalDeleteActive}
+            title="Удалить митап?"
+          >
+            <button
+              className="view-meetup-modal-buttons__delete"
+              onClick={() => {
+                meetupsStore.deleteMeetup(meetup.id);
+                if (props.type === MeetupPageTypes.DRAFT) {
+                  navigate(`${routes.meetups}/${routes.drafts}`);
+                } else if (props.type === MeetupPageTypes.FUTURE) {
+                  navigate(`${routes.meetups}/${routes.future}`);
+                } else {
+                  navigate(`${routes.meetups}/${routes.past}`);
+                }
+              }}
+            >
+              Удалить
+            </button>
+            <button
+              className="view-meetup-modal-buttons__cancel"
+              onClick={() => setModalDeleteActive(false)}
+            >
+              Отмена
+            </button>
+          </ModalWindow>
+          <ModalWindow
+            active={modalPublishActive}
+            setActive={setModalPublishActive}
+            title="Опубликовать митап?"
+          >
+            <button
+              className="view-theme-modal-buttons__approve"
+              onClick={publishTheme}
+            >
+              Опубликовать
+            </button>
+            <button
+              className="view-theme-modal-buttons__cancel"
+              onClick={() => setModalPublishActive(false)}
+            >
+              Отмена
+            </button>
+          </ModalWindow>
           <div className="view-meetup-data-item view-theme-data-item-last">
             {props.type === MeetupPageTypes.DRAFT ? (
               <div className="view-meetup-data-buttons">
@@ -183,13 +256,19 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           drive_file_rename_outline
                         </span>
                       </LinkComponent>
-                      <button className="view-meetup-data-buttons-button-delete">
+                      <button
+                        className="view-meetup-data-buttons-button-delete"
+                        onClick={() => setModalDeleteActive(true)}
+                      >
                         Удалить
                       </button>
                     </>
                   )}
                   {authStore.user.roles === UserRoles.CHIEF && (
-                    <button className="view-meetup-data-buttons-button-submit">
+                    <button
+                      className="view-meetup-data-buttons-button-submit"
+                      onClick={() => setModalPublishActive(true)}
+                    >
                       Опубликовать
                     </button>
                   )}
@@ -214,7 +293,10 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           drive_file_rename_outline
                         </span>
                       </LinkComponent>
-                      <button className="view-meetup-data-buttons-button-delete">
+                      <button
+                        className="view-meetup-data-buttons-button-delete"
+                        onClick={() => setModalDeleteActive(true)}
+                      >
                         Удалить
                       </button>
                     </>
@@ -242,7 +324,10 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         drive_file_rename_outline
                       </span>
                     </LinkComponent>
-                    <button className="view-meetup-data-buttons-button-delete">
+                    <button
+                      className="view-meetup-data-buttons-button-delete"
+                      onClick={() => setModalDeleteActive(true)}
+                    >
                       Удалить
                     </button>
                   </div>
