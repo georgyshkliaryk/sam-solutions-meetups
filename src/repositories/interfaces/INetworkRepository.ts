@@ -33,6 +33,16 @@ export interface IMeetupToServer {
   image?: string;
 }
 
+export interface IEditedMeetupToServer {
+  id: string;
+  subject?: string;
+  excerpt?: string;
+  start?: string | null;
+  finish?: string | null;
+  place?: string;
+  image?: string;
+}
+
 export interface IParticipant {
   id: string;
   name: string;

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../../components/Avatar/Avatar";
 import Header from "../../components/header/Header/Header";
@@ -9,12 +9,14 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupPageTypes, navItems, routes } from "../../constants";
+import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
 import dateFormat from "dateformat";
 import Loader from "react-loader-spinner";
+import { hasUserRights } from "../../helpers/hasUserRights";
+import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 
 interface IProps {
   type: string;
@@ -22,7 +24,8 @@ interface IProps {
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
-  const themeId = useParams();
+  const meetupId = useParams();
+  const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
 
   useEffect(() => {
     return () => {
@@ -31,10 +34,16 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }, []);
 
   useEffect(() => {
-    if (themeId.id) {
-      meetupsStore.getMeetupById(themeId.id);
+    async function getMeetup() {
+      if (meetupId.id !== undefined) {
+        setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+      }
     }
-  }, [meetupsStore, themeId.id]);
+    if (meetupId.id) {
+      meetupsStore.getParticipantsList(meetupId.id);
+      getMeetup();
+    }
+  }, [meetupsStore, meetupId.id]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -45,9 +54,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     return <Navigate to={routes.login} />;
   }
 
-  const currentMeetup = meetupsStore.current;
-
-  if (currentMeetup === undefined) {
+  if (meetup === undefined) {
     return (
       <div className="view-meetup">
         <Header className="view-meetup__header">
@@ -80,37 +87,37 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           <div className="view-meetup-data-item">
             <img
               className="view-meetup-data-item__image"
-              src={currentMeetup.image ?? MeetupDefaultImage}
+              src={meetup.image ?? MeetupDefaultImage}
               alt="Meetup cover"
             />
             <p className="view-meetup-data-content view-meetup-data-content__title">
-              {currentMeetup.title}
+              {meetup.title}
             </p>
           </div>
           <div className="view-meetup-data-item">
             <p className="view-meetup-data-label">Время и место проведения</p>
             <div className="view-meetup-data-content view-meetup-data-content-schedule">
-              {currentMeetup.start && (
+              {meetup.start && (
                 <>
                   <p className="view-meetup-data-content-schedule__item">
                     <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                       calendar_today
                     </span>
-                    <time dateTime={currentMeetup.start}>
-                      {dateFormat(currentMeetup.start, "dddd, d mmmm yyyy")}
+                    <time dateTime={meetup.start}>
+                      {dateFormat(meetup.start, "dddd, d mmmm yyyy")}
                     </time>
                   </p>
-                  {currentMeetup.finish ? (
+                  {meetup.finish ? (
                     <p className="view-meetup-data-content-schedule__item">
                       <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                         schedule
                       </span>
-                      <time dateTime={currentMeetup.start}>
-                        {dateFormat(currentMeetup.start, "H:MM")}
+                      <time dateTime={meetup.start}>
+                        {dateFormat(meetup.start, "H:MM")}
                       </time>
                       &nbsp;–&nbsp;
-                      <time dateTime={currentMeetup.finish}>
-                        {dateFormat(currentMeetup.finish, "H:MM")}
+                      <time dateTime={meetup.finish}>
+                        {dateFormat(meetup.finish, "H:MM")}
                       </time>
                     </p>
                   ) : (
@@ -118,17 +125,17 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                         schedule
                       </span>
-                      <span>{dateFormat(currentMeetup.start, "H:MM")}</span>
+                      <span>{dateFormat(meetup.start, "H:MM")}</span>
                     </p>
                   )}
                 </>
               )}
-              {currentMeetup.place && (
+              {meetup.place && (
                 <p className="view-meetup-data-content-schedule__item">
                   <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                     place
                   </span>
-                  <span>{currentMeetup.place}</span>
+                  <span>{meetup.place}</span>
                 </p>
               )}
             </div>
@@ -136,24 +143,24 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           <div className="view-meetup-data-item">
             <p className="view-meetup-data-label">Спикер</p>
             <div className="view-meetup-data-content">
-              {currentMeetup.speakers && (
+              {meetup.speakers && (
                 <Avatar
                   className="view-meetup-data-content-avatar"
                   user={{
-                    name: currentMeetup.speakers[0].name,
-                    surname: currentMeetup.speakers[0].surname,
+                    name: meetup.speakers[0].name,
+                    surname: meetup.speakers[0].surname,
                   }}
                 />
               )}
               <span>
-                {`${currentMeetup.speakers[0].name} ${currentMeetup.speakers[0].surname}`}
+                {`${meetup.speakers[0].name} ${meetup.speakers[0].surname}`}
               </span>
             </div>
           </div>
           <div className="view-meetup-data-item">
             <p className="view-meetup-data-label">Описание</p>
-            <div className="view-meetup-data-content">
-              {currentMeetup.description}
+            <div className="view-meetup-data-content view-meetup-data-content__description">
+              {meetup.description}
             </div>
           </div>
           <div className="view-meetup-data-item view-theme-data-item-last">
@@ -166,12 +173,26 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
-                  <button className="view-meetup-data-buttons-button-submit">
-                    Опубликовать
-                  </button>
+                  {hasUserRights(authStore.user, meetup) && (
+                    <>
+                      <LinkComponent
+                        to={`${routes.meetups}/${routes.drafts}/${meetupId.id}/edit`}
+                        className="view-meetup-data-buttons-button-edit"
+                      >
+                        <span className="material-icons-round">
+                          drive_file_rename_outline
+                        </span>
+                      </LinkComponent>
+                      <button className="view-meetup-data-buttons-button-delete">
+                        Удалить
+                      </button>
+                    </>
+                  )}
+                  {authStore.user.roles === UserRoles.CHIEF && (
+                    <button className="view-meetup-data-buttons-button-submit">
+                      Опубликовать
+                    </button>
+                  )}
                 </div>
               </div>
             ) : props.type === MeetupPageTypes.FUTURE ? (
@@ -183,9 +204,21 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   Назад
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
+                  {hasUserRights(authStore.user, meetup) && (
+                    <>
+                      <LinkComponent
+                        to={`${routes.meetups}/${routes.future}/${meetupId.id}/edit`}
+                        className="view-meetup-data-buttons-button-edit"
+                      >
+                        <span className="material-icons-round">
+                          drive_file_rename_outline
+                        </span>
+                      </LinkComponent>
+                      <button className="view-meetup-data-buttons-button-delete">
+                        Удалить
+                      </button>
+                    </>
+                  )}
                   <button className="view-meetup-data-buttons-button-submit">
                     Пойду
                   </button>
@@ -199,11 +232,21 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 >
                   Назад
                 </LinkComponent>
-                <div className="view-meetup-data-buttons-right">
-                  <button className="view-meetup-data-buttons-button-delete">
-                    Удалить
-                  </button>
-                </div>
+                {hasUserRights(authStore.user, meetup) && (
+                  <div className="view-meetup-data-buttons-right">
+                    <LinkComponent
+                      to={`${routes.meetups}/${routes.past}/${meetupId.id}/edit`}
+                      className="view-meetup-data-buttons-button-edit"
+                    >
+                      <span className="material-icons-round">
+                        drive_file_rename_outline
+                      </span>
+                    </LinkComponent>
+                    <button className="view-meetup-data-buttons-button-delete">
+                      Удалить
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

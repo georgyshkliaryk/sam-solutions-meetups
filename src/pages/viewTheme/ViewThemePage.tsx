@@ -9,15 +9,18 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
 import Loader from "react-loader-spinner";
+import { hasUserRights } from "../../helpers/hasUserRights";
+import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
   const themeId = useParams();
+  const [meetup, setMeetup] = useState<IMeetup | undefined>(undefined);
 
   useEffect(() => {
     return () => {
@@ -26,9 +29,14 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }, []);
 
   useEffect(() => {
+    async function getMeetup() {
+      if (themeId.id !== undefined) {
+        setMeetup(await meetupsStore.getMeetupById(themeId.id));
+      }
+    }
     if (themeId.id) {
       meetupsStore.getParticipantsList(themeId.id);
-      meetupsStore.getMeetupById(themeId.id);
+      getMeetup();
     }
   }, [meetupsStore, themeId.id]);
 
@@ -41,9 +49,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     return <Navigate to={routes.login} />;
   }
 
-  const currentMeetup = meetupsStore.current;
-
-  if (currentMeetup === undefined) {
+  if (meetup === undefined) {
     return (
       <div className="view-meetup">
         <Header className="view-meetup__header">
@@ -76,30 +82,28 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Название</p>
             <p className="view-theme-data-content view-theme-data-content__title">
-              {currentMeetup.title}
+              {meetup.title}
             </p>
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Автор</p>
             <div className="view-theme-data-content">
-              {currentMeetup && (
+              {meetup && (
                 <Avatar
                   className="view-theme-data-content-avatar"
                   user={{
-                    name: currentMeetup.authorName,
-                    surname: currentMeetup.authorSurname,
+                    name: meetup.authorName,
+                    surname: meetup.authorSurname,
                   }}
                 />
               )}
-              <span>
-                {`${currentMeetup.authorName} ${currentMeetup.authorSurname}`}
-              </span>
+              <span>{`${meetup.authorName} ${meetup.authorSurname}`}</span>
             </div>
           </div>
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Описание</p>
             <div className="view-theme-data-content view-theme-data-content__description">
-              {currentMeetup.description}
+              {meetup.description}
             </div>
           </div>
           <div className="view-theme-data-item">
@@ -164,12 +168,16 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 Назад
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
-                <button className="view-theme-data-buttons-button-delete">
-                  Удалить
-                </button>
-                <button className="view-theme-data-buttons-button-submit">
-                  Одобрить тему
-                </button>
+                {hasUserRights(authStore.user, meetup) && (
+                  <button className="view-theme-data-buttons-button-delete">
+                    Удалить
+                  </button>
+                )}
+                {authStore.user.roles === UserRoles.CHIEF && (
+                  <button className="view-theme-data-buttons-button-submit">
+                    Одобрить тему
+                  </button>
+                )}
               </div>
             </div>
           </div>

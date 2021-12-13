@@ -24,6 +24,7 @@ import { INewMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import { getBase64 } from "../../helpers/getBase64";
 import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
+import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const navigate = useNavigate();
@@ -38,13 +39,15 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   const [place, setPlace] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [urlImage, setUrlImage] = useState("");
-  const [maxSizeError, setMaxSizeError] = useState(false);
-  const { getRootProps, isDragActive, fileRejections } = useDropzone({
+  const [fileError, setFileError] = useState(false);
+  const { getRootProps, isDragActive, isDragReject } = useDropzone({
     accept: "image/jpeg, image/png, image/jpg",
     onDrop: (acceptedFiles: File[]) => {
-      setFile(acceptedFiles[0]);
-      URL.revokeObjectURL(urlImage);
-      setUrlImage(URL.createObjectURL(acceptedFiles[0]));
+      if (!isDragReject) {
+        setFile(acceptedFiles[0]);
+        URL.revokeObjectURL(urlImage);
+        setUrlImage(URL.createObjectURL(acceptedFiles[0]));
+      }
     },
     maxFiles: 1,
   });
@@ -62,14 +65,14 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   }, [description, speaker, title]);
 
   useEffect(() => {
-    if (fileRejections.length > 0) {
-      setMaxSizeError(true);
+    if (isDragReject) {
+      setFileError(true);
     } else if (file !== null && file.size > fileMaxSize) {
-      setMaxSizeError(true);
+      setFileError(true);
     } else {
-      setMaxSizeError(false);
+      setFileError(false);
     }
-  }, [file, fileRejections.length]);
+  }, [file, isDragReject]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -134,10 +137,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
         meetupData.start = finishDate.toISOString();
       }
       if (file !== null) {
-        const imageBase64 = await getBase64(file);
-        if (typeof imageBase64 === "string" && imageBase64 !== undefined) {
-          meetupData.image = imageBase64;
-        }
+        meetupData.image = await getBase64(file);
       }
 
       await meetupsStore.createNewMeetup(meetupData);
@@ -175,7 +175,19 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
             }}
           />
           <label className="create-meetup-nav-item" htmlFor="requiredTab">
-            <span className="create-meetup-nav-item__icon">1</span>
+            <span
+              className={classNames("create-meetup-nav-item__icon", {
+                "create-meetup-nav-item__icon-success": requiredFilled,
+              })}
+            >
+              {requiredTabOpen ? (
+                "1"
+              ) : (
+                <span className="material-icons-outlined create-meetup-nav-item__icon-success-tick">
+                  done
+                </span>
+              )}
+            </span>
             Обязательные поля
           </label>
           <input
@@ -207,7 +219,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           {requiredTabOpen ? (
             <>
               <fieldset className="create-meetup-data-content">
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createTitle"
                     className="create-meetup-data-content__label"
@@ -216,13 +228,19 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   </label>
                   <input
                     type="text"
-                    className="create-meetup-data-content__input"
+                    className={classNames(
+                      "create-meetup-data-content__input",
+                      title.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     id="createTitle"
                     onChange={handleTitleChange}
                     value={title}
                   />
+                  <ValidationForInput inputData={title} />
                 </div>
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createSpeaker"
                     className="create-meetup-data-content__label"
@@ -231,14 +249,20 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   </label>
                   <input
                     type="text"
-                    className="create-meetup-data-content__input"
+                    className={classNames(
+                      "create-meetup-data-content__input",
+                      speaker.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     id="createSpeaker"
                     onChange={handleSpeakerChange}
                     value={speaker}
                   />
+                  <ValidationForInput inputData={speaker} />
                 </div>
 
-                <div className="create-meetup-data-content-input-wrapper">
+                <div className="create-meetup-data-content-input-wrapper-validation">
                   <label
                     htmlFor="createDescription"
                     className="create-meetup-data-content__label"
@@ -246,7 +270,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     Описание
                   </label>
                   <textarea
-                    className="create-meetup-data-content__textarea"
+                    className={classNames(
+                      "create-meetup-data-content__textarea",
+                      description.trim() === ""
+                        ? "create-meetup-data-content__input-error"
+                        : "create-meetup-data-content__input-success"
+                    )}
                     name="createDescription"
                     id="createDescription"
                     onChange={handleDescriptionChange}
@@ -254,6 +283,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     cols={30}
                     rows={10}
                   ></textarea>
+                  <ValidationForInput inputData={description} />
                 </div>
               </fieldset>
               <div className="create-meetup-data-buttons">
@@ -316,7 +346,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateEnd"
                       className="create-meetup-data-content__label"
                     >
-                      Конец
+                      Окончание
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}
@@ -355,9 +385,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   />
                 </div>
                 {file !== null &&
-                fileRejections.length === 0 &&
-                imageTypesRegex.test(file.type) &&
-                !maxSizeError ? (
+                !fileError &&
+                imageTypesRegex.test(file.type) ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
                       Загруженные изображения
@@ -369,7 +398,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       <div className="create-meetup-data-content-uploaded-image-icon-text">
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
-                          File size: {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
+                          Размер файла: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
+                          Mb{" "}
                         </p>
                       </div>
                       <button
@@ -393,6 +423,10 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         {
                           "create-meetup-data-content-dragndrop-active":
                             isDragActive,
+                        },
+                        {
+                          "create-meetup-data-content-dragndrop-rejected":
+                            isDragReject,
                         }
                       ),
                     })}
@@ -424,7 +458,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     />
                     <p
                       className={
-                        maxSizeError
+                        fileError
                           ? "create-meetup-data-content-dragndrop__error-visible"
                           : "create-meetup-data-content-dragndrop__error-hidden"
                       }

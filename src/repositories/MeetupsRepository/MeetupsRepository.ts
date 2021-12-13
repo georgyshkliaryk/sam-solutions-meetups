@@ -1,9 +1,11 @@
 import {
+  IEditedMeetup,
   IMeetup,
   IMeetupsRepository,
   INewMeetup,
 } from "./../interfaces/IMeetupsRepository";
 import {
+  IEditedMeetupToServer,
   IMeetupFromServer,
   IMeetupToServer,
   IParticipant,
@@ -20,12 +22,22 @@ export class MeetupsRepository implements IMeetupsRepository {
     return meetupsFromServer.map(this.parseMeetup);
   }
 
+  async getMeetupById(id: string): Promise<IMeetup> {
+    const meetupFromServer = await this.networkRepository.getMeetupById(id);
+    return this.parseMeetup(meetupFromServer);
+  }
+
   async createMeetup(meetupData: INewMeetup): Promise<IMeetup> {
     const newMeetupForServer = this.parseMeetupForServer(meetupData);
     const response = await this.networkRepository.createMeetup(
       newMeetupForServer
     );
     return this.parseMeetup(response);
+  }
+
+  async editMeetup(meetupData: IEditedMeetup): Promise<void> {
+    const editedMeetup = this.parseEditedMeetupForServer(meetupData);
+    await this.networkRepository.editMeetup(editedMeetup);
   }
 
   async getParticipantsById(id: string): Promise<IParticipant[]> {
@@ -47,6 +59,7 @@ export class MeetupsRepository implements IMeetupsRepository {
       place: meetup.place,
       status: meetup.status,
       isOver: meetup.isOver,
+      image: meetup.image,
     };
   }
 
@@ -63,6 +76,21 @@ export class MeetupsRepository implements IMeetupsRepository {
       start: meetup.start,
       finish: meetup.finish,
       place: meetup.place,
+      image: meetup.image,
+    };
+  }
+
+  private parseEditedMeetupForServer(
+    meetup: IEditedMeetup
+  ): IEditedMeetupToServer {
+    return {
+      id: meetup.id,
+      subject: meetup.title,
+      excerpt: meetup.description,
+      start: meetup.start,
+      finish: meetup.finish,
+      place: meetup.place,
+      image: meetup.image,
     };
   }
 }

@@ -1,5 +1,6 @@
 import { apiUrls } from "./../../constants";
 import {
+  IEditedMeetupToServer,
   ILoginData,
   ILoginResponse,
   IMeetupFromServer,
@@ -15,6 +16,11 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async getMeetupById(id: string): Promise<IMeetupFromServer> {
+    const response = await axios.get(`${apiUrls.meetups}/${id}`);
+    return await response.data;
+  }
+
   async getParticipantsOfMeetup(id: string): Promise<IParticipant[]> {
     const response = await axios.get(`${apiUrls.meetups}/${id}/participants`);
     return await response.data;
@@ -22,6 +28,14 @@ export class NetworkRepository implements INetworkRepository {
 
   async createMeetup(meetupData: IMeetupToServer): Promise<IMeetupFromServer> {
     const response = await axios.post(apiUrls.meetups, meetupData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
+  async editMeetup(meetupData: IEditedMeetupToServer) {
+    const response = await axios.put(apiUrls.meetups, meetupData);
     if (response.status !== 200) {
       throw new Error(response.data);
     }
