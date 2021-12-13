@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactElement, useCallback, useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import "./ModalWindow.scss";
 
 interface IProps {
