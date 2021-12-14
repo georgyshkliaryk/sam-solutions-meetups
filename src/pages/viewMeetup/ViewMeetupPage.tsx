@@ -82,7 +82,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     );
   }
 
-  const publishTheme = async () => {
+  const publishMeetup = async () => {
     meetupsStore.publishMeetup(meetup.id);
     navigate(`${routes.meetups}/${routes.drafts}`);
   };
@@ -224,7 +224,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           >
             <button
               className="view-theme-modal-buttons__approve"
-              onClick={publishTheme}
+              onClick={publishMeetup}
             >
               Опубликовать
             </button>
