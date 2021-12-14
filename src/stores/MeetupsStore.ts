@@ -87,4 +87,18 @@ export class MeetupsStore {
   async editMeetup(meetupData: IEditedMeetup): Promise<void> {
     await this.meetupsRepository.editMeetup(meetupData);
   }
+
+  async approveTheme(id: string): Promise<void> {
+    await this.editMeetup({
+      id: id,
+      status: MeetupTypes.DRAFT,
+    });
+  }
+
+  async publishMeetup(id: string): Promise<void> {
+    await this.editMeetup({
+      id: id,
+      status: MeetupTypes.CONFIRMED,
+    });
+  }
 }

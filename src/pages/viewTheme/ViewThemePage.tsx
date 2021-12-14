@@ -72,11 +72,13 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   const approveTheme = async () => {
-    await meetupsStore.editMeetup({
-      id: meetup.id,
-      status: MeetupTypes.DRAFT,
-    });
+    await meetupsStore.approveTheme(meetup.id);
     navigate(routes.themes);
+  };
+
+  const handleDeleteTheme = () => {
+    meetupsStore.deleteMeetup(meetup.id);
+    navigate(routes.meetups);
   };
 
   return (
@@ -178,10 +180,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           >
             <button
               className="view-theme-modal-buttons__delete"
-              onClick={() => {
-                meetupsStore.deleteMeetup(meetup.id);
-                navigate(routes.meetups);
-              }}
+              onClick={handleDeleteTheme}
             >
               Удалить
             </button>

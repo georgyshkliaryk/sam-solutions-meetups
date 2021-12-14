@@ -83,11 +83,19 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }
 
   const publishTheme = async () => {
-    await meetupsStore.editMeetup({
-      id: meetup.id,
-      status: MeetupTypes.CONFIRMED,
-    });
+    meetupsStore.publishMeetup(meetup.id);
     navigate(`${routes.meetups}/${routes.drafts}`);
+  };
+
+  const handleDeleteMeetup = () => {
+    meetupsStore.deleteMeetup(meetup.id);
+    if (props.type === MeetupPageTypes.DRAFT) {
+      navigate(`${routes.meetups}/${routes.drafts}`);
+    } else if (props.type === MeetupPageTypes.FUTURE) {
+      navigate(`${routes.meetups}/${routes.future}`);
+    } else {
+      navigate(`${routes.meetups}/${routes.past}`);
+    }
   };
 
   return (
@@ -198,16 +206,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           >
             <button
               className="view-meetup-modal-buttons__delete"
-              onClick={() => {
-                meetupsStore.deleteMeetup(meetup.id);
-                if (props.type === MeetupPageTypes.DRAFT) {
-                  navigate(`${routes.meetups}/${routes.drafts}`);
-                } else if (props.type === MeetupPageTypes.FUTURE) {
-                  navigate(`${routes.meetups}/${routes.future}`);
-                } else {
-                  navigate(`${routes.meetups}/${routes.past}`);
-                }
-              }}
+              onClick={handleDeleteMeetup}
             >
               Удалить
             </button>
