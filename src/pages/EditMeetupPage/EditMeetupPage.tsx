@@ -132,7 +132,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   };
 
   const handleEditImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    image && URL.revokeObjectURL(image);
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
     setFile(e.target.files ? e.target.files[0] : null);
     if (e.target.files !== null) {
       setImage(URL.createObjectURL(e.target.files[0]));
