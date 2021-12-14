@@ -122,6 +122,25 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     setDescription(event.target.value);
   };
 
+  const handleDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setFile(null);
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
+    setImage(undefined);
+  };
+
+  const handleEditImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
+    setFile(e.target.files ? e.target.files[0] : null);
+    if (e.target.files !== null) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (meetupId.id !== undefined) {
@@ -149,6 +168,9 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
 
       if (file !== null) {
         editedData.image = await getBase64(file);
+      }
+      if (file === null && image === undefined) {
+        editedData.image = null;
       }
 
       await meetupsStore.editMeetup(editedData);
@@ -182,20 +204,29 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     id="editImage"
                     className="edit-meetup__image-input"
                     accept=".png,.jpeg,.jpg"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      image && URL.revokeObjectURL(image);
-                      setFile(e.target.files ? e.target.files[0] : null);
-                      if (e.target.files !== null) {
-                        setImage(URL.createObjectURL(e.target.files[0]));
-                      }
-                    }}
+                    onChange={handleEditImage}
                   />
                   <label
                     htmlFor="editImage"
                     className="edit-meetup__image-label"
+                    title="Выбрать фотографию для митапа"
                   >
-                    <span className="material-icons-round">file_upload</span>
+                    <span className="material-icons-round edit-meetup__image-label-icon">
+                      file_upload
+                    </span>
                   </label>
+                  <button
+                    className={classNames("edit-meetup__image-delete", {
+                      "edit-meetup__image-delete-visible":
+                        file !== null || image,
+                    })}
+                    title="Удалить фотографию"
+                    onClick={handleDeleteImage}
+                  >
+                    <span className="material-icons-round edit-meetup__image-delete-icon">
+                      delete_forever
+                    </span>
+                  </button>
                 </div>
                 <div className="edit-meetup-data-item">
                   <label
@@ -357,7 +388,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
             start={startDate?.toISOString() ?? meetup.start}
             finish={finishDate?.toISOString() ?? meetup.finish}
             place={place ?? meetup.place}
-            image={image ?? meetup.image}
+            image={image}
           >
             <div className="edit-meetup-data-buttons">
               <button

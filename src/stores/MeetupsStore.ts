@@ -1,3 +1,4 @@
+import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRepository";
 import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
 import {
   IEditedMeetup,
@@ -13,7 +14,10 @@ export class MeetupsStore {
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
 
-  constructor(private readonly meetupsRepository: MeetupsRepository) {
+  constructor(
+    private readonly meetupsRepository: MeetupsRepository,
+    private readonly networkRepository: NetworkRepository
+  ) {
     makeAutoObservable(this);
   }
 

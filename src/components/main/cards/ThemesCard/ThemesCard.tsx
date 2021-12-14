@@ -1,9 +1,11 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 import { NumberDeclination } from "../../../../constants";
+import { StoreContext } from "../../../../context/StoreContext";
 import { numberDeclination } from "../../../../helpers/declination";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
+import ModalWindow from "../../../ModalWindow/ModalWindow";
 import "./ThemesCard.scss";
 
 interface IProps {
@@ -12,10 +14,12 @@ interface IProps {
 }
 
 const ThemesCard: React.FC<IProps> = (props): ReactElement => {
+  const { meetupsStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
     surname: props.item.authorSurname,
   };
+  const [modalActive, setModalActive] = useState<boolean>(false);
 
   return (
     <article className="themes-card">
@@ -40,8 +44,30 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
           )}
         </p>
       </div>
+      <ModalWindow
+        active={modalActive}
+        setActive={setModalActive}
+        title="Удалить тему?"
+      >
+        <button
+          className="themes-card-modal-buttons__delete"
+          onClick={() => meetupsStore.deleteMeetup(props.item.id)}
+        >
+          Удалить
+        </button>
+        <button
+          className="themes-card-modal-buttons__cancel"
+          onClick={() => setModalActive(false)}
+        >
+          Отмена
+        </button>
+      </ModalWindow>
       {props.editRights && (
-        <button className="themes-card-delete-button" title="Удалить тему">
+        <button
+          className="themes-card-delete-button"
+          title="Удалить тему"
+          onClick={() => setModalActive(true)}
+        >
           <span className="material-icons-outlined">delete</span>
         </button>
       )}
