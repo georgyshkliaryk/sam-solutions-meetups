@@ -120,6 +120,47 @@
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
+.view-theme-modal-buttons__delete {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-error;
+  border-color: $color-error;
+}
+
+.view-theme-modal-buttons__approve {
+  @include button-primary;
+  width: auto;
+}
+
+.view-theme-modal-buttons__approve:active {
+  @include button-primary-active;
+}
+
+.view-theme-modal-buttons__delete:hover {
+  background-color: #ef0800bb;
+  color: #ffff;
+}
+
+.view-theme-modal-buttons__delete:active {
+  background-color: $color-error;
+  color: #ffff;
+}
+
+.view-theme-modal-buttons__cancel {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-primary1;
+  border-color: $color-primary1;
+}
+
+.view-theme-modal-buttons__cancel:hover {
+  @include button-secondary-hover;
+}
+
+.view-theme-modal-buttons__cancel:active {
+  @include button-secondary-active;
+}
+
 @media (max-width: $mobile-width) {
   .view-theme-data-buttons-button-back,
   .view-theme-data-buttons-button-delete,

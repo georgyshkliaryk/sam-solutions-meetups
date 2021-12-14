@@ -92,8 +92,17 @@ export class MeetupsStore {
     await this.meetupsRepository.editMeetup(meetupData);
   }
 
-  async deleteMeetup(id: string) {
-    await this.networkRepository.deleteMeetup(id);
-    this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
+  async approveTheme(id: string): Promise<void> {
+    await this.editMeetup({
+      id: id,
+      status: MeetupTypes.DRAFT,
+    });
+  }
+
+  async publishMeetup(id: string): Promise<void> {
+    await this.editMeetup({
+      id: id,
+      status: MeetupTypes.CONFIRMED,
+    });
   }
 }
