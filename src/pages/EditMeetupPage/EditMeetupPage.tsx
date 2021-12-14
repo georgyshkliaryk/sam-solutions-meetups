@@ -122,6 +122,23 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     setDescription(event.target.value);
   };
 
+  const handleDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setFile(null);
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
+    setImage(undefined);
+  };
+
+  const handleEditImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    image && URL.revokeObjectURL(image);
+    setFile(e.target.files ? e.target.files[0] : null);
+    if (e.target.files !== null) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (meetupId.id !== undefined) {
@@ -185,13 +202,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     id="editImage"
                     className="edit-meetup__image-input"
                     accept=".png,.jpeg,.jpg"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      image && URL.revokeObjectURL(image);
-                      setFile(e.target.files ? e.target.files[0] : null);
-                      if (e.target.files !== null) {
-                        setImage(URL.createObjectURL(e.target.files[0]));
-                      }
-                    }}
+                    onChange={handleEditImage}
                   />
                   <label
                     htmlFor="editImage"
@@ -203,20 +214,12 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     </span>
                   </label>
                   <button
-                    className={classNames(
-                      "edit-meetup__image-delete",
-                      (file !== null || image) &&
-                        "edit-meetup__image-delete-visible"
-                    )}
+                    className={classNames("edit-meetup__image-delete", {
+                      "edit-meetup__image-delete-visible":
+                        file !== null || image,
+                    })}
                     title="Удалить фотографию"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setFile(null);
-                      if (image) {
-                        URL.revokeObjectURL(image);
-                      }
-                      setImage(undefined);
-                    }}
+                    onClick={handleDeleteImage}
                   >
                     <span className="material-icons-round edit-meetup__image-delete-icon">
                       delete_forever
