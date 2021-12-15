@@ -116,3 +116,53 @@
 .meetups-card-modal-buttons__cancel:active {
   @include button-secondary-active;
 }
+
+.meetups-card-footer__button-participating,
+.meetups-card-footer__button-not-participating {
+  width: 8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+
+.meetups-card-footer__button-participating:disabled,
+.meetups-card-footer__button-not-participating:disabled {
+  cursor: not-allowed;
+}
+
+.meetups-card-footer__button-not-participating {
+  border: none;
+  border-radius: 0.375rem;
+  background: $gradient;
+  color: #ffff;
+  line-height: 1rem;
+}
+
+.meetups-card-footer__button-participating {
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  outline: 1px solid $color-primary2;
+  color: $color-primary2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+
+  .meetups-card-footer__button-participating-icon {
+    font-size: 1rem;
+    color: $color-success;
+  }
+}
+
+.meetups-card-footer__button-participating:hover {
+  @include button-secondary-hover;
+}
+
+.meetups-card-footer__button-not-participating:active {
+  @include button-primary-active;
+}
+
+.meetups-card-footer__button-loading {
+  width: 8rem;
+}
