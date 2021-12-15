@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
@@ -10,7 +10,6 @@ import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
 import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
 import { Navigate } from "react-router-dom";
-import { toJS } from "mobx";
 import Loader from "react-loader-spinner";
 
 interface IProps {
