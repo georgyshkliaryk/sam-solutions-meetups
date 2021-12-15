@@ -39,7 +39,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
       }
     }
     if (themeId.id) {
-      meetupsStore.getParticipantsList(themeId.id);
+      //meetupsStore.getParticipantsList(themeId.id);
       getMeetup();
     }
   }, [meetupsStore, themeId.id]);

@@ -13,6 +13,7 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
+  participantsMap = new Map();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
@@ -23,11 +24,6 @@ export class MeetupsStore {
 
   async getAllMeetups(): Promise<void> {
     this.meetups = await this.meetupsRepository.getAllMeetups();
-  }
-
-  private async getParticipantsById(id: string): Promise<void> {
-    this.participants = undefined;
-    this.participants = await this.meetupsRepository.getParticipantsById(id);
   }
 
   get themes(): IMeetup[] {
@@ -64,10 +60,6 @@ export class MeetupsStore {
     return this.meetups.filter((m: IMeetup) => m.isOver);
   }
 
-  getParticipantsList(id: string): void {
-    this.getParticipantsById(id);
-  }
-
   async getMeetupById(id: string): Promise<IMeetup | undefined> {
     this.errorState = false;
     try {
@@ -92,6 +84,11 @@ export class MeetupsStore {
     await this.meetupsRepository.editMeetup(meetupData);
   }
 
+  async deleteMeetup(id: string) {
+    await this.networkRepository.deleteMeetup(id);
+    this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
+  }
+
   async approveTheme(id: string): Promise<void> {
     await this.editMeetup({
       id: id,
@@ -104,5 +101,13 @@ export class MeetupsStore {
       id: id,
       status: MeetupTypes.CONFIRMED,
     });
+  }
+
+  async fetchParticipants(id: string) {
+    this.participantsMap.set(
+      id,
+      await this.meetupsRepository.getParticipantsById(id)
+    );
+    return this.participantsMap;
   }
 }

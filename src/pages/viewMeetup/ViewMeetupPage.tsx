@@ -50,7 +50,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
       }
     }
     if (meetupId.id) {
-      meetupsStore.getParticipantsList(meetupId.id);
+      //meetupsStore.getParticipantsList(meetupId.id);
       getMeetup();
     }
   }, [meetupsStore, meetupId.id]);

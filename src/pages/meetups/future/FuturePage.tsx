@@ -1,5 +1,6 @@
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
 import { NumberDeclination, routes } from "../../../constants";
@@ -12,6 +13,15 @@ import "./FuturePage.scss";
 const FuturePage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
   const currentUser = authStore.user;
+
+  useEffect(() => {
+    if (meetupsStore.future.length > 0) {
+      meetupsStore.future.forEach((m: IMeetup) => {
+        meetupsStore.fetchParticipants(m.id);
+        //console.log(toJS(await meetupsStore.fetchParticipants(m.id)));
+      });
+    }
+  }, [meetupsStore]);
 
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
@@ -34,6 +44,7 @@ const FuturePage: React.FC = observer((): ReactElement => {
             item={card}
             editRights={hasUserRights(currentUser, card)}
             type={routes.future}
+            participants={meetupsStore.participantsMap.get(card.id)}
           />
         ))}
       </div>

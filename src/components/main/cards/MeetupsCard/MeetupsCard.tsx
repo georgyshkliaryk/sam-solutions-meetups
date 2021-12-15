@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
@@ -7,14 +7,17 @@ import LinkComponent from "../../../LinkComponent/LinkComponent";
 import { routes } from "../../../../constants";
 import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
+import { observer } from "mobx-react-lite";
+import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
 
 interface IProps {
   item: IMeetup;
   editRights: boolean;
   type: string;
+  participants?: IParticipant[];
 }
 
-const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
+const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
   const { meetupsStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
@@ -24,6 +27,7 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
 
   return (
     <article className="meetups-card">
+      {props.participants && props.participants.length}
       <p className="meetups-card-header">
         <time dateTime={props.item.start}>
           {props.item.start
@@ -46,7 +50,6 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
             {props.item.authorName} {props.item.authorSurname}
           </span>
         </div>
-        {props.type === routes.future && <button>Пойду</button>}
       </div>
       <ModalWindow
         active={modalActive}
@@ -90,6 +93,6 @@ const MeetupsCard: React.FC<IProps> = (props): ReactElement => {
       )}
     </article>
   );
-};
+});
 
 export default MeetupsCard;
