@@ -159,6 +159,10 @@
   @include button-secondary-hover;
 }
 
+.meetups-card-footer__button-participating:active {
+  @include button-secondary-active;
+}
+
 .meetups-card-footer__button-not-participating:active {
   @include button-primary-active;
 }

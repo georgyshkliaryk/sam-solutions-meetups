@@ -178,6 +178,46 @@
   @include button-secondary-active;
 }
 
+.view-meetup-data-buttons-button-not-participating {
+  @include button-primary;
+}
+
+.view-meetup-data-buttons-button-not-participating:active {
+  @include button-primary-active;
+}
+
+.view-meetup-data-buttons-button-not-participating:disabled {
+  @include button-primary-disabled;
+}
+
+.view-meetup-data-buttons-button-participating:disabled {
+  cursor: not-allowed;
+}
+
+.view-meetup-data-buttons-button-participating {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  border-color: $color-success;
+  color: $color-success;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.view-meetup-data-buttons-button-participating,
+.view-meetup-data-buttons-button-not-participating {
+  width: 10rem;
+}
+
+.view-meetup-data-buttons-button-participating:hover {
+  @include button-default-hover;
+}
+
+.view-meetup-data-buttons-button-participating:active {
+  @include button-default-active;
+}
+
 @media (max-width: $mobile-width) {
   .view-meetup-data-buttons-button-back,
   .view-meetup-data-buttons-button-delete,

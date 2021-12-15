@@ -127,7 +127,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                       width={30}
                     />
                   ) : (
-                    "Пойду"
+                    <span>Пойду</span>
                   )}
                 </button>
               )
