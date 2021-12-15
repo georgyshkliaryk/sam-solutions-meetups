@@ -9,6 +9,7 @@ import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
 import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
+import { Navigate } from "react-router-dom";
 
 interface IProps {
   item: IMeetup;
@@ -18,16 +19,23 @@ interface IProps {
 }
 
 const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
-  const { meetupsStore } = useContext(StoreContext);
+  const { meetupsStore, authStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
 
+  if (authStore.user === undefined) {
+    return <Navigate to={routes.login} />;
+  }
+
+  const isParticipating = (participants: IParticipant[], id: string) => {
+    return participants.some((p: IParticipant) => p.id === id);
+  };
+
   return (
     <article className="meetups-card">
-      {props.participants && props.participants.length}
       <p className="meetups-card-header">
         <time dateTime={props.item.start}>
           {props.item.start
@@ -50,6 +58,16 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             {props.item.authorName} {props.item.authorSurname}
           </span>
         </div>
+        {props.type === routes.future &&
+          (props.participants && props.participants?.length !== 0 ? (
+            isParticipating(props.participants, authStore.user.id) ? (
+              <button>Иду</button>
+            ) : (
+              <button>Пойду</button>
+            )
+          ) : (
+            <div>Загурузка...</div>
+          ))}
       </div>
       <ModalWindow
         active={modalActive}
