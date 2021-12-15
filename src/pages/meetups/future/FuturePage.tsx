@@ -16,12 +16,11 @@ const FuturePage: React.FC = observer((): ReactElement => {
 
   useEffect(() => {
     if (meetupsStore.future.length > 0) {
-      meetupsStore.future.forEach((m: IMeetup) => {
-        meetupsStore.fetchParticipants(m.id);
-        //console.log(toJS(await meetupsStore.fetchParticipants(m.id)));
+      meetupsStore.future.forEach(async (m: IMeetup) => {
+        await meetupsStore.fetchParticipants(m.id);
       });
     }
-  }, [meetupsStore]);
+  }, [meetupsStore, meetupsStore.future]);
 
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;

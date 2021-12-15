@@ -10,6 +10,7 @@ import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
 import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
 import { Navigate } from "react-router-dom";
+import { toJS } from "mobx";
 
 interface IProps {
   item: IMeetup;
@@ -59,7 +60,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
           </span>
         </div>
         {props.type === routes.future &&
-          (props.participants && props.participants?.length !== 0 ? (
+          (props.participants !== undefined ? (
             isParticipating(props.participants, authStore.user.id) ? (
               <button>Иду</button>
             ) : (
