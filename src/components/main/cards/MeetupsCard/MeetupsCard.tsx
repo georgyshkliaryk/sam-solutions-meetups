@@ -35,6 +35,13 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
     return participants.some((p: IParticipant) => p.id === id);
   };
 
+  const handleParticipateInMeetup = async (e: any) => {
+    e.preventDefault();
+    if (authStore.user !== undefined) {
+      await meetupsStore.participateInMeetup(props.item.id, authStore.user.id);
+    }
+  };
+
   return (
     <article className="meetups-card">
       <p className="meetups-card-header">
@@ -64,7 +71,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             isParticipating(props.participants, authStore.user.id) ? (
               <button>Иду</button>
             ) : (
-              <button>Пойду</button>
+              <button onClick={handleParticipateInMeetup}>Пойду</button>
             )
           ) : (
             <div>Загурузка...</div>

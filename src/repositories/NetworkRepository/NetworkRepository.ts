@@ -26,6 +26,17 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async participateInMeetup(
+    meetupId: string,
+    userId: string
+  ): Promise<IParticipant[]> {
+    const response = await axios.post(
+      `${apiUrls.meetups}/${meetupId}/participants`,
+      { id: userId }
+    );
+    return await response.data;
+  }
+
   async createMeetup(meetupData: IMeetupToServer): Promise<IMeetupFromServer> {
     const response = await axios.post(apiUrls.meetups, meetupData);
     if (response.status !== 200) {

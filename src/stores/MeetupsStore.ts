@@ -110,4 +110,9 @@ export class MeetupsStore {
     );
     return this.participantsMap;
   }
+
+  async participateInMeetup(meetupId: string, userId: string): Promise<void> {
+    await this.networkRepository.participateInMeetup(meetupId, userId);
+    await this.fetchParticipants(meetupId);
+  }
 }
