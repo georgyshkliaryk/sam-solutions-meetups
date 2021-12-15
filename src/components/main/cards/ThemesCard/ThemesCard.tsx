@@ -38,10 +38,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       <div className="themes-card-footer">
         <p className="themes-card-footer-support">
           <span className="material-icons-round">person</span>
-          {numberDeclination(
-            props.item.goCount,
-            NumberDeclination.participants
-          )}
+          {numberDeclination(props.item.goCount, NumberDeclination.votedUsers)}
         </p>
       </div>
       <ModalWindow

@@ -12,6 +12,6 @@ test("Test for correct declination of words with different numbers", () => {
     "200 митапов опубликовано"
   );
   expect(numberDeclination(100, NumberDeclination.participants)).toBe(
-    "100 поддерживают"
+    "100 человек идут"
   );
 });

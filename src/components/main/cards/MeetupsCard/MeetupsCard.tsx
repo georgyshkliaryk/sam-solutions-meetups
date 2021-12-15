@@ -4,13 +4,14 @@ import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
 import dateFormat from "dateformat";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
-import { routes } from "../../../../constants";
+import { NumberDeclination, routes } from "../../../../constants";
 import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
 import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
 import { Navigate } from "react-router-dom";
 import Loader from "react-loader-spinner";
+import { numberDeclination } from "../../../../helpers/declination";
 
 interface IProps {
   item: IMeetup;
@@ -78,58 +79,69 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             {props.item.authorName} {props.item.authorSurname}
           </span>
         </div>
-        {props.type === routes.future &&
-          (props.participants !== undefined ? (
-            isParticipating(props.participants, authStore.user.id) ? (
-              <button
-                onClick={handleStopParticipateInMeetup}
-                className="meetups-card-footer__button-participating"
-                disabled={meetupsStore.loadingState}
-              >
-                {meetupsStore.loadingState ? (
-                  <Loader
-                    type="ThreeDots"
-                    color="#00BFFF"
-                    height="0.8rem"
-                    width={30}
-                  />
-                ) : (
-                  <>
-                    <span className="material-icons-round meetups-card-footer__button-participating-icon">
-                      check_circle_outline
-                    </span>
-                    <span>Иду</span>
-                  </>
-                )}
-              </button>
+        <div className="meetups-card-footer-buttons">
+          {props.type === routes.future && props.participants !== undefined && (
+            <span>
+              {numberDeclination(
+                props.participants.length,
+                NumberDeclination.participants
+              )}
+            </span>
+          )}
+
+          {props.type === routes.future &&
+            (props.participants !== undefined ? (
+              isParticipating(props.participants, authStore.user.id) ? (
+                <button
+                  onClick={handleStopParticipateInMeetup}
+                  className="meetups-card-footer__button-participating"
+                  disabled={meetupsStore.loadingState}
+                >
+                  {meetupsStore.loadingState ? (
+                    <Loader
+                      type="ThreeDots"
+                      color="#00BFFF"
+                      height="0.8rem"
+                      width={30}
+                    />
+                  ) : (
+                    <>
+                      <span className="material-icons-round meetups-card-footer__button-participating-icon">
+                        check_circle_outline
+                      </span>
+                      <span>Иду</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <button
+                  onClick={handleParticipateInMeetup}
+                  className="meetups-card-footer__button-not-participating"
+                  disabled={meetupsStore.loadingState}
+                >
+                  {meetupsStore.loadingState ? (
+                    <Loader
+                      type="ThreeDots"
+                      color="#FFFFFF"
+                      height="0.8rem"
+                      width={30}
+                    />
+                  ) : (
+                    "Пойду"
+                  )}
+                </button>
+              )
             ) : (
-              <button
-                onClick={handleParticipateInMeetup}
-                className="meetups-card-footer__button-not-participating"
-                disabled={meetupsStore.loadingState}
-              >
-                {meetupsStore.loadingState ? (
-                  <Loader
-                    type="ThreeDots"
-                    color="#FFFFFF"
-                    height="0.8rem"
-                    width={30}
-                  />
-                ) : (
-                  "Пойду"
-                )}
-              </button>
-            )
-          ) : (
-            <div className="meetups-card-footer__button-loading">
-              <Loader
-                type="ThreeDots"
-                color="#00BFFF"
-                height="0.8rem"
-                width={30}
-              />
-            </div>
-          ))}
+              <div className="meetups-card-footer__button-loading">
+                <Loader
+                  type="ThreeDots"
+                  color="#00BFFF"
+                  height="0.8rem"
+                  width={30}
+                />
+              </div>
+            ))}
+        </div>
       </div>
       <ModalWindow
         active={modalActive}

@@ -166,3 +166,9 @@
 .meetups-card-footer__button-loading {
   width: 8rem;
 }
+
+.meetups-card-footer-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
