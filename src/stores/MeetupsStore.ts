@@ -13,6 +13,7 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
+  loadingState = false;
   participantsMap = new Map();
 
   constructor(
@@ -111,8 +112,25 @@ export class MeetupsStore {
     return this.participantsMap;
   }
 
-  async participateInMeetup(meetupId: string, userId: string): Promise<void> {
-    await this.networkRepository.participateInMeetup(meetupId, userId);
+  async participateInMeetup(meetupId: string): Promise<void> {
+    this.loadingState = true;
+    await this.networkRepository.participateInMeetup(meetupId);
     await this.fetchParticipants(meetupId);
+    this.loadingState = false;
+  }
+
+  async stopParticipateInMeetup(
+    meetupId: string,
+    userId: string
+  ): Promise<void> {
+    this.loadingState = true;
+    await this.networkRepository.stopParticipateInMeetup(meetupId);
+    this.participantsMap.set(
+      meetupId,
+      (await this.meetupsRepository.getParticipantsById(meetupId)).filter(
+        (p: IParticipant) => p.id !== userId
+      )
+    );
+    this.loadingState = false;
   }
 }

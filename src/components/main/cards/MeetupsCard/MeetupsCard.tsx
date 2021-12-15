@@ -35,10 +35,22 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
     return participants.some((p: IParticipant) => p.id === id);
   };
 
-  const handleParticipateInMeetup = async (e: any) => {
+  const handleParticipateInMeetup = async (
+    e: React.MouseEvent<HTMLElement>
+  ) => {
+    e.preventDefault();
+    await meetupsStore.participateInMeetup(props.item.id);
+  };
+
+  const handleStopParticipateInMeetup = async (
+    e: React.MouseEvent<HTMLElement>
+  ) => {
     e.preventDefault();
     if (authStore.user !== undefined) {
-      await meetupsStore.participateInMeetup(props.item.id, authStore.user.id);
+      await meetupsStore.stopParticipateInMeetup(
+        props.item.id,
+        authStore.user.id
+      );
     }
   };
 
@@ -69,12 +81,16 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
         {props.type === routes.future &&
           (props.participants !== undefined ? (
             isParticipating(props.participants, authStore.user.id) ? (
-              <button>Иду</button>
+              <button onClick={handleStopParticipateInMeetup}>
+                {meetupsStore.loadingState ? "..." : "Иду"}
+              </button>
             ) : (
-              <button onClick={handleParticipateInMeetup}>Пойду</button>
+              <button onClick={handleParticipateInMeetup}>
+                {meetupsStore.loadingState ? "..." : "Пойду"}
+              </button>
             )
           ) : (
-            <div>Загурузка...</div>
+            <div>Загрузка...</div>
           ))}
       </div>
       <ModalWindow

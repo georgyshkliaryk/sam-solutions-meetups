@@ -26,13 +26,16 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
-  async participateInMeetup(
-    meetupId: string,
-    userId: string
-  ): Promise<IParticipant[]> {
+  async participateInMeetup(meetupId: string): Promise<IParticipant[]> {
     const response = await axios.post(
-      `${apiUrls.meetups}/${meetupId}/participants`,
-      { id: userId }
+      `${apiUrls.meetups}/${meetupId}/participants`
+    );
+    return await response.data;
+  }
+
+  async stopParticipateInMeetup(meetupId: string): Promise<IParticipant[]> {
+    const response = await axios.delete(
+      `${apiUrls.meetups}/${meetupId}/participants`
     );
     return await response.data;
   }
