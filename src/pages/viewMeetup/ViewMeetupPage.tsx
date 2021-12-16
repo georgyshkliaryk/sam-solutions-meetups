@@ -56,10 +56,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     participants: IParticipant[],
     id: string
   ): boolean => {
-    return (
-      participants &&
-      participants.some((p: IParticipant): boolean => p.id === id)
-    );
+    return participants.some((p: IParticipant): boolean => p.id === id);
   };
 
   const handleParticipateInMeetup = async (
