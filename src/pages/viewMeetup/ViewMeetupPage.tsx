@@ -9,13 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import {
-  MeetupPageTypes,
-  MeetupTypes,
-  navItems,
-  routes,
-  UserRoles,
-} from "../../constants";
+import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -58,8 +52,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     }
   }, [meetupsStore, meetupId.id]);
 
-  const isParticipating = (participants: IParticipant[], id: string) => {
-    return participants.some((p: IParticipant) => p.id === id);
+  const isParticipating = (
+    participants: IParticipant[] | undefined,
+    id: string
+  ): boolean | undefined => {
+    return participants && participants.some((p: IParticipant) => p.id === id);
   };
 
   const handleParticipateInMeetup = async (
@@ -328,8 +325,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                     </>
                   )}
 
-                  {meetupsStore.participantsMap.get(meetupId.id) !==
-                  undefined ? (
+                  {meetupId.id !== undefined &&
+                  meetupsStore.participantsMap.get(meetupId.id) !==
+                    undefined ? (
                     isParticipating(
                       meetupsStore.participantsMap.get(meetupId.id),
                       authStore.user.id

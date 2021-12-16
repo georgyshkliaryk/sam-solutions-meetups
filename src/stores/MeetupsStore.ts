@@ -14,7 +14,7 @@ export class MeetupsStore {
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
   loadingState = false;
-  participantsMap = new Map();
+  participantsMap = new Map<string, IParticipant[]>();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
