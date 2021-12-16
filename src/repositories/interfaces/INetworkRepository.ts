@@ -75,8 +75,12 @@ export interface ILoginData {
 
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
+  getMeetupById: (id: string) => Promise<IMeetupFromServer>;
   getParticipantsOfMeetup: (id: string) => Promise<IParticipant[]>;
+  participateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
+  stopParticipateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
   createMeetup: (meetupData: IMeetupToServer) => Promise<IMeetupFromServer>;
+  editMeetup: (meetupData: IEditedMeetupToServer) => Promise<IMeetupFromServer>;
   login: (loginData: ILoginData) => Promise<ILoginResponse>;
   loginWithCookies: () => Promise<ILoginResponse>;
   logout: () => void;

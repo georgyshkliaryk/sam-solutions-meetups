@@ -48,7 +48,9 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
-  async editMeetup(meetupData: IEditedMeetupToServer) {
+  async editMeetup(
+    meetupData: IEditedMeetupToServer
+  ): Promise<IMeetupFromServer> {
     const response = await axios.put(apiUrls.meetups, meetupData);
     if (response.status !== 200) {
       throw new Error(response.data);

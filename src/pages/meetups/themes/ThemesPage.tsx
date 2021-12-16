@@ -15,6 +15,10 @@ const ThemesPage: React.FC = observer((): ReactElement => {
 
   const currentUser = authStore.user;
 
+  const handleDeleteTheme = (id: string) => {
+    meetupsStore.deleteMeetup(id);
+  };
+
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
@@ -41,6 +45,7 @@ const ThemesPage: React.FC = observer((): ReactElement => {
             key={card.id}
             item={card}
             editRights={hasUserRights(currentUser, card)}
+            deleteTheme={handleDeleteTheme}
           />
         ))}
       </div>

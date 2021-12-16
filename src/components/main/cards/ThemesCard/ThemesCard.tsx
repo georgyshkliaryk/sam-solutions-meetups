@@ -1,6 +1,5 @@
-import React, { ReactElement, useContext, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { NumberDeclination } from "../../../../constants";
-import { StoreContext } from "../../../../context/StoreContext";
 import { numberDeclination } from "../../../../helpers/declination";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
@@ -11,10 +10,10 @@ import "./ThemesCard.scss";
 interface IProps {
   item: IMeetup;
   editRights: boolean;
+  deleteTheme: (id: string) => void;
 }
 
 const ThemesCard: React.FC<IProps> = (props): ReactElement => {
-  const { meetupsStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
     surname: props.item.authorSurname,
@@ -48,7 +47,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       >
         <button
           className="themes-card-modal-buttons__delete"
-          onClick={() => meetupsStore.deleteMeetup(props.item.id)}
+          onClick={() => props.deleteTheme(props.item.id)}
         >
           Удалить
         </button>

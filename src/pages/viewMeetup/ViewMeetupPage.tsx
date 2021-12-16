@@ -53,10 +53,13 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }, [meetupsStore, meetupId.id]);
 
   const isParticipating = (
-    participants: IParticipant[] | undefined,
+    participants: IParticipant[],
     id: string
-  ): boolean | undefined => {
-    return participants && participants.some((p: IParticipant) => p.id === id);
+  ): boolean => {
+    return (
+      participants &&
+      participants.some((p: IParticipant): boolean => p.id === id)
+    );
   };
 
   const handleParticipateInMeetup = async (
@@ -121,6 +124,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
       navigate(`${routes.meetups}/${routes.past}`);
     }
   };
+
+  let participantsList = undefined;
+  if (meetupId.id !== undefined) {
+    participantsList = meetupsStore.participantsMap.get(meetupId.id);
+  }
 
   return (
     <div className="view-meetup">
@@ -326,12 +334,8 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   )}
 
                   {meetupId.id !== undefined &&
-                  meetupsStore.participantsMap.get(meetupId.id) !==
-                    undefined ? (
-                    isParticipating(
-                      meetupsStore.participantsMap.get(meetupId.id),
-                      authStore.user.id
-                    ) ? (
+                  participantsList !== undefined ? (
+                    isParticipating(participantsList, authStore.user.id) ? (
                       <button
                         className="view-meetup-data-buttons-button-participating"
                         onClick={handleStopParticipateInMeetup}

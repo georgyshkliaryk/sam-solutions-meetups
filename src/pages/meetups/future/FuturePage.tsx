@@ -1,4 +1,3 @@
-import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
@@ -22,6 +21,10 @@ const FuturePage: React.FC = observer((): ReactElement => {
     }
   }, [meetupsStore, meetupsStore.future]);
 
+  const handleDeleteMeetup = (id: string) => {
+    meetupsStore.deleteMeetup(id);
+  };
+
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
@@ -44,6 +47,9 @@ const FuturePage: React.FC = observer((): ReactElement => {
             editRights={hasUserRights(currentUser, card)}
             type={MeetupPageTypes.FUTURE}
             participants={meetupsStore.participantsMap.get(card.id)}
+            loadingState={meetupsStore.loadingState}
+            user={currentUser}
+            deleteMeetup={handleDeleteMeetup}
           />
         ))}
       </div>

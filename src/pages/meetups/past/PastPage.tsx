@@ -13,6 +13,10 @@ const PastPage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
   const currentUser = authStore.user;
 
+  const handleDeleteMeetup = (id: string) => {
+    meetupsStore.deleteMeetup(id);
+  };
+
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
@@ -31,6 +35,8 @@ const PastPage: React.FC = observer((): ReactElement => {
             item={card}
             editRights={hasUserRights(currentUser, card)}
             type={MeetupPageTypes.PAST}
+            user={currentUser}
+            deleteMeetup={handleDeleteMeetup}
           />
         ))}
       </div>

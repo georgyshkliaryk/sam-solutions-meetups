@@ -12,8 +12,10 @@ import {
 import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
-import { IParticipant } from "../../../../repositories/interfaces/INetworkRepository";
-import { Navigate } from "react-router-dom";
+import {
+  IParticipant,
+  IUser,
+} from "../../../../repositories/interfaces/INetworkRepository";
 import Loader from "react-loader-spinner";
 import { numberDeclination } from "../../../../helpers/declination";
 
@@ -22,40 +24,41 @@ interface IProps {
   editRights: boolean;
   type: string;
   participants?: IParticipant[];
+  loadingState?: boolean;
+  user: IUser;
+  deleteMeetup: (id: string) => void;
 }
 
 const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
-  const { meetupsStore, authStore } = useContext(StoreContext);
+  const { meetupsStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
 
-  if (authStore.user === undefined) {
-    return <Navigate to={routes.login} />;
-  }
-
-  const isParticipating = (participants: IParticipant[], id: string) => {
-    return participants.some((p: IParticipant) => p.id === id);
+  const isParticipating = (
+    participants: IParticipant[],
+    id: string
+  ): boolean => {
+    return participants.some((p: IParticipant): boolean => p.id === id);
   };
 
-  const handleParticipateInMeetup = async (
-    e: React.MouseEvent<HTMLElement>
-  ) => {
+  const handleParticipateInMeetup = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    await meetupsStore.participateInMeetup(props.item.id);
+    participateInMeetup(props.item.id);
+  };
+
+  const participateInMeetup = async (id: string) => {
+    await meetupsStore.participateInMeetup(id);
   };
 
   const handleStopParticipateInMeetup = async (
     e: React.MouseEvent<HTMLElement>
   ) => {
     e.preventDefault();
-    if (authStore.user !== undefined) {
-      await meetupsStore.stopParticipateInMeetup(
-        props.item.id,
-        authStore.user.id
-      );
+    if (props.user !== undefined) {
+      await meetupsStore.stopParticipateInMeetup(props.item.id, props.user.id);
     }
   };
 
@@ -84,24 +87,25 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
           </span>
         </div>
         <div className="meetups-card-footer-buttons">
-          {props.type === routes.future && props.participants !== undefined && (
-            <span>
-              {numberDeclination(
-                props.participants.length,
-                NumberDeclination.participants
-              )}
-            </span>
-          )}
+          {props.type === MeetupPageTypes.FUTURE &&
+            props.participants !== undefined && (
+              <span>
+                {numberDeclination(
+                  props.participants.length,
+                  NumberDeclination.participants
+                )}
+              </span>
+            )}
 
           {props.type === MeetupPageTypes.FUTURE &&
             (props.participants !== undefined ? (
-              isParticipating(props.participants, authStore.user.id) ? (
+              isParticipating(props.participants, props.user.id) ? (
                 <button
                   onClick={handleStopParticipateInMeetup}
                   className="meetups-card-footer__button-participating"
-                  disabled={meetupsStore.loadingState}
+                  disabled={props.loadingState}
                 >
-                  {meetupsStore.loadingState ? (
+                  {props.loadingState ? (
                     <Loader
                       type="ThreeDots"
                       color="#00BFFF"
@@ -121,9 +125,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                 <button
                   onClick={handleParticipateInMeetup}
                   className="meetups-card-footer__button-not-participating"
-                  disabled={meetupsStore.loadingState}
+                  disabled={props.loadingState}
                 >
-                  {meetupsStore.loadingState ? (
+                  {props.loadingState ? (
                     <Loader
                       type="ThreeDots"
                       color="#FFFFFF"
@@ -154,7 +158,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       >
         <button
           className="meetups-card-modal-buttons__delete"
-          onClick={() => meetupsStore.deleteMeetup(props.item.id)}
+          onClick={() => props.deleteMeetup(props.item.id)}
         >
           Удалить
         </button>

@@ -13,6 +13,10 @@ const DraftsPage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
   const currentUser = authStore.user;
 
+  const handleDeleteMeetup = (id: string) => {
+    meetupsStore.deleteMeetup(id);
+  };
+
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
@@ -34,6 +38,8 @@ const DraftsPage: React.FC = observer((): ReactElement => {
             item={card}
             editRights={hasUserRights(currentUser, card)}
             type={MeetupPageTypes.DRAFT}
+            user={currentUser}
+            deleteMeetup={handleDeleteMeetup}
           />
         ))}
       </div>
