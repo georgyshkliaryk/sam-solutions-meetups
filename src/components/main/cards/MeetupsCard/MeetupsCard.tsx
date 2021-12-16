@@ -4,7 +4,11 @@ import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
 import dateFormat from "dateformat";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
-import { NumberDeclination, routes } from "../../../../constants";
+import {
+  MeetupPageTypes,
+  NumberDeclination,
+  routes,
+} from "../../../../constants";
 import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
@@ -89,7 +93,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             </span>
           )}
 
-          {props.type === routes.future &&
+          {props.type === MeetupPageTypes.FUTURE &&
             (props.participants !== undefined ? (
               isParticipating(props.participants, authStore.user.id) ? (
                 <button

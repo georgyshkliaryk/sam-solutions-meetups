@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { NumberDeclination, routes } from "../../../constants";
+import { MeetupPageTypes, NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { hasUserRights } from "../../../helpers/hasUserRights";
@@ -33,7 +33,7 @@ const DraftsPage: React.FC = observer((): ReactElement => {
             key={card.id}
             item={card}
             editRights={hasUserRights(currentUser, card)}
-            type={routes.drafts}
+            type={MeetupPageTypes.DRAFT}
           />
         ))}
       </div>
