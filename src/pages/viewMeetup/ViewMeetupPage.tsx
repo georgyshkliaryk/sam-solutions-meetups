@@ -348,7 +348,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           />
                         ) : (
                           <>
-                            <span className="material-icons-round meetups-card-footer__button-participating-icon">
+                            <span className="material-icons-round">
                               check_circle_outline
                             </span>
                             <span>Иду</span>
