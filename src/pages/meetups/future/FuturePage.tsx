@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { NumberDeclination, routes } from "../../../constants";
+import { MeetupPageTypes, NumberDeclination, routes } from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { hasUserRights } from "../../../helpers/hasUserRights";
@@ -12,6 +12,28 @@ import "./FuturePage.scss";
 const FuturePage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
   const currentUser = authStore.user;
+
+  useEffect(() => {
+    if (meetupsStore.future.length > 0) {
+      meetupsStore.future.forEach(async (m: IMeetup) => {
+        await meetupsStore.fetchParticipants(m.id);
+      });
+    }
+  }, [meetupsStore, meetupsStore.future]);
+
+  const handleDeleteMeetup = (id: string) => {
+    meetupsStore.deleteMeetup(id);
+  };
+
+  const handleParticipateInMeetup = async (id: string) => {
+    await meetupsStore.participateInMeetup(id);
+  };
+
+  const handleStopParticipateInMeetup = async (id: string) => {
+    if (currentUser !== undefined) {
+      await meetupsStore.stopParticipateInMeetup(id, currentUser.id);
+    }
+  };
 
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
@@ -33,7 +55,13 @@ const FuturePage: React.FC = observer((): ReactElement => {
             key={card.id}
             item={card}
             editRights={hasUserRights(currentUser, card)}
-            type={routes.future}
+            type={MeetupPageTypes.FUTURE}
+            participants={meetupsStore.participantsMap.get(card.id)}
+            loadingState={meetupsStore.loadingState}
+            user={currentUser}
+            deleteMeetup={handleDeleteMeetup}
+            participateInMeetup={handleParticipateInMeetup}
+            stopParticipateInMeetup={handleStopParticipateInMeetup}
           />
         ))}
       </div>

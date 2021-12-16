@@ -9,13 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import {
-  MeetupPageTypes,
-  MeetupTypes,
-  navItems,
-  routes,
-  UserRoles,
-} from "../../constants";
+import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -24,6 +18,7 @@ import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 
 interface IProps {
   type: string;
@@ -47,13 +42,42 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     async function getMeetup() {
       if (meetupId.id !== undefined) {
         setMeetup(await meetupsStore.getMeetupById(meetupId.id));
+        if (props.type === MeetupPageTypes.FUTURE) {
+          await meetupsStore.fetchParticipants(meetupId.id);
+        }
       }
     }
     if (meetupId.id) {
-      meetupsStore.getParticipantsList(meetupId.id);
       getMeetup();
     }
   }, [meetupsStore, meetupId.id]);
+
+  const isParticipating = (
+    participants: IParticipant[],
+    id: string
+  ): boolean => {
+    return participants.some((p: IParticipant): boolean => p.id === id);
+  };
+
+  const handleParticipateInMeetup = async (
+    e: React.MouseEvent<HTMLElement>
+  ) => {
+    e.preventDefault();
+    if (meetupId.id !== undefined)
+      await meetupsStore.participateInMeetup(meetupId.id);
+  };
+
+  const handleStopParticipateInMeetup = async (
+    e: React.MouseEvent<HTMLElement>
+  ) => {
+    e.preventDefault();
+    if (authStore.user !== undefined && meetupId.id !== undefined) {
+      await meetupsStore.stopParticipateInMeetup(
+        meetupId.id,
+        authStore.user.id
+      );
+    }
+  };
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -97,6 +121,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
       navigate(`${routes.meetups}/${routes.past}`);
     }
   };
+
+  let participantsList = undefined;
+  if (meetupId.id !== undefined) {
+    participantsList = meetupsStore.participantsMap.get(meetupId.id);
+  }
 
   return (
     <div className="view-meetup">
@@ -300,9 +329,59 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       </button>
                     </>
                   )}
-                  <button className="view-meetup-data-buttons-button-submit">
-                    Пойду
-                  </button>
+
+                  {meetupId.id !== undefined &&
+                  participantsList !== undefined ? (
+                    isParticipating(participantsList, authStore.user.id) ? (
+                      <button
+                        className="view-meetup-data-buttons-button-participating"
+                        onClick={handleStopParticipateInMeetup}
+                        disabled={meetupsStore.loadingState}
+                      >
+                        {meetupsStore.loadingState ? (
+                          <Loader
+                            type="ThreeDots"
+                            color="#00BFFF"
+                            height="1rem"
+                            width={30}
+                          />
+                        ) : (
+                          <>
+                            <span className="material-icons-round">
+                              check_circle_outline
+                            </span>
+                            <span>Иду</span>
+                          </>
+                        )}
+                      </button>
+                    ) : (
+                      <button
+                        className="view-meetup-data-buttons-button-not-participating"
+                        onClick={handleParticipateInMeetup}
+                        disabled={meetupsStore.loadingState}
+                      >
+                        {meetupsStore.loadingState ? (
+                          <Loader
+                            type="ThreeDots"
+                            color="#00BFFF"
+                            height="1rem"
+                            width={30}
+                          />
+                        ) : (
+                          <span>Пойду</span>
+                        )}
+                      </button>
+                    )
+                  ) : (
+                    <div>
+                      <Loader
+                        type="ThreeDots"
+                        color="#00BFFF"
+                        height="1rem"
+                        width={30}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (

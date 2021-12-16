@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupTypes, navItems, routes, UserRoles } from "../../constants";
+import { navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
@@ -39,7 +39,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
       }
     }
     if (themeId.id) {
-      meetupsStore.getParticipantsList(themeId.id);
+      //meetupsStore.getParticipantsList(themeId.id);
       getMeetup();
     }
   }, [meetupsStore, themeId.id]);

@@ -52,9 +52,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       }
     }
     getMeetup();
-    if (meetupId.id) {
-      meetupsStore.getParticipantsList(meetupId.id);
-    }
   }, [meetupId.id]);
 
   useEffect(() => {
