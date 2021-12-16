@@ -25,6 +25,16 @@ const FuturePage: React.FC = observer((): ReactElement => {
     meetupsStore.deleteMeetup(id);
   };
 
+  const handleParticipateInMeetup = async (id: string) => {
+    await meetupsStore.participateInMeetup(id);
+  };
+
+  const handleStopParticipateInMeetup = async (id: string) => {
+    if (currentUser !== undefined) {
+      await meetupsStore.stopParticipateInMeetup(id, currentUser.id);
+    }
+  };
+
   if (currentUser === undefined) {
     return <Navigate to={routes.login} />;
   }
@@ -50,6 +60,8 @@ const FuturePage: React.FC = observer((): ReactElement => {
             loadingState={meetupsStore.loadingState}
             user={currentUser}
             deleteMeetup={handleDeleteMeetup}
+            participateInMeetup={handleParticipateInMeetup}
+            stopParticipateInMeetup={handleStopParticipateInMeetup}
           />
         ))}
       </div>

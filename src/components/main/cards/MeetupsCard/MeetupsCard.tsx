@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
@@ -9,7 +9,6 @@ import {
   NumberDeclination,
   routes,
 } from "../../../../constants";
-import { StoreContext } from "../../../../context/StoreContext";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
 import { observer } from "mobx-react-lite";
 import {
@@ -27,10 +26,11 @@ interface IProps {
   loadingState?: boolean;
   user: IUser;
   deleteMeetup: (id: string) => void;
+  participateInMeetup?: (id: string) => void;
+  stopParticipateInMeetup?: (id: string) => void;
 }
 
 const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
-  const { meetupsStore } = useContext(StoreContext);
   const author = {
     name: props.item.authorName,
     surname: props.item.authorSurname,
@@ -46,19 +46,18 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
 
   const handleParticipateInMeetup = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    participateInMeetup(props.item.id);
+    if (props.participateInMeetup !== undefined) {
+      props.participateInMeetup(props.item.id);
+    }
   };
 
-  const participateInMeetup = async (id: string) => {
-    await meetupsStore.participateInMeetup(id);
-  };
-
-  const handleStopParticipateInMeetup = async (
-    e: React.MouseEvent<HTMLElement>
-  ) => {
+  const handleStopParticipateInMeetup = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if (props.user !== undefined) {
-      await meetupsStore.stopParticipateInMeetup(props.item.id, props.user.id);
+    if (
+      props.user !== undefined &&
+      props.stopParticipateInMeetup !== undefined
+    ) {
+      props.stopParticipateInMeetup(props.item.id);
     }
   };
 
