@@ -199,6 +199,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             <button
               className="view-theme-modal-buttons__approve"
               onClick={approveTheme}
+              data-cy="view-theme-modal-button-approve"
             >
               Одобрить
             </button>
@@ -230,6 +231,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                   <button
                     className="view-theme-data-buttons-button-submit"
                     onClick={() => setModalApproveActive(true)}
+                    data-cy="view-theme-button-approve"
                   >
                     Одобрить тему
                   </button>

@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "dateformat": "^5.0.2",
+    "eslint-plugin-cypress": "^2.12.1",
     "mobx": "^6.3.7",
     "mobx-react-lite": "^3.2.2",
     "node-sass": "^6.0.1",
@@ -32,6 +33,7 @@
     "build": "react-scripts build",
     "lint": "eslint --ext .ts,.tsx src --fix",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!i18n)/\"",
+    "e2e": "cypress open",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -66,6 +68,7 @@
     "@types/react-datepicker": "^4.3.2",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
+    "cypress": "^9.1.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^4.0.0",

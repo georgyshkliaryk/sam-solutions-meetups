@@ -73,7 +73,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
         {props.item.place && " • " + props.item.place}
       </p>
       <LinkComponent to={props.item.id} className="meetups-card-main">
-        <p className="meetups-card-main__title">{props.item.title}</p>
+        <p className="meetups-card-main__title" data-cy="meetup-card-title">
+          {props.item.title}
+        </p>
         <p className="meetups-card-main__description">
           {props.item.description}
         </p>
@@ -158,6 +160,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={() => props.deleteMeetup(props.item.id)}
+          data-cy="meetup-card-modal-button-delete"
         >
           Удалить
         </button>
@@ -174,6 +177,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             className="meetups-card-delete-button"
             title="Удалить митап"
             onClick={() => setModalActive(true)}
+            data-cy="meetup-card-button-delete"
           >
             <span className="material-icons-outlined">delete</span>
           </button>

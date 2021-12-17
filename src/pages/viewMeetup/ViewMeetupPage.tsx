@@ -254,6 +254,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
             <button
               className="view-theme-modal-buttons__approve"
               onClick={publishMeetup}
+              data-cy="view-meetup-modal-button-publish"
             >
               Опубликовать
             </button>
@@ -296,6 +297,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                     <button
                       className="view-meetup-data-buttons-button-submit"
                       onClick={() => setModalPublishActive(true)}
+                      data-cy="view-meetup-button-publish"
                     >
                       Опубликовать
                     </button>

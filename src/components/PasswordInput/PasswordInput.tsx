@@ -24,6 +24,7 @@ const PasswordInput: React.FC<IProps> = (props): ReactElement => {
         id={props.id}
         onChange={props.onChange}
         value={props.value}
+        data-cy="password"
       />
       <input
         type="checkbox"
