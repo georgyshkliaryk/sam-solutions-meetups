@@ -237,6 +237,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     id="createTitle"
                     onChange={handleTitleChange}
                     value={title}
+                    data-cy="create-meetup-input-title"
                   />
                   <ValidationForInput inputData={title} />
                 </div>
@@ -258,6 +259,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     id="createSpeaker"
                     onChange={handleSpeakerChange}
                     value={speaker}
+                    data-cy="create-meetup-input-speakers"
                   />
                   <ValidationForInput inputData={speaker} />
                 </div>
@@ -282,6 +284,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     value={description}
                     cols={30}
                     rows={10}
+                    data-cy="create-meetup-input-description"
                   ></textarea>
                   <ValidationForInput inputData={description} />
                 </div>
@@ -298,6 +301,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     className="create-meetup-data-buttons-button-submit"
                     disabled={!requiredFilled}
                     onClick={handleClickNext}
+                    data-cy="create-meetup-button-next"
                   >
                     Далее
                   </button>
@@ -480,6 +484,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   <button
                     type="submit"
                     className="create-meetup-data-buttons-button-submit"
+                    data-cy="create-meetup-button-create"
                   >
                     Создать
                   </button>

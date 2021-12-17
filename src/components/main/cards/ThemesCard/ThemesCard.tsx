@@ -21,7 +21,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   return (
-    <article className="themes-card">
+    <article className="themes-card" data-cy="theme-card">
       <div className="themes-card-header">
         <Avatar className="themes-card-header__avatar" user={author} />
         <span className="themes-card-header__username">

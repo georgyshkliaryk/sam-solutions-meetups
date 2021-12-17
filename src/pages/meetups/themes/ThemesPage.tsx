@@ -36,7 +36,10 @@ const ThemesPage: React.FC = observer((): ReactElement => {
           className="themes-page-meetups-quantity__button"
           to={`${routes.meetups}/${routes.create}`}
         >
-          <span className="material-icons-round">add</span>Создать тему
+          <span className="material-icons-round" data-cy="create-meetup-button">
+            add
+          </span>
+          Создать тему
         </LinkComponent>
       </div>
       <div className="themes-page-wrapper">
