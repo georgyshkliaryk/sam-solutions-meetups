@@ -64,6 +64,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
             id="login-input"
             value={login}
             onChange={handleLoginChange}
+            data-cy="login"
           />
         </div>
         <div className="login-page-form__input-wrapper">
@@ -95,6 +96,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
           className="login-page-form__submit-button"
           type="submit"
           disabled={login === "" || password === ""}
+          data-cy="login-button"
         >
           Войти{" "}
           <span className="material-icons-round login-page-form__submit-button-icon">

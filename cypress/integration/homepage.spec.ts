@@ -1,6 +1,8 @@
+import { visitHome } from "../utils";
+
 describe("renders the homepage", () => {
   it("renders correctly", () => {
-    cy.visit("/");
+    visitHome();
     cy.get("#root").should("exist");
   });
 });
