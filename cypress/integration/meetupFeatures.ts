@@ -1,4 +1,5 @@
 import { visitHome, login } from "../utils";
+import { routes } from "../../src/constants";
 
 describe("tests meetups functionality", () => {
   const themeTitle = "Meetup for e2e test";
@@ -30,14 +31,14 @@ describe("tests meetups functionality", () => {
   });
 
   it("meetup opened and published", () => {
-    cy.visit("/meetups/drafts");
+    cy.visit(`${routes.meetups}/${routes.drafts}`);
     cy.get("[data-cy=meetup-card-title]").last().click();
     cy.get("[data-cy=view-meetup-button-publish]").click();
     cy.get("[data-cy=view-meetup-modal-button-publish]").click();
   });
 
   it("meetup deleted", () => {
-    cy.visit("/meetups/future");
+    cy.visit(`${routes.meetups}/${routes.future}`);
     cy.get("[data-cy=meetup-card-button-delete]").last().click();
     cy.get("[data-cy=meetup-card-modal-button-delete]").last().click();
   });
