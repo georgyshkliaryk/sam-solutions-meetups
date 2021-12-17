@@ -21,7 +21,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   return (
-    <article className="themes-card" data-cy="theme-card">
+    <article className="themes-card">
       <div className="themes-card-header">
         <Avatar className="themes-card-header__avatar" user={author} />
         <span className="themes-card-header__username">
@@ -29,8 +29,13 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
         </span>
       </div>
       <LinkComponent to={props.item.id} className="themes-card-main">
-        <p className="themes-card-main__title">{props.item.title}</p>
-        <p className="themes-card-main__description">
+        <p className="themes-card-main__title" data-cy="theme-card-title">
+          {props.item.title}
+        </p>
+        <p
+          className="themes-card-main__description"
+          data-cy="theme-card-description"
+        >
           {props.item.description}
         </p>
       </LinkComponent>
