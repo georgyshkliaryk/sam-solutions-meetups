@@ -20,4 +20,10 @@ export class NotificationsStore {
   shiftNotification(): void {
     this.notifications.shift();
   }
+
+  deleteNotification(index: number): void {
+    this.notifications = this.notifications.filter(
+      (n: INotification, i: number) => i !== index
+    );
+  }
 }

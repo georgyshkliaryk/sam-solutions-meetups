@@ -45,6 +45,12 @@ const Notifications: React.FC = observer((): ReactElement => {
               {n.description}
             </p>
           </div>
+          <button
+            className="notifications-item-button-close"
+            onClick={() => notificationsStore.deleteNotification(i)}
+          >
+            <span className="material-icons-round">close</span>
+          </button>
         </div>
       ))}
     </div>

@@ -33,6 +33,7 @@
 }
 
 .notifications-item-success {
+  border-bottom: 0.25rem solid $color-success;
   .notifications-item-text__title {
     color: $color-success;
   }
@@ -42,6 +43,7 @@
 }
 
 .notifications-item-error {
+  border-bottom: 0.25rem solid $color-error;
   .notifications-item-text__title {
     color: $color-error;
   }
@@ -51,6 +53,7 @@
 }
 
 .notifications-item-warning {
+  border-bottom: 0.25rem solid $color-warning;
   .notifications-item-text__title {
     color: $color-warning;
   }
@@ -60,10 +63,25 @@
 }
 
 .notifications-item-info {
+  border-bottom: 0.25rem solid $color-primary2;
   .notifications-item-text__title {
     color: $color-primary2;
   }
   .notification-item__image {
     color: $color-primary2;
   }
+}
+
+.notifications-item-button-close {
+  margin: auto 0 auto auto;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.notifications-item-button-close:hover {
+  transform: scale(1.2);
+  color: $color-error;
 }
