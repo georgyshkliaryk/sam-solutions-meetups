@@ -1,3 +1,4 @@
+import { NotificationsStore } from "./NotificationsStore";
 import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRepository";
 import { IParticipant } from "./../repositories/interfaces/INetworkRepository";
 import {
@@ -11,14 +12,14 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 
 export class MeetupsStore {
   meetups: IMeetup[] = [];
-  participants: IParticipant[] | undefined = undefined;
   errorState = false;
   loadingState = false;
   participantsMap = new Map<string, IParticipant[]>();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
-    private readonly networkRepository: NetworkRepository
+    private readonly networkRepository: NetworkRepository,
+    private readonly notificationsStore: NotificationsStore
   ) {
     makeAutoObservable(this);
   }
@@ -79,6 +80,11 @@ export class MeetupsStore {
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
     const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
     this.meetups.push(newMeetup);
+    this.notificationsStore.setNotification({
+      type: "success",
+      title: "Success",
+      description: "Meetup successfully created.",
+    });
   }
 
   async editMeetup(meetupData: IEditedMeetup): Promise<void> {

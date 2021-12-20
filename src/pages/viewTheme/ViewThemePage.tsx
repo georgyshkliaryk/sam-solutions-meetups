@@ -145,8 +145,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                   </div>
                 )}
               </div>
-            ) : meetupsStore.participants !== undefined &&
-              meetupsStore.participants.length === 0 ? (
+            ) : voted !== undefined && voted.length === 0 ? (
               <div className="view-theme-data-content">
                 <i>Пока никто не поддержал тему</i>
               </div>
