@@ -36,10 +36,10 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     async function getMeetup() {
       if (themeId.id !== undefined) {
         setMeetup(await meetupsStore.getMeetupById(themeId.id));
+        await meetupsStore.fetchVotedUsers(themeId.id);
       }
     }
     if (themeId.id) {
-      //meetupsStore.getParticipantsList(themeId.id);
       getMeetup();
     }
   }, [meetupsStore, themeId.id]);
@@ -80,6 +80,11 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     meetupsStore.deleteMeetup(meetup.id);
     navigate(routes.meetups);
   };
+
+  let voted = undefined;
+  if (themeId.id !== undefined) {
+    voted = meetupsStore.votedUsersMap.get(themeId.id);
+  }
 
   return (
     <div className="view-theme">
@@ -123,25 +128,22 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">Поддерживают</p>
 
-            {meetupsStore.participants !== undefined &&
-            meetupsStore.participants.length !== 0 ? (
+            {voted !== undefined && voted.length !== 0 ? (
               <div className="view-theme-data-content">
-                {meetupsStore.participants
-                  .slice(0, 10)
-                  .map((p: IParticipant, i: number) => (
-                    <Avatar
-                      className="view-theme-data-content-avatar"
-                      user={{
-                        name: p.name,
-                        surname: p.surname,
-                      }}
-                      // TODO: FIX LATER
-                      key={p.id + i}
-                    />
-                  ))}
-                {meetupsStore.participants.length > 10 && (
+                {voted.slice(0, 10).map((p: IParticipant, i: number) => (
+                  <Avatar
+                    className="view-theme-data-content-avatar"
+                    user={{
+                      name: p.name,
+                      surname: p.surname,
+                    }}
+                    // TODO: FIX LATER
+                    key={p.id + i}
+                  />
+                ))}
+                {voted.length > 10 && (
                   <div className="view-theme-data-content-avatar-rest">
-                    +{meetupsStore.participants.length - 10}
+                    +{voted.length - 10}
                   </div>
                 )}
               </div>

@@ -15,6 +15,7 @@ export class MeetupsStore {
   errorState = false;
   loadingState = false;
   participantsMap = new Map<string, IParticipant[]>();
+  votedUsersMap = new Map<string, IParticipant[]>();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
@@ -85,7 +86,7 @@ export class MeetupsStore {
     await this.meetupsRepository.editMeetup(meetupData);
   }
 
-  async deleteMeetup(id: string) {
+  async deleteMeetup(id: string): Promise<void> {
     await this.networkRepository.deleteMeetup(id);
     this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
   }
@@ -104,7 +105,7 @@ export class MeetupsStore {
     });
   }
 
-  async fetchParticipants(id: string) {
+  async fetchParticipants(id: string): Promise<Map<string, IParticipant[]>> {
     this.participantsMap.set(
       id,
       await this.meetupsRepository.getParticipantsById(id)
@@ -112,10 +113,25 @@ export class MeetupsStore {
     return this.participantsMap;
   }
 
+  async fetchVotedUsers(id: string): Promise<Map<string, IParticipant[]>> {
+    this.votedUsersMap.set(
+      id,
+      await this.meetupsRepository.getVotedUsersById(id)
+    );
+    return this.votedUsersMap;
+  }
+
   async participateInMeetup(meetupId: string): Promise<void> {
     this.loadingState = true;
     await this.networkRepository.participateInMeetup(meetupId);
     await this.fetchParticipants(meetupId);
+    this.loadingState = false;
+  }
+
+  async voteForTheme(meetupId: string): Promise<void> {
+    this.loadingState = true;
+    await this.networkRepository.voteForTheme(meetupId);
+    await this.fetchVotedUsers(meetupId);
     this.loadingState = false;
   }
 
@@ -128,6 +144,18 @@ export class MeetupsStore {
     this.participantsMap.set(
       meetupId,
       (await this.meetupsRepository.getParticipantsById(meetupId)).filter(
+        (p: IParticipant) => p.id !== userId
+      )
+    );
+    this.loadingState = false;
+  }
+
+  async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
+    this.loadingState = true;
+    await this.networkRepository.unvoteForTheme(meetupId);
+    this.votedUsersMap.set(
+      meetupId,
+      (await this.meetupsRepository.getVotedUsersById(meetupId)).filter(
         (p: IParticipant) => p.id !== userId
       )
     );

@@ -102,7 +102,7 @@ export enum MeetupTypes {
 }
 
 export enum MeetupPageTypes {
-  DRAFT = "DRAFT",
+  DRAFT = "DRAFTS",
   FUTURE = "FUTURE",
   PAST = "PAST",
 }

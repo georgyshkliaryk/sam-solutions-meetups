@@ -1,7 +1,12 @@
 import React, { ReactElement, useState } from "react";
+import Loader from "react-loader-spinner";
 import { NumberDeclination } from "../../../../constants";
 import { numberDeclination } from "../../../../helpers/declination";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
+import {
+  IParticipant,
+  IUser,
+} from "../../../../repositories/interfaces/INetworkRepository";
 import Avatar from "../../../Avatar/Avatar";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
 import ModalWindow from "../../../ModalWindow/ModalWindow";
@@ -10,7 +15,12 @@ import "./ThemesCard.scss";
 interface IProps {
   item: IMeetup;
   editRights: boolean;
+  voted?: IParticipant[];
+  loadingState?: boolean;
+  user: IUser;
   deleteTheme: (id: string) => void;
+  voteForTheme?: (id: string) => void;
+  unvoteForTheme?: (id: string) => void;
 }
 
 const ThemesCard: React.FC<IProps> = (props): ReactElement => {
@@ -19,6 +29,24 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
+
+  const isVoted = (voted: IParticipant[], id: string): boolean => {
+    return voted.some((p: IParticipant): boolean => p.id === id);
+  };
+
+  const handleVoteForTheme = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (props.voteForTheme !== undefined) {
+      props.voteForTheme(props.item.id);
+    }
+  };
+
+  const handleUnvoteForTheme = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (props.user !== undefined && props.unvoteForTheme !== undefined) {
+      props.unvoteForTheme(props.item.id);
+    }
+  };
 
   return (
     <article className="themes-card">
@@ -40,10 +68,70 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
         </p>
       </LinkComponent>
       <div className="themes-card-footer">
-        <p className="themes-card-footer-support">
-          <span className="material-icons-round">person</span>
-          {numberDeclination(props.item.goCount, NumberDeclination.votedUsers)}
-        </p>
+        <div>
+          {props.voted !== undefined && (
+            <p className="themes-card-footer-support">
+              <span className="material-icons-round">person</span>
+              {numberDeclination(
+                props.voted.length,
+                NumberDeclination.votedUsers
+              )}
+            </p>
+          )}
+        </div>
+        <div>
+          {props.voted !== undefined ? (
+            isVoted(props.voted, props.user.id) ? (
+              <button
+                onClick={handleUnvoteForTheme}
+                className="meetups-card-footer__button-participating"
+                disabled={props.loadingState}
+              >
+                {props.loadingState ? (
+                  <Loader
+                    type="ThreeDots"
+                    color="#00BFFF"
+                    height="0.8rem"
+                    width={30}
+                  />
+                ) : (
+                  <>
+                    <span className="material-icons-round meetups-card-footer__button-participating-icon">
+                      check_circle_outline
+                    </span>
+                    <span>Поддерживаю</span>
+                  </>
+                )}
+              </button>
+            ) : (
+              <button
+                onClick={handleVoteForTheme}
+                className="meetups-card-footer__button-not-participating"
+                disabled={props.loadingState}
+              >
+                {props.loadingState ? (
+                  <Loader
+                    type="ThreeDots"
+                    color="#FFFFFF"
+                    height="0.8rem"
+                    width={30}
+                  />
+                ) : (
+                  <span>Поддержать</span>
+                )}
+              </button>
+            )
+          ) : (
+            <div className="meetups-card-footer__button-loading">
+              <Loader
+                type="ThreeDots"
+                color="#00BFFF"
+                height="0.8rem"
+                width={30}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <ModalWindow
         active={modalActive}

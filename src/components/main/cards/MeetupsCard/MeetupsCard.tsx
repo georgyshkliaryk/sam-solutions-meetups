@@ -182,7 +182,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             <span className="material-icons-outlined">delete</span>
           </button>
           <LinkComponent
-            to={`${routes.meetups}/${props.type}/${props.item.id}/edit`}
+            to={`${routes.meetups}/${props.type.toLowerCase()}/${
+              props.item.id
+            }/edit`}
             className="meetups-card-edit-button"
           >
             <span
