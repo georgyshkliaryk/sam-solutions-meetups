@@ -106,3 +106,66 @@
 .themes-card-modal-buttons__cancel:active {
   @include button-secondary-active;
 }
+<<<<<<< HEAD
+=======
+
+.themes-card-footer__button-participating,
+.themes-card-footer__button-not-participating {
+  width: 10rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+
+.themes-card-footer__button-participating:disabled,
+.themes-card-footer__button-not-participating:disabled {
+  cursor: not-allowed;
+}
+
+.themes-card-footer__button-not-participating {
+  border: none;
+  border-radius: 0.375rem;
+  background: $gradient;
+  color: #ffff;
+  line-height: 1rem;
+}
+
+.themes-card-footer__button-participating {
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  outline: 1px solid $color-primary2;
+  color: $color-primary2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+
+  .themes-card-footer__button-participating-icon {
+    font-size: 1rem;
+    color: $color-success;
+  }
+}
+
+.themes-card-footer__button-participating:hover {
+  @include button-secondary-hover;
+}
+
+.themes-card-footer__button-participating:active {
+  @include button-secondary-active;
+}
+
+.themes-card-footer__button-not-participating:active {
+  @include button-primary-active;
+}
+
+.themes-card-footer__button-loading {
+  width: 8rem;
+}
+
+.themes-card-footer-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+>>>>>>> 1856b41 (notifications added)

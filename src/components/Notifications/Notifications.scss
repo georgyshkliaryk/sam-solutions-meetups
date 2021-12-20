@@ -1,3 +1,5 @@
+@import "../../constants.scss";
+
 .notifications {
   position: absolute;
   bottom: 1rem;
@@ -5,10 +7,63 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  z-index: 5;
 }
 
 .notifications-item {
   background-color: #ffff;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.25rem 0.563rem rgba(194, 203, 218, 0.25);
   padding: 1rem;
   width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+}
+
+.notifications-item-text__title,
+.notifications-item-text__description {
+  text-align: left;
+}
+
+.notifications-item-text__description {
+  @include font-semi-light;
+  margin-top: 0.5rem;
+}
+
+.notifications-item-success {
+  .notifications-item-text__title {
+    color: $color-success;
+  }
+  .notification-item__image {
+    color: $color-success;
+  }
+}
+
+.notifications-item-error {
+  .notifications-item-text__title {
+    color: $color-error;
+  }
+  .notification-item__image {
+    color: $color-error;
+  }
+}
+
+.notifications-item-warning {
+  .notifications-item-text__title {
+    color: $color-warning;
+  }
+  .notification-item__image {
+    color: $color-warning;
+  }
+}
+
+.notifications-item-info {
+  .notifications-item-text__title {
+    color: $color-primary2;
+  }
+  .notification-item__image {
+    color: $color-primary2;
+  }
 }

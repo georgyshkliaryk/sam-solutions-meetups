@@ -18,7 +18,7 @@ const meetupsStore = new MeetupsStore(
   networkRepository,
   notificationsStore
 );
-const authStore = new AuthStore(networkRepository);
+const authStore = new AuthStore(networkRepository, notificationsStore);
 
 export const StoreContext = React.createContext<IStoreContext>({
   meetupsStore,

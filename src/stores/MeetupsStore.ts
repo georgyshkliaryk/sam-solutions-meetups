@@ -78,13 +78,21 @@ export class MeetupsStore {
   }
 
   async createNewMeetup(meetupData: INewMeetup): Promise<void> {
-    const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
-    this.meetups.push(newMeetup);
-    this.notificationsStore.setNotification({
-      type: "success",
-      title: "Success",
-      description: "Meetup successfully created.",
-    });
+    try {
+      const newMeetup = await this.meetupsRepository.createMeetup(meetupData);
+      this.meetups.push(newMeetup);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Митап успешно создан.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Ошибка при создании митапа.",
+      });
+    }
   }
 
   async editMeetup(meetupData: IEditedMeetup): Promise<void> {

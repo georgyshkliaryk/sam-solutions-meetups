@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
-interface INotification {
-  type: "success" | "error" | "info";
+export interface INotification {
+  type: "success" | "error" | "info" | "warning";
   title: string;
   description?: string;
 }
@@ -13,7 +13,11 @@ export class NotificationsStore {
     makeAutoObservable(this);
   }
 
-  setNotification(notification: INotification) {
+  setNotification(notification: INotification): void {
     this.notifications.push(notification);
+  }
+
+  shiftNotification(): void {
+    this.notifications.shift();
   }
 }
