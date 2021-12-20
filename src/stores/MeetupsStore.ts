@@ -13,7 +13,7 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
-  loadingState = false;
+  loadingState = "";
   participantsMap = new Map<string, IParticipant[]>();
   votedUsersMap = new Map<string, IParticipant[]>();
 
@@ -122,24 +122,24 @@ export class MeetupsStore {
   }
 
   async participateInMeetup(meetupId: string): Promise<void> {
-    this.loadingState = true;
+    this.loadingState = meetupId;
     await this.networkRepository.participateInMeetup(meetupId);
     await this.fetchParticipants(meetupId);
-    this.loadingState = false;
+    this.loadingState = "";
   }
 
   async voteForTheme(meetupId: string): Promise<void> {
-    this.loadingState = true;
+    this.loadingState = meetupId;
     await this.networkRepository.voteForTheme(meetupId);
     await this.fetchVotedUsers(meetupId);
-    this.loadingState = false;
+    this.loadingState = "";
   }
 
   async stopParticipateInMeetup(
     meetupId: string,
     userId: string
   ): Promise<void> {
-    this.loadingState = true;
+    this.loadingState = meetupId;
     await this.networkRepository.stopParticipateInMeetup(meetupId);
     this.participantsMap.set(
       meetupId,
@@ -147,11 +147,11 @@ export class MeetupsStore {
         (p: IParticipant) => p.id !== userId
       )
     );
-    this.loadingState = false;
+    this.loadingState = "";
   }
 
   async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
-    this.loadingState = true;
+    this.loadingState = meetupId;
     await this.networkRepository.unvoteForTheme(meetupId);
     this.votedUsersMap.set(
       meetupId,
@@ -159,6 +159,6 @@ export class MeetupsStore {
         (p: IParticipant) => p.id !== userId
       )
     );
-    this.loadingState = false;
+    this.loadingState = "";
   }
 }

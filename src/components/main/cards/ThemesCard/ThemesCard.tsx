@@ -16,7 +16,7 @@ interface IProps {
   item: IMeetup;
   editRights: boolean;
   voted?: IParticipant[];
-  loadingState?: boolean;
+  loadingState?: string;
   user: IUser;
   deleteTheme: (id: string) => void;
   voteForTheme?: (id: string) => void;
@@ -84,10 +84,10 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
             isVoted(props.voted, props.user.id) ? (
               <button
                 onClick={handleUnvoteForTheme}
-                className="meetups-card-footer__button-participating"
-                disabled={props.loadingState}
+                className="themes-card-footer__button-participating"
+                disabled={props.loadingState === props.item.id}
               >
-                {props.loadingState ? (
+                {props.loadingState === props.item.id ? (
                   <Loader
                     type="ThreeDots"
                     color="#00BFFF"
@@ -96,7 +96,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                   />
                 ) : (
                   <>
-                    <span className="material-icons-round meetups-card-footer__button-participating-icon">
+                    <span className="material-icons-round themes-card-footer__button-participating-icon">
                       check_circle_outline
                     </span>
                     <span>Поддерживаю</span>
@@ -106,10 +106,10 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
             ) : (
               <button
                 onClick={handleVoteForTheme}
-                className="meetups-card-footer__button-not-participating"
-                disabled={props.loadingState}
+                className="themes-card-footer__button-not-participating"
+                disabled={props.loadingState === props.item.id}
               >
-                {props.loadingState ? (
+                {props.loadingState === props.item.id ? (
                   <Loader
                     type="ThreeDots"
                     color="#FFFFFF"
@@ -122,7 +122,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
               </button>
             )
           ) : (
-            <div className="meetups-card-footer__button-loading">
+            <div className="themes-card-footer__button-loading">
               <Loader
                 type="ThreeDots"
                 color="#00BFFF"

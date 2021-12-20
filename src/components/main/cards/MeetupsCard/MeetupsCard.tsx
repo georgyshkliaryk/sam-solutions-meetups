@@ -23,7 +23,7 @@ interface IProps {
   editRights: boolean;
   type: string;
   participants?: IParticipant[];
-  loadingState?: boolean;
+  loadingState?: string;
   user: IUser;
   deleteMeetup: (id: string) => void;
   participateInMeetup?: (id: string) => void;
@@ -104,9 +104,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                 <button
                   onClick={handleStopParticipateInMeetup}
                   className="meetups-card-footer__button-participating"
-                  disabled={props.loadingState}
+                  disabled={props.loadingState === props.item.id}
                 >
-                  {props.loadingState ? (
+                  {props.loadingState === props.item.id ? (
                     <Loader
                       type="ThreeDots"
                       color="#00BFFF"
@@ -126,9 +126,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                 <button
                   onClick={handleParticipateInMeetup}
                   className="meetups-card-footer__button-not-participating"
-                  disabled={props.loadingState}
+                  disabled={props.loadingState === props.item.id}
                 >
-                  {props.loadingState ? (
+                  {props.loadingState === props.item.id ? (
                     <Loader
                       type="ThreeDots"
                       color="#FFFFFF"
