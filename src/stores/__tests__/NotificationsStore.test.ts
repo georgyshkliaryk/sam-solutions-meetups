@@ -1,5 +1,7 @@
-import { INotificationDefinintion } from "./../NotificationsStore";
-import { INotification, NotificationsStore } from "../NotificationsStore";
+import {
+  INotificationDefinintion,
+  NotificationsStore,
+} from "../NotificationsStore";
 
 const notificationsStore = new NotificationsStore();
 
