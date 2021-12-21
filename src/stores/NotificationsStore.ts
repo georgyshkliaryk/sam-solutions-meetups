@@ -15,6 +15,10 @@ export class NotificationsStore {
 
   setNotification(notification: INotification): void {
     this.notifications.push(notification);
+    setTimeout(() => {
+      this.shiftNotification();
+    }, 5000);
+    clearTimeout();
   }
 
   shiftNotification(): void {

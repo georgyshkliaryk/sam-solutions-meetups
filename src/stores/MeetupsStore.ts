@@ -13,7 +13,7 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   errorState = false;
-  loadingState = false;
+  loadingState = "";
   participantsMap = new Map<string, IParticipant[]>();
 
   constructor(
@@ -70,6 +70,11 @@ export class MeetupsStore {
       return response;
     } catch {
       this.errorState = true;
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось загрузить митап.",
+      });
     }
   }
 
@@ -99,23 +104,79 @@ export class MeetupsStore {
     await this.meetupsRepository.editMeetup(meetupData);
   }
 
-  async deleteMeetup(id: string) {
-    await this.networkRepository.deleteMeetup(id);
-    this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
+  async updateMeetup(meetupData: IEditedMeetup): Promise<void> {
+    try {
+      await this.meetupsRepository.editMeetup(meetupData);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Митап успешно изменен.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось изменить митап.",
+      });
+    }
+  }
+
+  async deleteMeetup(id: string): Promise<void> {
+    try {
+      await this.networkRepository.deleteMeetup(id);
+      this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Митап успешно удален.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось удалить митап.",
+      });
+    }
   }
 
   async approveTheme(id: string): Promise<void> {
-    await this.editMeetup({
-      id: id,
-      status: MeetupTypes.DRAFT,
-    });
+    try {
+      await this.editMeetup({
+        id: id,
+        status: MeetupTypes.DRAFT,
+      });
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Тема одобрена.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Не удалось одобрить тему.",
+      });
+    }
   }
 
   async publishMeetup(id: string): Promise<void> {
-    await this.editMeetup({
-      id: id,
-      status: MeetupTypes.CONFIRMED,
-    });
+    try {
+      await this.editMeetup({
+        id: id,
+        status: MeetupTypes.CONFIRMED,
+      });
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Митап опубликован.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось опубликовать митап.",
+      });
+    }
   }
 
   async fetchParticipants(id: string) {
@@ -127,24 +188,95 @@ export class MeetupsStore {
   }
 
   async participateInMeetup(meetupId: string): Promise<void> {
-    this.loadingState = true;
-    await this.networkRepository.participateInMeetup(meetupId);
-    await this.fetchParticipants(meetupId);
-    this.loadingState = false;
+    try {
+      this.loadingState = meetupId;
+      await this.networkRepository.participateInMeetup(meetupId);
+      await this.fetchParticipants(meetupId);
+      this.loadingState = "";
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Вы записались на митап.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось записаться на митап.",
+      });
+    }
+  }
+
+  async voteForTheme(meetupId: string): Promise<void> {
+    try {
+      this.loadingState = meetupId;
+      await this.networkRepository.voteForTheme(meetupId);
+      await this.fetchVotedUsers(meetupId);
+      this.loadingState = "";
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Вы поддержали тему.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось поддержать тему.",
+      });
+    }
   }
 
   async stopParticipateInMeetup(
     meetupId: string,
     userId: string
   ): Promise<void> {
-    this.loadingState = true;
-    await this.networkRepository.stopParticipateInMeetup(meetupId);
-    this.participantsMap.set(
-      meetupId,
-      (await this.meetupsRepository.getParticipantsById(meetupId)).filter(
-        (p: IParticipant) => p.id !== userId
-      )
-    );
-    this.loadingState = false;
+    try {
+      this.loadingState = meetupId;
+      await this.networkRepository.stopParticipateInMeetup(meetupId);
+      this.participantsMap.set(
+        meetupId,
+        (await this.meetupsRepository.getParticipantsById(meetupId)).filter(
+          (p: IParticipant) => p.id !== userId
+        )
+      );
+      this.loadingState = "";
+      this.notificationsStore.setNotification({
+        type: "warning",
+        title: "Внимание",
+        description: "Вы отказались от участия в митапе.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось отказаться от участия в митапе.",
+      });
+    }
+  }
+
+  async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
+    try {
+      this.loadingState = meetupId;
+      await this.networkRepository.unvoteForTheme(meetupId);
+      this.votedUsersMap.set(
+        meetupId,
+        (await this.meetupsRepository.getVotedUsersById(meetupId)).filter(
+          (p: IParticipant) => p.id !== userId
+        )
+      );
+      this.loadingState = "";
+      this.notificationsStore.setNotification({
+        type: "warning",
+        title: "Внимание",
+        description: "Вы больше не поддерживаете тему.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось убрать голос с темы.",
+      });
+    }
   }
 }

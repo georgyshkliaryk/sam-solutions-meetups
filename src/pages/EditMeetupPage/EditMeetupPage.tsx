@@ -170,7 +170,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
         editedData.image = null;
       }
 
-      await meetupsStore.editMeetup(editedData);
+      await meetupsStore.updateMeetup(editedData);
       navigate(routes.meetups);
     }
   };

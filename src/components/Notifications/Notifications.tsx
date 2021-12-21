@@ -8,16 +8,6 @@ import "./Notifications.scss";
 const Notifications: React.FC = observer((): ReactElement => {
   const { notificationsStore } = useContext(StoreContext);
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      notificationsStore.shiftNotification();
-    }, 10000);
-
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [notificationsStore]);
-
   return (
     <div className="notifications">
       {notificationsStore.notifications.map((n: INotification, i: number) => (

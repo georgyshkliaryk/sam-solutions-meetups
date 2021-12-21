@@ -58,8 +58,8 @@ export class AuthStore {
       await this.networkRepository.logout();
       this.resetAuth();
       this.notificationsStore.setNotification({
-        type: "success",
-        title: "Успех",
+        type: "info",
+        title: "Инфо",
         description: "Выход выполнен успешно.",
       });
     } catch {
