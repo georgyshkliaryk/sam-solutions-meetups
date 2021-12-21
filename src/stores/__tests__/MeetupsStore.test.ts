@@ -105,7 +105,7 @@ const networkRepository = new NetworkRepository();
 const meetupsRepository = new MeetupsRepository(networkRepository);
 const meetupsStore = new MeetupsStore(meetupsRepository);
 
-test("Initial state", () => {
+test("Initial meetups state", () => {
   expect(meetupsStore.drafts.length).toEqual(0);
   expect(meetupsStore.themes.length).toEqual(0);
   expect(meetupsStore.past.length).toEqual(0);
