@@ -1,6 +1,7 @@
 import classNames from "classnames";
+import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext, useEffect, useRef } from "react";
+import React, { ReactElement, useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import { INotification } from "../../stores/NotificationsStore";
 import "./Notifications.scss";
@@ -8,15 +9,17 @@ import "./Notifications.scss";
 const Notifications: React.FC = observer((): ReactElement => {
   const { notificationsStore } = useContext(StoreContext);
 
+  console.log(toJS(notificationsStore.notifications));
+
   return (
     <div className="notifications">
-      {notificationsStore.notifications.map((n: INotification, i: number) => (
+      {notificationsStore.notifications.map((n: INotification) => (
         <div
           className={classNames(
             "notifications-item",
             `notifications-item-${n.type}`
           )}
-          key={i}
+          key={n.id}
         >
           <p className="notification-item__image">
             {n.type === "success" ? (
@@ -37,7 +40,7 @@ const Notifications: React.FC = observer((): ReactElement => {
           </div>
           <button
             className="notifications-item-button-close"
-            onClick={() => notificationsStore.deleteNotification(i)}
+            onClick={() => notificationsStore.deleteNotification(n.id)}
           >
             <span className="material-icons-round">close</span>
           </button>
