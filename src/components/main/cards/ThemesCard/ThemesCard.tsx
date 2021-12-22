@@ -16,7 +16,7 @@ interface IProps {
   item: IMeetup;
   editRights: boolean;
   voted?: IParticipant[];
-  loadingState?: string;
+  buttonInLoading?: string;
   user: IUser;
   deleteTheme: (id: string) => void;
   voteForTheme?: (id: string) => void;
@@ -85,9 +85,9 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
               <button
                 onClick={handleUnvoteForTheme}
                 className="themes-card-footer__button-participating"
-                disabled={props.loadingState === props.item.id}
+                disabled={props.buttonInLoading === props.item.id}
               >
-                {props.loadingState === props.item.id ? (
+                {props.buttonInLoading === props.item.id ? (
                   <Loader
                     type="ThreeDots"
                     color="#00BFFF"
@@ -107,9 +107,9 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
               <button
                 onClick={handleVoteForTheme}
                 className="themes-card-footer__button-not-participating"
-                disabled={props.loadingState === props.item.id}
+                disabled={props.buttonInLoading === props.item.id}
               >
-                {props.loadingState === props.item.id ? (
+                {props.buttonInLoading === props.item.id ? (
                   <Loader
                     type="ThreeDots"
                     color="#FFFFFF"

@@ -66,7 +66,7 @@ const ThemesPage: React.FC = observer((): ReactElement => {
             item={card}
             editRights={hasUserRights(currentUser, card)}
             deleteTheme={handleDeleteTheme}
-            loadingState={meetupsStore.loadingState}
+            buttonInLoading={meetupsStore.buttonInLoading}
             user={currentUser}
             voted={meetupsStore.votedUsersMap.get(card.id)}
             voteForTheme={handleVoteForTheme}
