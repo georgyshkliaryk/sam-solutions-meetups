@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
@@ -9,12 +8,10 @@ import "./Notifications.scss";
 const Notifications: React.FC = observer((): ReactElement => {
   const { notificationsStore } = useContext(StoreContext);
 
-  console.log(toJS(notificationsStore.notifications));
-
   return (
     <div className="notifications">
       {notificationsStore.notifications.map((n: INotification) => (
-        <div
+        <output
           className={classNames(
             "notifications-item",
             `notifications-item-${n.type}`
@@ -44,7 +41,7 @@ const Notifications: React.FC = observer((): ReactElement => {
           >
             <span className="material-icons-round">close</span>
           </button>
-        </div>
+        </output>
       ))}
     </div>
   );
