@@ -44,6 +44,10 @@ export class MeetupsRepository implements IMeetupsRepository {
     return await this.networkRepository.getParticipantsOfMeetup(id);
   }
 
+  async getVotedUsersById(id: string): Promise<IParticipant[]> {
+    return await this.networkRepository.getVotedUsersOfTheme(id);
+  }
+
   private parseMeetup(meetup: IMeetupFromServer): IMeetup {
     return {
       id: meetup.id,

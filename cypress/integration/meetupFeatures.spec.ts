@@ -7,7 +7,7 @@ describe("tests meetups functionality", () => {
   const themeSpeaker = "Test User";
 
   beforeEach(() => {
-    login({ login: "Sandra", password: "private" });
+    login({ login: "Robbie", password: "private" });
     visitHome();
   });
 

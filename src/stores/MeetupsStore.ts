@@ -13,8 +13,9 @@ import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepo
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   errorState = false;
-  loadingState = "";
+  buttonInLoading = "";
   participantsMap = new Map<string, IParticipant[]>();
+  votedUsersMap = new Map<string, IParticipant[]>();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
@@ -179,12 +180,20 @@ export class MeetupsStore {
     }
   }
 
-  async fetchParticipants(id: string) {
+  async fetchParticipants(id: string): Promise<Map<string, IParticipant[]>> {
     this.participantsMap.set(
       id,
       await this.meetupsRepository.getParticipantsById(id)
     );
     return this.participantsMap;
+  }
+
+  async fetchVotedUsers(id: string): Promise<Map<string, IParticipant[]>> {
+    this.votedUsersMap.set(
+      id,
+      await this.meetupsRepository.getVotedUsersById(id)
+    );
+    return this.votedUsersMap;
   }
 
   async participateInMeetup(meetupId: string): Promise<void> {

@@ -40,6 +40,25 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async getVotedUsersOfTheme(id: string): Promise<IParticipant[]> {
+    const response = await axios.get(`${apiUrls.meetups}/${id}/votedusers`);
+    return await response.data;
+  }
+
+  async voteForTheme(meetupId: string): Promise<IParticipant[]> {
+    const response = await axios.post(
+      `${apiUrls.meetups}/${meetupId}/votedusers`
+    );
+    return await response.data;
+  }
+
+  async unvoteForTheme(meetupId: string): Promise<IParticipant[]> {
+    const response = await axios.delete(
+      `${apiUrls.meetups}/${meetupId}/votedusers`
+    );
+    return await response.data;
+  }
+
   async createMeetup(meetupData: IMeetupToServer): Promise<IMeetupFromServer> {
     const response = await axios.post(apiUrls.meetups, meetupData);
     if (response.status !== 200) {

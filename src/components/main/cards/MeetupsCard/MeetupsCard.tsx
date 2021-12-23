@@ -23,7 +23,7 @@ interface IProps {
   editRights: boolean;
   type: string;
   participants?: IParticipant[];
-  loadingState?: boolean;
+  buttonInLoading?: string;
   user: IUser;
   deleteMeetup: (id: string) => void;
   participateInMeetup?: (id: string) => void;
@@ -104,9 +104,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                 <button
                   onClick={handleStopParticipateInMeetup}
                   className="meetups-card-footer__button-participating"
-                  disabled={props.loadingState}
+                  disabled={props.buttonInLoading === props.item.id}
                 >
-                  {props.loadingState ? (
+                  {props.buttonInLoading === props.item.id ? (
                     <Loader
                       type="ThreeDots"
                       color="#00BFFF"
@@ -126,9 +126,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                 <button
                   onClick={handleParticipateInMeetup}
                   className="meetups-card-footer__button-not-participating"
-                  disabled={props.loadingState}
+                  disabled={props.buttonInLoading === props.item.id}
                 >
-                  {props.loadingState ? (
+                  {props.buttonInLoading === props.item.id ? (
                     <Loader
                       type="ThreeDots"
                       color="#FFFFFF"
@@ -182,7 +182,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
             <span className="material-icons-outlined">delete</span>
           </button>
           <LinkComponent
-            to={`${routes.meetups}/${props.type}/${props.item.id}/edit`}
+            to={`${routes.meetups}/${props.type.toLowerCase()}/${
+              props.item.id
+            }/edit`}
             className="meetups-card-edit-button"
           >
             <span
