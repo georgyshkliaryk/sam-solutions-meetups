@@ -16,6 +16,14 @@
     }
   },
   "buttons": {
+    "commonButtons": {
+      "createMeetup": "Create theme",
+      "cancel": "Cancel",
+      "save": "Save",
+      "preview": "Preview",
+      "create": "Create",
+      "next": "Next"
+    },
     "cardButtons": {
       "voteForTheme": "Promote",
       "unvoteForTheme": "Promoting",
@@ -31,6 +39,10 @@
       "approveTheme": "Approve theme",
       "publishMeetup": "Publish",
       "goBack": "Back"
+    },
+    "authButtons": {
+      "login": "Log in",
+      "logout": "Log out"
     }
   }
 }

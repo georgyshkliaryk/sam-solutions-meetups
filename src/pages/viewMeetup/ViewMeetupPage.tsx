@@ -19,12 +19,15 @@ import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   type: string;
 }
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore, meetupsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const meetupId = useParams();
@@ -272,7 +275,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   className="view-meetup-data-buttons-button-back"
                   to={`${routes.meetups}/${routes.drafts}`}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
                   {hasUserRights(authStore.user, meetup) && (
@@ -289,7 +292,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         className="view-meetup-data-buttons-button-delete"
                         onClick={() => setModalDeleteActive(true)}
                       >
-                        Удалить
+                        {t("buttons.meetupPageButtons.deleteMeetup")}
                       </button>
                     </>
                   )}
@@ -299,7 +302,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       onClick={() => setModalPublishActive(true)}
                       data-cy="view-meetup-button-publish"
                     >
-                      Опубликовать
+                      {t("buttons.meetupPageButtons.publishMeetup")}
                     </button>
                   )}
                 </div>
@@ -310,7 +313,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   className="view-meetup-data-buttons-button-back"
                   to={`${routes.meetups}/${routes.future}`}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
                   {hasUserRights(authStore.user, meetup) && (
@@ -327,7 +330,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         className="view-meetup-data-buttons-button-delete"
                         onClick={() => setModalDeleteActive(true)}
                       >
-                        Удалить
+                        {t("buttons.meetupPageButtons.deleteMeetup")}
                       </button>
                     </>
                   )}
@@ -352,7 +355,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                             <span className="material-icons-round">
                               check_circle_outline
                             </span>
-                            <span>Иду</span>
+                            <span>
+                              {t(
+                                "buttons.meetupPageButtons.stopParticipateInMeetup"
+                              )}
+                            </span>
                           </>
                         )}
                       </button>
@@ -370,7 +377,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                             width={30}
                           />
                         ) : (
-                          <span>Пойду</span>
+                          <span>
+                            {t("buttons.meetupPageButtons.participateInMeetup")}
+                          </span>
                         )}
                       </button>
                     )

@@ -25,8 +25,11 @@ import { getBase64 } from "../../helpers/getBase64";
 import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
+import { useTranslation } from "react-i18next";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const [requiredFilled, setRequiredFilled] = useState(false);
@@ -294,7 +297,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   className="create-meetup-data-buttons-button-back"
                   to={routes.meetups}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="create-meetup-data-buttons-right">
                   <button
@@ -303,7 +306,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     onClick={handleClickNext}
                     data-cy="create-meetup-button-next"
                   >
-                    Далее
+                    {t("buttons.commonButtons.next")}
                   </button>
                 </div>
               </div>
@@ -478,7 +481,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   className="create-meetup-data-buttons-button-back"
                   onClick={() => setRequiredTabOpen(true)}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </button>
                 <div className="create-meetup-data-buttons-right">
                   <button
@@ -486,7 +489,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     className="create-meetup-data-buttons-button-submit"
                     data-cy="create-meetup-button-create"
                   >
-                    Создать
+                    {t("buttons.commonButtons.create")}
                   </button>
                 </div>
               </div>

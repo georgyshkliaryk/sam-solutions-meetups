@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
@@ -10,6 +11,8 @@ import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -98,7 +101,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
           disabled={login === "" || password === ""}
           data-cy="login-button"
         >
-          Войти{" "}
+          {t("buttons.authButtons.login")}{" "}
           <span className="material-icons-round login-page-form__submit-button-icon">
             login
           </span>

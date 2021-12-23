@@ -14,7 +14,7 @@ interface IProps {
 
 const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore } = useContext(StoreContext);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const handleChangeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
   };
@@ -36,7 +36,9 @@ const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
         onClick={handleLogout}
         data-cy="header-button-logout"
       >
-        <span className="header-profile-logout__text">Выйти</span>
+        <span className="header-profile-logout__text">
+          {t("buttons.authButtons.logout")}
+        </span>
         <span className="material-icons-round">logout</span>
       </button>
     </div>

@@ -20,8 +20,11 @@ import { observer } from "mobx-react-lite";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
+import { useTranslation } from "react-i18next";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
@@ -352,7 +355,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   className="edit-meetup-data-buttons-button-back"
                   onClick={() => navigate(routes.meetups)}
                 >
-                  Отмена
+                  {t("buttons.commonButtons.cancel")}
                 </button>
                 <div className="edit-meetup-data-buttons-right">
                   <button
@@ -362,7 +365,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     className="edit-meetup-data-buttons-button-preview"
                     onClick={() => setPreviewOpen(true)}
                   >
-                    Предпросмотр
+                    {t("buttons.commonButtons.preview")}
                   </button>
                   <button
                     disabled={
@@ -371,7 +374,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     type="submit"
                     className="edit-meetup-data-buttons-button-submit"
                   >
-                    Сохранить
+                    {t("buttons.commonButtons.save")}
                   </button>
                 </div>
               </div>
@@ -392,7 +395,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                 className="edit-meetup-data-buttons-button-back"
                 onClick={() => setPreviewOpen(false)}
               >
-                Назад
+                {t("buttons.meetupPageButtons.goBack")}
               </button>
               <div className="edit-meetup-data-buttons-right">
                 <button
@@ -400,7 +403,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   disabled={title?.trim() === "" || description?.trim() === ""}
                   className="edit-meetup-data-buttons-button-submit"
                 >
-                  Опубликовать
+                  {t("buttons.meetupPageButtons.publishMeetup")}
                 </button>
               </div>
             </div>

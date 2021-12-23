@@ -17,8 +17,11 @@ import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import { useTranslation } from "react-i18next";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore, meetupsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const themeId = useParams();
@@ -217,7 +220,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 className="view-theme-data-buttons-button-back"
                 to={`${routes.meetups}`}
               >
-                Назад
+                {t("buttons.meetupPageButtons.goBack")}
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
                 {hasUserRights(authStore.user, meetup) && (
@@ -225,7 +228,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                     className="view-theme-data-buttons-button-delete"
                     onClick={() => setModalDeleteActive(true)}
                   >
-                    Удалить
+                    {t("buttons.meetupPageButtons.deleteMeetup")}
                   </button>
                 )}
                 {authStore.user.roles === UserRoles.CHIEF && (
@@ -234,7 +237,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                     onClick={() => setModalApproveActive(true)}
                     data-cy="view-theme-button-approve"
                   >
-                    Одобрить тему
+                    {t("buttons.meetupPageButtons.approveTheme")}
                   </button>
                 )}
               </div>

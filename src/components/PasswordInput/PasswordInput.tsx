@@ -38,7 +38,7 @@ const PasswordInput: React.FC<IProps> = (props): ReactElement => {
         title={passwordVisible ? "Скрыть пароль" : "Показать пароль"}
       >
         <span className="material-icons-round">
-          {passwordVisible ? "visibility_off" : "visibility"}
+          {passwordVisible ? "visibility" : "visibility_off"}
         </span>
       </label>
     </div>

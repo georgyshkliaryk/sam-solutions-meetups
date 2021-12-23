@@ -16,6 +16,14 @@
     }
   },
   "buttons": {
+    "commonButtons": {
+      "createMeetup": "Создать тему",
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "preview": "Предпросмотр",
+      "create": "Создать",
+      "next": "Далее"
+    },
     "cardButtons": {
       "voteForTheme": "Поддержать",
       "unvoteForTheme": "Поддерживаю",
@@ -31,6 +39,10 @@
       "approveTheme": "Одобрить тему",
       "publishMeetup": "Опубликовать",
       "goBack": "Назад"
+    },
+    "authButtons": {
+      "login": "Войти",
+      "logout": "Выйти"
     }
   }
 }
