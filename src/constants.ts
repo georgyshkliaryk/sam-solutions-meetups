@@ -64,14 +64,20 @@ export interface NavItems {
   [key: string]: NavItem[];
 }
 
+export const LOCALES = {
+  RU: "ru",
+  EN: "en",
+  DE: "de",
+} as const;
+
 export const navItems: NavItems = {
   header: [
     {
-      title: "Митапы",
+      title: "navbar.header.meetups",
       path: routes.meetups,
     },
     {
-      title: "Новости",
+      title: "navbar.header.news",
       path: routes.news,
     },
   ],

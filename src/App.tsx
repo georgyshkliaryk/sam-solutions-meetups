@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, Suspense } from "react";
 import "./App.scss";
 import NewsPage from "./pages/news/NewsPage";
 import { MeetupPageTypes, routes } from "./constants";
@@ -14,93 +14,95 @@ import Notifications from "./components/Notifications/Notifications";
 
 const App: React.FC = (): ReactElement => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={`${routes.meetups}/*`}
-          element={
-            <PrivateRoute>
-              <MeetupsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.themes}/:id`}
-          element={
-            <PrivateRoute>
-              <ViewThemePage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.drafts}/:id`}
-          element={
-            <PrivateRoute>
-              <ViewMeetupPage type={MeetupPageTypes.DRAFT} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.future}/:id`}
-          element={
-            <PrivateRoute>
-              <ViewMeetupPage type={MeetupPageTypes.FUTURE} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.past}/:id`}
-          element={
-            <PrivateRoute>
-              <ViewMeetupPage type={MeetupPageTypes.PAST} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.create}`}
-          element={
-            <PrivateRoute>
-              <CreateMeetupPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.drafts}/:id/edit`}
-          element={
-            <PrivateRoute>
-              <EditMeetupPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.future}/:id/edit`}
-          element={
-            <PrivateRoute>
-              <EditMeetupPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={`${routes.meetups}/${routes.past}/:id/edit`}
-          element={
-            <PrivateRoute>
-              <EditMeetupPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={routes.news}
-          element={
-            <PrivateRoute>
-              <NewsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path={routes.login} element={<LoginPage />} />
-        <Route path="*" element={<Navigate replace to={routes.meetups} />} />
-      </Routes>
-      <Notifications />
-    </BrowserRouter>
+    <Suspense fallback={<div>...</div>}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={`${routes.meetups}/*`}
+            element={
+              <PrivateRoute>
+                <MeetupsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.themes}/:id`}
+            element={
+              <PrivateRoute>
+                <ViewThemePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.drafts}/:id`}
+            element={
+              <PrivateRoute>
+                <ViewMeetupPage type={MeetupPageTypes.DRAFT} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.future}/:id`}
+            element={
+              <PrivateRoute>
+                <ViewMeetupPage type={MeetupPageTypes.FUTURE} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.past}/:id`}
+            element={
+              <PrivateRoute>
+                <ViewMeetupPage type={MeetupPageTypes.PAST} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.create}`}
+            element={
+              <PrivateRoute>
+                <CreateMeetupPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.drafts}/:id/edit`}
+            element={
+              <PrivateRoute>
+                <EditMeetupPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.future}/:id/edit`}
+            element={
+              <PrivateRoute>
+                <EditMeetupPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.meetups}/${routes.past}/:id/edit`}
+            element={
+              <PrivateRoute>
+                <EditMeetupPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={routes.news}
+            element={
+              <PrivateRoute>
+                <NewsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path={routes.login} element={<LoginPage />} />
+          <Route path="*" element={<Navigate replace to={routes.meetups} />} />
+        </Routes>
+        <Notifications />
+      </BrowserRouter>
+    </Suspense>
   );
 };
 
