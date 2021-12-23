@@ -198,10 +198,10 @@ export class MeetupsStore {
 
   async participateInMeetup(meetupId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.participateInMeetup(meetupId);
       await this.fetchParticipants(meetupId);
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "success",
         title: "Успех",
@@ -218,10 +218,10 @@ export class MeetupsStore {
 
   async voteForTheme(meetupId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.voteForTheme(meetupId);
       await this.fetchVotedUsers(meetupId);
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "success",
         title: "Успех",
@@ -241,7 +241,7 @@ export class MeetupsStore {
     userId: string
   ): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.stopParticipateInMeetup(meetupId);
       this.participantsMap.set(
         meetupId,
@@ -249,7 +249,7 @@ export class MeetupsStore {
           (p: IParticipant) => p.id !== userId
         )
       );
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "warning",
         title: "Внимание",
@@ -266,7 +266,7 @@ export class MeetupsStore {
 
   async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.unvoteForTheme(meetupId);
       this.votedUsersMap.set(
         meetupId,
@@ -274,7 +274,7 @@ export class MeetupsStore {
           (p: IParticipant) => p.id !== userId
         )
       );
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "warning",
         title: "Внимание",
