@@ -1,7 +1,12 @@
 {
   "pageTitles": {
     "meetups": "Митапы",
-    "news": "Новости"
+    "news": "Новости",
+    "newMeetup": "Новый митап",
+    "viewTheme": "Просмотр темы",
+    "viewMeetup": "Просмотр митапа",
+    "editMeetup": "Редактирование митапа",
+    "previewMeetup": "Предпросмотр митапа"
   },
   "navbar": {
     "header": {
@@ -13,6 +18,10 @@
       "drafts": "На модерации",
       "future": "Будущие",
       "past": "Прошедшие"
+    },
+    "createMeetup": {
+      "requiredFields": "Обязательные поля",
+      "extraFields": "Дополнительные поля"
     }
   },
   "buttons": {

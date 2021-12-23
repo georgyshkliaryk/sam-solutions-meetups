@@ -1,7 +1,12 @@
 {
   "pageTitles": {
     "meetups": "Meetups",
-    "news": "News"
+    "news": "News",
+    "newMeetup": "New meetup",
+    "viewTheme": "Browse theme",
+    "viewMeetup": "Browse meetup",
+    "editMeetup": "Meetup editing",
+    "previewMeetup": "Meetup pewview"
   },
   "navbar": {
     "header": {
@@ -13,6 +18,10 @@
       "drafts": "Drafts",
       "future": "Future",
       "past": "Past"
+    },
+    "createMeetup": {
+      "requiredFields": "Required fields",
+      "extraFields": "Extra fields"
     }
   },
   "buttons": {

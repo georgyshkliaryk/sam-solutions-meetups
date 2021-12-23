@@ -191,7 +191,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                 </span>
               )}
             </span>
-            Обязательные поля
+            {t("navbar.createMeetup.requiredFields")}
           </label>
           <input
             type="radio"
@@ -210,10 +210,10 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           />
           <label className="create-meetup-nav-item" htmlFor="extraTab">
             <span className="create-meetup-nav-item__icon">2</span>
-            Дополнительные поля
+            {t("navbar.createMeetup.extraFields")}
           </label>
         </fieldset>
-        <MainTitle>Новый митап</MainTitle>
+        <MainTitle>{t("pageTitles.newMeetup")}</MainTitle>
         <p className="create-meetup__description">
           Заполните необходимые поля ниже наиболее подробно, это даст полную
           информацию о предстоящем событии.

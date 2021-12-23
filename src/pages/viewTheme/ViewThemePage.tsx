@@ -99,7 +99,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Просмотр темы</MainTitle>
+        <MainTitle>{t("pageTitles.viewTheme")}</MainTitle>
         <article className="view-theme-data">
           <div className="view-theme-data-item">
             <p className="view-theme-data-label">{t("inputLabels.title")}</p>

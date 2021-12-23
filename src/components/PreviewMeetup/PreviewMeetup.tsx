@@ -21,7 +21,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
 
   return (
     <>
-      <MainTitle>Предпросмотр митапа</MainTitle>
+      <MainTitle>{t("pageTitles.previewMeetup")}</MainTitle>
       <article className="preview-meetup-data">
         <div className="preview-meetup-data-item">
           <img

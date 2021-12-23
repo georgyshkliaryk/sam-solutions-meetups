@@ -190,7 +190,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       <Main>
         {!previewOpen ? (
           <>
-            <MainTitle>Редактирование митапа</MainTitle>
+            <MainTitle>{t("pageTitles.editMeetup")}</MainTitle>
             <form onSubmit={handleEditMeetup}>
               <div className="edit-meetup-data">
                 <div className="edit-meetup__image-wrapper">

@@ -140,7 +140,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Просмотр митапа</MainTitle>
+        <MainTitle>{t("pageTitles.viewMeetup")}</MainTitle>
         <article className="view-meetup-data">
           <div className="view-meetup-data-item">
             <img
