@@ -7,10 +7,10 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/login/LoginPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewThemePage from "./pages/viewTheme/ViewThemePage";
-import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import CreateMeetupPage from "./pages/createMeetup/CreateMeetupPage";
 import EditMeetupPage from "./pages/EditMeetupPage/EditMeetupPage";
 import Notifications from "./components/Notifications/Notifications";
+import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 
 const App: React.FC = (): ReactElement => {
   return (

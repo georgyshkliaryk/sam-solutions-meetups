@@ -14,8 +14,8 @@ interface IProps {
 
 const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore } = useContext(StoreContext);
-  const { t, i18n } = useTranslation();
-  const handleChangeLanguage = (lang: any) => {
+  const { i18n } = useTranslation();
+  const handleChangeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
   };
 

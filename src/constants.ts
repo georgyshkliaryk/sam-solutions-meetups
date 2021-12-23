@@ -83,19 +83,19 @@ export const navItems: NavItems = {
   ],
   meetups: [
     {
-      title: "Темы",
+      title: "navbar.main.themes",
       path: routes.themes,
     },
     {
-      title: "На модерации",
+      title: "navbar.main.drafts",
       path: routes.drafts,
     },
     {
-      title: "Будущие",
+      title: "navbar.main.future",
       path: routes.future,
     },
     {
-      title: "Прошедшие",
+      title: "navbar.main.past",
       path: routes.past,
     },
   ],

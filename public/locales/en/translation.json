@@ -7,6 +7,12 @@
     "header": {
       "meetups": "Meetups",
       "news": "News"
+    },
+    "main": {
+      "themes": "Themes",
+      "drafts": "Drafts",
+      "future": "Future",
+      "past": "Past"
     }
   }
 }
