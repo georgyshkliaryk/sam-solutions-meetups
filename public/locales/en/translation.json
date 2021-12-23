@@ -82,5 +82,39 @@
       "maxFileSize": "Maximum file size",
       "allowedFormats": "Permitted formats"
     }
+  },
+  "declinations": {
+    "meetups": {
+      "themes": {
+        "themeProposed1": "theme proposed",
+        "themeProposed2": "themes proposed",
+        "themeProposed3": "themes proposed"
+      },
+      "drafts": {
+        "meetupOnModeration1": "meetup on moderation",
+        "meetupOnModeration2": "meetups on moderation",
+        "meetupOnModeration3": "meetups on moderation"
+      },
+      "future": {
+        "meetupPublished1": "meetup published",
+        "meetupPublished2": "meetups published",
+        "meetupPublished3": "meetups published"
+      },
+      "past": {
+        "meetupPassed1": "meetup is over",
+        "meetupPassed2": "meetups are over",
+        "meetupPassed3": "meetups are over"
+      }
+    },
+    "votedUsers": {
+      "voted1": "supports",
+      "voted2": "support",
+      "voted3": "support"
+    },
+    "participants": {
+      "participants1": "person will go",
+      "participants2": "persons will go",
+      "participants3": "persons will go"
+    }
   }
 }

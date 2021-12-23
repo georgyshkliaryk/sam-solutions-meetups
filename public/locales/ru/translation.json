@@ -82,5 +82,39 @@
       "maxFileSize": "Максимальный размер файла",
       "allowedFormats": "Разрешенные форматы"
     }
+  },
+  "declinations": {
+    "meetups": {
+      "themes": {
+        "themeProposed1": "тема предложена",
+        "themeProposed2": "темы предложены",
+        "themeProposed3": "тем предложено"
+      },
+      "drafts": {
+        "meetupOnModeration1": "митап на модерации",
+        "meetupOnModeration2": "митапа на модерации",
+        "meetupOnModeration3": "митапов на модерации"
+      },
+      "future": {
+        "meetupPublished1": "митап опубликован",
+        "meetupPublished2": "митапа опубликовано",
+        "meetupPublished3": "митапов опубликовано"
+      },
+      "past": {
+        "meetupPassed1": "митап прошел",
+        "meetupPassed2": "митапа прошло",
+        "meetupPassed3": "митапов прошло"
+      }
+    },
+    "votedUsers": {
+      "voted1": "поддерживает",
+      "voted2": "поддерживают",
+      "voted3": "поддерживают"
+    },
+    "participants": {
+      "participants1": "человек идет",
+      "participants2": "человека идут",
+      "participants3": "человек идут"
+    }
   }
 }

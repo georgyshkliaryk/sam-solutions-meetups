@@ -130,12 +130,36 @@ interface IDeclination {
 }
 
 export const NumberDeclination: IDeclination = {
-  themes: ["тема предложена", "темы предложены", "тем предложено"],
-  drafts: ["митап на модерации", "митапа на модерации", "митапов на модерации"],
-  future: ["митап опубликован", "митапа опубликовано", "митапов опубликовано"],
-  past: ["митап прошел", "митапа прошло", "митапов прошло"],
-  votedUsers: ["поддерживает", "поддерживают", "поддерживают"],
-  participants: ["человек идет", "человека идут", "человек идут"],
+  themes: [
+    "declinations.meetups.themes.themeProposed1",
+    "declinations.meetups.themes.themeProposed2",
+    "declinations.meetups.themes.themeProposed3",
+  ],
+  drafts: [
+    "declinations.meetups.drafts.meetupOnModeration1",
+    "declinations.meetups.drafts.meetupOnModeration2",
+    "declinations.meetups.drafts.meetupOnModeration3",
+  ],
+  future: [
+    "declinations.meetups.future.meetupPublished1",
+    "declinations.meetups.future.meetupPublished2",
+    "declinations.meetups.future.meetupPublished3",
+  ],
+  past: [
+    "declinations.meetups.past.meetupPassed1",
+    "declinations.meetups.past.meetupPassed2",
+    "declinations.meetups.past.meetupPassed3",
+  ],
+  votedUsers: [
+    "declinations.votedUsers.voted1",
+    "declinations.votedUsers.voted2",
+    "declinations.votedUsers.voted3",
+  ],
+  participants: [
+    "declinations.participants.participants1",
+    "declinations.participants.participants2",
+    "declinations.participants.participants3",
+  ],
 };
 
 export const avatarColors: string[] = [
