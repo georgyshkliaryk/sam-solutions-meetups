@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { NumberDeclination } from "../../../../constants";
 import { numberDeclination } from "../../../../helpers/declination";
@@ -29,6 +30,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const isVoted = (voted: IParticipant[], id: string): boolean => {
     return voted.some((p: IParticipant): boolean => p.id === id);
@@ -99,7 +101,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                     <span className="material-icons-round themes-card-footer__button-participating-icon">
                       check_circle_outline
                     </span>
-                    <span>Поддерживаю</span>
+                    <span>{t("buttons.cardButtons.unvoteForTheme")}</span>
                   </>
                 )}
               </button>
@@ -117,7 +119,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                     width={30}
                   />
                 ) : (
-                  <span>Поддержать</span>
+                  <span>{t("buttons.cardButtons.voteForTheme")}</span>
                 )}
               </button>
             )

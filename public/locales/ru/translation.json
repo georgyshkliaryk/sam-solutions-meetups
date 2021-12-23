@@ -14,5 +14,23 @@
       "future": "Будущие",
       "past": "Прошедшие"
     }
+  },
+  "buttons": {
+    "cardButtons": {
+      "voteForTheme": "Поддержать",
+      "unvoteForTheme": "Поддерживаю",
+      "participateInMeetup": "Пойду",
+      "stopParticipateInMeetup": "Иду"
+    },
+    "meetupPageButtons": {
+      "deleteMeetup": "Удалить",
+      "participateInMeetup": "Пойду",
+      "stopParticipateInMeetup": "Иду",
+      "voteForTheme": "Поддержать",
+      "unvoteForTheme": "Поддерживаю",
+      "approveTheme": "Одобрить тему",
+      "publishMeetup": "Опубликовать",
+      "goBack": "Назад"
+    }
   }
 }

@@ -14,5 +14,23 @@
       "future": "Future",
       "past": "Past"
     }
+  },
+  "buttons": {
+    "cardButtons": {
+      "voteForTheme": "Promote",
+      "unvoteForTheme": "Promoting",
+      "participateInMeetup": "Participate",
+      "stopParticipateInMeetup": "Participating"
+    },
+    "meetupPageButtons": {
+      "deleteMeetup": "Delete",
+      "participateInMeetup": "Participate",
+      "stopParticipateInMeetup": "Participating",
+      "voteForTheme": "Promote",
+      "unvoteForTheme": "Promoting",
+      "approveTheme": "Approve theme",
+      "publishMeetup": "Publish",
+      "goBack": "Back"
+    }
   }
 }

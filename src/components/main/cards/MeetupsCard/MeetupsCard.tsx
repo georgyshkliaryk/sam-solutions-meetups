@@ -17,6 +17,7 @@ import {
 } from "../../../../repositories/interfaces/INetworkRepository";
 import Loader from "react-loader-spinner";
 import { numberDeclination } from "../../../../helpers/declination";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   item: IMeetup;
@@ -36,6 +37,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const isParticipating = (
     participants: IParticipant[],
@@ -118,7 +120,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                       <span className="material-icons-round meetups-card-footer__button-participating-icon">
                         check_circle_outline
                       </span>
-                      <span>Иду</span>
+                      <span>
+                        {t("buttons.cardButtons.stopParticipateInMeetup")}
+                      </span>
                     </>
                   )}
                 </button>
@@ -136,7 +140,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                       width={30}
                     />
                   ) : (
-                    <span>Пойду</span>
+                    <span>{t("buttons.cardButtons.participateInMeetup")}</span>
                   )}
                 </button>
               )
