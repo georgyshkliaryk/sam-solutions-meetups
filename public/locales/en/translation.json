@@ -1,0 +1,12 @@
+{
+  "pageTitles": {
+    "meetups": "Meetups",
+    "news": "News"
+  },
+  "navbar": {
+    "header": {
+      "meetups": "Meetups",
+      "news": "News"
+    }
+  }
+}
