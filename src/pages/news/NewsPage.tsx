@@ -11,8 +11,12 @@ import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./NewsPage.scss";
 
+import { useTranslation } from "react-i18next";
+
 const NewsPage: React.FC = (): ReactElement => {
   const { authStore } = useContext(StoreContext);
+  const { t } = useTranslation();
+
   if (authStore.user !== undefined) {
     return (
       <div className="news">
@@ -24,7 +28,7 @@ const NewsPage: React.FC = (): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>{navItems.header[1].title}</MainTitle>
+          <MainTitle>{t("pageTitles.news")}</MainTitle>
         </Main>
       </div>
     );

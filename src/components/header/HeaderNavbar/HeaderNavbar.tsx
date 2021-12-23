@@ -3,11 +3,15 @@ import { NavItem } from "../../../constants";
 import LinkComponent from "../../LinkComponent/LinkComponent";
 import "./HeaderNavbar.scss";
 
+import { useTranslation } from "react-i18next";
+
 interface IProps {
   items: NavItem[];
 }
 
 const HeaderNavbar: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <nav className="header__navbar">
       {props.items.map((item: NavItem) => (
@@ -17,7 +21,7 @@ const HeaderNavbar: React.FC<IProps> = (props): ReactElement => {
           activeClassName="header__navbar-link-item-is-active"
           key={item.path}
         >
-          {item.title}
+          {t(item.title)}
         </LinkComponent>
       ))}
     </nav>
