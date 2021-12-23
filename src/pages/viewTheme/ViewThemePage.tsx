@@ -156,7 +156,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
               </div>
             ) : voted !== undefined && voted.length === 0 ? (
               <div className="view-theme-data-content">
-                <i>Пока никто не поддержал тему</i>
+                <i>{t("fillers.noSupporters")}</i>
               </div>
             ) : (
               <div className="view-theme-data-content">

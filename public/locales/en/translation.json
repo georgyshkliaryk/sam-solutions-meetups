@@ -6,7 +6,10 @@
     "viewTheme": "Browse theme",
     "viewMeetup": "Browse meetup",
     "editMeetup": "Meetup editing",
-    "previewMeetup": "Meetup pewview"
+    "previewMeetup": "Meetup prewview"
+  },
+  "pageDescriptions": {
+    "newMeetup": "Fill in the required fields below in more detail, this will give complete information about the upcoming event."
   },
   "navbar": {
     "header": {
@@ -64,6 +67,20 @@
     "start": "Start",
     "finish": "Ending",
     "place": "Location",
-    "timeAndPlace": "Time and place"
+    "timeAndPlace": "Time and place",
+    "uploadedImage": "Uploaded image"
+  },
+  "fillers": {
+    "noSupporters": "So far no one has supported the topic",
+    "noTimeAndPlace": "Time and location not specified"
+  },
+  "dropZoneSection": {
+    "dragImages": "Drag an image here or ",
+    "upload": "upload",
+    "fileSize": "File size",
+    "errors": {
+      "maxFileSize": "Maximum file size",
+      "allowedFormats": "Permitted formats"
+    }
   }
 }

@@ -215,8 +215,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
         </fieldset>
         <MainTitle>{t("pageTitles.newMeetup")}</MainTitle>
         <p className="create-meetup__description">
-          Заполните необходимые поля ниже наиболее подробно, это даст полную
-          информацию о предстоящем событии.
+          {t("pageDescriptions.newMeetup")}
         </p>
         <form className="create-meetup-data" onSubmit={handleCreateMeetup}>
           {requiredTabOpen ? (
@@ -396,7 +395,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                 imageTypesRegex.test(file.type) ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
-                      Загруженные изображения
+                      {t("inputLabels.uploadedImage")}
                     </p>
                     <div className="create-meetup-data-content-uploaded-image-icon">
                       <span className="material-icons-outlined create-meetup-data-content-uploaded-image-icon__image">
@@ -405,8 +404,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       <div className="create-meetup-data-content-uploaded-image-icon-text">
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
-                          Размер файла: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
-                          Mb{" "}
+                          {t("dropZoneSection.fileSize")}:{" "}
+                          {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
                         </p>
                       </div>
                       <button
@@ -443,12 +442,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       alt="Drop zone"
                       className="create-meetup-data-content-dragndrop-icon"
                     />
-                    Перетащите изображение сюда или{" "}
+                    {t("dropZoneSection.dragImages")}
                     <label
                       htmlFor="image-upload"
                       className="create-meetup-data-content-dragndrop__label"
                     >
-                      загрузите
+                      {t("dropZoneSection.upload")}
                     </label>
                     &nbsp;(.jpeg, .png, .jpg)
                     <input
@@ -470,8 +469,9 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                           : "create-meetup-data-content-dragndrop__error-hidden"
                       }
                     >
-                      Максимальный размер файла: 1 Mb <br />
-                      Разрешенные форматы: .png .jpg .jpeg
+                      {t("dropZoneSection.errors.maxFileSize")}: 1 Mb <br />
+                      {t("dropZoneSection.errors.allowedFormats")}: .png .jpg
+                      .jpeg
                     </p>
                   </div>
                 )}

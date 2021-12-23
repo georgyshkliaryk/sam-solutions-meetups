@@ -158,7 +158,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                 {t("inputLabels.timeAndPlace")}
               </p>
               <p className="view-theme-data-content">
-                <i>Время и место проведения не указано</i>
+                <i>{t("fillers.noTimeAndPlace")}</i>
               </p>
             </div>
           ) : (
