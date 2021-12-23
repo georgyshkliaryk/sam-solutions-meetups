@@ -1,3 +1,4 @@
+import { NotificationsStore } from "./../NotificationsStore";
 import { apiUrls } from "./../../constants";
 import { IMeetupFromServer } from "./../../repositories/interfaces/INetworkRepository";
 import axios from "axios";
@@ -103,9 +104,14 @@ const testParsedMeetups: IMeetup[] = [
 
 const networkRepository = new NetworkRepository();
 const meetupsRepository = new MeetupsRepository(networkRepository);
-const meetupsStore = new MeetupsStore(meetupsRepository, networkRepository);
+const notificationsStore = new NotificationsStore();
+const meetupsStore = new MeetupsStore(
+  meetupsRepository,
+  networkRepository,
+  notificationsStore
+);
 
-test("Initial state", () => {
+test("Initial meetups state", () => {
   expect(meetupsStore.drafts.length).toEqual(0);
   expect(meetupsStore.themes.length).toEqual(0);
   expect(meetupsStore.past.length).toEqual(0);

@@ -1,0 +1,103 @@
+@import "../../constants.scss";
+
+.notifications {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 5;
+}
+
+.notifications-item {
+  background-color: #ffff;
+  border-radius: 0.25rem;
+  box-shadow: 0px 7px 20px rgba(51, 63, 82, 0.25);
+  padding: 1rem;
+  width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  animation: slide-in 0.5s forwards;
+  -webkit-animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+
+.notifications-item-text__title,
+.notifications-item-text__description {
+  text-align: left;
+}
+
+.notifications-item-text__description {
+  @include font-semi-light;
+  margin-top: 0.5rem;
+}
+
+.notifications-item-success {
+  border-bottom: 0.25rem solid $color-success;
+  .notifications-item-text__title {
+    color: $color-success;
+  }
+  .notification-item__image {
+    color: $color-success;
+  }
+}
+
+.notifications-item-error {
+  border-bottom: 0.25rem solid $color-error;
+  .notifications-item-text__title {
+    color: $color-error;
+  }
+  .notification-item__image {
+    color: $color-error;
+  }
+}
+
+.notifications-item-warning {
+  border-bottom: 0.25rem solid $color-warning;
+  .notifications-item-text__title {
+    color: $color-warning;
+  }
+  .notification-item__image {
+    color: $color-warning;
+  }
+}
+
+.notifications-item-info {
+  border-bottom: 0.25rem solid $color-primary2;
+  .notifications-item-text__title {
+    color: $color-primary2;
+  }
+  .notification-item__image {
+    color: $color-primary2;
+  }
+}
+
+.notifications-item-button-close {
+  margin: auto 0 auto auto;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.notifications-item-button-close:hover {
+  transform: scale(1.2);
+  color: $color-error;
+}

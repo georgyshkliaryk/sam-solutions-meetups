@@ -1,3 +1,4 @@
+import { NotificationsStore } from "./NotificationsStore";
 import {
   ILoginData,
   IUser,
@@ -9,7 +10,10 @@ export class AuthStore {
   user: IUser | undefined = undefined;
   private authenticated = false;
 
-  constructor(private readonly networkRepository: NetworkRepository) {
+  constructor(
+    private readonly networkRepository: NetworkRepository,
+    private readonly notificationsStore: NotificationsStore
+  ) {
     makeAutoObservable(this);
     this.loginWithCookies();
   }
@@ -21,6 +25,11 @@ export class AuthStore {
       this.user = response.user;
     } catch (err) {
       this.resetAuth();
+      this.notificationsStore.setNotification({
+        type: "warning",
+        title: "Внимание",
+        description: "Данные для входа больше не дейстуют. Выполните вход.",
+      });
     }
   }
 
@@ -29,14 +38,37 @@ export class AuthStore {
       const loginResponse = await this.networkRepository.login(loginData);
       this.user = loginResponse.user;
       this.setAuthenticated(true);
-    } catch (err) {
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: "Успех",
+        description: "Вход выполнен успешно.",
+      });
+    } catch {
       this.resetAuth();
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Вход не выполнен.",
+      });
     }
   }
 
   async logout(): Promise<void> {
-    await this.networkRepository.logout();
-    this.resetAuth();
+    try {
+      await this.networkRepository.logout();
+      this.resetAuth();
+      this.notificationsStore.setNotification({
+        type: "info",
+        title: "Инфо",
+        description: "Выход выполнен успешно.",
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: "Ошибка",
+        description: "Не удалось выйти.",
+      });
+    }
   }
 
   private setAuthenticated(authenticated: boolean) {

@@ -3,17 +3,25 @@ import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRe
 import { MeetupsRepository } from "./../repositories/MeetupsRepository/MeetupsRepository";
 import { MeetupsStore } from "./../stores/MeetupsStore";
 import React from "react";
+import { NotificationsStore } from "../stores/NotificationsStore";
 
 interface IStoreContext {
   meetupsStore: MeetupsStore;
   authStore: AuthStore;
+  notificationsStore: NotificationsStore;
 }
 const networkRepository = new NetworkRepository();
 const meetupsRepository = new MeetupsRepository(networkRepository);
-const meetupsStore = new MeetupsStore(meetupsRepository, networkRepository);
-const authStore = new AuthStore(networkRepository);
+const notificationsStore = new NotificationsStore();
+const meetupsStore = new MeetupsStore(
+  meetupsRepository,
+  networkRepository,
+  notificationsStore
+);
+const authStore = new AuthStore(networkRepository, notificationsStore);
 
 export const StoreContext = React.createContext<IStoreContext>({
   meetupsStore,
   authStore,
+  notificationsStore,
 });

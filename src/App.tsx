@@ -10,6 +10,7 @@ import ViewThemePage from "./pages/viewTheme/ViewThemePage";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import CreateMeetupPage from "./pages/createMeetup/CreateMeetupPage";
 import EditMeetupPage from "./pages/EditMeetupPage/EditMeetupPage";
+import Notifications from "./components/Notifications/Notifications";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -98,6 +99,7 @@ const App: React.FC = (): ReactElement => {
         <Route path={routes.login} element={<LoginPage />} />
         <Route path="*" element={<Navigate replace to={routes.meetups} />} />
       </Routes>
+      <Notifications />
     </BrowserRouter>
   );
 };
