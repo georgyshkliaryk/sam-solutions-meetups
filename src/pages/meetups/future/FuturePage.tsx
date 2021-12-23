@@ -57,7 +57,7 @@ const FuturePage: React.FC = observer((): ReactElement => {
             editRights={hasUserRights(currentUser, card)}
             type={MeetupPageTypes.FUTURE}
             participants={meetupsStore.participantsMap.get(card.id)}
-            loadingState={meetupsStore.loadingState}
+            buttonInLoading={meetupsStore.buttonInLoading}
             user={currentUser}
             deleteMeetup={handleDeleteMeetup}
             participateInMeetup={handleParticipateInMeetup}

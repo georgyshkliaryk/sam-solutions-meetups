@@ -338,9 +338,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       <button
                         className="view-meetup-data-buttons-button-participating"
                         onClick={handleStopParticipateInMeetup}
-                        disabled={meetupsStore.loadingState}
+                        disabled={meetupsStore.buttonInLoading === meetupId.id}
                       >
-                        {meetupsStore.loadingState ? (
+                        {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
                             color="#00BFFF"
@@ -360,9 +360,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       <button
                         className="view-meetup-data-buttons-button-not-participating"
                         onClick={handleParticipateInMeetup}
-                        disabled={meetupsStore.loadingState}
+                        disabled={meetupsStore.buttonInLoading === meetupId.id}
                       >
-                        {meetupsStore.loadingState ? (
+                        {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
                             color="#00BFFF"

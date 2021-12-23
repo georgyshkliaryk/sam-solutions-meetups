@@ -13,8 +13,9 @@ export class MeetupsStore {
   meetups: IMeetup[] = [];
   participants: IParticipant[] | undefined = undefined;
   errorState = false;
-  loadingState = false;
+  buttonInLoading = "";
   participantsMap = new Map<string, IParticipant[]>();
+  votedUsersMap = new Map<string, IParticipant[]>();
 
   constructor(
     private readonly meetupsRepository: MeetupsRepository,
@@ -85,7 +86,7 @@ export class MeetupsStore {
     await this.meetupsRepository.editMeetup(meetupData);
   }
 
-  async deleteMeetup(id: string) {
+  async deleteMeetup(id: string): Promise<void> {
     await this.networkRepository.deleteMeetup(id);
     this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
   }
@@ -104,7 +105,7 @@ export class MeetupsStore {
     });
   }
 
-  async fetchParticipants(id: string) {
+  async fetchParticipants(id: string): Promise<Map<string, IParticipant[]>> {
     this.participantsMap.set(
       id,
       await this.meetupsRepository.getParticipantsById(id)
@@ -112,18 +113,33 @@ export class MeetupsStore {
     return this.participantsMap;
   }
 
+  async fetchVotedUsers(id: string): Promise<Map<string, IParticipant[]>> {
+    this.votedUsersMap.set(
+      id,
+      await this.meetupsRepository.getVotedUsersById(id)
+    );
+    return this.votedUsersMap;
+  }
+
   async participateInMeetup(meetupId: string): Promise<void> {
-    this.loadingState = true;
+    this.buttonInLoading = meetupId;
     await this.networkRepository.participateInMeetup(meetupId);
     await this.fetchParticipants(meetupId);
-    this.loadingState = false;
+    this.buttonInLoading = "";
+  }
+
+  async voteForTheme(meetupId: string): Promise<void> {
+    this.buttonInLoading = meetupId;
+    await this.networkRepository.voteForTheme(meetupId);
+    await this.fetchVotedUsers(meetupId);
+    this.buttonInLoading = "";
   }
 
   async stopParticipateInMeetup(
     meetupId: string,
     userId: string
   ): Promise<void> {
-    this.loadingState = true;
+    this.buttonInLoading = meetupId;
     await this.networkRepository.stopParticipateInMeetup(meetupId);
     this.participantsMap.set(
       meetupId,
@@ -131,6 +147,18 @@ export class MeetupsStore {
         (p: IParticipant) => p.id !== userId
       )
     );
-    this.loadingState = false;
+    this.buttonInLoading = "";
+  }
+
+  async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
+    this.buttonInLoading = meetupId;
+    await this.networkRepository.unvoteForTheme(meetupId);
+    this.votedUsersMap.set(
+      meetupId,
+      (await this.meetupsRepository.getVotedUsersById(meetupId)).filter(
+        (p: IParticipant) => p.id !== userId
+      )
+    );
+    this.buttonInLoading = "";
   }
 }

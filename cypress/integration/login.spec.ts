@@ -4,7 +4,7 @@ import { routes } from "../../src/constants";
 describe("performs login", () => {
   it("logs in correctly", () => {
     cy.visit(routes.login);
-    login({ login: "Sandra", password: "private" });
+    login({ login: "Robbie", password: "private" });
     visitHome();
   });
 });

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Navigate } from "react-router";
 import LinkComponent from "../../../components/LinkComponent/LinkComponent";
 import ThemesCard from "../../../components/main/cards/ThemesCard/ThemesCard";
@@ -12,11 +12,28 @@ import "./ThemesPage.scss";
 
 const ThemesPage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
-
   const currentUser = authStore.user;
+
+  useEffect(() => {
+    if (meetupsStore.themes.length > 0) {
+      meetupsStore.themes.forEach(async (m: IMeetup) => {
+        await meetupsStore.fetchVotedUsers(m.id);
+      });
+    }
+  }, [meetupsStore, meetupsStore.future]);
 
   const handleDeleteTheme = (id: string) => {
     meetupsStore.deleteMeetup(id);
+  };
+
+  const handleVoteForTheme = async (id: string) => {
+    await meetupsStore.voteForTheme(id);
+  };
+
+  const handleUnvoteForTheme = async (id: string) => {
+    if (currentUser !== undefined) {
+      await meetupsStore.unvoteForTheme(id, currentUser.id);
+    }
   };
 
   if (currentUser === undefined) {
@@ -49,6 +66,11 @@ const ThemesPage: React.FC = observer((): ReactElement => {
             item={card}
             editRights={hasUserRights(currentUser, card)}
             deleteTheme={handleDeleteTheme}
+            buttonInLoading={meetupsStore.buttonInLoading}
+            user={currentUser}
+            voted={meetupsStore.votedUsersMap.get(card.id)}
+            voteForTheme={handleVoteForTheme}
+            unvoteForTheme={handleUnvoteForTheme}
           />
         ))}
       </div>
