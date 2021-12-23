@@ -227,7 +227,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createTitle"
                     className="create-meetup-data-content__label"
                   >
-                    Название
+                    {t("inputLabels.title")}
                   </label>
                   <input
                     type="text"
@@ -249,7 +249,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createSpeaker"
                     className="create-meetup-data-content__label"
                   >
-                    Спикер
+                    {t("inputLabels.speaker")}
                   </label>
                   <input
                     type="text"
@@ -272,7 +272,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createDescription"
                     className="create-meetup-data-content__label"
                   >
-                    Описание
+                    {t("inputLabels.description")}
                   </label>
                   <textarea
                     className={classNames(
@@ -320,7 +320,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateStart"
                       className="create-meetup-data-content__label"
                     >
-                      Начало
+                      {t("inputLabels.start")}
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}
@@ -353,7 +353,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateEnd"
                       className="create-meetup-data-content__label"
                     >
-                      Окончание
+                      {t("inputLabels.finish")}
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}
@@ -381,7 +381,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createPlace"
                     className="create-meetup-data-content__label"
                   >
-                    Место проведения
+                    {t("inputLabels.place")}
                   </label>
                   <input
                     type="text"

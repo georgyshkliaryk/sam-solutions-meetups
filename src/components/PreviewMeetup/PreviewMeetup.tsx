@@ -4,6 +4,7 @@ import "./PreviewMeetup.scss";
 import MeetupDefaultImage from "../../pages/viewMeetup/assets/MeetupDefaultImage.svg";
 import dateFormat from "dateformat";
 import Avatar from "../Avatar/Avatar";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   title: string;
@@ -16,6 +17,8 @@ interface IProps {
 }
 
 const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <>
       <MainTitle>Предпросмотр митапа</MainTitle>
@@ -31,7 +34,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </p>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Время и место проведения</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.timeAndPlace")}
+          </p>
           <div className="preview-meetup-data-content preview-meetup-data-content-schedule">
             {props.start && (
               <>
@@ -77,7 +82,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </div>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Спикер</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.speaker")}
+          </p>
           <div className="preview-meetup-data-content">
             {props.speaker && (
               <Avatar
@@ -92,7 +99,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </div>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Описание</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.description")}
+          </p>
           <div className="preview-meetup-data-content preview-meetup-data-content__description">
             {props.description}
           </div>

@@ -102,13 +102,13 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
         <MainTitle>Просмотр темы</MainTitle>
         <article className="view-theme-data">
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Название</p>
+            <p className="view-theme-data-label">{t("inputLabels.title")}</p>
             <p className="view-theme-data-content view-theme-data-content__title">
               {meetup.title}
             </p>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Автор</p>
+            <p className="view-theme-data-label">{t("inputLabels.author")}</p>
             <div className="view-theme-data-content">
               {meetup && (
                 <Avatar
@@ -123,13 +123,17 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             </div>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Описание</p>
+            <p className="view-theme-data-label">
+              {t("inputLabels.description")}
+            </p>
             <div className="view-theme-data-content view-theme-data-content__description">
               {meetup.description}
             </div>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Поддерживают</p>
+            <p className="view-theme-data-label">
+              {t("inputLabels.supporters")}
+            </p>
 
             {voted !== undefined && voted.length !== 0 ? (
               <div className="view-theme-data-content">

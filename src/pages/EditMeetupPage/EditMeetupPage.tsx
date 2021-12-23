@@ -233,7 +233,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editTitle"
                     className="edit-meetup-data-item__label"
                   >
-                    Тема
+                    {t("inputLabels.theme")}
                   </label>
                   <input
                     type="text"
@@ -257,7 +257,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="editStartDate"
                       className="edit-meetup-data-item__label"
                     >
-                      Начало
+                      {t("inputLabels.start")}
                     </label>
                     <DatePicker
                       id="editStartDate"
@@ -279,7 +279,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="editEndDate"
                       className="edit-meetup-data-item__label"
                     >
-                      Окончание
+                      {t("inputLabels.finish")}
                     </label>
                     <DatePicker
                       id="editEndDate"
@@ -300,7 +300,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editPlace"
                     className="edit-meetup-data-item__label"
                   >
-                    Место проведения
+                    {t("inputLabels.place")}
                   </label>
                   <input
                     type="text"
@@ -315,7 +315,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editSpeaker"
                     className="edit-meetup-data-item__label"
                   >
-                    Спикер
+                    {t("inputLabels.speaker")}
                   </label>
                   <input
                     type="text"
@@ -329,7 +329,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editDescription"
                     className="edit-meetup-data-item__label"
                   >
-                    Описание
+                    {t("inputLabels.description")}
                   </label>
                   <textarea
                     name="editDescription"

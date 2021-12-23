@@ -44,5 +44,17 @@
       "login": "Войти",
       "logout": "Выйти"
     }
+  },
+  "inputLabels": {
+    "title": "Название",
+    "theme": "Тема",
+    "description": "Описание",
+    "supporters": "Поддерживают",
+    "author": "Автор",
+    "speaker": "Спикер",
+    "start": "Начало",
+    "finish": "Окончание",
+    "place": "Место проведения",
+    "timeAndPlace": "Время и место проведения"
   }
 }

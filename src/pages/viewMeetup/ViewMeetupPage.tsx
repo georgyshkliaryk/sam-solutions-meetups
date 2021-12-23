@@ -154,14 +154,18 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           </div>
           {!meetup.start && !meetup.finish && !meetup.place ? (
             <div className="view-meetup-data-item">
-              <p className="view-meetup-data-label">Время и место проведения</p>
+              <p className="view-meetup-data-label">
+                {t("inputLabels.timeAndPlace")}
+              </p>
               <p className="view-theme-data-content">
                 <i>Время и место проведения не указано</i>
               </p>
             </div>
           ) : (
             <div className="view-meetup-data-item">
-              <p className="view-meetup-data-label">Время и место проведения</p>
+              <p className="view-meetup-data-label">
+                {t("inputLabels.timeAndPlace")}
+              </p>
               <div className="view-meetup-data-content view-meetup-data-content-schedule">
                 {meetup.start && (
                   <>
@@ -209,7 +213,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           )}
 
           <div className="view-meetup-data-item">
-            <p className="view-meetup-data-label">Спикер</p>
+            <p className="view-meetup-data-label">{t("inputLabels.speaker")}</p>
             <div className="view-meetup-data-content">
               {meetup.speakers && (
                 <Avatar
@@ -226,7 +230,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
             </div>
           </div>
           <div className="view-meetup-data-item">
-            <p className="view-meetup-data-label">Описание</p>
+            <p className="view-meetup-data-label">
+              {t("inputLabels.description")}
+            </p>
             <div className="view-meetup-data-content view-meetup-data-content__description">
               {meetup.description}
             </div>
