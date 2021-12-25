@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
 import { MeetupPageTypes, NumberDeclination, routes } from "../../../constants";
@@ -12,6 +13,8 @@ import "./DraftsPage.scss";
 const DraftsPage: React.FC = observer((): ReactElement => {
   const { meetupsStore, authStore } = useContext(StoreContext);
   const currentUser = authStore.user;
+
+  const { t } = useTranslation();
 
   const handleDeleteMeetup = (id: string) => {
     meetupsStore.deleteMeetup(id);

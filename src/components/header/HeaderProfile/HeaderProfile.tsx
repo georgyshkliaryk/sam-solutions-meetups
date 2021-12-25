@@ -1,4 +1,10 @@
-import React, { ReactElement, useContext } from "react";
+import React, {
+  ReactElement,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./HeaderProfile.scss";
 import Avatar from "../../Avatar/Avatar";
 import { IUser } from "../../../repositories/interfaces/INetworkRepository";
@@ -7,6 +13,7 @@ import { observer } from "mobx-react-lite";
 
 import { useTranslation } from "react-i18next";
 import { LOCALES } from "../../../constants";
+import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 
 interface IProps {
   user: IUser;
@@ -31,7 +38,7 @@ const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
         {props.user.name} {props.user.surname}
       </p>
       <Avatar className="header-profile__avatar" user={props.user} />
-      <button
+      {/* <button
         className="header-profile-logout"
         onClick={handleLogout}
         data-cy="header-button-logout"
@@ -40,7 +47,8 @@ const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
           {t("buttons.authButtons.logout")}
         </span>
         <span className="material-icons-round">logout</span>
-      </button>
+      </button> */}
+      <HeaderDropdown />
     </div>
   );
 });
