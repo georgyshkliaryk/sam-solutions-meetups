@@ -1,7 +1,10 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./HeaderDropdown.scss";
 
 const HeaderDropdown: React.FC = (): ReactElement => {
+  const { t } = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerDropdownRef = useRef<any>(null);
 
@@ -36,8 +39,10 @@ const HeaderDropdown: React.FC = (): ReactElement => {
       </button>
       {isMenuOpen && (
         <div className="header-dropdown-list">
-          <p className="header-dropdown-list-item">choose lng</p>
-          <p className="header-dropdown-list-item">logout</p>
+          <p className="header-dropdown-list-item">En Ru De</p>
+          <button className="header-dropdown-list-item header-dropdown-button-logout">
+            {t("buttons.authButtons.logout")}
+          </button>
         </div>
       )}
     </div>
