@@ -2,13 +2,19 @@ import classNames from "classnames";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LOCALES } from "../../../constants";
+import ModalWindow from "../../ModalWindow/ModalWindow";
 import "./HeaderDropdown.scss";
 
-const HeaderDropdown: React.FC = (): ReactElement => {
+interface IProps {
+  handleLogout: () => void;
+}
+
+const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   const { t, i18n } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerDropdownRef = useRef<HTMLDivElement>(null);
+  const [logoutModalActive, setLogoutModalActive] = useState<boolean>(false);
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -106,11 +112,33 @@ const HeaderDropdown: React.FC = (): ReactElement => {
               </label>
             </fieldset>
           </div>
-          <button className="header-dropdown-list-item header-dropdown-button-logout">
+          <button
+            className="header-dropdown-list-item header-dropdown-button-logout"
+            onClick={() => setLogoutModalActive(true)}
+          >
             {t("buttons.authButtons.logout")}
           </button>
         </div>
       )}
+      <ModalWindow
+        active={logoutModalActive}
+        setActive={setLogoutModalActive}
+        title="Выйти из аккаунта?"
+      >
+        <button
+          className="meetups-card-modal-buttons__delete"
+          onClick={props.handleLogout}
+          data-cy="meetup-card-modal-button-delete"
+        >
+          Выйти
+        </button>
+        <button
+          className="meetups-card-modal-buttons__cancel"
+          onClick={() => setLogoutModalActive(false)}
+        >
+          Отмена
+        </button>
+      </ModalWindow>
     </div>
   );
 };

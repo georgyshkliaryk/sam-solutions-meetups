@@ -16,6 +16,7 @@
   flex-direction: column;
   text-align: center;
   box-shadow: 0px 7px 20px rgba(51, 63, 82, 0.25);
+  gap: 1rem;
   border-radius: 0.375rem;
 }
 
@@ -64,7 +65,7 @@
 .header-dropdown-list-item-change-language-title {
   color: $color-secondary-text;
   @include font-semi-light;
-  padding-top: 0.75rem;
+  padding-top: 1rem;
   padding-bottom: 0.25rem;
 }
 
