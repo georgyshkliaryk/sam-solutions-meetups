@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { routes } from "../../constants";
+import { LOCALES, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = observer((): ReactElement => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { authStore } = useContext(StoreContext);
   const navigate = useNavigate();
@@ -50,20 +50,24 @@ const LoginPage: React.FC = observer((): ReactElement => {
     }
   };
 
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    i18n.changeLanguage(e.target.value);
+  };
+
   return (
     <div className="login-page">
       <form className="login-page-form" onSubmit={handleLoginAttempt}>
-        <p className="login-page-form__title">Войдите для просмотра митапов:</p>
+        <p className="login-page-form__title">{t("pageTitles.login")}:</p>
         <div className="login-page-form__input-wrapper">
           <label htmlFor="login-input" className="login-page-form__label">
-            Введите имя пользователя:
+            {t("inputLabels.loginName")}:
           </label>
           <input
             type="text"
             className={classNames("login-page-form__input", {
               "login-page-form__input-error": validationError,
             })}
-            placeholder="Логин"
+            placeholder={t("placeholders.loginName")}
             id="login-input"
             value={login}
             onChange={handleLoginChange}
@@ -72,7 +76,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
         </div>
         <div className="login-page-form__input-wrapper">
           <label htmlFor="login-password" className="login-page-form__label">
-            Введите пароль:
+            {t("inputLabels.loginPassword")}:
           </label>
           <PasswordInput
             id="password-input"
@@ -83,6 +87,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
                 ? "login-page-form__input-error login-page-form__input-password"
                 : "login-page-form__input-password"
             }
+            placeholder={t("placeholders.loginPassword")}
           />
           <p
             className={classNames("login-page-form__error-text", {
@@ -106,6 +111,58 @@ const LoginPage: React.FC = observer((): ReactElement => {
             login
           </span>
         </button>
+        <div>
+          <p className="login-page-form-change-language-title">
+            {t("inputLabels.changeLanguage")}:
+          </p>
+          <fieldset className="login-page-form-change-language-buttons">
+            <input
+              className="login-page-form-change-language-buttons-input"
+              type="radio"
+              id="language1"
+              name="changeLang"
+              value={LOCALES.RU}
+              checked={i18n.language === LOCALES.RU}
+              onChange={handleLanguageChange}
+            />
+            <label
+              htmlFor="language1"
+              className="login-page-form-change-language-buttons-label"
+            >
+              RU
+            </label>
+            <input
+              className="login-page-form-change-language-buttons-input"
+              type="radio"
+              id="language2"
+              name="changeLang"
+              value={LOCALES.EN}
+              checked={i18n.language === LOCALES.EN}
+              onChange={handleLanguageChange}
+            />
+            <label
+              htmlFor="language2"
+              className="login-page-form-change-language-buttons-label"
+            >
+              EN
+            </label>
+            <input
+              className="login-page-form-change-language-buttons-input"
+              type="radio"
+              id="language3"
+              name="changeLang"
+              value={LOCALES.DE}
+              checked={i18n.language === LOCALES.DE}
+              onChange={handleLanguageChange}
+            />
+            <label
+              htmlFor="language3"
+              className="login-page-form-change-language-buttons-label"
+            >
+              DE
+            </label>
+          </fieldset>
+        </div>
       </form>
     </div>
   );

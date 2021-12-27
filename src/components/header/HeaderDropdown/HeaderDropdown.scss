@@ -90,3 +90,19 @@
 .header-dropdown-list-item-change-language-buttons-label:hover {
   background-color: $color-secondary-hover;
 }
+
+.header-dropdown-list-item-change-language-buttons-label:active {
+  @include button-secondary-active;
+}
+
+.header-dropdown-list-item-change-language-buttons:focus-within
+  .header-dropdown-list-item-change-language-buttons-input:checked
+  + .header-dropdown-list-item-change-language-buttons-label {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+}
+
+.header-dropdown-list-item-change-language-buttons-input {
+  width: 0;
+  margin: 0;
+  overflow: hidden;
+}

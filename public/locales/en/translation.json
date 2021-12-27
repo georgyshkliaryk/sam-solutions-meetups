@@ -2,11 +2,12 @@
   "pageTitles": {
     "meetups": "Meetups",
     "news": "News",
-    "newMeetup": "New meetup",
-    "viewTheme": "Browse theme",
-    "viewMeetup": "Browse meetup",
-    "editMeetup": "Meetup editing",
-    "previewMeetup": "Meetup prewview"
+    "newMeetup": "New Meetup",
+    "viewTheme": "Browse Theme",
+    "viewMeetup": "Browse Meetup",
+    "editMeetup": "Meetup Editing",
+    "previewMeetup": "Meetup Prewview",
+    "login": "Sign In to View Meetups"
   },
   "pageDescriptions": {
     "newMeetup": "Fill in the required fields below in more detail, this will give complete information about the upcoming event."
@@ -68,7 +69,10 @@
     "finish": "Ending",
     "place": "Location",
     "timeAndPlace": "Time and place",
-    "uploadedImage": "Uploaded image"
+    "uploadedImage": "Uploaded image",
+    "loginName": "Enter username",
+    "loginPassword": "Enter password",
+    "changeLanguage": "Change language"
   },
   "fillers": {
     "noSupporters": "So far no one has supported the topic",
@@ -116,5 +120,13 @@
       "participants2": "persons will go",
       "participants3": "persons will go"
     }
+  },
+  "placeholders": {
+    "loginName": "Username",
+    "loginPassword": "Password"
+  },
+  "htmlTitles": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   }
 }

@@ -70,7 +70,6 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
                 value={LOCALES.RU}
                 checked={i18n.language === LOCALES.RU}
                 onChange={handleLanguageChange}
-                style={{ display: "none" }}
               />
               <label
                 htmlFor="language1"
@@ -86,7 +85,6 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
                 value={LOCALES.EN}
                 checked={i18n.language === LOCALES.EN}
                 onChange={handleLanguageChange}
-                style={{ display: "none" }}
               />
               <label
                 htmlFor="language2"
@@ -102,7 +100,6 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
                 value={LOCALES.DE}
                 checked={i18n.language === LOCALES.DE}
                 onChange={handleLanguageChange}
-                style={{ display: "none" }}
               />
               <label
                 htmlFor="language3"

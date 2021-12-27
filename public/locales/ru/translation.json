@@ -6,7 +6,8 @@
     "viewTheme": "Просмотр темы",
     "viewMeetup": "Просмотр митапа",
     "editMeetup": "Редактирование митапа",
-    "previewMeetup": "Предпросмотр митапа"
+    "previewMeetup": "Предпросмотр митапа",
+    "login": "Войдите для просмотра митапов"
   },
   "pageDescriptions": {
     "newMeetup": "Заполните необходимые поля ниже наиболее подробно, это даст полную информацию о предстоящем событии."
@@ -68,7 +69,10 @@
     "finish": "Окончание",
     "place": "Место проведения",
     "timeAndPlace": "Время и место проведения",
-    "uploadedImage": "Загруженное изображение"
+    "uploadedImage": "Загруженное изображение",
+    "loginName": "Введите имя пользователя",
+    "loginPassword": "Введите пароль",
+    "changeLanguage": "Сменить язык"
   },
   "fillers": {
     "noSupporters": "Пока никто не поддержал тему",
@@ -116,5 +120,13 @@
       "participants2": "человека идут",
       "participants3": "человек идут"
     }
+  },
+  "placeholders": {
+    "loginName": "Логин",
+    "loginPassword": "Пароль"
+  },
+  "htmlTitles": {
+    "showPassword": "Показать пароль",
+    "hidePassword": "Скрыть пароль"
   }
 }

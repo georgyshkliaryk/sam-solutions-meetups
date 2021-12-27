@@ -17,6 +17,7 @@
   padding: 3rem 2rem;
   border-radius: 0.5rem;
   gap: 1.5rem;
+  width: 25rem;
 }
 
 .login-page-form__title {
@@ -98,4 +99,49 @@
   .login-page-form__input-password {
     width: 21.5rem;
   }
+}
+
+.login-page-form-change-language-title {
+  color: $color-secondary-text;
+  @include font-semi-light;
+  padding-bottom: 0.25rem;
+}
+
+.login-page-form-change-language-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.login-page-form-change-language-buttons-input:checked
+  + .login-page-form-change-language-buttons-label {
+  background: $gradient;
+  color: #ffff;
+}
+
+.login-page-form-change-language-buttons-label {
+  padding: 0.25rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+}
+
+.login-page-form-change-language-buttons-label:hover {
+  background-color: $color-secondary-hover;
+}
+
+.login-page-form-change-language-buttons-label:active {
+  @include button-secondary-active;
+}
+
+.login-page-form-change-language-buttons:focus-within
+  .login-page-form-change-language-buttons-input:checked
+  + .login-page-form-change-language-buttons-label {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+}
+
+.login-page-form-change-language-buttons-input {
+  width: 0;
+  margin: 0;
+  overflow: hidden;
 }
