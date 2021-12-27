@@ -184,38 +184,38 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <ModalWindow
             active={modalDeleteActive}
             setActive={setModalDeleteActive}
-            title="Удалить тему?"
+            title={t("modalWindow.titles.deleteTheme")}
           >
             <button
               className="view-theme-modal-buttons__delete"
               onClick={handleDeleteTheme}
             >
-              Удалить
+              {t("modalWindow.buttons.delete")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalDeleteActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <ModalWindow
             active={modalApproveActive}
             setActive={setModalApproveActive}
-            title="Одобрить тему?"
+            title={t("modalWindow.titles.approveTheme")}
           >
             <button
               className="view-theme-modal-buttons__approve"
               onClick={approveTheme}
               data-cy="view-theme-modal-button-approve"
             >
-              Одобрить
+              {t("modalWindow.buttons.approve")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalApproveActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <div className="view-theme-data-item view-theme-data-item-last">

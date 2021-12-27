@@ -120,20 +120,20 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
       <ModalWindow
         active={logoutModalActive}
         setActive={setLogoutModalActive}
-        title="Выйти из аккаунта?"
+        title={t("modalWindow.titles.logout")}
       >
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={props.handleLogout}
           data-cy="meetup-card-modal-button-delete"
         >
-          Выйти
+          {t("modalWindow.buttons.logout")}
         </button>
         <button
           className="meetups-card-modal-buttons__cancel"
           onClick={() => setLogoutModalActive(false)}
         >
-          Отмена
+          {t("modalWindow.buttons.cancel")}
         </button>
       </ModalWindow>
     </div>

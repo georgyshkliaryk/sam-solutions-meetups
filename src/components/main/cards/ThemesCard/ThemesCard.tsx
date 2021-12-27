@@ -138,19 +138,19 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       <ModalWindow
         active={modalActive}
         setActive={setModalActive}
-        title="Удалить тему?"
+        title={t("modalWindow.titles.deleteTheme")}
       >
         <button
           className="themes-card-modal-buttons__delete"
           onClick={() => props.deleteTheme(props.item.id)}
         >
-          Удалить
+          {t("modalWindow.buttons.delete")}
         </button>
         <button
           className="themes-card-modal-buttons__cancel"
           onClick={() => setModalActive(false)}
         >
-          Отмена
+          {t("modalWindow.buttons.cancel")}
         </button>
       </ModalWindow>
       {props.editRights && (

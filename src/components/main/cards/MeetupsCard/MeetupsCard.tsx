@@ -159,20 +159,20 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       <ModalWindow
         active={modalActive}
         setActive={setModalActive}
-        title="Удалить митап?"
+        title={t("modalWindow.titles.deleteMeetup")}
       >
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={() => props.deleteMeetup(props.item.id)}
           data-cy="meetup-card-modal-button-delete"
         >
-          Удалить
+          {t("modalWindow.buttons.delete")}
         </button>
         <button
           className="meetups-card-modal-buttons__cancel"
           onClick={() => setModalActive(false)}
         >
-          Отмена
+          {t("modalWindow.buttons.cancel")}
         </button>
       </ModalWindow>
       {props.editRights && (

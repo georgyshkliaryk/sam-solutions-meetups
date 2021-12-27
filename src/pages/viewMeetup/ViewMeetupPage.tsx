@@ -240,38 +240,38 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           <ModalWindow
             active={modalDeleteActive}
             setActive={setModalDeleteActive}
-            title="Удалить митап?"
+            title={t("modalWindow.titles.deleteMeetup")}
           >
             <button
               className="view-meetup-modal-buttons__delete"
               onClick={handleDeleteMeetup}
             >
-              Удалить
+              {t("modalWindow.buttons.delete")}
             </button>
             <button
               className="view-meetup-modal-buttons__cancel"
               onClick={() => setModalDeleteActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <ModalWindow
             active={modalPublishActive}
             setActive={setModalPublishActive}
-            title="Опубликовать митап?"
+            title={t("modalWindow.titles.publishMeetup")}
           >
             <button
               className="view-theme-modal-buttons__approve"
               onClick={publishMeetup}
               data-cy="view-meetup-modal-button-publish"
             >
-              Опубликовать
+              {t("modalWindow.buttons.publish")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalPublishActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <div className="view-meetup-data-item view-theme-data-item-last">
