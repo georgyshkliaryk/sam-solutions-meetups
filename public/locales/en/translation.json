@@ -185,5 +185,13 @@
       "publish": "Publish",
       "approve": "Approve"
     }
+  },
+  "inputValidation": {
+    "common": {
+      "requiredField": "Field required"
+    },
+    "errors": {
+      "incorrectLoginOrPassword": "Incorrect username or password!"
+    }
   }
 }

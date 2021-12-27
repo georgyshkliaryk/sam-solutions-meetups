@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
 import "./ValidationForInput.scss";
 
 interface IProps {
@@ -7,6 +8,8 @@ interface IProps {
 }
 
 const ValidationForInput: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <>
       <p
@@ -17,7 +20,7 @@ const ValidationForInput: React.FC<IProps> = (props): ReactElement => {
         <span className="material-icons-round validation-for-input-icon">
           error_outline
         </span>
-        &nbsp;Обязательное поле
+        &nbsp;{t("inputValidation.common.requiredField")}
       </p>
       <p
         className={classNames("validation-for-input-success", {
@@ -27,7 +30,7 @@ const ValidationForInput: React.FC<IProps> = (props): ReactElement => {
         <span className="material-icons-round validation-for-input-icon">
           check_circle
         </span>
-        &nbsp;Обязательное поле
+        &nbsp;{t("inputValidation.common.requiredField")}
       </p>
     </>
   );

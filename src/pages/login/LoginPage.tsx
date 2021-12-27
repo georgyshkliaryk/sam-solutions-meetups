@@ -97,7 +97,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
             <span className="material-icons-round login-page-form__error-text-icon">
               error_outline
             </span>
-            &nbsp; Неверный логин или пароль!
+            &nbsp; {t("inputValidation.errors.incorrectLoginOrPassword")}
           </p>
         </div>
         <button

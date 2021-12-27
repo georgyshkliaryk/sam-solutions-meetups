@@ -185,5 +185,13 @@
       "publish": "Опубликовать",
       "approve": "Одобрить"
     }
+  },
+  "inputValidation": {
+    "common": {
+      "requiredField": "Обязательное поле"
+    },
+    "errors": {
+      "incorrectLoginOrPassword": "Неверный логин или пароль!"
+    }
   }
 }

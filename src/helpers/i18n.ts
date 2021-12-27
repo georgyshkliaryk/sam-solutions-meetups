@@ -11,7 +11,7 @@ i18n
   .init({
     fallbackLng: LOCALES.RU,
     //whitelist: ["ru", "en"],
-    debug: false,
+    debug: true,
     detection: {
       order: ["localStorage", "cookie"],
       caches: ["localStorage", "cookie"],
