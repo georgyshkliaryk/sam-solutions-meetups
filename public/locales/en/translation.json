@@ -161,6 +161,7 @@
       "stopParticipateInMeetupError": "Failed to refuse participating in meetup.",
       "unvoteForThemeSuccess": "You don't support the theme anymore.",
       "unvoteForThemeError": "Failed to remove vote from the theme.",
+      "languageChangedSuccess": "Language has been successfully changed to",
       "auth": {
         "loginExpired": "The login details are no longer valid. Please log in again.",
         "loginSuccess": "Login completed successfully.",

@@ -70,6 +70,16 @@ export const LOCALES = {
   DE: "de",
 } as const;
 
+interface ILanguageNames {
+  [key: string]: string;
+}
+
+export const languageNames: ILanguageNames = {
+  ru: "Русский",
+  en: "English",
+  de: "Deutsch",
+};
+
 export const navItems: NavItems = {
   header: [
     {

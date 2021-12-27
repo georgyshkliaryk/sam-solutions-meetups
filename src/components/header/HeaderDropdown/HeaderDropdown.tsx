@@ -1,7 +1,14 @@
 import classNames from "classnames";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, {
+  ReactElement,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
-import { LOCALES } from "../../../constants";
+import { languageNames, LOCALES } from "../../../constants";
+import { StoreContext } from "../../../context/StoreContext";
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import "./HeaderDropdown.scss";
 
@@ -15,6 +22,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerDropdownRef = useRef<HTMLDivElement>(null);
   const [logoutModalActive, setLogoutModalActive] = useState<boolean>(false);
+  const { notificationsStore } = useContext(StoreContext);
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -30,7 +38,6 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
     };
     document.addEventListener("mousedown", checkIfClickedOutside);
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [isMenuOpen]);
@@ -41,6 +48,13 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     i18n.changeLanguage(e.target.value);
+    notificationsStore.setNotification({
+      type: "info",
+      title: t("notifications.titles.info"),
+      description: `${t(
+        "notifications.descriptions.languageChangedSuccess"
+      )}: ${languageNames[e.target.value]}`,
+    });
   };
 
   return (

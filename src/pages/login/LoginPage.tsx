@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { LOCALES, routes } from "../../constants";
+import { languageNames, LOCALES, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
@@ -13,7 +13,7 @@ import "./LoginPage.scss";
 const LoginPage: React.FC = observer((): ReactElement => {
   const { t, i18n } = useTranslation();
 
-  const { authStore } = useContext(StoreContext);
+  const { authStore, notificationsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [login, setLogin] = useState("");
@@ -52,6 +52,13 @@ const LoginPage: React.FC = observer((): ReactElement => {
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     i18n.changeLanguage(e.target.value);
+    notificationsStore.setNotification({
+      type: "info",
+      title: t("notifications.titles.info"),
+      description: `${t(
+        "notifications.descriptions.languageChangedSuccess"
+      )}: ${languageNames[e.target.value]}`,
+    });
   };
 
   return (

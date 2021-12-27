@@ -161,6 +161,7 @@
       "stopParticipateInMeetupError": "Не удалось отказаться от участия в митапе.",
       "unvoteForThemeSuccess": "Вы больше не поддерживаете тему.",
       "unvoteForThemeError": "Не удалось убрать голос с темы.",
+      "languageChangedSuccess": "Язык был успешно изменен на",
       "auth": {
         "loginExpired": "Данные для входа больше не дейстуют. Выполните вход.",
         "loginSuccess": "Вход выполнен успешно.",
