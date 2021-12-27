@@ -6,6 +6,8 @@ import {
 import { makeAutoObservable } from "mobx";
 import { NetworkRepository } from "./../repositories/NetworkRepository/NetworkRepository";
 
+import { t } from "i18next";
+
 export class AuthStore {
   user: IUser | undefined = undefined;
   private authenticated = false;
@@ -27,8 +29,8 @@ export class AuthStore {
       this.resetAuth();
       this.notificationsStore.setNotification({
         type: "warning",
-        title: "Внимание",
-        description: "Данные для входа больше не дейстуют. Выполните вход.",
+        title: t("notifications.titles.warning"),
+        description: t("notifications.descriptions.auth.loginExpired"),
       });
     }
   }
@@ -40,15 +42,15 @@ export class AuthStore {
       this.setAuthenticated(true);
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Вход выполнен успешно.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.auth.loginSuccess"),
       });
     } catch {
       this.resetAuth();
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Вход не выполнен.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.auth.loginError"),
       });
     }
   }
@@ -59,14 +61,14 @@ export class AuthStore {
       this.resetAuth();
       this.notificationsStore.setNotification({
         type: "info",
-        title: "Инфо",
-        description: "Выход выполнен успешно.",
+        title: t("notifications.titles.info"),
+        description: t("notifications.descriptions.auth.logoutSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось выйти.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.auth.logoutError"),
       });
     }
   }

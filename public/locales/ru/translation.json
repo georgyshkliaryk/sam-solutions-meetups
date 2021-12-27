@@ -128,5 +128,41 @@
   "htmlTitles": {
     "showPassword": "Показать пароль",
     "hidePassword": "Скрыть пароль"
+  },
+  "notifications": {
+    "titles": {
+      "success": "Успех",
+      "error": "Ошибка",
+      "warning": "Внимание",
+      "info": "Инфо"
+    },
+    "descriptions": {
+      "createMeetupSuccess": "Митап успешно создан.",
+      "createMeetupError": "Ошибка при создании митапа.",
+      "loadMeetupError": "Не удалось загрузить митап.",
+      "editMeetupSuccess": "Митап успешно изменен.",
+      "editMeetupError": "Не удалось изменить митап.",
+      "deleteMeetuppSuccess": "Митап успешно удален.",
+      "deleteMeetupError": "Не удалось удалить митап.",
+      "approveThemeSuccess": "Тема одобрена.",
+      "approveThemeError": "Не удалось одобрить тему.",
+      "publishMeetupSuccess": "Митап опубликован.",
+      "publishMeetupError": "Не удалось опубликовать митап.",
+      "participateInMeetupSuccess": "Вы записались на митап.",
+      "participateInMeetupError": "Не удалось записаться на митап.",
+      "voteForThemeSuccess": "Вы поддержали тему.",
+      "voteForThemeError": "Не удалось поддержать тему.",
+      "stopParticipateInMeetupSuccess": "Вы отказались от участия в митапе.",
+      "stopParticipateInMeetupError": "Не удалось отказаться от участия в митапе.",
+      "unvoteForThemeSuccess": "Вы больше не поддерживаете тему.",
+      "unvoteForThemeError": "Не удалось убрать голос с темы.",
+      "auth": {
+        "loginExpired": "Данные для входа больше не дейстуют. Выполните вход.",
+        "loginSuccess": "Вход выполнен успешно.",
+        "loginError": "Не удалось выполнить вход.",
+        "logoutSuccess": "Выход выполнен успешно.",
+        "logoutError": "Не удалось выйти."
+      }
+    }
   }
 }

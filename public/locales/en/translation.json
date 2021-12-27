@@ -128,5 +128,41 @@
   "htmlTitles": {
     "showPassword": "Show password",
     "hidePassword": "Hide password"
+  },
+  "notifications": {
+    "titles": {
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Info"
+    },
+    "descriptions": {
+      "createMeetupSuccess": "The meetup has been successfully created.",
+      "createMeetupError": "Error while creating a meetup.",
+      "loadMeetupError": "Failed to load meetup.",
+      "editMeetupSuccess": "The meetup was successfully edited.",
+      "editMeetupError": "Failed to edit meetup.",
+      "deleteMeetuppSuccess": "The meetup was successfully deleted.",
+      "deleteMeetupError": "Failed to delete meetup.",
+      "approveThemeSuccess": "Theme was approved successfully.",
+      "approveThemeError": "Failed to approve theme.",
+      "publishMeetupSuccess": "Meetup was published successfully.",
+      "publishMeetupError": "Failed to publish meetup.",
+      "participateInMeetupSuccess": "You are participating in meetup.",
+      "participateInMeetupError": "Failed to participate in meetup.",
+      "voteForThemeSuccess": "You are now supporting the theme.",
+      "voteForThemeError": "Failed to suppotr the theme.",
+      "stopParticipateInMeetupSuccess": "You are not participating in meetup anymore.",
+      "stopParticipateInMeetupError": "Failed to refuse participating in meetup.",
+      "unvoteForThemeSuccess": "You don't support the theme anymore.",
+      "unvoteForThemeError": "Failed to remove vote from the theme.",
+      "auth": {
+        "loginExpired": "The login details are no longer valid. Please log in again.",
+        "loginSuccess": "Login completed successfully.",
+        "loginError": "Failed to log in.",
+        "logoutSuccess": "The logout was successful.",
+        "logoutError": "Failed to log out."
+      }
+    }
   }
 }
