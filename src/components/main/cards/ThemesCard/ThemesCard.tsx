@@ -156,7 +156,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       {props.editRights && (
         <button
           className="themes-card-delete-button"
-          title="Удалить тему"
+          title={t("htmlTitles.deleteTheme")}
           onClick={() => setModalActive(true)}
         >
           <span className="material-icons-outlined">delete</span>

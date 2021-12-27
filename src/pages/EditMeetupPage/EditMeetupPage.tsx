@@ -209,7 +209,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   <label
                     htmlFor="editImage"
                     className="edit-meetup__image-label"
-                    title="Выбрать фотографию для митапа"
+                    title={t("htmlTitles.chooseImage")}
                   >
                     <span className="material-icons-round edit-meetup__image-label-icon">
                       file_upload
@@ -220,7 +220,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       "edit-meetup__image-delete-visible":
                         file !== null || image,
                     })}
-                    title="Удалить фотографию"
+                    title={t("htmlTitles.deleteImage")}
                     onClick={handleDeleteImage}
                   >
                     <span className="material-icons-round edit-meetup__image-delete-icon">

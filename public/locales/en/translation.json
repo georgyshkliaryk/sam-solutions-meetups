@@ -127,7 +127,12 @@
   },
   "htmlTitles": {
     "showPassword": "Show password",
-    "hidePassword": "Hide password"
+    "hidePassword": "Hide password",
+    "deleteMeetup": "Delete Meetup",
+    "editMeetup": "Edit Meetup",
+    "deleteTheme": "Delete Theme",
+    "chooseImage": "Choose Image for Meetup",
+    "deleteImage": "Delete Image"
   },
   "notifications": {
     "titles": {

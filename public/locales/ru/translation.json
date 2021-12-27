@@ -127,7 +127,12 @@
   },
   "htmlTitles": {
     "showPassword": "Показать пароль",
-    "hidePassword": "Скрыть пароль"
+    "hidePassword": "Скрыть пароль",
+    "deleteMeetup": "Удалить митап",
+    "editMeetup": "Редактировать митап",
+    "deleteTheme": "Удалить тему",
+    "chooseImage": "Выбрать фотографию для митапа",
+    "deleteImage": "Удалить фотографию"
   },
   "notifications": {
     "titles": {

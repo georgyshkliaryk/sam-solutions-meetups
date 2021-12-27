@@ -179,7 +179,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
         <div className="meetups-card-buttons">
           <button
             className="meetups-card-delete-button"
-            title="Удалить митап"
+            title={t("htmlTitles.deleteMeetup")}
             onClick={() => setModalActive(true)}
             data-cy="meetup-card-button-delete"
           >
@@ -193,7 +193,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
           >
             <span
               className="material-icons-outlined"
-              title="Редактировать митап"
+              title={t("htmlTitles.editMeetup")}
             >
               edit
             </span>
