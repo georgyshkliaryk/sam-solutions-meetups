@@ -73,7 +73,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
         <div className="header-dropdown-list">
           <div className="header-dropdown-list-item">
             <p className="header-dropdown-list-item-change-language-title">
-              Сменить язык:
+              {t("inputLabels.changeLanguage")}:
             </p>
             <fieldset className="header-dropdown-list-item-change-language-buttons">
               <input
@@ -127,6 +127,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
             className="header-dropdown-list-item header-dropdown-button-logout"
             onClick={() => setLogoutModalActive(true)}
           >
+            <span className="material-icons-outlined">logout</span>
             {t("buttons.authButtons.logout")}
           </button>
         </div>

@@ -174,7 +174,16 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         calendar_today
                       </span>
                       <time dateTime={meetup.start}>
-                        {dateFormat(meetup.start, "dddd, d mmmm yyyy")}
+                        {t("intlDateTime", {
+                          val: new Date(meetup.start),
+                          formatParams: {
+                            val: {
+                              weekday: "long",
+                              month: "long",
+                              day: "numeric",
+                            },
+                          },
+                        })}
                       </time>
                     </p>
                     {meetup.finish ? (

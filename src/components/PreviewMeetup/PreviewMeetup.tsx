@@ -45,7 +45,16 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     calendar_today
                   </span>
                   <time dateTime={props.start}>
-                    {dateFormat(props.start, "dddd, d mmmm yyyy")}
+                    {t("intlDateTime", {
+                      val: new Date(props.start),
+                      formatParams: {
+                        val: {
+                          weekday: "long",
+                          month: "long",
+                          day: "numeric",
+                        },
+                      },
+                    })}
                   </time>
                 </p>
                 {props.finish ? (

@@ -194,5 +194,6 @@
     "errors": {
       "incorrectLoginOrPassword": "Incorrect username or password!"
     }
-  }
+  },
+  "intlDateTime": "{{val, datetime}}"
 }

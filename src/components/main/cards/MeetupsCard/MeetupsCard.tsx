@@ -68,7 +68,18 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       <p className="meetups-card-header">
         <time dateTime={props.item.start}>
           {props.item.start
-            ? dateFormat(props.item.start, "ddd, d mmmm • H:MM")
+            ? t("intlDateTime", {
+                val: new Date(props.item.start),
+                formatParams: {
+                  val: {
+                    weekday: "short",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  },
+                },
+              })
             : "–"}
         </time>
         &nbsp;

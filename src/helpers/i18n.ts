@@ -10,7 +10,6 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: LOCALES.RU,
-    //whitelist: ["ru", "en"],
     debug: true,
     detection: {
       order: ["localStorage", "cookie"],
