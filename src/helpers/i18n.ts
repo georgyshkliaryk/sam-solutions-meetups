@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: LOCALES.RU,
+    fallbackLng: LOCALES[0],
     debug: true,
     detection: {
       order: ["localStorage", "cookie"],

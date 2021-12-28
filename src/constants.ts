@@ -18,11 +18,7 @@ export interface NavItems {
   [key: string]: NavItem[];
 }
 
-export const LOCALES = {
-  RU: "ru",
-  EN: "en",
-  DE: "de",
-} as const;
+export const LOCALES = ["ru", "en", "de"] as const;
 
 interface ILanguageNames {
   [key: string]: string;

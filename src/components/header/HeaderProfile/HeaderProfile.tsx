@@ -1,18 +1,10 @@
-import React, {
-  ReactElement,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, useContext } from "react";
 import "./HeaderProfile.scss";
 import Avatar from "../../Avatar/Avatar";
 import { IUser } from "../../../repositories/interfaces/INetworkRepository";
 import { StoreContext } from "../../../context/StoreContext";
 import { observer } from "mobx-react-lite";
 
-import { useTranslation } from "react-i18next";
-import { LOCALES } from "../../../constants";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 
 interface IProps {
@@ -21,7 +13,6 @@ interface IProps {
 
 const HeaderProfile: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore } = useContext(StoreContext);
-  const { t } = useTranslation();
 
   const handleLogout = async () => {
     await authStore.logout();

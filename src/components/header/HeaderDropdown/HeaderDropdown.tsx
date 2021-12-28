@@ -1,14 +1,7 @@
 import classNames from "classnames";
-import React, {
-  ReactElement,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { languageNames, LOCALES } from "../../../constants";
-import { StoreContext } from "../../../context/StoreContext";
+import LocaleChange from "../../LocaleChange/LocaleChange";
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import "./HeaderDropdown.scss";
 
@@ -17,12 +10,11 @@ interface IProps {
 }
 
 const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerDropdownRef = useRef<HTMLDivElement>(null);
   const [logoutModalActive, setLogoutModalActive] = useState<boolean>(false);
-  const { notificationsStore } = useContext(StoreContext);
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -46,17 +38,6 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    i18n.changeLanguage(e.target.value);
-    notificationsStore.setNotification({
-      type: "info",
-      title: t("notifications.titles.info"),
-      description: `${t(
-        "notifications.descriptions.languageChangedSuccess"
-      )}: ${languageNames[e.target.value]}`,
-    });
-  };
-
   return (
     <div className="header-dropdown" ref={headerDropdownRef}>
       <button
@@ -72,56 +53,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
       {isMenuOpen && (
         <div className="header-dropdown-list">
           <div className="header-dropdown-list-item">
-            <p className="header-dropdown-list-item-change-language-title">
-              {t("inputLabels.changeLanguage")}:
-            </p>
-            <fieldset className="header-dropdown-list-item-change-language-buttons">
-              <input
-                className="header-dropdown-list-item-change-language-buttons-input"
-                type="radio"
-                id="language1"
-                name="changeLang"
-                value={LOCALES.RU}
-                checked={i18n.language === LOCALES.RU}
-                onChange={handleLanguageChange}
-              />
-              <label
-                htmlFor="language1"
-                className="header-dropdown-list-item-change-language-buttons-label"
-              >
-                RU
-              </label>
-              <input
-                className="header-dropdown-list-item-change-language-buttons-input"
-                type="radio"
-                id="language2"
-                name="changeLang"
-                value={LOCALES.EN}
-                checked={i18n.language === LOCALES.EN}
-                onChange={handleLanguageChange}
-              />
-              <label
-                htmlFor="language2"
-                className="header-dropdown-list-item-change-language-buttons-label"
-              >
-                EN
-              </label>
-              <input
-                className="header-dropdown-list-item-change-language-buttons-input"
-                type="radio"
-                id="language3"
-                name="changeLang"
-                value={LOCALES.DE}
-                checked={i18n.language === LOCALES.DE}
-                onChange={handleLanguageChange}
-              />
-              <label
-                htmlFor="language3"
-                className="header-dropdown-list-item-change-language-buttons-label"
-              >
-                DE
-              </label>
-            </fieldset>
+            <LocaleChange styles="header" />
           </div>
           <button
             className="header-dropdown-list-item header-dropdown-button-logout"

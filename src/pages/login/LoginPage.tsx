@@ -4,16 +4,17 @@ import React, { ReactElement, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import LocaleChange from "../../components/LocaleChange/LocaleChange";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import { languageNames, LOCALES, routes } from "../../constants";
+import { routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = observer((): ReactElement => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  const { authStore, notificationsStore } = useContext(StoreContext);
+  const { authStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [login, setLogin] = useState("");
@@ -48,17 +49,6 @@ const LoginPage: React.FC = observer((): ReactElement => {
     } else {
       setValidationError(true);
     }
-  };
-
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    i18n.changeLanguage(e.target.value);
-    notificationsStore.setNotification({
-      type: "info",
-      title: t("notifications.titles.info"),
-      description: `${t(
-        "notifications.descriptions.languageChangedSuccess"
-      )}: ${languageNames[e.target.value]}`,
-    });
   };
 
   return (
@@ -119,56 +109,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </span>
         </button>
         <div>
-          <p className="login-page-form-change-language-title">
-            {t("inputLabels.changeLanguage")}:
-          </p>
-          <fieldset className="login-page-form-change-language-buttons">
-            <input
-              className="login-page-form-change-language-buttons-input"
-              type="radio"
-              id="language1"
-              name="changeLang"
-              value={LOCALES.RU}
-              checked={i18n.language === LOCALES.RU}
-              onChange={handleLanguageChange}
-            />
-            <label
-              htmlFor="language1"
-              className="login-page-form-change-language-buttons-label"
-            >
-              RU
-            </label>
-            <input
-              className="login-page-form-change-language-buttons-input"
-              type="radio"
-              id="language2"
-              name="changeLang"
-              value={LOCALES.EN}
-              checked={i18n.language === LOCALES.EN}
-              onChange={handleLanguageChange}
-            />
-            <label
-              htmlFor="language2"
-              className="login-page-form-change-language-buttons-label"
-            >
-              EN
-            </label>
-            <input
-              className="login-page-form-change-language-buttons-input"
-              type="radio"
-              id="language3"
-              name="changeLang"
-              value={LOCALES.DE}
-              checked={i18n.language === LOCALES.DE}
-              onChange={handleLanguageChange}
-            />
-            <label
-              htmlFor="language3"
-              className="login-page-form-change-language-buttons-label"
-            >
-              DE
-            </label>
-          </fieldset>
+          <LocaleChange styles="login" />
         </div>
       </form>
     </div>
