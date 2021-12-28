@@ -13,7 +13,6 @@ import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
-import dateFormat from "dateformat";
 import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
@@ -192,11 +191,27 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           schedule
                         </span>
                         <time dateTime={meetup.start}>
-                          {dateFormat(meetup.start, "H:MM")}
+                          {t("intlDateTime", {
+                            val: new Date(meetup.start),
+                            formatParams: {
+                              val: {
+                                hour: "numeric",
+                                minute: "numeric",
+                              },
+                            },
+                          })}
                         </time>
                         &nbsp;–&nbsp;
                         <time dateTime={meetup.finish}>
-                          {dateFormat(meetup.finish, "H:MM")}
+                          {t("intlDateTime", {
+                            val: new Date(meetup.finish),
+                            formatParams: {
+                              val: {
+                                hour: "numeric",
+                                minute: "numeric",
+                              },
+                            },
+                          })}
                         </time>
                       </p>
                     ) : (
@@ -204,7 +219,17 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                           schedule
                         </span>
-                        <span>{dateFormat(meetup.start, "H:MM")}</span>
+                        <span>
+                          {t("intlDateTime", {
+                            val: new Date(meetup.start),
+                            formatParams: {
+                              val: {
+                                hour: "numeric",
+                                minute: "numeric",
+                              },
+                            },
+                          })}
+                        </span>
                       </p>
                     )}
                   </>

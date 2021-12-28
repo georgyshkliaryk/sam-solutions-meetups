@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from "react";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
-import dateFormat from "dateformat";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
 import {
   MeetupPageTypes,

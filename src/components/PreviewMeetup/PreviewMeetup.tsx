@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import MainTitle from "../main/MainTitle/MainTitle";
 import "./PreviewMeetup.scss";
 import MeetupDefaultImage from "../../pages/viewMeetup/assets/MeetupDefaultImage.svg";
-import dateFormat from "dateformat";
 import Avatar from "../Avatar/Avatar";
 import { useTranslation } from "react-i18next";
 
@@ -63,11 +62,27 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                       schedule
                     </span>
                     <time dateTime={props.start}>
-                      {dateFormat(props.start, "H:MM")}
+                      {t("intlDateTime", {
+                        val: new Date(props.start),
+                        formatParams: {
+                          val: {
+                            hour: "numeric",
+                            minute: "numeric",
+                          },
+                        },
+                      })}
                     </time>
                     &nbsp;–&nbsp;
                     <time dateTime={props.finish}>
-                      {dateFormat(props.finish, "H:MM")}
+                      {t("intlDateTime", {
+                        val: new Date(props.finish),
+                        formatParams: {
+                          val: {
+                            hour: "numeric",
+                            minute: "numeric",
+                          },
+                        },
+                      })}
                     </time>
                   </p>
                 ) : (
@@ -75,7 +90,17 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                       schedule
                     </span>
-                    <span>{dateFormat(props.start, "H:MM")}</span>
+                    <span>
+                      {t("intlDateTime", {
+                        val: new Date(props.start),
+                        formatParams: {
+                          val: {
+                            hour: "numeric",
+                            minute: "numeric",
+                          },
+                        },
+                      })}
+                    </span>
                   </p>
                 )}
               </>
