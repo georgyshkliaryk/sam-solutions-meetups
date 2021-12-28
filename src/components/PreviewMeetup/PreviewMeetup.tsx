@@ -4,6 +4,10 @@ import "./PreviewMeetup.scss";
 import MeetupDefaultImage from "../../pages/viewMeetup/assets/MeetupDefaultImage.svg";
 import Avatar from "../Avatar/Avatar";
 import { useTranslation } from "react-i18next";
+import {
+  dateLocalization,
+  timeLocalization,
+} from "../../helpers/dateTimeLocalization";
 
 interface IProps {
   title: string;
@@ -44,16 +48,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     calendar_today
                   </span>
                   <time dateTime={props.start}>
-                    {t("intlDateTime", {
-                      val: new Date(props.start),
-                      formatParams: {
-                        val: {
-                          weekday: "long",
-                          month: "long",
-                          day: "numeric",
-                        },
-                      },
-                    })}
+                    {dateLocalization("long", props.start)}
                   </time>
                 </p>
                 {props.finish ? (
@@ -62,27 +57,11 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                       schedule
                     </span>
                     <time dateTime={props.start}>
-                      {t("intlDateTime", {
-                        val: new Date(props.start),
-                        formatParams: {
-                          val: {
-                            hour: "numeric",
-                            minute: "numeric",
-                          },
-                        },
-                      })}
+                      {timeLocalization(props.start)}
                     </time>
                     &nbsp;–&nbsp;
                     <time dateTime={props.finish}>
-                      {t("intlDateTime", {
-                        val: new Date(props.finish),
-                        formatParams: {
-                          val: {
-                            hour: "numeric",
-                            minute: "numeric",
-                          },
-                        },
-                      })}
+                      {timeLocalization(props.finish)}
                     </time>
                   </p>
                 ) : (
@@ -90,17 +69,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                       schedule
                     </span>
-                    <span>
-                      {t("intlDateTime", {
-                        val: new Date(props.start),
-                        formatParams: {
-                          val: {
-                            hour: "numeric",
-                            minute: "numeric",
-                          },
-                        },
-                      })}
-                    </span>
+                    <span>{timeLocalization(props.start)}</span>
                   </p>
                 )}
               </>

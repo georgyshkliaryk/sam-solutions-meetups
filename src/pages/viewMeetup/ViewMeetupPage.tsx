@@ -19,6 +19,10 @@ import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import { useTranslation } from "react-i18next";
+import {
+  dateLocalization,
+  timeLocalization,
+} from "../../helpers/dateTimeLocalization";
 
 interface IProps {
   type: string;
@@ -173,16 +177,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         calendar_today
                       </span>
                       <time dateTime={meetup.start}>
-                        {t("intlDateTime", {
-                          val: new Date(meetup.start),
-                          formatParams: {
-                            val: {
-                              weekday: "long",
-                              month: "long",
-                              day: "numeric",
-                            },
-                          },
-                        })}
+                        {dateLocalization("long", meetup.start)}
                       </time>
                     </p>
                     {meetup.finish ? (
@@ -191,27 +186,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           schedule
                         </span>
                         <time dateTime={meetup.start}>
-                          {t("intlDateTime", {
-                            val: new Date(meetup.start),
-                            formatParams: {
-                              val: {
-                                hour: "numeric",
-                                minute: "numeric",
-                              },
-                            },
-                          })}
+                          {timeLocalization(meetup.start)}
                         </time>
                         &nbsp;–&nbsp;
                         <time dateTime={meetup.finish}>
-                          {t("intlDateTime", {
-                            val: new Date(meetup.finish),
-                            formatParams: {
-                              val: {
-                                hour: "numeric",
-                                minute: "numeric",
-                              },
-                            },
-                          })}
+                          {timeLocalization(meetup.finish)}
                         </time>
                       </p>
                     ) : (
@@ -219,17 +198,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                           schedule
                         </span>
-                        <span>
-                          {t("intlDateTime", {
-                            val: new Date(meetup.start),
-                            formatParams: {
-                              val: {
-                                hour: "numeric",
-                                minute: "numeric",
-                              },
-                            },
-                          })}
-                        </span>
+                        <span>{timeLocalization(meetup.start)}</span>
                       </p>
                     )}
                   </>

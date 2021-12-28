@@ -17,6 +17,7 @@ import {
 import Loader from "react-loader-spinner";
 import { numberDeclination } from "../../../../helpers/declination";
 import { useTranslation } from "react-i18next";
+import { fullDateTimeLocalization } from "../../../../helpers/dateTimeLocalization";
 
 interface IProps {
   item: IMeetup;
@@ -67,18 +68,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       <p className="meetups-card-header">
         <time dateTime={props.item.start}>
           {props.item.start
-            ? t("intlDateTime", {
-                val: new Date(props.item.start),
-                formatParams: {
-                  val: {
-                    weekday: "short",
-                    month: "long",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                  },
-                },
-              })
+            ? fullDateTimeLocalization("short", props.item.start)
             : "–"}
         </time>
         &nbsp;
