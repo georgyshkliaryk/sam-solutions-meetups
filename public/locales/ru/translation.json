@@ -147,7 +147,7 @@
       "loadMeetupError": "Не удалось загрузить митап.",
       "editMeetupSuccess": "Митап успешно изменен.",
       "editMeetupError": "Не удалось изменить митап.",
-      "deleteMeetuppSuccess": "Митап успешно удален.",
+      "deleteMeetupSuccess": "Митап успешно удален.",
       "deleteMeetupError": "Не удалось удалить митап.",
       "approveThemeSuccess": "Тема одобрена.",
       "approveThemeError": "Не удалось одобрить тему.",

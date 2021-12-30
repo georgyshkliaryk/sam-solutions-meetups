@@ -147,7 +147,7 @@
       "loadMeetupError": "Failed to load meetup.",
       "editMeetupSuccess": "The meetup was successfully edited.",
       "editMeetupError": "Failed to edit meetup.",
-      "deleteMeetuppSuccess": "The meetup was successfully deleted.",
+      "deleteMeetupSuccess": "The meetup was successfully deleted.",
       "deleteMeetupError": "Failed to delete meetup.",
       "approveThemeSuccess": "Theme was approved successfully.",
       "approveThemeError": "Failed to approve theme.",

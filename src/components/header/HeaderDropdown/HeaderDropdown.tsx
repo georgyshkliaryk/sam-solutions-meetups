@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { ReactElement, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import LocaleChange from "../../LocaleChange/LocaleChange";
+import LocaleChange from "../../ChangeLocale/LocaleChange";
 import ModalWindow from "../../ModalWindow/ModalWindow";
 import "./HeaderDropdown.scss";
 
@@ -14,23 +14,18 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [logoutModalActive, setLogoutModalActive] = useState<boolean>(false);
-  const [blurTimerId, setBlurTimerId] = useState<number>(0);
 
   const handleDropdownBlur = (e: React.FocusEvent<HTMLDivElement>): void => {
     const currentTarget = e.currentTarget;
-    setBlurTimerId(
-      window.setTimeout(() => {
-        if (!currentTarget.contains(document.activeElement)) {
-          setIsMenuOpen(false);
-        }
-      }, 100)
-    );
+    const relatedTarget = e.relatedTarget;
+
+    if (!currentTarget.contains(relatedTarget)) {
+      setIsMenuOpen(false);
+    }
   };
 
   useEffect(() => {
-    //cleanup
     return () => {
-      window.clearTimeout(blurTimerId);
       setIsMenuOpen(false);
     };
   }, []);
@@ -45,7 +40,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   };
 
   return (
-    <div className="header-dropdown" onBlur={handleDropdownBlur} tabIndex={0}>
+    <div className="header-dropdown" onBlur={handleDropdownBlur}>
       <button
         className={classNames("header-dropdown-expand-button", {
           "header-dropdown-expand-button-rotated": isMenuOpen,
@@ -57,7 +52,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
         </span>
       </button>
       {isMenuOpen && (
-        <div className="header-dropdown-list">
+        <div className="header-dropdown-list" tabIndex={0}>
           <div className="header-dropdown-list-item">
             <LocaleChange />
           </div>

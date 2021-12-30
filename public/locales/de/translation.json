@@ -147,7 +147,7 @@
       "loadMeetupError": "Treffen konnte nicht geladen werden.",
       "editMeetupSuccess": "Das Treffen wurde erfolgreich bearbeitet.",
       "editMeetupError": "Treffen konnte nicht bearbeitet werden.",
-      "deleteMeetuppSuccess": "Das Treffen wurde erfolgreich gelöscht.",
+      "deleteMeetupSuccess": "Das Treffen wurde erfolgreich gelöscht.",
       "deleteMeetupError": "Treffen konnte nicht gelöscht werden.",
       "approveThemeSuccess": "Thema wurde erfolgreich genehmigt.",
       "approveThemeError": "Design konnte nicht genehmigt werden.",
