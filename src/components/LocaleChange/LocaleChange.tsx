@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import React, { Fragment, ReactElement, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { languageNames, LOCALES } from "../../constants";
@@ -6,11 +5,7 @@ import { StoreContext } from "../../context/StoreContext";
 
 import "./LocaleChange.scss";
 
-interface IProps {
-  styles: string;
-}
-
-const LocaleChange: React.FC<IProps> = (props): ReactElement => {
+const LocaleChange: React.FC = (): ReactElement => {
   const { t, i18n } = useTranslation();
   const { notificationsStore } = useContext(StoreContext);
 
@@ -27,22 +22,10 @@ const LocaleChange: React.FC<IProps> = (props): ReactElement => {
 
   return (
     <>
-      <p
-        className={classNames(
-          props.styles === "login"
-            ? "locale-change-language-title-login"
-            : "locale-change-language-title"
-        )}
-      >
+      <p className="locale-change-language-title">
         {t("inputLabels.changeLanguage")}:
       </p>
-      <fieldset
-        className={classNames(
-          props.styles === "login"
-            ? "locale-change-language-buttons-login"
-            : "locale-change-language-buttons"
-        )}
-      >
+      <fieldset className="locale-change-language-buttons">
         {LOCALES.map((locale: string) => (
           <Fragment key={locale}>
             <input
@@ -56,11 +39,7 @@ const LocaleChange: React.FC<IProps> = (props): ReactElement => {
             />
             <label
               htmlFor={`language_${locale}`}
-              className={classNames(
-                props.styles === "login"
-                  ? "locale-change-language-buttons-label-login"
-                  : "locale-change-language-buttons-label"
-              )}
+              className="locale-change-language-buttons-label"
             >
               {locale.toUpperCase()}
             </label>

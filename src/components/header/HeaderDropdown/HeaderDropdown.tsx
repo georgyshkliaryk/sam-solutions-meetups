@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LocaleChange from "../../LocaleChange/LocaleChange";
 import ModalWindow from "../../ModalWindow/ModalWindow";
@@ -12,34 +12,40 @@ interface IProps {
 const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   const { t } = useTranslation();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const headerDropdownRef = useRef<HTMLDivElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [logoutModalActive, setLogoutModalActive] = useState<boolean>(false);
+  const [blurTimerId, setBlurTimerId] = useState<number>(0);
+
+  const handleDropdownBlur = (e: React.FocusEvent<HTMLDivElement>): void => {
+    const currentTarget = e.currentTarget;
+    setBlurTimerId(
+      window.setTimeout(() => {
+        if (!currentTarget.contains(document.activeElement)) {
+          setIsMenuOpen(false);
+        }
+      }, 100)
+    );
+  };
 
   useEffect(() => {
-    const checkIfClickedOutside = (e: any) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (
-        isMenuOpen &&
-        headerDropdownRef.current &&
-        !headerDropdownRef.current.contains(e.target)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    //cleanup
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      window.clearTimeout(blurTimerId);
+      setIsMenuOpen(false);
     };
-  }, [isMenuOpen]);
+  }, []);
 
   const handleExpandButtonClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogoutModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLogoutModalActive(true);
+  };
+
   return (
-    <div className="header-dropdown" ref={headerDropdownRef}>
+    <div className="header-dropdown" onBlur={handleDropdownBlur} tabIndex={0}>
       <button
         className={classNames("header-dropdown-expand-button", {
           "header-dropdown-expand-button-rotated": isMenuOpen,
@@ -53,11 +59,11 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
       {isMenuOpen && (
         <div className="header-dropdown-list">
           <div className="header-dropdown-list-item">
-            <LocaleChange styles="header" />
+            <LocaleChange />
           </div>
           <button
             className="header-dropdown-list-item header-dropdown-button-logout"
-            onClick={() => setLogoutModalActive(true)}
+            onClick={handleLogoutModal}
           >
             <span className="material-icons-outlined">logout</span>
             {t("buttons.authButtons.logout")}

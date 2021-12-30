@@ -7,28 +7,18 @@
   padding-top: 0.75rem;
 }
 
-.locale-change-language-title-login {
+.locale-change-language-title {
   color: $color-secondary-text;
   @include font-semi-light;
-  padding-bottom: 0.25rem;
-}
-
-.locale-change-language-buttons-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
 }
 
 .locale-change-language-buttons {
   display: flex;
   align-items: center;
-}
-
-.locale-change-language-buttons-input:checked
-  + .locale-change-language-buttons-label-login {
-  background: $gradient;
-  color: #ffff;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .locale-change-language-buttons-input:checked
@@ -37,31 +27,10 @@
   color: #ffff;
 }
 
-.locale-change-language-buttons-label-login {
+.locale-change-language-buttons-label {
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   border-radius: 0.375rem;
-}
-
-.locale-change-language-buttons-label {
-  flex-grow: 1;
-  padding: 0.25rem 0;
-  cursor: pointer;
-  border-radius: 0.375rem;
-}
-
-.locale-change-language-buttons-label-login:hover {
-  background-color: $color-secondary-hover;
-}
-
-.locale-change-language-buttons-label-login:active {
-  @include button-secondary-active;
-}
-
-.locale-change-language-buttons-login:focus-within
-  .locale-change-language-buttons-input:checked
-  + .locale-change-language-buttons-label-login {
-  box-shadow: 0 0 0 0.125rem $color-primary1;
 }
 
 .locale-change-language-buttons-label:hover {

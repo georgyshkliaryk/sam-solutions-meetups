@@ -109,7 +109,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
           </span>
         </button>
         <div>
-          <LocaleChange styles="login" />
+          <LocaleChange />
         </div>
       </form>
     </div>

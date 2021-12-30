@@ -10,7 +10,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: LOCALES[0],
-    debug: true,
+    debug: false,
     detection: {
       order: ["localStorage", "cookie"],
       caches: ["localStorage", "cookie"],
