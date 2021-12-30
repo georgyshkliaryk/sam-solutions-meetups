@@ -13,18 +13,24 @@ import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
-import dateFormat from "dateformat";
 import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
+import { useTranslation } from "react-i18next";
+import {
+  dateLocalization,
+  timeLocalization,
+} from "../../helpers/dateTimeLocalization";
 
 interface IProps {
   type: string;
 }
 
 const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore, meetupsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const meetupId = useParams();
@@ -137,7 +143,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Просмотр митапа</MainTitle>
+        <MainTitle>{t("pageTitles.viewMeetup")}</MainTitle>
         <article className="view-meetup-data">
           <div className="view-meetup-data-item">
             <img
@@ -151,14 +157,18 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           </div>
           {!meetup.start && !meetup.finish && !meetup.place ? (
             <div className="view-meetup-data-item">
-              <p className="view-meetup-data-label">Время и место проведения</p>
+              <p className="view-meetup-data-label">
+                {t("inputLabels.timeAndPlace")}
+              </p>
               <p className="view-theme-data-content">
-                <i>Время и место проведения не указано</i>
+                <i>{t("fillers.noTimeAndPlace")}</i>
               </p>
             </div>
           ) : (
             <div className="view-meetup-data-item">
-              <p className="view-meetup-data-label">Время и место проведения</p>
+              <p className="view-meetup-data-label">
+                {t("inputLabels.timeAndPlace")}
+              </p>
               <div className="view-meetup-data-content view-meetup-data-content-schedule">
                 {meetup.start && (
                   <>
@@ -167,7 +177,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         calendar_today
                       </span>
                       <time dateTime={meetup.start}>
-                        {dateFormat(meetup.start, "dddd, d mmmm yyyy")}
+                        {dateLocalization("long", meetup.start)}
                       </time>
                     </p>
                     {meetup.finish ? (
@@ -176,11 +186,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                           schedule
                         </span>
                         <time dateTime={meetup.start}>
-                          {dateFormat(meetup.start, "H:MM")}
+                          {timeLocalization(meetup.start)}
                         </time>
                         &nbsp;–&nbsp;
                         <time dateTime={meetup.finish}>
-                          {dateFormat(meetup.finish, "H:MM")}
+                          {timeLocalization(meetup.finish)}
                         </time>
                       </p>
                     ) : (
@@ -188,7 +198,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         <span className="material-icons-round view-meetup-data-content-schedule__item-icon">
                           schedule
                         </span>
-                        <span>{dateFormat(meetup.start, "H:MM")}</span>
+                        <span>{timeLocalization(meetup.start)}</span>
                       </p>
                     )}
                   </>
@@ -206,7 +216,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           )}
 
           <div className="view-meetup-data-item">
-            <p className="view-meetup-data-label">Спикер</p>
+            <p className="view-meetup-data-label">{t("inputLabels.speaker")}</p>
             <div className="view-meetup-data-content">
               {meetup.speakers && (
                 <Avatar
@@ -223,7 +233,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
             </div>
           </div>
           <div className="view-meetup-data-item">
-            <p className="view-meetup-data-label">Описание</p>
+            <p className="view-meetup-data-label">
+              {t("inputLabels.description")}
+            </p>
             <div className="view-meetup-data-content view-meetup-data-content__description">
               {meetup.description}
             </div>
@@ -231,38 +243,38 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           <ModalWindow
             active={modalDeleteActive}
             setActive={setModalDeleteActive}
-            title="Удалить митап?"
+            title={t("modalWindow.titles.deleteMeetup")}
           >
             <button
               className="view-meetup-modal-buttons__delete"
               onClick={handleDeleteMeetup}
             >
-              Удалить
+              {t("modalWindow.buttons.delete")}
             </button>
             <button
               className="view-meetup-modal-buttons__cancel"
               onClick={() => setModalDeleteActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <ModalWindow
             active={modalPublishActive}
             setActive={setModalPublishActive}
-            title="Опубликовать митап?"
+            title={t("modalWindow.titles.publishMeetup")}
           >
             <button
               className="view-theme-modal-buttons__approve"
               onClick={publishMeetup}
               data-cy="view-meetup-modal-button-publish"
             >
-              Опубликовать
+              {t("modalWindow.buttons.publish")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalPublishActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <div className="view-meetup-data-item view-theme-data-item-last">
@@ -272,7 +284,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   className="view-meetup-data-buttons-button-back"
                   to={`${routes.meetups}/${routes.drafts}`}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
                   {hasUserRights(authStore.user, meetup) && (
@@ -289,7 +301,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         className="view-meetup-data-buttons-button-delete"
                         onClick={() => setModalDeleteActive(true)}
                       >
-                        Удалить
+                        {t("buttons.meetupPageButtons.deleteMeetup")}
                       </button>
                     </>
                   )}
@@ -299,7 +311,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                       onClick={() => setModalPublishActive(true)}
                       data-cy="view-meetup-button-publish"
                     >
-                      Опубликовать
+                      {t("buttons.meetupPageButtons.publishMeetup")}
                     </button>
                   )}
                 </div>
@@ -310,7 +322,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   className="view-meetup-data-buttons-button-back"
                   to={`${routes.meetups}/${routes.future}`}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="view-meetup-data-buttons-right">
                   {hasUserRights(authStore.user, meetup) && (
@@ -327,7 +339,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         className="view-meetup-data-buttons-button-delete"
                         onClick={() => setModalDeleteActive(true)}
                       >
-                        Удалить
+                        {t("buttons.meetupPageButtons.deleteMeetup")}
                       </button>
                     </>
                   )}
@@ -352,7 +364,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                             <span className="material-icons-round">
                               check_circle_outline
                             </span>
-                            <span>Иду</span>
+                            <span>
+                              {t(
+                                "buttons.meetupPageButtons.stopParticipateInMeetup"
+                              )}
+                            </span>
                           </>
                         )}
                       </button>
@@ -370,7 +386,9 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                             width={30}
                           />
                         ) : (
-                          <span>Пойду</span>
+                          <span>
+                            {t("buttons.meetupPageButtons.participateInMeetup")}
+                          </span>
                         )}
                       </button>
                     )

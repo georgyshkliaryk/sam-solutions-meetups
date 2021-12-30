@@ -1,0 +1,199 @@
+{
+  "pageTitles": {
+    "meetups": "Treffen",
+    "news": "Nachrichten",
+    "newMeetup": "Neues Meetup",
+    "viewTheme": "Thema durchsuchen",
+    "viewMeetup": "Meetup durchsuchen",
+    "editMeetup": "Meetup-Bearbeitung",
+    "previewMeetup": "Meetup-Vorschau",
+    "login": "Melden Sie sich an, um Meetups anzuzeigen"
+  },
+  "pageDescriptions": {
+    "newMeetup": "Füllen Sie die erforderlichen Felder unten genauer aus, um vollständige Informationen über die bevorstehende Veranstaltung zu erhalten."
+  },
+  "navbar": {
+    "header": {
+      "meetups": "Treffen",
+      "news": "Nachrichten"
+    },
+    "main": {
+      "themes": "Themen",
+      "drafts": "Entwürfe",
+      "future": "Zukunft",
+      "past": "Vergangenheit"
+    },
+    "createMeetup": {
+      "requiredFields": "Benötigte Felder",
+      "extraFields": "Optionale Felder"
+    }
+  },
+  "buttons": {
+    "commonButtons": {
+      "createMeetup": "Thema erstellen",
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "preview": "Vorschau",
+      "create": "Erstellen",
+      "next": "Nächste"
+    },
+    "cardButtons": {
+      "voteForTheme": "Unterstützung",
+      "unvoteForTheme": "Unterstützend",
+      "participateInMeetup": "Sich beteiligen",
+      "stopParticipateInMeetup": "Teilnahme"
+    },
+    "meetupPageButtons": {
+      "deleteMeetup": "Löschen",
+      "participateInMeetup": "Sich beteiligen",
+      "stopParticipateInMeetup": "Teilnahme",
+      "voteForTheme": "Unterstützung",
+      "unvoteForTheme": "Unterstützend",
+      "approveTheme": "Thema genehmigen",
+      "publishMeetup": "Veröffentlichen",
+      "goBack": "Zurück"
+    },
+    "authButtons": {
+      "login": "Einloggen",
+      "logout": "Ausloggen"
+    }
+  },
+  "inputLabels": {
+    "title": "Titel",
+    "theme": "Thema",
+    "description": "Beschreibung",
+    "supporters": "Unterstützer",
+    "author": "Autor",
+    "speaker": "Vortragende",
+    "start": "Anfang",
+    "finish": "Ende",
+    "place": "Ort",
+    "timeAndPlace": "Zeit und Ort",
+    "uploadedImage": "Hochgeladenes Bild",
+    "loginName": "Benutzername eingeben",
+    "loginPassword": "Passwort eingeben",
+    "changeLanguage": "Sprache ändern"
+  },
+  "fillers": {
+    "noSupporters": "Bisher hat noch niemand das Thema unterstützt",
+    "noTimeAndPlace": "Zeit und Ort nicht angegeben"
+  },
+  "dropZoneSection": {
+    "dragImages": "Ziehen Sie ein Bild hierher oder ",
+    "upload": "Hochladen",
+    "fileSize": "Dateigröße",
+    "errors": {
+      "maxFileSize": "Maximale Dateigröße",
+      "allowedFormats": "Zulässige Formate"
+    }
+  },
+  "declinations": {
+    "meetups": {
+      "themes": {
+        "themeProposed1": "Thema vorgeschlagen",
+        "themeProposed2": "Themenvorschläge",
+        "themeProposed3": "Themenvorschläge"
+      },
+      "drafts": {
+        "meetupOnModeration1": "Treffen auf Moderation",
+        "meetupOnModeration2": "Treffen auf Moderation",
+        "meetupOnModeration3": "Treffen auf Moderation"
+      },
+      "future": {
+        "meetupPublished1": "Treffen veröffentlicht",
+        "meetupPublished2": "Treffen veröffentlicht",
+        "meetupPublished3": "Treffen veröffentlicht"
+      },
+      "past": {
+        "meetupPassed1": "Treffen ist vorbei",
+        "meetupPassed2": "Treffen sind vorbei",
+        "meetupPassed3": "Treffen sind vorbei"
+      }
+    },
+    "votedUsers": {
+      "voted1": "unterstützung",
+      "voted2": "unterstützen",
+      "voted3": "unterstützen"
+    },
+    "participants": {
+      "participants1": "Person wird gehen",
+      "participants2": "Personen werden gehen",
+      "participants3": "Personen werden gehen"
+    }
+  },
+  "placeholders": {
+    "loginName": "Nutzername",
+    "loginPassword": "Passwort"
+  },
+  "htmlTitles": {
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "deleteMeetup": "Meetup löschen",
+    "editMeetup": "Meetup bearbeiten",
+    "deleteTheme": "Thema löschen",
+    "chooseImage": "Bild für Meetup auswählen",
+    "deleteImage": "Lösche Bild"
+  },
+  "notifications": {
+    "titles": {
+      "success": "Erfolg",
+      "error": "Fehler",
+      "warning": "Warnung",
+      "info": "Die Info"
+    },
+    "descriptions": {
+      "createMeetupSuccess": "Das Treffen wurde erfolgreich erstellt.",
+      "createMeetupError": "Fehler beim Erstellen eines Meetups.",
+      "loadMeetupError": "Treffen konnte nicht geladen werden.",
+      "editMeetupSuccess": "Das Treffen wurde erfolgreich bearbeitet.",
+      "editMeetupError": "Treffen konnte nicht bearbeitet werden.",
+      "deleteMeetupSuccess": "Das Treffen wurde erfolgreich gelöscht.",
+      "deleteMeetupError": "Treffen konnte nicht gelöscht werden.",
+      "approveThemeSuccess": "Thema wurde erfolgreich genehmigt.",
+      "approveThemeError": "Design konnte nicht genehmigt werden.",
+      "publishMeetupSuccess": "Meetup wurde erfolgreich veröffentlicht.",
+      "publishMeetupError": "Das Treffen konnte nicht veröffentlicht werden.",
+      "participateInMeetupSuccess": "Du nimmst am Treffen teil.",
+      "participateInMeetupError": "Teilnahme am Treffen fehlgeschlagen.",
+      "voteForThemeSuccess": "Sie unterstützen jetzt das Thema.",
+      "voteForThemeError": "Das Thema konnte nicht unterstützt werden.",
+      "stopParticipateInMeetupSuccess": "Du nimmst nicht mehr am Meetup teil.",
+      "stopParticipateInMeetupError": "Die Teilnahme am Meetup konnte nicht abgelehnt werden.",
+      "unvoteForThemeSuccess": "Sie unterstützen das Thema nicht mehr.",
+      "unvoteForThemeError": "Die Stimme konnte nicht aus dem Thema entfernt werden.",
+      "languageChangedSuccess": "Sprache wurde erfolgreich geändert auf",
+      "auth": {
+        "loginExpired": "Die Zugangsdaten sind nicht mehr gültig. Bitte melden Sie sich erneut an.",
+        "loginSuccess": "Anmeldung erfolgreich abgeschlossen.",
+        "loginError": "Login fehlgeschlagen.",
+        "logoutSuccess": "Die Abmeldung war erfolgreich.",
+        "logoutError": "Abmelden fehlgeschlagen."
+      }
+    }
+  },
+  "modalWindow": {
+    "titles": {
+      "logout": "Von Ihrem Konto abmelden?",
+      "deleteMeetup": "Treffen löschen?",
+      "deleteTheme": "Thema löschen?",
+      "publishMeetup": "Treffen veröffentlichen?",
+      "approveTheme": "Treffen veröffentlichen?"
+    },
+    "buttons": {
+      "logout": "Ausloggen",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "publish": "Veröffentlichen",
+      "approve": "Genehmigen"
+    }
+  },
+  "inputValidation": {
+    "common": {
+      "requiredField": "Pflichtfeld"
+    },
+    "errors": {
+      "incorrectLoginOrPassword": "Falscher Benutzername oder Passwort!"
+    }
+  },
+  "intlDateTime": "{{val, datetime}}"
+}

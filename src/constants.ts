@@ -1,49 +1,3 @@
-import { i18n } from "dateformat";
-
-i18n.dayNames = [
-  "Воскр.",
-  "Пон.",
-  "Вт.",
-  "Ср.",
-  "Четв.",
-  "Пятн.",
-  "Суб.",
-  "Воскресенье",
-  "Понедельник",
-  "Вторник",
-  "Среда",
-  "Четверг",
-  "Пятница",
-  "Суббота",
-];
-
-i18n.monthNames = [
-  "янв",
-  "февр",
-  "мар",
-  "апр",
-  "мая",
-  "июн",
-  "июл",
-  "авг",
-  "сент",
-  "окт",
-  "нояб",
-  "дек",
-  "января",
-  "февраля",
-  "марта",
-  "апреля",
-  "мая",
-  "июня",
-  "июля",
-  "августа",
-  "сентября",
-  "октября",
-  "ноября",
-  "декабря",
-];
-
 export const routes = {
   meetups: "/meetups",
   news: "/news",
@@ -64,32 +18,44 @@ export interface NavItems {
   [key: string]: NavItem[];
 }
 
+export const LOCALES = ["ru", "en", "de"] as const;
+
+interface ILanguageNames {
+  [key: string]: string;
+}
+
+export const languageNames: ILanguageNames = {
+  ru: "Русский",
+  en: "English",
+  de: "Deutsch",
+};
+
 export const navItems: NavItems = {
   header: [
     {
-      title: "Митапы",
+      title: "navbar.header.meetups",
       path: routes.meetups,
     },
     {
-      title: "Новости",
+      title: "navbar.header.news",
       path: routes.news,
     },
   ],
   meetups: [
     {
-      title: "Темы",
+      title: "navbar.main.themes",
       path: routes.themes,
     },
     {
-      title: "На модерации",
+      title: "navbar.main.drafts",
       path: routes.drafts,
     },
     {
-      title: "Будущие",
+      title: "navbar.main.future",
       path: routes.future,
     },
     {
-      title: "Прошедшие",
+      title: "navbar.main.past",
       path: routes.past,
     },
   ],
@@ -124,12 +90,36 @@ interface IDeclination {
 }
 
 export const NumberDeclination: IDeclination = {
-  themes: ["тема предложена", "темы предложены", "тем предложено"],
-  drafts: ["митап на модерации", "митапа на модерации", "митапов на модерации"],
-  future: ["митап опубликован", "митапа опубликовано", "митапов опубликовано"],
-  past: ["митап прошел", "митапа прошло", "митапов прошло"],
-  votedUsers: ["поддерживает", "поддерживают", "поддерживают"],
-  participants: ["человек идет", "человека идут", "человек идут"],
+  themes: [
+    "declinations.meetups.themes.themeProposed1",
+    "declinations.meetups.themes.themeProposed2",
+    "declinations.meetups.themes.themeProposed3",
+  ],
+  drafts: [
+    "declinations.meetups.drafts.meetupOnModeration1",
+    "declinations.meetups.drafts.meetupOnModeration2",
+    "declinations.meetups.drafts.meetupOnModeration3",
+  ],
+  future: [
+    "declinations.meetups.future.meetupPublished1",
+    "declinations.meetups.future.meetupPublished2",
+    "declinations.meetups.future.meetupPublished3",
+  ],
+  past: [
+    "declinations.meetups.past.meetupPassed1",
+    "declinations.meetups.past.meetupPassed2",
+    "declinations.meetups.past.meetupPassed3",
+  ],
+  votedUsers: [
+    "declinations.votedUsers.voted1",
+    "declinations.votedUsers.voted2",
+    "declinations.votedUsers.voted3",
+  ],
+  participants: [
+    "declinations.participants.participants1",
+    "declinations.participants.participants2",
+    "declinations.participants.participants3",
+  ],
 };
 
 export const avatarColors: string[] = [

@@ -3,6 +3,7 @@ import { NavItem } from "../../../constants";
 import LinkComponent from "../../LinkComponent/LinkComponent";
 import "./MainNavbar.scss";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   items: NavItem[];
@@ -10,6 +11,8 @@ interface IProps {
 }
 
 const MainNavbar: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <nav className={classNames("main__navbar", props.className)}>
       {props.items.map((item: NavItem) => (
@@ -19,7 +22,7 @@ const MainNavbar: React.FC<IProps> = (props): ReactElement => {
           activeClassName="main__navbar-link-item-is-active"
           key={item.path}
         >
-          {item.title}
+          {t(item.title)}
         </LinkComponent>
       ))}
     </nav>

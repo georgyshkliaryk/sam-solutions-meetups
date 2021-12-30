@@ -20,8 +20,11 @@ import { observer } from "mobx-react-lite";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
+import { useTranslation } from "react-i18next";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const meetupId = useParams();
@@ -187,7 +190,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       <Main>
         {!previewOpen ? (
           <>
-            <MainTitle>Редактирование митапа</MainTitle>
+            <MainTitle>{t("pageTitles.editMeetup")}</MainTitle>
             <form onSubmit={handleEditMeetup}>
               <div className="edit-meetup-data">
                 <div className="edit-meetup__image-wrapper">
@@ -206,7 +209,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   <label
                     htmlFor="editImage"
                     className="edit-meetup__image-label"
-                    title="Выбрать фотографию для митапа"
+                    title={t("htmlTitles.chooseImage")}
                   >
                     <span className="material-icons-round edit-meetup__image-label-icon">
                       file_upload
@@ -217,7 +220,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       "edit-meetup__image-delete-visible":
                         file !== null || image,
                     })}
-                    title="Удалить фотографию"
+                    title={t("htmlTitles.deleteImage")}
                     onClick={handleDeleteImage}
                   >
                     <span className="material-icons-round edit-meetup__image-delete-icon">
@@ -230,7 +233,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editTitle"
                     className="edit-meetup-data-item__label"
                   >
-                    Тема
+                    {t("inputLabels.theme")}
                   </label>
                   <input
                     type="text"
@@ -254,7 +257,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="editStartDate"
                       className="edit-meetup-data-item__label"
                     >
-                      Начало
+                      {t("inputLabels.start")}
                     </label>
                     <DatePicker
                       id="editStartDate"
@@ -276,7 +279,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="editEndDate"
                       className="edit-meetup-data-item__label"
                     >
-                      Окончание
+                      {t("inputLabels.finish")}
                     </label>
                     <DatePicker
                       id="editEndDate"
@@ -297,7 +300,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editPlace"
                     className="edit-meetup-data-item__label"
                   >
-                    Место проведения
+                    {t("inputLabels.place")}
                   </label>
                   <input
                     type="text"
@@ -312,7 +315,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editSpeaker"
                     className="edit-meetup-data-item__label"
                   >
-                    Спикер
+                    {t("inputLabels.speaker")}
                   </label>
                   <input
                     type="text"
@@ -326,7 +329,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="editDescription"
                     className="edit-meetup-data-item__label"
                   >
-                    Описание
+                    {t("inputLabels.description")}
                   </label>
                   <textarea
                     name="editDescription"
@@ -352,7 +355,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   className="edit-meetup-data-buttons-button-back"
                   onClick={() => navigate(routes.meetups)}
                 >
-                  Отмена
+                  {t("buttons.commonButtons.cancel")}
                 </button>
                 <div className="edit-meetup-data-buttons-right">
                   <button
@@ -362,7 +365,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     className="edit-meetup-data-buttons-button-preview"
                     onClick={() => setPreviewOpen(true)}
                   >
-                    Предпросмотр
+                    {t("buttons.commonButtons.preview")}
                   </button>
                   <button
                     disabled={
@@ -371,7 +374,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     type="submit"
                     className="edit-meetup-data-buttons-button-submit"
                   >
-                    Сохранить
+                    {t("buttons.commonButtons.save")}
                   </button>
                 </div>
               </div>
@@ -392,7 +395,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                 className="edit-meetup-data-buttons-button-back"
                 onClick={() => setPreviewOpen(false)}
               >
-                Назад
+                {t("buttons.meetupPageButtons.goBack")}
               </button>
               <div className="edit-meetup-data-buttons-right">
                 <button
@@ -400,7 +403,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   disabled={title?.trim() === "" || description?.trim() === ""}
                   className="edit-meetup-data-buttons-button-submit"
                 >
-                  Опубликовать
+                  {t("buttons.meetupPageButtons.publishMeetup")}
                 </button>
               </div>
             </div>

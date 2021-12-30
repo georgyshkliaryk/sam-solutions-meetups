@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
+import LocaleChange from "../../components/LocaleChange/LocaleChange";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import { routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
@@ -10,6 +12,8 @@ import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
 
 const LoginPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,17 +54,17 @@ const LoginPage: React.FC = observer((): ReactElement => {
   return (
     <div className="login-page">
       <form className="login-page-form" onSubmit={handleLoginAttempt}>
-        <p className="login-page-form__title">Войдите для просмотра митапов:</p>
+        <p className="login-page-form__title">{t("pageTitles.login")}:</p>
         <div className="login-page-form__input-wrapper">
           <label htmlFor="login-input" className="login-page-form__label">
-            Введите имя пользователя:
+            {t("inputLabels.loginName")}:
           </label>
           <input
             type="text"
             className={classNames("login-page-form__input", {
               "login-page-form__input-error": validationError,
             })}
-            placeholder="Логин"
+            placeholder={t("placeholders.loginName")}
             id="login-input"
             value={login}
             onChange={handleLoginChange}
@@ -69,7 +73,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
         </div>
         <div className="login-page-form__input-wrapper">
           <label htmlFor="login-password" className="login-page-form__label">
-            Введите пароль:
+            {t("inputLabels.loginPassword")}:
           </label>
           <PasswordInput
             id="password-input"
@@ -80,6 +84,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
                 ? "login-page-form__input-error login-page-form__input-password"
                 : "login-page-form__input-password"
             }
+            placeholder={t("placeholders.loginPassword")}
           />
           <p
             className={classNames("login-page-form__error-text", {
@@ -89,7 +94,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
             <span className="material-icons-round login-page-form__error-text-icon">
               error_outline
             </span>
-            &nbsp; Неверный логин или пароль!
+            &nbsp; {t("inputValidation.errors.incorrectLoginOrPassword")}
           </p>
         </div>
         <button
@@ -98,11 +103,14 @@ const LoginPage: React.FC = observer((): ReactElement => {
           disabled={login === "" || password === ""}
           data-cy="login-button"
         >
-          Войти{" "}
+          {t("buttons.authButtons.login")}{" "}
           <span className="material-icons-round login-page-form__submit-button-icon">
             login
           </span>
         </button>
+        <div>
+          <LocaleChange />
+        </div>
       </form>
     </div>
   );

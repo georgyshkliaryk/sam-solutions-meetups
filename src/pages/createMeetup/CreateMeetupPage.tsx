@@ -25,8 +25,11 @@ import { getBase64 } from "../../helpers/getBase64";
 import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
+import { useTranslation } from "react-i18next";
 
 const CreateMeetupPage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { authStore, meetupsStore } = useContext(StoreContext);
   const [requiredFilled, setRequiredFilled] = useState(false);
@@ -188,7 +191,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                 </span>
               )}
             </span>
-            Обязательные поля
+            {t("navbar.createMeetup.requiredFields")}
           </label>
           <input
             type="radio"
@@ -207,13 +210,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
           />
           <label className="create-meetup-nav-item" htmlFor="extraTab">
             <span className="create-meetup-nav-item__icon">2</span>
-            Дополнительные поля
+            {t("navbar.createMeetup.extraFields")}
           </label>
         </fieldset>
-        <MainTitle>Новый митап</MainTitle>
+        <MainTitle>{t("pageTitles.newMeetup")}</MainTitle>
         <p className="create-meetup__description">
-          Заполните необходимые поля ниже наиболее подробно, это даст полную
-          информацию о предстоящем событии.
+          {t("pageDescriptions.newMeetup")}
         </p>
         <form className="create-meetup-data" onSubmit={handleCreateMeetup}>
           {requiredTabOpen ? (
@@ -224,7 +226,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createTitle"
                     className="create-meetup-data-content__label"
                   >
-                    Название
+                    {t("inputLabels.title")}
                   </label>
                   <input
                     type="text"
@@ -246,7 +248,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createSpeaker"
                     className="create-meetup-data-content__label"
                   >
-                    Спикер
+                    {t("inputLabels.speaker")}
                   </label>
                   <input
                     type="text"
@@ -269,7 +271,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createDescription"
                     className="create-meetup-data-content__label"
                   >
-                    Описание
+                    {t("inputLabels.description")}
                   </label>
                   <textarea
                     className={classNames(
@@ -294,7 +296,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   className="create-meetup-data-buttons-button-back"
                   to={routes.meetups}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
                 <div className="create-meetup-data-buttons-right">
                   <button
@@ -303,7 +305,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     onClick={handleClickNext}
                     data-cy="create-meetup-button-next"
                   >
-                    Далее
+                    {t("buttons.commonButtons.next")}
                   </button>
                 </div>
               </div>
@@ -317,7 +319,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateStart"
                       className="create-meetup-data-content__label"
                     >
-                      Начало
+                      {t("inputLabels.start")}
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}
@@ -350,7 +352,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       htmlFor="createDateEnd"
                       className="create-meetup-data-content__label"
                     >
-                      Окончание
+                      {t("inputLabels.finish")}
                     </label>
                     <DatePicker
                       onFocus={(e) => e.target.blur()}
@@ -378,7 +380,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     htmlFor="createPlace"
                     className="create-meetup-data-content__label"
                   >
-                    Место проведения
+                    {t("inputLabels.place")}
                   </label>
                   <input
                     type="text"
@@ -393,7 +395,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                 imageTypesRegex.test(file.type) ? (
                   <div className="create-meetup-data-content-uploaded-image">
                     <p className="create-meetup-data-content__label">
-                      Загруженные изображения
+                      {t("inputLabels.uploadedImage")}
                     </p>
                     <div className="create-meetup-data-content-uploaded-image-icon">
                       <span className="material-icons-outlined create-meetup-data-content-uploaded-image-icon__image">
@@ -402,8 +404,8 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       <div className="create-meetup-data-content-uploaded-image-icon-text">
                         <p>{file.name}</p>
                         <p className="create-meetup-data-content-uploaded-image-icon-text-filesize">
-                          Размер файла: {(file.size / (1024 * 1024)).toFixed(2)}{" "}
-                          Mb{" "}
+                          {t("dropZoneSection.fileSize")}:{" "}
+                          {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
                         </p>
                       </div>
                       <button
@@ -440,12 +442,12 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       alt="Drop zone"
                       className="create-meetup-data-content-dragndrop-icon"
                     />
-                    Перетащите изображение сюда или{" "}
+                    {t("dropZoneSection.dragImages")}
                     <label
                       htmlFor="image-upload"
                       className="create-meetup-data-content-dragndrop__label"
                     >
-                      загрузите
+                      {t("dropZoneSection.upload")}
                     </label>
                     &nbsp;(.jpeg, .png, .jpg)
                     <input
@@ -467,8 +469,9 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                           : "create-meetup-data-content-dragndrop__error-hidden"
                       }
                     >
-                      Максимальный размер файла: 1 Mb <br />
-                      Разрешенные форматы: .png .jpg .jpeg
+                      {t("dropZoneSection.errors.maxFileSize")}: 1 Mb <br />
+                      {t("dropZoneSection.errors.allowedFormats")}: .png .jpg
+                      .jpeg
                     </p>
                   </div>
                 )}
@@ -478,7 +481,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                   className="create-meetup-data-buttons-button-back"
                   onClick={() => setRequiredTabOpen(true)}
                 >
-                  Назад
+                  {t("buttons.meetupPageButtons.goBack")}
                 </button>
                 <div className="create-meetup-data-buttons-right">
                   <button
@@ -486,7 +489,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                     className="create-meetup-data-buttons-button-submit"
                     data-cy="create-meetup-button-create"
                   >
-                    Создать
+                    {t("buttons.commonButtons.create")}
                   </button>
                 </div>
               </div>

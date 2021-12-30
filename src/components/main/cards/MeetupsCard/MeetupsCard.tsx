@@ -2,7 +2,6 @@ import React, { ReactElement, useState } from "react";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
-import dateFormat from "dateformat";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
 import {
   MeetupPageTypes,
@@ -17,6 +16,8 @@ import {
 } from "../../../../repositories/interfaces/INetworkRepository";
 import Loader from "react-loader-spinner";
 import { numberDeclination } from "../../../../helpers/declination";
+import { useTranslation } from "react-i18next";
+import { fullDateTimeLocalization } from "../../../../helpers/dateTimeLocalization";
 
 interface IProps {
   item: IMeetup;
@@ -36,6 +37,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const isParticipating = (
     participants: IParticipant[],
@@ -66,7 +68,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       <p className="meetups-card-header">
         <time dateTime={props.item.start}>
           {props.item.start
-            ? dateFormat(props.item.start, "ddd, d mmmm • H:MM")
+            ? fullDateTimeLocalization("short", props.item.start)
             : "–"}
         </time>
         &nbsp;
@@ -118,7 +120,9 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                       <span className="material-icons-round meetups-card-footer__button-participating-icon">
                         check_circle_outline
                       </span>
-                      <span>Иду</span>
+                      <span>
+                        {t("buttons.cardButtons.stopParticipateInMeetup")}
+                      </span>
                     </>
                   )}
                 </button>
@@ -136,7 +140,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                       width={30}
                     />
                   ) : (
-                    <span>Пойду</span>
+                    <span>{t("buttons.cardButtons.participateInMeetup")}</span>
                   )}
                 </button>
               )
@@ -155,27 +159,27 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
       <ModalWindow
         active={modalActive}
         setActive={setModalActive}
-        title="Удалить митап?"
+        title={t("modalWindow.titles.deleteMeetup")}
       >
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={() => props.deleteMeetup(props.item.id)}
           data-cy="meetup-card-modal-button-delete"
         >
-          Удалить
+          {t("modalWindow.buttons.delete")}
         </button>
         <button
           className="meetups-card-modal-buttons__cancel"
           onClick={() => setModalActive(false)}
         >
-          Отмена
+          {t("modalWindow.buttons.cancel")}
         </button>
       </ModalWindow>
       {props.editRights && (
         <div className="meetups-card-buttons">
           <button
             className="meetups-card-delete-button"
-            title="Удалить митап"
+            title={t("htmlTitles.deleteMeetup")}
             onClick={() => setModalActive(true)}
             data-cy="meetup-card-button-delete"
           >
@@ -189,7 +193,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
           >
             <span
               className="material-icons-outlined"
-              title="Редактировать митап"
+              title={t("htmlTitles.editMeetup")}
             >
               edit
             </span>

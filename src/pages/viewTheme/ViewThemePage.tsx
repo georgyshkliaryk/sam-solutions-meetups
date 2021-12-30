@@ -17,8 +17,11 @@ import Loader from "react-loader-spinner";
 import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import { useTranslation } from "react-i18next";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
+  const { t } = useTranslation();
+
   const { authStore, meetupsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const themeId = useParams();
@@ -96,16 +99,16 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Просмотр темы</MainTitle>
+        <MainTitle>{t("pageTitles.viewTheme")}</MainTitle>
         <article className="view-theme-data">
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Название</p>
+            <p className="view-theme-data-label">{t("inputLabels.title")}</p>
             <p className="view-theme-data-content view-theme-data-content__title">
               {meetup.title}
             </p>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Автор</p>
+            <p className="view-theme-data-label">{t("inputLabels.author")}</p>
             <div className="view-theme-data-content">
               {meetup && (
                 <Avatar
@@ -120,13 +123,17 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             </div>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Описание</p>
+            <p className="view-theme-data-label">
+              {t("inputLabels.description")}
+            </p>
             <div className="view-theme-data-content view-theme-data-content__description">
               {meetup.description}
             </div>
           </div>
           <div className="view-theme-data-item">
-            <p className="view-theme-data-label">Поддерживают</p>
+            <p className="view-theme-data-label">
+              {t("inputLabels.supporters")}
+            </p>
 
             {voted !== undefined && voted.length !== 0 ? (
               <div className="view-theme-data-content">
@@ -149,7 +156,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
               </div>
             ) : voted !== undefined && voted.length === 0 ? (
               <div className="view-theme-data-content">
-                <i>Пока никто не поддержал тему</i>
+                <i>{t("fillers.noSupporters")}</i>
               </div>
             ) : (
               <div className="view-theme-data-content">
@@ -177,38 +184,38 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <ModalWindow
             active={modalDeleteActive}
             setActive={setModalDeleteActive}
-            title="Удалить тему?"
+            title={t("modalWindow.titles.deleteTheme")}
           >
             <button
               className="view-theme-modal-buttons__delete"
               onClick={handleDeleteTheme}
             >
-              Удалить
+              {t("modalWindow.buttons.delete")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalDeleteActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <ModalWindow
             active={modalApproveActive}
             setActive={setModalApproveActive}
-            title="Одобрить тему?"
+            title={t("modalWindow.titles.approveTheme")}
           >
             <button
               className="view-theme-modal-buttons__approve"
               onClick={approveTheme}
               data-cy="view-theme-modal-button-approve"
             >
-              Одобрить
+              {t("modalWindow.buttons.approve")}
             </button>
             <button
               className="view-theme-modal-buttons__cancel"
               onClick={() => setModalApproveActive(false)}
             >
-              Отмена
+              {t("modalWindow.buttons.cancel")}
             </button>
           </ModalWindow>
           <div className="view-theme-data-item view-theme-data-item-last">
@@ -217,7 +224,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                 className="view-theme-data-buttons-button-back"
                 to={`${routes.meetups}`}
               >
-                Назад
+                {t("buttons.meetupPageButtons.goBack")}
               </LinkComponent>
               <div className="view-theme-data-buttons-right">
                 {hasUserRights(authStore.user, meetup) && (
@@ -225,7 +232,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                     className="view-theme-data-buttons-button-delete"
                     onClick={() => setModalDeleteActive(true)}
                   >
-                    Удалить
+                    {t("buttons.meetupPageButtons.deleteMeetup")}
                   </button>
                 )}
                 {authStore.user.roles === UserRoles.CHIEF && (
@@ -234,7 +241,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
                     onClick={() => setModalApproveActive(true)}
                     data-cy="view-theme-button-approve"
                   >
-                    Одобрить тему
+                    {t("buttons.meetupPageButtons.approveTheme")}
                   </button>
                 )}
               </div>

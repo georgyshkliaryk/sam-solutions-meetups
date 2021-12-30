@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./PasswordInput.scss";
 
 interface IProps {
@@ -7,9 +8,12 @@ interface IProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   className?: string;
+  placeholder?: string;
 }
 
 const PasswordInput: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const toggleShowPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +24,7 @@ const PasswordInput: React.FC<IProps> = (props): ReactElement => {
       <input
         type={passwordVisible ? "text" : "password"}
         className="password-input"
-        placeholder="Пароль"
+        placeholder={props.placeholder}
         id={props.id}
         onChange={props.onChange}
         value={props.value}
@@ -35,10 +39,14 @@ const PasswordInput: React.FC<IProps> = (props): ReactElement => {
       <label
         htmlFor="showPassword"
         className="password-input__show-password-icon"
-        title={passwordVisible ? "Скрыть пароль" : "Показать пароль"}
+        title={
+          passwordVisible
+            ? t("htmlTitles.hidePassword")
+            : t("htmlTitles.showPassword")
+        }
       >
         <span className="material-icons-round">
-          {passwordVisible ? "visibility_off" : "visibility"}
+          {passwordVisible ? "visibility" : "visibility_off"}
         </span>
       </label>
     </div>

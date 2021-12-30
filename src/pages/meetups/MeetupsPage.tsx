@@ -17,8 +17,11 @@ import PastPage from "./past/PastPage";
 import { StoreContext } from "../../context/StoreContext";
 import { observer } from "mobx-react-lite";
 
+import { useTranslation } from "react-i18next";
+
 const MeetupsPage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     meetupsStore.getAllMeetups();
@@ -35,7 +38,7 @@ const MeetupsPage: React.FC = observer((): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>{navItems.header[0].title}</MainTitle>
+          <MainTitle>{t("pageTitles.meetups")}</MainTitle>
           <MainNavbar items={navItems.meetups} className="main__navbar-outer" />
           <Routes>
             <Route path={`${routes.themes}/*`} element={<ThemesPage />} />

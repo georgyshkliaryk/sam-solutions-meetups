@@ -1,0 +1,199 @@
+{
+  "pageTitles": {
+    "meetups": "Митапы",
+    "news": "Новости",
+    "newMeetup": "Новый митап",
+    "viewTheme": "Просмотр темы",
+    "viewMeetup": "Просмотр митапа",
+    "editMeetup": "Редактирование митапа",
+    "previewMeetup": "Предпросмотр митапа",
+    "login": "Войдите для просмотра митапов"
+  },
+  "pageDescriptions": {
+    "newMeetup": "Заполните необходимые поля ниже наиболее подробно, это даст полную информацию о предстоящем событии."
+  },
+  "navbar": {
+    "header": {
+      "meetups": "Митапы",
+      "news": "Новости"
+    },
+    "main": {
+      "themes": "Темы",
+      "drafts": "На модерации",
+      "future": "Будущие",
+      "past": "Прошедшие"
+    },
+    "createMeetup": {
+      "requiredFields": "Обязательные поля",
+      "extraFields": "Дополнительные поля"
+    }
+  },
+  "buttons": {
+    "commonButtons": {
+      "createMeetup": "Создать тему",
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "preview": "Предпросмотр",
+      "create": "Создать",
+      "next": "Далее"
+    },
+    "cardButtons": {
+      "voteForTheme": "Поддержать",
+      "unvoteForTheme": "Поддерживаю",
+      "participateInMeetup": "Пойду",
+      "stopParticipateInMeetup": "Иду"
+    },
+    "meetupPageButtons": {
+      "deleteMeetup": "Удалить",
+      "participateInMeetup": "Пойду",
+      "stopParticipateInMeetup": "Иду",
+      "voteForTheme": "Поддержать",
+      "unvoteForTheme": "Поддерживаю",
+      "approveTheme": "Одобрить тему",
+      "publishMeetup": "Опубликовать",
+      "goBack": "Назад"
+    },
+    "authButtons": {
+      "login": "Войти",
+      "logout": "Выйти"
+    }
+  },
+  "inputLabels": {
+    "title": "Название",
+    "theme": "Тема",
+    "description": "Описание",
+    "supporters": "Поддерживают",
+    "author": "Автор",
+    "speaker": "Спикер",
+    "start": "Начало",
+    "finish": "Окончание",
+    "place": "Место проведения",
+    "timeAndPlace": "Время и место проведения",
+    "uploadedImage": "Загруженное изображение",
+    "loginName": "Введите имя пользователя",
+    "loginPassword": "Введите пароль",
+    "changeLanguage": "Сменить язык"
+  },
+  "fillers": {
+    "noSupporters": "Пока никто не поддержал тему",
+    "noTimeAndPlace": "Время и место проведения не указано"
+  },
+  "dropZoneSection": {
+    "dragImages": "Перетащите изображение сюда или ",
+    "upload": "загрузите",
+    "fileSize": "Размер файла",
+    "errors": {
+      "maxFileSize": "Максимальный размер файла",
+      "allowedFormats": "Разрешенные форматы"
+    }
+  },
+  "declinations": {
+    "meetups": {
+      "themes": {
+        "themeProposed1": "тема предложена",
+        "themeProposed2": "темы предложены",
+        "themeProposed3": "тем предложено"
+      },
+      "drafts": {
+        "meetupOnModeration1": "митап на модерации",
+        "meetupOnModeration2": "митапа на модерации",
+        "meetupOnModeration3": "митапов на модерации"
+      },
+      "future": {
+        "meetupPublished1": "митап опубликован",
+        "meetupPublished2": "митапа опубликовано",
+        "meetupPublished3": "митапов опубликовано"
+      },
+      "past": {
+        "meetupPassed1": "митап прошел",
+        "meetupPassed2": "митапа прошло",
+        "meetupPassed3": "митапов прошло"
+      }
+    },
+    "votedUsers": {
+      "voted1": "поддерживает",
+      "voted2": "поддерживают",
+      "voted3": "поддерживают"
+    },
+    "participants": {
+      "participants1": "человек идет",
+      "participants2": "человека идут",
+      "participants3": "человек идут"
+    }
+  },
+  "placeholders": {
+    "loginName": "Логин",
+    "loginPassword": "Пароль"
+  },
+  "htmlTitles": {
+    "showPassword": "Показать пароль",
+    "hidePassword": "Скрыть пароль",
+    "deleteMeetup": "Удалить митап",
+    "editMeetup": "Редактировать митап",
+    "deleteTheme": "Удалить тему",
+    "chooseImage": "Выбрать фотографию для митапа",
+    "deleteImage": "Удалить фотографию"
+  },
+  "notifications": {
+    "titles": {
+      "success": "Успех",
+      "error": "Ошибка",
+      "warning": "Внимание",
+      "info": "Инфо"
+    },
+    "descriptions": {
+      "createMeetupSuccess": "Митап успешно создан.",
+      "createMeetupError": "Ошибка при создании митапа.",
+      "loadMeetupError": "Не удалось загрузить митап.",
+      "editMeetupSuccess": "Митап успешно изменен.",
+      "editMeetupError": "Не удалось изменить митап.",
+      "deleteMeetupSuccess": "Митап успешно удален.",
+      "deleteMeetupError": "Не удалось удалить митап.",
+      "approveThemeSuccess": "Тема одобрена.",
+      "approveThemeError": "Не удалось одобрить тему.",
+      "publishMeetupSuccess": "Митап опубликован.",
+      "publishMeetupError": "Не удалось опубликовать митап.",
+      "participateInMeetupSuccess": "Вы записались на митап.",
+      "participateInMeetupError": "Не удалось записаться на митап.",
+      "voteForThemeSuccess": "Вы поддержали тему.",
+      "voteForThemeError": "Не удалось поддержать тему.",
+      "stopParticipateInMeetupSuccess": "Вы отказались от участия в митапе.",
+      "stopParticipateInMeetupError": "Не удалось отказаться от участия в митапе.",
+      "unvoteForThemeSuccess": "Вы больше не поддерживаете тему.",
+      "unvoteForThemeError": "Не удалось убрать голос с темы.",
+      "languageChangedSuccess": "Язык был успешно изменен на",
+      "auth": {
+        "loginExpired": "Данные для входа больше не дейстуют. Выполните вход.",
+        "loginSuccess": "Вход выполнен успешно.",
+        "loginError": "Не удалось выполнить вход.",
+        "logoutSuccess": "Выход выполнен успешно.",
+        "logoutError": "Не удалось выйти."
+      }
+    }
+  },
+  "modalWindow": {
+    "titles": {
+      "logout": "Выйти из аккаунта?",
+      "deleteMeetup": "Удалить митап?",
+      "deleteTheme": "Удалить тему?",
+      "publishMeetup": "Опубликовать митап?",
+      "approveTheme": "Одобрить тему?"
+    },
+    "buttons": {
+      "logout": "Выйти",
+      "cancel": "Отмена",
+      "delete": "Удалить",
+      "publish": "Опубликовать",
+      "approve": "Одобрить"
+    }
+  },
+  "inputValidation": {
+    "common": {
+      "requiredField": "Обязательное поле"
+    },
+    "errors": {
+      "incorrectLoginOrPassword": "Неверный логин или пароль!"
+    }
+  },
+  "intlDateTime": "{{val, datetime}}"
+}

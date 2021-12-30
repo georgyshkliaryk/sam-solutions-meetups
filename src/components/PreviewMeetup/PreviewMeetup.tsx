@@ -2,8 +2,12 @@ import React, { ReactElement } from "react";
 import MainTitle from "../main/MainTitle/MainTitle";
 import "./PreviewMeetup.scss";
 import MeetupDefaultImage from "../../pages/viewMeetup/assets/MeetupDefaultImage.svg";
-import dateFormat from "dateformat";
 import Avatar from "../Avatar/Avatar";
+import { useTranslation } from "react-i18next";
+import {
+  dateLocalization,
+  timeLocalization,
+} from "../../helpers/dateTimeLocalization";
 
 interface IProps {
   title: string;
@@ -16,9 +20,11 @@ interface IProps {
 }
 
 const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <MainTitle>Предпросмотр митапа</MainTitle>
+      <MainTitle>{t("pageTitles.previewMeetup")}</MainTitle>
       <article className="preview-meetup-data">
         <div className="preview-meetup-data-item">
           <img
@@ -31,7 +37,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </p>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Время и место проведения</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.timeAndPlace")}
+          </p>
           <div className="preview-meetup-data-content preview-meetup-data-content-schedule">
             {props.start && (
               <>
@@ -40,7 +48,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     calendar_today
                   </span>
                   <time dateTime={props.start}>
-                    {dateFormat(props.start, "dddd, d mmmm yyyy")}
+                    {dateLocalization("long", props.start)}
                   </time>
                 </p>
                 {props.finish ? (
@@ -49,11 +57,11 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                       schedule
                     </span>
                     <time dateTime={props.start}>
-                      {dateFormat(props.start, "H:MM")}
+                      {timeLocalization(props.start)}
                     </time>
                     &nbsp;–&nbsp;
                     <time dateTime={props.finish}>
-                      {dateFormat(props.finish, "H:MM")}
+                      {timeLocalization(props.finish)}
                     </time>
                   </p>
                 ) : (
@@ -61,7 +69,7 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
                     <span className="material-icons-round preview-meetup-data-content-schedule__item-icon">
                       schedule
                     </span>
-                    <span>{dateFormat(props.start, "H:MM")}</span>
+                    <span>{timeLocalization(props.start)}</span>
                   </p>
                 )}
               </>
@@ -77,7 +85,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </div>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Спикер</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.speaker")}
+          </p>
           <div className="preview-meetup-data-content">
             {props.speaker && (
               <Avatar
@@ -92,7 +102,9 @@ const PreviewMeetup: React.FC<IProps> = (props): ReactElement => {
           </div>
         </div>
         <div className="preview-meetup-data-item">
-          <p className="preview-meetup-data-label">Описание</p>
+          <p className="preview-meetup-data-label">
+            {t("inputLabels.description")}
+          </p>
           <div className="preview-meetup-data-content preview-meetup-data-content__description">
             {props.description}
           </div>

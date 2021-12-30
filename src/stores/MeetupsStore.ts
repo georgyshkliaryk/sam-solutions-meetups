@@ -9,6 +9,7 @@ import {
 import { MeetupTypes } from "./../constants";
 import { makeAutoObservable } from "mobx";
 import { MeetupsRepository } from "../repositories/MeetupsRepository/MeetupsRepository";
+import { t } from "i18next";
 
 export class MeetupsStore {
   meetups: IMeetup[] = [];
@@ -73,8 +74,8 @@ export class MeetupsStore {
       this.errorState = true;
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось загрузить митап.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.loadMeetupError"),
       });
     }
   }
@@ -89,14 +90,14 @@ export class MeetupsStore {
       this.meetups.push(newMeetup);
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Митап успешно создан.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.createMeetupSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Ошибка при создании митапа.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.createMeetupError"),
       });
     }
   }
@@ -110,14 +111,14 @@ export class MeetupsStore {
       await this.meetupsRepository.editMeetup(meetupData);
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Митап успешно изменен.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.editMeetupSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось изменить митап.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.editMeetupError"),
       });
     }
   }
@@ -128,14 +129,14 @@ export class MeetupsStore {
       this.meetups = this.meetups.filter((m: IMeetup) => m.id !== id);
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Митап успешно удален.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.deleteMeetupSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось удалить митап.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.deleteMeetupError"),
       });
     }
   }
@@ -148,14 +149,14 @@ export class MeetupsStore {
       });
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Тема одобрена.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.approveThemeSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
-        type: "success",
-        title: "Успех",
-        description: "Не удалось одобрить тему.",
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.approveThemeError"),
       });
     }
   }
@@ -168,14 +169,14 @@ export class MeetupsStore {
       });
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Митап опубликован.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.publishMeetupSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось опубликовать митап.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.publishMeetupError"),
       });
     }
   }
@@ -198,40 +199,40 @@ export class MeetupsStore {
 
   async participateInMeetup(meetupId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.participateInMeetup(meetupId);
       await this.fetchParticipants(meetupId);
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Вы записались на митап.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.participateInMeetupSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось записаться на митап.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.participateInMeetupError"),
       });
     }
   }
 
   async voteForTheme(meetupId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.voteForTheme(meetupId);
       await this.fetchVotedUsers(meetupId);
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "success",
-        title: "Успех",
-        description: "Вы поддержали тему.",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.voteForThemeSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось поддержать тему.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.voteForThemeError"),
       });
     }
   }
@@ -241,7 +242,7 @@ export class MeetupsStore {
     userId: string
   ): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.stopParticipateInMeetup(meetupId);
       this.participantsMap.set(
         meetupId,
@@ -249,24 +250,28 @@ export class MeetupsStore {
           (p: IParticipant) => p.id !== userId
         )
       );
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "warning",
-        title: "Внимание",
-        description: "Вы отказались от участия в митапе.",
+        title: t("notifications.titles.error"),
+        description: t(
+          "notifications.descriptions.stopParticipateInMeetupSuccess"
+        ),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось отказаться от участия в митапе.",
+        title: t("notifications.titles.error"),
+        description: t(
+          "notifications.descriptions.stopParticipateInMeetupError"
+        ),
       });
     }
   }
 
   async unvoteForTheme(meetupId: string, userId: string): Promise<void> {
     try {
-      this.loadingState = meetupId;
+      this.buttonInLoading = meetupId;
       await this.networkRepository.unvoteForTheme(meetupId);
       this.votedUsersMap.set(
         meetupId,
@@ -274,17 +279,17 @@ export class MeetupsStore {
           (p: IParticipant) => p.id !== userId
         )
       );
-      this.loadingState = "";
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "warning",
-        title: "Внимание",
-        description: "Вы больше не поддерживаете тему.",
+        title: t("notifications.titles.warning"),
+        description: t("notifications.descriptions.unvoteForThemeSuccess"),
       });
     } catch {
       this.notificationsStore.setNotification({
         type: "error",
-        title: "Ошибка",
-        description: "Не удалось убрать голос с темы.",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.unvoteForThemeError"),
       });
     }
   }

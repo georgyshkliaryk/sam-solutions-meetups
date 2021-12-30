@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { NumberDeclination } from "../../../../constants";
 import { numberDeclination } from "../../../../helpers/declination";
@@ -29,6 +30,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
     surname: props.item.authorSurname,
   };
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const isVoted = (voted: IParticipant[], id: string): boolean => {
     return voted.some((p: IParticipant): boolean => p.id === id);
@@ -99,7 +101,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                     <span className="material-icons-round themes-card-footer__button-participating-icon">
                       check_circle_outline
                     </span>
-                    <span>Поддерживаю</span>
+                    <span>{t("buttons.cardButtons.unvoteForTheme")}</span>
                   </>
                 )}
               </button>
@@ -117,7 +119,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                     width={30}
                   />
                 ) : (
-                  <span>Поддержать</span>
+                  <span>{t("buttons.cardButtons.voteForTheme")}</span>
                 )}
               </button>
             )
@@ -136,25 +138,25 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
       <ModalWindow
         active={modalActive}
         setActive={setModalActive}
-        title="Удалить тему?"
+        title={t("modalWindow.titles.deleteTheme")}
       >
         <button
           className="themes-card-modal-buttons__delete"
           onClick={() => props.deleteTheme(props.item.id)}
         >
-          Удалить
+          {t("modalWindow.buttons.delete")}
         </button>
         <button
           className="themes-card-modal-buttons__cancel"
           onClick={() => setModalActive(false)}
         >
-          Отмена
+          {t("modalWindow.buttons.cancel")}
         </button>
       </ModalWindow>
       {props.editRights && (
         <button
           className="themes-card-delete-button"
-          title="Удалить тему"
+          title={t("htmlTitles.deleteTheme")}
           onClick={() => setModalActive(true)}
         >
           <span className="material-icons-outlined">delete</span>

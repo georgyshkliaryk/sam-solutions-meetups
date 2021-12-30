@@ -1,0 +1,199 @@
+{
+  "pageTitles": {
+    "meetups": "Meetups",
+    "news": "News",
+    "newMeetup": "New Meetup",
+    "viewTheme": "Browse Theme",
+    "viewMeetup": "Browse Meetup",
+    "editMeetup": "Meetup Editing",
+    "previewMeetup": "Meetup Prewview",
+    "login": "Sign In to View Meetups"
+  },
+  "pageDescriptions": {
+    "newMeetup": "Fill in the required fields below in more detail, this will give complete information about the upcoming event."
+  },
+  "navbar": {
+    "header": {
+      "meetups": "Meetups",
+      "news": "News"
+    },
+    "main": {
+      "themes": "Themes",
+      "drafts": "Drafts",
+      "future": "Future",
+      "past": "Past"
+    },
+    "createMeetup": {
+      "requiredFields": "Required fields",
+      "extraFields": "Optional fields"
+    }
+  },
+  "buttons": {
+    "commonButtons": {
+      "createMeetup": "Create theme",
+      "cancel": "Cancel",
+      "save": "Save",
+      "preview": "Preview",
+      "create": "Create",
+      "next": "Next"
+    },
+    "cardButtons": {
+      "voteForTheme": "Support",
+      "unvoteForTheme": "Supporting",
+      "participateInMeetup": "Participate",
+      "stopParticipateInMeetup": "Participating"
+    },
+    "meetupPageButtons": {
+      "deleteMeetup": "Delete",
+      "participateInMeetup": "Participate",
+      "stopParticipateInMeetup": "Participating",
+      "voteForTheme": "Support",
+      "unvoteForTheme": "Supporting",
+      "approveTheme": "Approve theme",
+      "publishMeetup": "Publish",
+      "goBack": "Back"
+    },
+    "authButtons": {
+      "login": "Log In",
+      "logout": "Log Out"
+    }
+  },
+  "inputLabels": {
+    "title": "Title",
+    "theme": "Theme",
+    "description": "Description",
+    "supporters": "Supporters",
+    "author": "Author",
+    "speaker": "Speaker",
+    "start": "Start",
+    "finish": "Ending",
+    "place": "Location",
+    "timeAndPlace": "Time and place",
+    "uploadedImage": "Uploaded image",
+    "loginName": "Enter username",
+    "loginPassword": "Enter password",
+    "changeLanguage": "Change language"
+  },
+  "fillers": {
+    "noSupporters": "So far no one has supported the topic",
+    "noTimeAndPlace": "Time and location not specified"
+  },
+  "dropZoneSection": {
+    "dragImages": "Drag an image here or ",
+    "upload": "upload",
+    "fileSize": "File size",
+    "errors": {
+      "maxFileSize": "Maximum file size",
+      "allowedFormats": "Permitted formats"
+    }
+  },
+  "declinations": {
+    "meetups": {
+      "themes": {
+        "themeProposed1": "theme proposed",
+        "themeProposed2": "themes proposed",
+        "themeProposed3": "themes proposed"
+      },
+      "drafts": {
+        "meetupOnModeration1": "meetup on moderation",
+        "meetupOnModeration2": "meetups on moderation",
+        "meetupOnModeration3": "meetups on moderation"
+      },
+      "future": {
+        "meetupPublished1": "meetup published",
+        "meetupPublished2": "meetups published",
+        "meetupPublished3": "meetups published"
+      },
+      "past": {
+        "meetupPassed1": "meetup is over",
+        "meetupPassed2": "meetups are over",
+        "meetupPassed3": "meetups are over"
+      }
+    },
+    "votedUsers": {
+      "voted1": "supports",
+      "voted2": "support",
+      "voted3": "support"
+    },
+    "participants": {
+      "participants1": "person will go",
+      "participants2": "persons will go",
+      "participants3": "persons will go"
+    }
+  },
+  "placeholders": {
+    "loginName": "Username",
+    "loginPassword": "Password"
+  },
+  "htmlTitles": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "deleteMeetup": "Delete Meetup",
+    "editMeetup": "Edit Meetup",
+    "deleteTheme": "Delete Theme",
+    "chooseImage": "Choose Image for Meetup",
+    "deleteImage": "Delete Image"
+  },
+  "notifications": {
+    "titles": {
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Info"
+    },
+    "descriptions": {
+      "createMeetupSuccess": "The meetup has been successfully created.",
+      "createMeetupError": "Error while creating a meetup.",
+      "loadMeetupError": "Failed to load meetup.",
+      "editMeetupSuccess": "The meetup was successfully edited.",
+      "editMeetupError": "Failed to edit meetup.",
+      "deleteMeetupSuccess": "The meetup was successfully deleted.",
+      "deleteMeetupError": "Failed to delete meetup.",
+      "approveThemeSuccess": "Theme was approved successfully.",
+      "approveThemeError": "Failed to approve theme.",
+      "publishMeetupSuccess": "Meetup was published successfully.",
+      "publishMeetupError": "Failed to publish meetup.",
+      "participateInMeetupSuccess": "You are participating in meetup.",
+      "participateInMeetupError": "Failed to participate in meetup.",
+      "voteForThemeSuccess": "You are now supporting the theme.",
+      "voteForThemeError": "Failed to suppotr the theme.",
+      "stopParticipateInMeetupSuccess": "You are not participating in meetup anymore.",
+      "stopParticipateInMeetupError": "Failed to refuse participating in meetup.",
+      "unvoteForThemeSuccess": "You don't support the theme anymore.",
+      "unvoteForThemeError": "Failed to remove vote from the theme.",
+      "languageChangedSuccess": "Language has been successfully changed to",
+      "auth": {
+        "loginExpired": "The login details are no longer valid. Please log in again.",
+        "loginSuccess": "Login completed successfully.",
+        "loginError": "Failed to log in.",
+        "logoutSuccess": "The logout was successful.",
+        "logoutError": "Failed to log out."
+      }
+    }
+  },
+  "modalWindow": {
+    "titles": {
+      "logout": "Log out from your account?",
+      "deleteMeetup": "Delete meetup?",
+      "deleteTheme": "Delete theme?",
+      "publishMeetup": "Publish meetup?",
+      "approveTheme": "Approve theme?"
+    },
+    "buttons": {
+      "logout": "Log out",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "publish": "Publish",
+      "approve": "Approve"
+    }
+  },
+  "inputValidation": {
+    "common": {
+      "requiredField": "Field required"
+    },
+    "errors": {
+      "incorrectLoginOrPassword": "Incorrect username or password!"
+    }
+  },
+  "intlDateTime": "{{val, datetime}}"
+}

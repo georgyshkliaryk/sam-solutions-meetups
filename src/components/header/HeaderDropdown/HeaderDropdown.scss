@@ -1,0 +1,112 @@
+@import "../../../constants.scss";
+
+.header-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header-dropdown-list {
+  background-color: #ffff;
+  color: #000;
+  position: absolute;
+  top: 3rem;
+  right: 0rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0px 7px 20px rgba(51, 63, 82, 0.25);
+  gap: 1rem;
+  border-radius: 0.375rem;
+}
+
+.header-dropdown-list-item {
+  width: 10rem;
+}
+
+.header-dropdown-button-logout {
+  font-size: 1.2rem;
+  color: $color-error;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  border-top: 1px solid #e2e7ef;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.header-dropdown-button-logout:hover {
+  background-color: $color-secondary-hover;
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.header-dropdown-expand-button {
+  background-color: transparent;
+  color: #ffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  .header-dropdown-expand-button-icon {
+    font-size: 2rem;
+  }
+}
+
+.header-dropdown-expand-button:hover {
+  color: $color-secondary-text;
+}
+
+.header-dropdown-expand-button-rotated {
+  transition: 0.3s ease-in-out;
+  transform: rotate(180deg);
+}
+
+.header-dropdown-list-item-change-language-title {
+  color: $color-secondary-text;
+  @include font-semi-light;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.header-dropdown-list-item-change-language-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.header-dropdown-list-item-change-language-buttons-input:checked
+  + .header-dropdown-list-item-change-language-buttons-label {
+  background: $gradient;
+  color: #ffff;
+}
+
+.header-dropdown-list-item-change-language-buttons-label {
+  flex-grow: 1;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  border-radius: 0.375rem;
+}
+
+.header-dropdown-list-item-change-language-buttons-label:hover {
+  background-color: $color-secondary-hover;
+}
+
+.header-dropdown-list-item-change-language-buttons-label:active {
+  @include button-secondary-active;
+}
+
+.header-dropdown-list-item-change-language-buttons:focus-within
+  .header-dropdown-list-item-change-language-buttons-input:checked
+  + .header-dropdown-list-item-change-language-buttons-label {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+}
+
+.header-dropdown-list-item-change-language-buttons-input {
+  width: 0;
+  margin: 0;
+  overflow: hidden;
+}

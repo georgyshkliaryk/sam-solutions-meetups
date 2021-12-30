@@ -9,10 +9,12 @@ import { hasUserRights } from "../../../helpers/hasUserRights";
 import { numberDeclination } from "../../../helpers/declination";
 import { IMeetup } from "../../../repositories/interfaces/IMeetupsRepository";
 import "./ThemesPage.scss";
+import { useTranslation } from "react-i18next";
 
 const ThemesPage: React.FC = observer((): ReactElement => {
   const { authStore, meetupsStore } = useContext(StoreContext);
   const currentUser = authStore.user;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (meetupsStore.themes.length > 0) {
@@ -56,7 +58,7 @@ const ThemesPage: React.FC = observer((): ReactElement => {
           <span className="material-icons-round" data-cy="create-meetup-button">
             add
           </span>
-          Создать тему
+          {t("buttons.commonButtons.createMeetup")}
         </LinkComponent>
       </div>
       <div className="themes-page-wrapper">
