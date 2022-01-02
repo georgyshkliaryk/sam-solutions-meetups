@@ -15,10 +15,15 @@ import NewsCard from "../../components/main/cards/NewsCard/NewsCard";
 import { useTranslation } from "react-i18next";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import { observer } from "mobx-react-lite";
+import { sortByDate } from "../../helpers/sortByDate";
 
 const NewsPage: React.FC = observer((): ReactElement => {
   const { authStore, newsStore } = useContext(StoreContext);
   const { t } = useTranslation();
+
+  const sortedNews = newsStore.news
+    .slice()
+    .sort((a: INews, b: INews) => sortByDate(a.date, b.date));
 
   useEffect(() => {
     newsStore.getAllNews();
@@ -37,7 +42,7 @@ const NewsPage: React.FC = observer((): ReactElement => {
         <Main>
           <MainTitle textAlign="left">{t("pageTitles.news")}</MainTitle>
           <div className="news-page-list">
-            {newsStore.news.map((n: INews) => (
+            {sortedNews.map((n: INews) => (
               <NewsCard item={n} key={n.id} />
             ))}
           </div>
