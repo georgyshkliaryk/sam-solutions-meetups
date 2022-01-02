@@ -1,7 +1,5 @@
 import {
-  IEditedMeetupToServer,
   IMeetupFromServer,
-  IMeetupToServer,
   IParticipant,
   ISpeaker,
 } from "./INetworkRepository";

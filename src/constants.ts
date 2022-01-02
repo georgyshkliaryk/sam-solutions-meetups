@@ -80,6 +80,7 @@ export enum UserRoles {
 
 export const apiUrls = {
   meetups: "/meetups",
+  news: "/news",
   users: "/users",
   login: "/login",
   logout: "/logout",

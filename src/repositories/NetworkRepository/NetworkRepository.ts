@@ -6,6 +6,7 @@ import {
   IMeetupFromServer,
   IMeetupToServer,
   INetworkRepository,
+  INewsFromServer,
   IParticipant,
 } from "./../interfaces/INetworkRepository";
 import axios from "axios";
@@ -13,6 +14,11 @@ import axios from "axios";
 export class NetworkRepository implements INetworkRepository {
   async getAllMeetups(): Promise<IMeetupFromServer[]> {
     const response = await axios.get(apiUrls.meetups);
+    return await response.data;
+  }
+
+  async getAllNews(): Promise<INewsFromServer[]> {
+    const response = await axios.get(apiUrls.news);
     return await response.data;
   }
 

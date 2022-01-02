@@ -19,6 +19,14 @@ export interface IMeetupFromServer {
   image?: string | null;
 }
 
+export interface INewsFromServer {
+  id: string;
+  publicationDate: string;
+  title: string;
+  text: string;
+  image: string;
+}
+
 export interface IMeetupToServer {
   subject: string;
   excerpt: string;
@@ -75,6 +83,7 @@ export interface ILoginData {
 
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
+  getAllNews: () => Promise<INewsFromServer[]>;
   getMeetupById: (id: string) => Promise<IMeetupFromServer>;
   getParticipantsOfMeetup: (id: string) => Promise<IParticipant[]>;
   participateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
