@@ -28,7 +28,7 @@ const NewsPage: React.FC = (): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>{t("pageTitles.news")}</MainTitle>
+          <MainTitle textAlign="left">{t("pageTitles.news")}</MainTitle>
         </Main>
       </div>
     );
