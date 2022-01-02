@@ -40,7 +40,13 @@ const NewsPage: React.FC = observer((): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle textAlign="left">{t("pageTitles.news")}</MainTitle>
+          <MainTitle styles="news-page-title">
+            <p>{t("pageTitles.news")}</p>
+            <button className="news-page-title__create-news-button">
+              <span className="material-icons-round">add</span>
+              {t("buttons.commonButtons.createNews")}
+            </button>
+          </MainTitle>
           <div className="news-page-list">
             {sortedNews.map((n: INews) => (
               <NewsCard item={n} key={n.id} />

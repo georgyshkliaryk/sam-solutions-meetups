@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { INews } from "../../../../repositories/interfaces/INewsRepository";
-import "./NewsCatd.scss";
+import "./NewsCard.scss";
 import defaultImage from "./assets/newsDefaultImage.svg";
 import { truncText } from "../../../../helpers/truncText";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,7 @@ const NewsCard: React.FC<IProps> = (props): ReactElement => {
         alt="News card"
       />
       <div className="news-card-content">
-        <time className="news-card-content__date">
+        <time className="news-card-content__date" dateTime={props.item.date}>
           {t("intlDateTime", {
             val: new Date(props.item.date),
           })}

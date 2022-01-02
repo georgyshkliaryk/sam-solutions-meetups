@@ -31,6 +31,7 @@
   "buttons": {
     "commonButtons": {
       "createMeetup": "Thema erstellen",
+      "createNews": "Artikel erstellen",
       "cancel": "Abbrechen",
       "save": "Speichern",
       "preview": "Vorschau",

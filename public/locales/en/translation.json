@@ -30,7 +30,8 @@
   },
   "buttons": {
     "commonButtons": {
-      "createMeetup": "Create theme",
+      "createMeetup": "Create Theme",
+      "createNews": "Create Article",
       "cancel": "Cancel",
       "save": "Save",
       "preview": "Preview",
