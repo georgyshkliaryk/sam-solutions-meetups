@@ -1,4 +1,10 @@
-.news {
+.news-page {
   height: 100%;
   overflow: auto;
+}
+
+.news-page-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

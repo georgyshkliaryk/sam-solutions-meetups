@@ -26,7 +26,7 @@ const NewsPage: React.FC = observer((): ReactElement => {
 
   if (authStore.user !== undefined) {
     return (
-      <div className="news">
+      <div className="news-page">
         <Header className="header-outer">
           <LinkComponent to={routes.meetups}>
             <LogoSam className="header-logo-outer" />
@@ -36,9 +36,11 @@ const NewsPage: React.FC = observer((): ReactElement => {
         </Header>
         <Main>
           <MainTitle textAlign="left">{t("pageTitles.news")}</MainTitle>
-          {newsStore.news.map((n: INews) => (
-            <div key={n.id}>{n.title}</div>
-          ))}
+          <div className="news-page-list">
+            {newsStore.news.map((n: INews) => (
+              <NewsCard item={n} key={n.id} />
+            ))}
+          </div>
         </Main>
       </div>
     );
