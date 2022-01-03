@@ -196,5 +196,6 @@
       "incorrectLoginOrPassword": "Falscher Benutzername oder Passwort!"
     }
   },
-  "intlDateTime": "{{val, datetime}}"
+  "intlDateTime": "{{val, datetime}}",
+  "loading": "Wird geladen"
 }

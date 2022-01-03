@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes, UserRoles } from "../../constants";
+import { loadingColor, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
@@ -66,8 +66,8 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+          <MainTitle>{t("loading")}...</MainTitle>
+          <Loader type="Puff" color={loadingColor} height={100} width={100} />
         </Main>
       </div>
     );
@@ -161,19 +161,19 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
               <div className="view-theme-data-content">
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />

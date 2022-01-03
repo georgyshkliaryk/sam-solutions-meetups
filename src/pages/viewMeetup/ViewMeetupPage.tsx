@@ -9,7 +9,13 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
+import {
+  loadingColor,
+  MeetupPageTypes,
+  navItems,
+  routes,
+  UserRoles,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -105,8 +111,8 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+          <MainTitle>{t("loading")}...</MainTitle>
+          <Loader type="Puff" color={loadingColor} height={100} width={100} />
         </Main>
       </div>
     );
@@ -355,7 +361,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
-                            color="#00BFFF"
+                            color={loadingColor}
                             height="1rem"
                             width={30}
                           />
@@ -381,7 +387,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
-                            color="#00BFFF"
+                            color={loadingColor}
                             height="1rem"
                             width={30}
                           />
@@ -396,7 +402,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                     <div>
                       <Loader
                         type="ThreeDots"
-                        color="#00BFFF"
+                        color={loadingColor}
                         height="1rem"
                         width={30}
                       />

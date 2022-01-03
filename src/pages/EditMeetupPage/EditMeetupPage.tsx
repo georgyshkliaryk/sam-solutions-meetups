@@ -7,7 +7,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { loadingColor, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
@@ -101,8 +101,8 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
           <HeaderProfile user={authStore.user} />
         </Header>
         <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+          <MainTitle>{t("loading")}...</MainTitle>
+          <Loader type="Puff" color={loadingColor} height={100} width={100} />
         </Main>
       </div>
     );

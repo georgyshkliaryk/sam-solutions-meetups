@@ -196,5 +196,6 @@
       "incorrectLoginOrPassword": "Неверный логин или пароль!"
     }
   },
-  "intlDateTime": "{{val, datetime}}"
+  "intlDateTime": "{{val, datetime}}",
+  "loading": "Загрузка"
 }

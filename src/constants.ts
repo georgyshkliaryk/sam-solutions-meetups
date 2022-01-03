@@ -136,6 +136,8 @@ export const avatarColors: string[] = [
   "crimson",
 ];
 
+export const loadingColor = "#314ad7" as const;
+
 export const fileMaxSize = 1000000;
 
 export const imageTypesRegex = /^image\/(jpe?g|png)$/;
