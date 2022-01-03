@@ -52,16 +52,15 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    //alert("Theme not found!");
     return <Navigate to={routes.login} />;
   }
 
   if (meetup === undefined) {
     return (
-      <div className="view-meetup">
-        <Header className="view-meetup__header">
+      <div className="view-theme">
+        <Header className="view-theme__header">
           <LinkComponent to={routes.meetups}>
-            <LogoSam className="view-meetup__header-logo" />
+            <LogoSam className="view-theme__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
           <HeaderProfile user={authStore.user} />

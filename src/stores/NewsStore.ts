@@ -9,7 +9,7 @@ export class NewsStore {
   errorState = false;
 
   constructor(
-    private readonly meetupsRepository: NewsRepository,
+    private readonly newsRepository: NewsRepository,
     private readonly networkRepository: NetworkRepository,
     private readonly notificationsStore: NotificationsStore
   ) {
@@ -17,7 +17,7 @@ export class NewsStore {
   }
 
   async getAllNews(): Promise<void> {
-    this.newsList = await this.meetupsRepository.getAllNews();
+    this.newsList = await this.newsRepository.getAllNews();
   }
 
   get news(): INews[] {
@@ -25,5 +25,25 @@ export class NewsStore {
       this.getAllNews();
     }
     return this.newsList;
+  }
+
+  resetErrorState(): void {
+    this.errorState = false;
+  }
+
+  async getArticleById(id: string): Promise<INews | undefined> {
+    this.errorState = false;
+    try {
+      const response = await this.newsRepository.getArticleById(id);
+      this.errorState = false;
+      return response;
+    } catch {
+      this.errorState = true;
+      //   this.notificationsStore.setNotification({
+      //     type: "error",
+      //     title: t("notifications.titles.error"),
+      //     description: t("notifications.descriptions.loadMeetupError"),
+      //   });
+    }
   }
 }

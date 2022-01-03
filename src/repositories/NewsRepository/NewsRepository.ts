@@ -12,6 +12,11 @@ export class NewsRepository implements INewsRepository {
     return newsFromServer.map(this.parseNews);
   }
 
+  async getArticleById(id: string): Promise<INews> {
+    const articleFromServer = await this.networkRepository.getArticleById(id);
+    return this.parseNews(articleFromServer);
+  }
+
   private parseNews(news: INewsFromServer): INews {
     return {
       id: news.id,

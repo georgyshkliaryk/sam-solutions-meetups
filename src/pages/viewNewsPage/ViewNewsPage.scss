@@ -1,0 +1,24 @@
+@import "../../constants.scss";
+
+.view-article {
+  height: 100%;
+  overflow: auto;
+}
+
+.view-article__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.view-article__header-logo {
+  width: 8rem;
+  text-align: left;
+}
+
+@media (min-width: $mobile-width) {
+  .view-article__header-logo {
+    width: 30rem;
+  }
+}
