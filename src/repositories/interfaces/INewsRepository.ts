@@ -8,4 +8,5 @@ export interface INews {
 
 export interface INewsRepository {
   getAllNews: () => Promise<INews[]>;
+  getArticleById: (id: string) => Promise<INews>;
 }

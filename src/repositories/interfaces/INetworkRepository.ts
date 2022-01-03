@@ -85,6 +85,7 @@ export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
   getAllNews: () => Promise<INewsFromServer[]>;
   getMeetupById: (id: string) => Promise<IMeetupFromServer>;
+  getArticleById: (id: string) => Promise<INewsFromServer>;
   getParticipantsOfMeetup: (id: string) => Promise<IParticipant[]>;
   participateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
   stopParticipateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
