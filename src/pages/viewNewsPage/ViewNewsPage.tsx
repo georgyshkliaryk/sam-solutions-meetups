@@ -103,7 +103,7 @@ const ViewNewsPage: React.FC = (): ReactElement => {
             className="view-article-buttons__back"
             to={routes.news}
           >
-            Назад
+            {t("buttons.meetupPageButtons.goBack")}
           </LinkComponent>
           <div className="view-article-buttons-right">
             <button className="view-article-buttons-right__edit">
@@ -115,7 +115,7 @@ const ViewNewsPage: React.FC = (): ReactElement => {
               className="view-article-buttons-right__delete"
               onClick={() => setModalDeleteActive(true)}
             >
-              Удалить
+              {t("buttons.meetupPageButtons.deleteMeetup")}
             </button>
           </div>
         </div>
