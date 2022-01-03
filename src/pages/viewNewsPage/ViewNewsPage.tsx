@@ -14,6 +14,7 @@ import { StoreContext } from "../../context/StoreContext";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import "./ViewNewsPage.scss";
 import defaultImage from "./assets/newsDefaultImage.svg";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 
 const ViewNewsPage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -21,6 +22,7 @@ const ViewNewsPage: React.FC = (): ReactElement => {
   const { authStore, newsStore } = useContext(StoreContext);
   const navigate = useNavigate();
   const articleId = useParams();
+  const [modalDeleteActive, setModalDeleteActive] = useState<boolean>(false);
 
   const [article, setArticle] = useState<INews | undefined>(undefined);
 
@@ -67,6 +69,11 @@ const ViewNewsPage: React.FC = (): ReactElement => {
     );
   }
 
+  const handleDeleteArticle = () => {
+    newsStore.deleteArticle(article.id);
+    navigate(routes.news);
+  };
+
   return (
     <div className="view-article">
       <Header className="view-article__header">
@@ -92,18 +99,44 @@ const ViewNewsPage: React.FC = (): ReactElement => {
           </div>
         </article>
         <div className="view-article-buttons">
-          <button className="view-article-buttons__back">Назад</button>
+          <LinkComponent
+            className="view-article-buttons__back"
+            to={routes.news}
+          >
+            Назад
+          </LinkComponent>
           <div className="view-article-buttons-right">
             <button className="view-article-buttons-right__edit">
               <span className="material-icons-round">
                 drive_file_rename_outline
               </span>
             </button>
-            <button className="view-article-buttons-right__delete">
+            <button
+              className="view-article-buttons-right__delete"
+              onClick={() => setModalDeleteActive(true)}
+            >
               Удалить
             </button>
           </div>
         </div>
+        <ModalWindow
+          active={modalDeleteActive}
+          setActive={setModalDeleteActive}
+          title={t("modalWindow.titles.deleteArticle")}
+        >
+          <button
+            className="view-article-modal-buttons__delete"
+            onClick={handleDeleteArticle}
+          >
+            {t("modalWindow.buttons.delete")}
+          </button>
+          <button
+            className="view-article-modal-buttons__cancel"
+            onClick={() => setModalDeleteActive(false)}
+          >
+            {t("modalWindow.buttons.cancel")}
+          </button>
+        </ModalWindow>
       </Main>
     </div>
   );

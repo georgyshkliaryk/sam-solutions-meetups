@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { makeAutoObservable } from "mobx";
 import { NetworkRepository } from "../repositories/NetworkRepository/NetworkRepository";
 import { NewsRepository } from "../repositories/NewsRepository/NewsRepository";
@@ -39,11 +40,29 @@ export class NewsStore {
       return response;
     } catch {
       this.errorState = true;
-      //   this.notificationsStore.setNotification({
-      //     type: "error",
-      //     title: t("notifications.titles.error"),
-      //     description: t("notifications.descriptions.loadMeetupError"),
-      //   });
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.loadArticleError"),
+      });
+    }
+  }
+
+  async deleteArticle(id: string): Promise<void> {
+    try {
+      await this.networkRepository.deleteArticle(id);
+      this.newsList = this.newsList.filter((m: INews) => m.id !== id);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.deleteArticleSuccess"),
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.deleteArticleError"),
+      });
     }
   }
 }

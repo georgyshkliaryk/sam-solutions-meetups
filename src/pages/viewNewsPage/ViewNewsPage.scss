@@ -104,6 +104,38 @@
   @include button-secondary-active;
 }
 
+.view-article-modal-buttons__delete {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-error;
+  border-color: $color-error;
+}
+
+.view-article-modal-buttons__delete:hover {
+  background-color: #ef0800bb;
+  color: #ffff;
+}
+
+.view-article-modal-buttons__delete:active {
+  background-color: $color-error;
+  color: #ffff;
+}
+
+.view-article-modal-buttons__cancel {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-primary1;
+  border-color: $color-primary1;
+}
+
+.view-article-modal-buttons__cancel:hover {
+  @include button-secondary-hover;
+}
+
+.view-article-modal-buttons__cancel:active {
+  @include button-secondary-active;
+}
+
 @media (min-width: $mobile-width) {
   .view-article__header-logo {
     width: 30rem;

@@ -96,6 +96,14 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async deleteArticle(id: string) {
+    const response = await axios.delete(`${apiUrls.news}/${id}`);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
   async login(loginData: ILoginData): Promise<ILoginResponse> {
     const response = await axios.post(apiUrls.login, loginData);
     if (response.status !== 200) {
