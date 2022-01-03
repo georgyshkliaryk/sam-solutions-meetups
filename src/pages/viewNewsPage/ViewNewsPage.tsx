@@ -91,6 +91,19 @@ const ViewNewsPage: React.FC = (): ReactElement => {
             </p>
           </div>
         </article>
+        <div className="view-article-buttons">
+          <button className="view-article-buttons__back">Назад</button>
+          <div className="view-article-buttons-right">
+            <button className="view-article-buttons-right__edit">
+              <span className="material-icons-round">
+                drive_file_rename_outline
+              </span>
+            </button>
+            <button className="view-article-buttons-right__delete">
+              Удалить
+            </button>
+          </div>
+        </div>
       </Main>
     </div>
   );
