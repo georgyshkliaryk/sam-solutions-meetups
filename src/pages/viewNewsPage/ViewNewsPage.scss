@@ -17,6 +17,36 @@
   text-align: left;
 }
 
+.view-article-content__image {
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 0.313rem 0.313rem 0 0;
+}
+
+.view-article-content-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background-color: #ffff;
+  text-align: left;
+  box-shadow: 0px 4px 7px rgba(215, 221, 232, 0.398055);
+  border-radius: 0 0 0.313rem 0.313rem;
+  padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+}
+
+.view-article-content-text__title {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+}
+
+.view-article-content-text__description {
+  @include font-semi-light;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  white-space: pre-line;
+}
+
 @media (min-width: $mobile-width) {
   .view-article__header-logo {
     width: 30rem;

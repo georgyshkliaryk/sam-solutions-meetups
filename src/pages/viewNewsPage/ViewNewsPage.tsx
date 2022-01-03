@@ -13,6 +13,7 @@ import { loadingColor, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import "./ViewNewsPage.scss";
+import defaultImage from "./assets/newsDefaultImage.svg";
 
 const ViewNewsPage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -66,7 +67,33 @@ const ViewNewsPage: React.FC = (): ReactElement => {
     );
   }
 
-  return <div>{article.title}</div>;
+  return (
+    <div className="view-article">
+      <Header className="view-article__header">
+        <LinkComponent to={routes.meetups}>
+          <LogoSam className="view-article__header-logo" />
+        </LinkComponent>
+        <HeaderNavbar items={navItems.header} />
+        <HeaderProfile user={authStore.user} />
+      </Header>
+      <Main>
+        <MainTitle>{t("pageTitles.viewArticle")}</MainTitle>
+        <article className="view-article-content">
+          <img
+            src={article.image ?? defaultImage}
+            alt="News Article"
+            className="view-article-content__image"
+          />
+          <div className="view-article-content-text">
+            <p className="view-article-content-text__title">{article.title}</p>
+            <p className="view-article-content-text__description">
+              {article.description}
+            </p>
+          </div>
+        </article>
+      </Main>
+    </div>
+  );
 };
 
 export default ViewNewsPage;
