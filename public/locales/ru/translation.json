@@ -75,7 +75,10 @@
     "uploadedImage": "Загруженное изображение",
     "loginName": "Введите имя пользователя",
     "loginPassword": "Введите пароль",
-    "changeLanguage": "Сменить язык"
+    "changeLanguage": "Сменить язык",
+    "headline": "Заголовок",
+    "text": "Текст",
+    "image": "Изображение"
   },
   "fillers": {
     "noSupporters": "Пока никто не поддержал тему",
@@ -147,6 +150,8 @@
     "descriptions": {
       "createMeetupSuccess": "Митап успешно создан.",
       "createMeetupError": "Ошибка при создании митапа.",
+      "createArticleSuccess": "Новость успешно создана.",
+      "createArticleError": "Не удалось создать новость.",
       "loadMeetupError": "Не удалось загрузить митап.",
       "loadArticleError": "Не удалось загрузить новость.",
       "editMeetupSuccess": "Митап успешно изменен.",

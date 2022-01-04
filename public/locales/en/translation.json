@@ -75,7 +75,10 @@
     "uploadedImage": "Uploaded image",
     "loginName": "Enter username",
     "loginPassword": "Enter password",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "headline": "Headline",
+    "text": "Text",
+    "image": "Image"
   },
   "fillers": {
     "noSupporters": "So far no one has supported the topic",
@@ -147,6 +150,8 @@
     "descriptions": {
       "createMeetupSuccess": "The meetup has been successfully created.",
       "createMeetupError": "Error while creating a meetup.",
+      "createArticleSuccess": "Article has been successfully created.",
+      "createArticleError": "Error while creating an article.",
       "loadMeetupError": "Failed to load meetup.",
       "loadArticleError": "Failed to load article.",
       "editMeetupSuccess": "The meetup was successfully edited.",

@@ -27,6 +27,13 @@ export interface INewsFromServer {
   image: string;
 }
 
+export interface INewsToServer {
+  publicationDate: string;
+  title: string;
+  text: string;
+  image: string | null;
+}
+
 export interface IMeetupToServer {
   subject: string;
   excerpt: string;

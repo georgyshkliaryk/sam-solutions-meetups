@@ -75,7 +75,10 @@
     "uploadedImage": "Hochgeladenes Bild",
     "loginName": "Benutzername eingeben",
     "loginPassword": "Passwort eingeben",
-    "changeLanguage": "Sprache ändern"
+    "changeLanguage": "Sprache ändern",
+    "headline": "Üerschrift",
+    "text": "Text",
+    "image": "Bild"
   },
   "fillers": {
     "noSupporters": "Bisher hat noch niemand das Thema unterstützt",
@@ -147,6 +150,8 @@
     "descriptions": {
       "createMeetupSuccess": "Das Treffen wurde erfolgreich erstellt.",
       "createMeetupError": "Fehler beim Erstellen eines Meetups.",
+      "createArticleSuccess": "Die Nachricht wurde erfolgreich erstellt.",
+      "createArticleError": "Nachrichten konnten nicht erstellt werden.",
       "loadMeetupError": "Treffen konnte nicht geladen werden.",
       "loadArticleError": "Nachrichten konnten nicht geladen werden.",
       "editMeetupSuccess": "Das Treffen wurde erfolgreich bearbeitet.",

@@ -1,4 +1,6 @@
-import React, { ReactElement, useContext } from "react";
+import classNames from "classnames";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
@@ -8,9 +10,17 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import {
+  fileMaxSize,
+  imageTypesRegex,
+  navItems,
+  routes,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./CreateArticlePage.scss";
+import DropZoneIcon from "./assets/dropzone-icon.svg";
+import { INewArticle } from "../../repositories/interfaces/INewsRepository";
+import { getBase64 } from "../../helpers/getBase64";
 
 const CreateArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -18,9 +28,85 @@ const CreateArticlePage: React.FC = (): ReactElement => {
   const navigate = useNavigate();
   const { authStore, newsStore } = useContext(StoreContext);
 
+  const [requiredFilled, setRequiredFilled] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState(false);
+  const [urlImage, setUrlImage] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const { getRootProps, isDragActive, isDragReject } = useDropzone({
+    accept: "image/jpeg, image/png, image/jpg",
+    onDrop: (acceptedFiles: File[]) => {
+      if (!isDragReject) {
+        setFile(acceptedFiles[0]);
+        URL.revokeObjectURL(urlImage);
+        setUrlImage(URL.createObjectURL(acceptedFiles[0]));
+      }
+    },
+    maxFiles: 1,
+  });
+
+  const handleCreateArticle = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (authStore.user === undefined) {
+      navigate(routes.meetups);
+    } else {
+      const articleData: INewArticle = {
+        title,
+        description,
+        date: new Date().toISOString(),
+        image: null,
+      };
+      if (file !== null) {
+        articleData.image = await getBase64(file);
+      }
+
+      await newsStore.createNewArticle(articleData);
+      navigate(routes.news);
+    }
+  };
+
+  const handleResetFile = () => {
+    setFile(null);
+    if (urlImage !== "") {
+      URL.revokeObjectURL(urlImage);
+      setUrlImage("");
+    }
+  };
+
+  useEffect(() => {
+    if (isDragReject) {
+      setFileError(true);
+    } else if (file !== null && file.size > fileMaxSize) {
+      setFileError(true);
+    } else {
+      setFileError(false);
+    }
+  }, [file, isDragReject]);
+
+  useEffect(() => {
+    if (title.trim() === "" || description.trim() === "") {
+      setRequiredFilled(false);
+    } else {
+      setRequiredFilled(true);
+    }
+  }, [description, title]);
+
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
   }
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDescription(event.target.value);
+  };
 
   return (
     <div className="create-article">
@@ -33,19 +119,21 @@ const CreateArticlePage: React.FC = (): ReactElement => {
       </Header>
       <Main>
         <MainTitle>{t("pageTitles.newArticle")}</MainTitle>
-        <form className="create-article-form">
+        <form className="create-article-form" onSubmit={handleCreateArticle}>
           <fieldset className="create-article-form-inputs">
             <div className="create-article-form-inputs-item">
               <label
                 htmlFor="articleTitle"
                 className="create-article-form-inputs-item__label"
               >
-                Заголовок
+                {t("inputLabels.headline")}
               </label>
               <input
                 type="text"
                 id="articleTitle"
                 className="create-article-form-inputs-item__input"
+                onChange={handleTitleChange}
+                value={title}
               />
             </div>
             <div className="create-article-form-inputs-item">
@@ -53,7 +141,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 htmlFor="articleDescription"
                 className="create-article-form-inputs-item__label"
               >
-                Текст
+                {t("inputLabels.text")}
               </label>
               <textarea
                 className="create-article-form-inputs-item__textarea"
@@ -61,6 +149,8 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 id="articleDescription"
                 cols={30}
                 rows={10}
+                onChange={handleDescriptionChange}
+                value={description}
               ></textarea>
             </div>
             <div className="create-article-form-inputs-item">
@@ -68,8 +158,88 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 htmlFor=""
                 className="create-article-form-inputs-item__label"
               >
-                Изображение
+                {t("inputLabels.image")}
               </label>
+              {file !== null &&
+              !fileError &&
+              imageTypesRegex.test(file.type) ? (
+                <div className="create-article-form-uploaded-image">
+                  <div className="create-article-form-uploaded-image-icon">
+                    <span className="material-icons-outlined create-article-form-uploaded-image-icon__image">
+                      image
+                    </span>
+                    <div className="create-article-form-uploaded-image-icon-text">
+                      <p>{file.name}</p>
+                      <p className="create-article-form-uploaded-image-icon-text-filesize">
+                        {t("dropZoneSection.fileSize")}:{" "}
+                        {(file.size / (1024 * 1024)).toFixed(2)} Mb{" "}
+                      </p>
+                    </div>
+                    <button
+                      className="material-icons-outlined create-article-form-uploaded-image-icon-text-delete"
+                      onClick={handleResetFile}
+                    >
+                      close
+                    </button>
+                  </div>
+                  <img
+                    src={urlImage}
+                    alt="preview"
+                    className="create-article-form-uploaded-image-pic"
+                  />
+                </div>
+              ) : (
+                <div
+                  {...getRootProps({
+                    className: classNames(
+                      "create-article-form-dragndrop",
+                      {
+                        "create-article-form-dragndrop-active": isDragActive,
+                      },
+                      {
+                        "create-article-form-dragndrop-rejected": isDragReject,
+                      }
+                    ),
+                  })}
+                >
+                  <img
+                    src={DropZoneIcon}
+                    alt="Drop zone"
+                    className="create-article-form-dragndrop-icon"
+                  />
+                  {t("dropZoneSection.dragImages")}
+                  <label
+                    htmlFor="image-upload"
+                    className="create-article-form-dragndrop__label"
+                  >
+                    {t("dropZoneSection.upload")}
+                  </label>
+                  &nbsp;(.jpeg, .png, .jpg)
+                  <input
+                    type="file"
+                    id="image-upload"
+                    accept=".png,.jpeg,.jpg"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setFile(e.target.files ? e.target.files[0] : null);
+                      if (e.target.files !== null) {
+                        setUrlImage(URL.createObjectURL(e.target.files[0]));
+                      }
+                    }}
+                    style={{ display: "none" }}
+                  />
+                  <p
+                    className={
+                      fileError
+                        ? "create-article-form-dragndrop__error-visible"
+                        : "create-article-form-dragndrop__error-hidden"
+                    }
+                  >
+                    {t("dropZoneSection.errors.maxFileSize")}: 1 Mb <br />
+                    {t("dropZoneSection.errors.allowedFormats")}: .png .jpg
+                    .jpeg
+                  </p>
+                </div>
+              )}
             </div>
           </fieldset>
           <fieldset className="create-article-form-buttons">
@@ -82,6 +252,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
             <button
               type="submit"
               className="create-article-form-buttons__submit"
+              disabled={!requiredFilled}
             >
               {t("buttons.commonButtons.create")}
             </button>

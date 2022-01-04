@@ -7,6 +7,7 @@ import {
   IMeetupToServer,
   INetworkRepository,
   INewsFromServer,
+  INewsToServer,
   IParticipant,
 } from "./../interfaces/INetworkRepository";
 import axios from "axios";
@@ -72,6 +73,14 @@ export class NetworkRepository implements INetworkRepository {
 
   async createMeetup(meetupData: IMeetupToServer): Promise<IMeetupFromServer> {
     const response = await axios.post(apiUrls.meetups, meetupData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
+  async createArticle(articleData: INewsToServer): Promise<INewsFromServer> {
+    const response = await axios.post(apiUrls.news, articleData);
     if (response.status !== 200) {
       throw new Error(response.data);
     }
