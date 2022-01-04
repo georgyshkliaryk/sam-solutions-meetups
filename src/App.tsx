@@ -12,6 +12,7 @@ import EditMeetupPage from "./pages/EditMeetupPage/EditMeetupPage";
 import Notifications from "./components/Notifications/Notifications";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import ViewNewsPage from "./pages/viewNewsPage/ViewNewsPage";
+import CreateArticlePage from "./pages/createArticle/CreateArticle";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -95,6 +96,14 @@ const App: React.FC = (): ReactElement => {
             element={
               <PrivateRoute>
                 <NewsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.news}/${routes.create}`}
+            element={
+              <PrivateRoute>
+                <CreateArticlePage />
               </PrivateRoute>
             }
           />

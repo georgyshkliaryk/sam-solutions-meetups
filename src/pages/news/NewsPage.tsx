@@ -43,10 +43,13 @@ const NewsPage: React.FC = observer((): ReactElement => {
           <MainTitle styles="news-page-title">
             <p>{t("pageTitles.news")}</p>
             {authStore.user.roles === UserRoles.CHIEF && (
-              <button className="news-page-title__create-news-button">
+              <LinkComponent
+                className="news-page-title__create-news-button"
+                to={`${routes.news}/${routes.create}`}
+              >
                 <span className="material-icons-round">add</span>
                 {t("buttons.commonButtons.createNews")}
-              </button>
+              </LinkComponent>
             )}
           </MainTitle>
           <div className="news-page-list">
