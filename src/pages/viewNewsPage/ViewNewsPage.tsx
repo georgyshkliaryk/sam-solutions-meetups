@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { loadingColor, navItems, routes } from "../../constants";
+import { loadingColor, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import "./ViewNewsPage.scss";
@@ -105,19 +105,21 @@ const ViewNewsPage: React.FC = (): ReactElement => {
           >
             {t("buttons.meetupPageButtons.goBack")}
           </LinkComponent>
-          <div className="view-article-buttons-right">
-            <button className="view-article-buttons-right__edit">
-              <span className="material-icons-round">
-                drive_file_rename_outline
-              </span>
-            </button>
-            <button
-              className="view-article-buttons-right__delete"
-              onClick={() => setModalDeleteActive(true)}
-            >
-              {t("buttons.meetupPageButtons.deleteMeetup")}
-            </button>
-          </div>
+          {authStore.user.roles === UserRoles.CHIEF && (
+            <div className="view-article-buttons-right">
+              <button className="view-article-buttons-right__edit">
+                <span className="material-icons-round">
+                  drive_file_rename_outline
+                </span>
+              </button>
+              <button
+                className="view-article-buttons-right__delete"
+                onClick={() => setModalDeleteActive(true)}
+              >
+                {t("buttons.meetupPageButtons.deleteMeetup")}
+              </button>
+            </div>
+          )}
         </div>
         <ModalWindow
           active={modalDeleteActive}

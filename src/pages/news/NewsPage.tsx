@@ -7,7 +7,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./NewsPage.scss";
 import NewsCard from "../../components/main/cards/NewsCard/NewsCard";
@@ -42,10 +42,12 @@ const NewsPage: React.FC = observer((): ReactElement => {
         <Main>
           <MainTitle styles="news-page-title">
             <p>{t("pageTitles.news")}</p>
-            <button className="news-page-title__create-news-button">
-              <span className="material-icons-round">add</span>
-              {t("buttons.commonButtons.createNews")}
-            </button>
+            {authStore.user.roles === UserRoles.CHIEF && (
+              <button className="news-page-title__create-news-button">
+                <span className="material-icons-round">add</span>
+                {t("buttons.commonButtons.createNews")}
+              </button>
+            )}
           </MainTitle>
           <div className="news-page-list">
             {sortedNews.map((n: INews) => (
