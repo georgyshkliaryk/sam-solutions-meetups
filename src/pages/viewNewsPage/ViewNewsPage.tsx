@@ -15,6 +15,7 @@ import { INews } from "../../repositories/interfaces/INewsRepository";
 import "./ViewNewsPage.scss";
 import defaultImage from "./assets/newsDefaultImage.svg";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import ReactMarkdown from "react-markdown";
 
 const ViewNewsPage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -93,9 +94,9 @@ const ViewNewsPage: React.FC = (): ReactElement => {
           />
           <div className="view-article-content-text">
             <p className="view-article-content-text__title">{article.title}</p>
-            <p className="view-article-content-text__description">
-              {article.description}
-            </p>
+            <div className="view-article-content-text__description">
+              <ReactMarkdown>{article.description}</ReactMarkdown>
+            </div>
           </div>
         </article>
         <div className="view-article-buttons">

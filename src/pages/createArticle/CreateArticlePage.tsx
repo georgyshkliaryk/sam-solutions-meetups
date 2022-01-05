@@ -24,6 +24,7 @@ import { getBase64 } from "../../helpers/getBase64";
 
 import ReactMde from "react-mde";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const CreateArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -145,7 +146,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
               <ReactMde
                 maxEditorHeight={480}
                 toolbarCommands={[
-                  ["header", "bold", "italic"],
+                  ["bold", "italic", "strikethrough"],
                   ["quote", "link", "code"],
                   ["unordered-list", "ordered-list"],
                 ]}
@@ -154,7 +155,11 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
                 generateMarkdownPreview={(markdown) =>
-                  Promise.resolve(<ReactMarkdown>{markdown}</ReactMarkdown>)
+                  Promise.resolve(
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {markdown}
+                    </ReactMarkdown>
+                  )
                 }
                 childProps={{
                   writeButton: {

@@ -12,7 +12,7 @@ import EditMeetupPage from "./pages/EditMeetupPage/EditMeetupPage";
 import Notifications from "./components/Notifications/Notifications";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import ViewNewsPage from "./pages/viewNewsPage/ViewNewsPage";
-import CreateArticlePage from "./pages/createArticle/CreateArticle";
+import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
 
 const App: React.FC = (): ReactElement => {
   return (
