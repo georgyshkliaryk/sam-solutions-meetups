@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
 import ReactMarkdown from "react-markdown";
 
+import strip from "strip-markdown";
+
 interface IProps {
   item: INews;
 }
@@ -29,7 +31,9 @@ const NewsCard: React.FC<IProps> = (props): ReactElement => {
         </time>
         <p className="news-card-content__title">{props.item.title}</p>
         <div className="news-card-content__description">
-          <ReactMarkdown>{truncText(90, props.item.description)}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[strip]}>
+            {truncText(90, props.item.description)}
+          </ReactMarkdown>
         </div>
       </div>
     </LinkComponent>

@@ -25,6 +25,7 @@ import { getBase64 } from "../../helpers/getBase64";
 import ReactMde from "react-mde";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeExternalLinks from "rehype-external-links";
 
 const CreateArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -156,7 +157,10 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 onTabChange={setSelectedTab}
                 generateMarkdownPreview={(markdown) =>
                   Promise.resolve(
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeExternalLinks]}
+                    >
                       {markdown}
                     </ReactMarkdown>
                   )

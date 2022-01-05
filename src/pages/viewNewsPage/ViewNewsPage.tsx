@@ -16,8 +16,11 @@ import "./ViewNewsPage.scss";
 import defaultImage from "./assets/newsDefaultImage.svg";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import ReactMarkdown from "react-markdown";
+import { observer } from "mobx-react-lite";
 
-const ViewNewsPage: React.FC = (): ReactElement => {
+import rehypeExternalLinks from "rehype-external-links";
+
+const ViewNewsPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
 
   const { authStore, newsStore } = useContext(StoreContext);
@@ -95,7 +98,9 @@ const ViewNewsPage: React.FC = (): ReactElement => {
           <div className="view-article-content-text">
             <p className="view-article-content-text__title">{article.title}</p>
             <div className="view-article-content-text__description">
-              <ReactMarkdown>{article.description}</ReactMarkdown>
+              <ReactMarkdown rehypePlugins={[rehypeExternalLinks]}>
+                {article.description}
+              </ReactMarkdown>
             </div>
           </div>
         </article>
@@ -143,6 +148,6 @@ const ViewNewsPage: React.FC = (): ReactElement => {
       </Main>
     </div>
   );
-};
+});
 
 export default ViewNewsPage;
