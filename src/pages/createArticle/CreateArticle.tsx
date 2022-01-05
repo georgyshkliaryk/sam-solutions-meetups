@@ -22,6 +22,9 @@ import DropZoneIcon from "./assets/dropzone-icon.svg";
 import { INewArticle } from "../../repositories/interfaces/INewsRepository";
 import { getBase64 } from "../../helpers/getBase64";
 
+import ReactMde from "react-mde";
+import ReactMarkdown from "react-markdown";
+
 const CreateArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
 
@@ -35,6 +38,8 @@ const CreateArticlePage: React.FC = (): ReactElement => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
   const { getRootProps, isDragActive, isDragReject } = useDropzone({
     accept: "image/jpeg, image/png, image/jpg",
@@ -102,12 +107,6 @@ const CreateArticlePage: React.FC = (): ReactElement => {
     setTitle(event.target.value);
   };
 
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setDescription(event.target.value);
-  };
-
   return (
     <div className="create-article">
       <Header className="create-article__header">
@@ -143,16 +142,28 @@ const CreateArticlePage: React.FC = (): ReactElement => {
               >
                 {t("inputLabels.text")}
               </label>
-              <textarea
-                className="create-article-form-inputs-item__textarea"
-                name="articleDescription"
-                id="articleDescription"
-                cols={30}
-                rows={10}
-                onChange={handleDescriptionChange}
+              <ReactMde
+                maxEditorHeight={480}
+                toolbarCommands={[
+                  ["header", "bold", "italic"],
+                  ["quote", "link", "code"],
+                  ["unordered-list", "ordered-list"],
+                ]}
                 value={description}
-              ></textarea>
+                onChange={setDescription}
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+                generateMarkdownPreview={(markdown) =>
+                  Promise.resolve(<ReactMarkdown>{markdown}</ReactMarkdown>)
+                }
+                childProps={{
+                  writeButton: {
+                    tabIndex: -1,
+                  },
+                }}
+              />
             </div>
+            <div className="container"></div>
             <div className="create-article-form-inputs-item">
               <label
                 htmlFor=""
