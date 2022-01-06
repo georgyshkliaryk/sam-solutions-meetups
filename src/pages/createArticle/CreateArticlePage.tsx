@@ -26,6 +26,7 @@ import ReactMde from "react-mde";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeExternalLinks from "rehype-external-links";
+import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 
 const CreateArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -136,6 +137,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 onChange={handleTitleChange}
                 value={title}
               />
+              <ValidationForInput inputData={title} />
             </div>
             <div className="create-article-form-inputs-item">
               <label
@@ -177,6 +179,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                   },
                 }}
               />
+              <ValidationForInput inputData={description} />
             </div>
             <div className="container"></div>
             <div className="create-article-form-inputs-item">

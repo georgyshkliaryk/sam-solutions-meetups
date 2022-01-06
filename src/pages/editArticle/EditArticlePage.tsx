@@ -18,6 +18,7 @@ import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
 import classNames from "classnames";
+import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -173,6 +174,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
                 defaultValue={title}
                 onChange={handleTitleChange}
               />
+              {title !== undefined && <ValidationForInput inputData={title} />}
             </div>
             <div className="edit-article-form-inputs-item">
               <label className="edit-article-form-inputs-item__label">
@@ -211,6 +213,9 @@ const EditArticlePage: React.FC = (): ReactElement => {
                   },
                 }}
               />
+              {description !== undefined && (
+                <ValidationForInput inputData={description} />
+              )}
             </div>
           </fieldset>
           <fieldset className="edit-article-form-buttons">
