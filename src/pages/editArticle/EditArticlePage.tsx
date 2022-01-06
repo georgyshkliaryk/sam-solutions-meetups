@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
-import { ReactElement } from "react-markdown/lib/react-markdown";
+import { ReactElement, ReactMarkdown } from "react-markdown/lib/react-markdown";
+import ReactMde from "react-mde";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import rehypeExternalLinks from "rehype-external-links";
+import remarkGfm from "remark-gfm";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
 import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
@@ -13,6 +16,7 @@ import MainTitle from "../../components/main/MainTitle/MainTitle";
 import { loadingColor, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
+import DefaultImage from "./assets/EditDefaultImage.svg";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -23,6 +27,10 @@ const EditArticlePage: React.FC = (): ReactElement => {
   const [article, setArticle] = useState(
     newsStore.newsList.find((a) => a.id === articleId.id)
   );
+
+  const [description, setDescription] = useState("");
+
+  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
   useEffect(() => {
     return () => {
@@ -65,7 +73,95 @@ const EditArticlePage: React.FC = (): ReactElement => {
     );
   }
 
-  return <div>edit article {article.id}</div>;
+  return (
+    <div className="edit-article">
+      <Header className="edit-article__header">
+        <LinkComponent to={routes.meetups}>
+          <LogoSam className="edit-article__header-logo" />
+        </LinkComponent>
+        <HeaderNavbar items={navItems.header} />
+        <HeaderProfile user={authStore.user} />
+      </Header>
+      <Main>
+        <MainTitle>{t("pageTitles.editArticle")}</MainTitle>
+        <form className="edit-article-form">
+          <fieldset className="edit-article-form-inputs">
+            <img
+              src={DefaultImage}
+              alt="Edit Article"
+              className="edit-article-form-inputs__image"
+            />
+            <div className="edit-article-form-inputs-item">
+              <label
+                htmlFor="editArticleTitle"
+                className="edit-article-form-inputs-item__label"
+              >
+                Заголовок
+              </label>
+              <input
+                type="text"
+                className="edit-article-form-inputs-item__input"
+                id="editArticleTitle"
+              />
+            </div>
+            <div className="edit-article-form-inputs-item">
+              <label className="edit-article-form-inputs-item__label">
+                Текст
+              </label>
+              <ReactMde
+                l18n={{
+                  write: t("markdown.write"),
+                  preview: t("markdown.preview"),
+                  uploadingImage: "",
+                  pasteDropSelect: "",
+                }}
+                maxEditorHeight={480}
+                toolbarCommands={[
+                  ["bold", "italic", "strikethrough"],
+                  ["quote", "link", "code"],
+                  ["unordered-list", "ordered-list"],
+                ]}
+                value={description}
+                onChange={setDescription}
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+                generateMarkdownPreview={(markdown) =>
+                  Promise.resolve(
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeExternalLinks]}
+                    >
+                      {markdown}
+                    </ReactMarkdown>
+                  )
+                }
+                childProps={{
+                  writeButton: {
+                    tabIndex: -1,
+                  },
+                }}
+              />
+            </div>
+          </fieldset>
+          <fieldset className="edit-article-form-buttons">
+            <LinkComponent
+              className="edit-article-form-buttons__back"
+              to={routes.news}
+            >
+              {t("buttons.meetupPageButtons.goBack")}
+            </LinkComponent>
+            <button
+              type="submit"
+              className="edit-article-form-buttons__submit"
+              //disabled={!requiredFilled}
+            >
+              {t("buttons.commonButtons.save")}
+            </button>
+          </fieldset>
+        </form>
+      </Main>
+    </div>
+  );
 };
 
 export default EditArticlePage;
