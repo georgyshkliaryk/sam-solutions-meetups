@@ -208,5 +208,9 @@
     }
   },
   "intlDateTime": "{{val, datetime}}",
-  "loading": "Загрузка"
+  "loading": "Загрузка",
+  "markdown": {
+    "write": "Писать",
+    "preview": "Просмотр"
+  }
 }

@@ -145,6 +145,12 @@ const CreateArticlePage: React.FC = (): ReactElement => {
                 {t("inputLabels.text")}
               </label>
               <ReactMde
+                l18n={{
+                  write: t("markdown.write"),
+                  preview: t("markdown.preview"),
+                  uploadingImage: "",
+                  pasteDropSelect: "",
+                }}
                 maxEditorHeight={480}
                 toolbarCommands={[
                   ["bold", "italic", "strikethrough"],

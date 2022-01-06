@@ -208,5 +208,9 @@
     }
   },
   "intlDateTime": "{{val, datetime}}",
-  "loading": "Loading"
+  "loading": "Loading",
+  "markdown": {
+    "write": "Write",
+    "preview": "Preview"
+  }
 }
