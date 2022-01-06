@@ -13,6 +13,7 @@ import Notifications from "./components/Notifications/Notifications";
 import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import ViewNewsPage from "./pages/viewNewsPage/ViewNewsPage";
 import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
+import EditArticlePage from "./pages/editArticle/EditArticlePage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -112,6 +113,14 @@ const App: React.FC = (): ReactElement => {
             element={
               <PrivateRoute>
                 <ViewNewsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={`${routes.news}/:id/edit`}
+            element={
+              <PrivateRoute>
+                <EditArticlePage />
               </PrivateRoute>
             }
           />

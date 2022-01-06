@@ -113,11 +113,14 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
           </LinkComponent>
           {authStore.user.roles === UserRoles.CHIEF && (
             <div className="view-article-buttons-right">
-              <button className="view-article-buttons-right__edit">
+              <LinkComponent
+                className="view-article-buttons-right__edit"
+                to={`${routes.news}/${articleId.id}/edit`}
+              >
                 <span className="material-icons-round">
                   drive_file_rename_outline
                 </span>
-              </button>
+              </LinkComponent>
               <button
                 className="view-article-buttons-right__delete"
                 onClick={() => setModalDeleteActive(true)}

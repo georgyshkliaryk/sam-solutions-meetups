@@ -86,7 +86,6 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    //alert("Meetup not found!");
     return <Navigate to={routes.login} />;
   }
 
