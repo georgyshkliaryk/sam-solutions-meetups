@@ -17,6 +17,7 @@ import { loadingColor, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
+import classNames from "classnames";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -28,7 +29,10 @@ const EditArticlePage: React.FC = (): ReactElement => {
     newsStore.newsList.find((a) => a.id === articleId.id)
   );
 
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(article?.title);
+  const [description, setDescription] = useState(article?.description);
+  const [image, setImage] = useState(article?.image);
+  const [file, setFile] = useState<File | null>(null);
 
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
@@ -46,6 +50,18 @@ const EditArticlePage: React.FC = (): ReactElement => {
     }
     getArticle();
   }, [articleId.id]);
+
+  useEffect(() => {
+    if (article && article.title) {
+      setTitle(article.title);
+    }
+    if (article && article.description) {
+      setDescription(article.description);
+    }
+    if (article && article.image) {
+      setImage(article.image);
+    }
+  }, [article]);
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -73,6 +89,29 @@ const EditArticlePage: React.FC = (): ReactElement => {
     );
   }
 
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  const handleEditImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
+    setFile(e.target.files ? e.target.files[0] : null);
+    if (e.target.files !== null) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
+  const handleDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setFile(null);
+    if (image) {
+      URL.revokeObjectURL(image);
+    }
+    setImage(undefined);
+  };
+
   return (
     <div className="edit-article">
       <Header className="edit-article__header">
@@ -86,11 +125,40 @@ const EditArticlePage: React.FC = (): ReactElement => {
         <MainTitle>{t("pageTitles.editArticle")}</MainTitle>
         <form className="edit-article-form">
           <fieldset className="edit-article-form-inputs">
-            <img
-              src={DefaultImage}
-              alt="Edit Article"
-              className="edit-article-form-inputs__image"
-            />
+            <div className="edit-article__image-wrapper">
+              <img
+                src={image ?? DefaultImage}
+                alt="Edit Article"
+                className="edit-article-form-inputs__image"
+              />
+              <input
+                type="file"
+                id="editImage"
+                className="edit-article__image-input"
+                accept=".png,.jpeg,.jpg"
+                onChange={handleEditImage}
+              />
+              <label
+                htmlFor="editImage"
+                className="edit-article__image-label"
+                title={t("htmlTitles.chooseImage")}
+              >
+                <span className="material-icons-round edit-article__image-label-icon">
+                  file_upload
+                </span>
+              </label>
+              <button
+                className={classNames("edit-article__image-delete", {
+                  "edit-article__image-delete-visible": file !== null || image,
+                })}
+                title={t("htmlTitles.deleteImage")}
+                onClick={handleDeleteImage}
+              >
+                <span className="material-icons-round edit-article__image-delete-icon">
+                  delete_forever
+                </span>
+              </button>
+            </div>
             <div className="edit-article-form-inputs-item">
               <label
                 htmlFor="editArticleTitle"
@@ -102,6 +170,8 @@ const EditArticlePage: React.FC = (): ReactElement => {
                 type="text"
                 className="edit-article-form-inputs-item__input"
                 id="editArticleTitle"
+                defaultValue={title}
+                onChange={handleTitleChange}
               />
             </div>
             <div className="edit-article-form-inputs-item">
@@ -153,7 +223,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
             <button
               type="submit"
               className="edit-article-form-buttons__submit"
-              //disabled={!requiredFilled}
+              disabled={title?.trim() === "" || description?.trim() === ""}
             >
               {t("buttons.commonButtons.save")}
             </button>

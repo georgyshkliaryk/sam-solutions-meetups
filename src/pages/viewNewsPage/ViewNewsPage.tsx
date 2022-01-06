@@ -19,6 +19,7 @@ import ReactMarkdown from "react-markdown";
 import { observer } from "mobx-react-lite";
 
 import rehypeExternalLinks from "rehype-external-links";
+import remarkGfm from "remark-gfm";
 
 const ViewNewsPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -98,7 +99,10 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
           <div className="view-article-content-text">
             <p className="view-article-content-text__title">{article.title}</p>
             <div className="view-article-content-text__description">
-              <ReactMarkdown rehypePlugins={[rehypeExternalLinks]}>
+              <ReactMarkdown
+                rehypePlugins={[rehypeExternalLinks]}
+                remarkPlugins={[remarkGfm]}
+              >
                 {article.description}
               </ReactMarkdown>
             </div>

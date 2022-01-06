@@ -49,6 +49,66 @@
   border-radius: 0.313rem;
 }
 
+.edit-article__image-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.edit-article__image-label {
+  position: absolute;
+  bottom: 1.3rem;
+  right: 1rem;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.edit-article__image-label:hover {
+  transform: scale(1.2);
+  color: $color-primary1;
+  border-color: $color-primary1;
+}
+
+.edit-article__image-label {
+  cursor: pointer;
+}
+
+.edit-article__image-input {
+  display: none;
+}
+
+.edit-article__image-label-icon {
+  font-size: 3rem;
+}
+
+.edit-article__image-delete {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: $color-error;
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-error;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.edit-article__image-delete-visible {
+  visibility: visible;
+}
+
+.edit-article__image-delete:hover {
+  transform: scale(1.2);
+}
+
+.edit-article__image-delete-icon {
+  font-size: 2rem;
+}
+
 .edit-article-form-inputs-item {
   display: flex;
   flex-direction: column;
