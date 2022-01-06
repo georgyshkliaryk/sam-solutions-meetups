@@ -59,6 +59,13 @@ export interface IEditedMeetupToServer {
   status?: string;
 }
 
+export interface IEditedArticleToServer {
+  id: string;
+  title?: string;
+  text?: string;
+  image?: string | null;
+}
+
 export interface IParticipant {
   id: string;
   name: string;
@@ -98,6 +105,10 @@ export interface INetworkRepository {
   stopParticipateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
   createMeetup: (meetupData: IMeetupToServer) => Promise<IMeetupFromServer>;
   editMeetup: (meetupData: IEditedMeetupToServer) => Promise<IMeetupFromServer>;
+  editArticle: (
+    id: string,
+    articleData: IEditedArticleToServer
+  ) => Promise<INewsFromServer>;
   login: (loginData: ILoginData) => Promise<ILoginResponse>;
   loginWithCookies: () => Promise<ILoginResponse>;
   logout: () => void;

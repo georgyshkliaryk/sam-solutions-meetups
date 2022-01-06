@@ -157,6 +157,8 @@
       "loadArticleError": "Failed to load article.",
       "editMeetupSuccess": "The meetup was successfully edited.",
       "editMeetupError": "Failed to edit meetup.",
+      "editArticleSuccess": "Article was successfully edited.",
+      "editArticleError": "Failed to edit the article.",
       "deleteMeetupSuccess": "The meetup was successfully deleted.",
       "deleteMeetupError": "Failed to delete meetup.",
       "deleteArticleSuccess": "Article has been successfully deleted.",

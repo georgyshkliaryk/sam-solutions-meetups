@@ -13,7 +13,16 @@ export interface INewArticle {
   image: string | null;
 }
 
+export interface IEditedArticle {
+  id: string;
+  title?: string;
+  description?: string;
+  image?: string | null;
+}
+
 export interface INewsRepository {
   getAllNews: () => Promise<INews[]>;
   getArticleById: (id: string) => Promise<INews>;
+  createArticle: (articleData: INewArticle) => Promise<INews>;
+  editArticle: (id: string, articleData: IEditedArticle) => Promise<void>;
 }

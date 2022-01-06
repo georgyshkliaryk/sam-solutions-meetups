@@ -1,5 +1,6 @@
 import { apiUrls } from "./../../constants";
 import {
+  IEditedArticleToServer,
   IEditedMeetupToServer,
   ILoginData,
   ILoginResponse,
@@ -91,6 +92,17 @@ export class NetworkRepository implements INetworkRepository {
     meetupData: IEditedMeetupToServer
   ): Promise<IMeetupFromServer> {
     const response = await axios.put(apiUrls.meetups, meetupData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
+  async editArticle(
+    id: string,
+    articleData: IEditedArticleToServer
+  ): Promise<INewsFromServer> {
+    const response = await axios.put(`${apiUrls.news}/${id}`, articleData);
     if (response.status !== 200) {
       throw new Error(response.data);
     }

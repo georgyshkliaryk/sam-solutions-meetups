@@ -157,6 +157,8 @@
       "loadArticleError": "Nachrichten konnten nicht geladen werden.",
       "editMeetupSuccess": "Das Treffen wurde erfolgreich bearbeitet.",
       "editMeetupError": "Treffen konnte nicht bearbeitet werden.",
+      "editArticleSuccess": "Artikel wurde erfolgreich bearbeitet.",
+      "editArticleError": "Fehler beim Bearbeiten des Artikels.",
       "deleteMeetupSuccess": "Das Treffen wurde erfolgreich gelöscht.",
       "deleteMeetupError": "Treffen konnte nicht gelöscht werden.",
       "deleteArticleSuccess": "Die Nachricht wurde erfolgreich gelöscht.",

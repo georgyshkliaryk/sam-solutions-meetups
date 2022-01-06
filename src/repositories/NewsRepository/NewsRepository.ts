@@ -1,6 +1,10 @@
-import { INewsToServer } from "./../interfaces/INetworkRepository";
-import { INewsFromServer } from "../interfaces/INetworkRepository";
 import {
+  IEditedArticleToServer,
+  INewsFromServer,
+  INewsToServer,
+} from "./../interfaces/INetworkRepository";
+import {
+  IEditedArticle,
   INewArticle,
   INews,
   INewsRepository,
@@ -30,6 +34,11 @@ export class NewsRepository implements INewsRepository {
     return this.parseNews(response);
   }
 
+  async editArticle(id: string, articleData: IEditedArticle): Promise<void> {
+    const editedArticle = this.parseEditedArticleForServer(articleData);
+    await this.networkRepository.editArticle(id, editedArticle);
+  }
+
   private parseNews(news: INewsFromServer): INews {
     return {
       id: news.id,
@@ -45,6 +54,17 @@ export class NewsRepository implements INewsRepository {
       title: article.title,
       text: article.description,
       publicationDate: article.date,
+      image: article.image,
+    };
+  }
+
+  private parseEditedArticleForServer(
+    article: IEditedArticle
+  ): IEditedArticleToServer {
+    return {
+      id: article.id,
+      title: article.title,
+      text: article.description,
       image: article.image,
     };
   }

@@ -19,6 +19,8 @@ import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
 import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
+import { IEditedArticle } from "../../repositories/interfaces/INewsRepository";
+import { getBase64 } from "../../helpers/getBase64";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -113,6 +115,32 @@ const EditArticlePage: React.FC = (): ReactElement => {
     setImage(undefined);
   };
 
+  const handleEditMeetup = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (articleId.id !== undefined) {
+      const editedData: IEditedArticle = {
+        id: articleId.id,
+      };
+
+      if (title !== undefined) {
+        editedData.title = title;
+      }
+      if (description !== undefined) {
+        editedData.description = description;
+      }
+
+      if (file !== null) {
+        editedData.image = await getBase64(file);
+      }
+      if (file === null && image === undefined) {
+        editedData.image = null;
+      }
+
+      await newsStore.updateArticle(articleId.id, editedData);
+      navigate(routes.news);
+    }
+  };
+
   return (
     <div className="edit-article">
       <Header className="edit-article__header">
@@ -124,7 +152,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
       </Header>
       <Main>
         <MainTitle>{t("pageTitles.editArticle")}</MainTitle>
-        <form className="edit-article-form">
+        <form className="edit-article-form" onSubmit={handleEditMeetup}>
           <fieldset className="edit-article-form-inputs">
             <div className="edit-article__image-wrapper">
               <img

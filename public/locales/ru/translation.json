@@ -157,6 +157,8 @@
       "loadArticleError": "Не удалось загрузить новость.",
       "editMeetupSuccess": "Митап успешно изменен.",
       "editMeetupError": "Не удалось изменить митап.",
+      "editArticleSuccess": "Новость успешно изменена.",
+      "editArticleError": "Не удалось изменить новость.",
       "deleteMeetupSuccess": "Митап успешно удален.",
       "deleteMeetupError": "Не удалось удалить митап.",
       "deleteArticleSuccess": "Новость успешно удалена.",
