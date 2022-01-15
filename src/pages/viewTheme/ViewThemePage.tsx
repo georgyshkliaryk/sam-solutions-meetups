@@ -18,6 +18,7 @@ import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "../loading/LoadingPage";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -56,21 +57,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="view-theme">
-        <Header className="view-theme__header">
-          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
-            <LogoSam className="view-theme__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>{t("loading")}...</MainTitle>
-          <Loader type="Puff" color={loadingColor} height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const approveTheme = async () => {

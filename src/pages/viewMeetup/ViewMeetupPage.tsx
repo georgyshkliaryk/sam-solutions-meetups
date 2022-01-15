@@ -29,6 +29,7 @@ import {
   dateLocalization,
   timeLocalization,
 } from "../../helpers/dateTimeLocalization";
+import LoadingPage from "../loading/LoadingPage";
 
 interface IProps {
   type: string;
@@ -101,21 +102,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="view-meetup">
-        <Header className="view-meetup__header">
-          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
-            <LogoSam className="view-meetup__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>{t("loading")}...</MainTitle>
-          <Loader type="Puff" color={loadingColor} height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const publishMeetup = async () => {
