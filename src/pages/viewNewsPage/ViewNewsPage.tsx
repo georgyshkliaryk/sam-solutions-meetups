@@ -60,7 +60,7 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
     return (
       <div className="view-article">
         <Header className="view-article__header">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="view-article__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
@@ -82,7 +82,7 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
   return (
     <div className="view-article">
       <Header className="view-article__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-article__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />

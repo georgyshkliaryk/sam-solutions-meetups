@@ -155,7 +155,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   return (
     <div className="create-meetup">
       <Header className="create-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="create-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -294,7 +294,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
               <div className="create-meetup-data-buttons">
                 <LinkComponent
                   className="create-meetup-data-buttons-button-back"
-                  to={routes.meetups}
+                  to={`${routes.meetups}/${routes.themes}`}
                 >
                   {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>

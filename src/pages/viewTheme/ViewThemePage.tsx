@@ -59,7 +59,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
     return (
       <div className="view-theme">
         <Header className="view-theme__header">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="view-theme__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
@@ -91,7 +91,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   return (
     <div className="view-theme">
       <Header className="view-theme__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-theme__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -221,7 +221,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             <div className="view-theme-data-buttons">
               <LinkComponent
                 className="view-theme-data-buttons-button-back"
-                to={`${routes.meetups}`}
+                to={`${routes.meetups}/${routes.themes}`}
               >
                 {t("buttons.meetupPageButtons.goBack")}
               </LinkComponent>

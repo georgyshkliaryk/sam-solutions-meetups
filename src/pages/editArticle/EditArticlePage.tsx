@@ -78,7 +78,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
     return (
       <div className="edit-meetup">
         <Header className="edit-meetup__header">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="edit-meetup__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
@@ -144,7 +144,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
   return (
     <div className="edit-article">
       <Header className="edit-article__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="edit-article__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />

@@ -104,7 +104,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
     return (
       <div className="view-meetup">
         <Header className="view-meetup__header">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="view-meetup__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
@@ -142,7 +142,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   return (
     <div className="view-meetup">
       <Header className="view-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />

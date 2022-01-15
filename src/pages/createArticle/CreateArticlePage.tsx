@@ -113,7 +113,7 @@ const CreateArticlePage: React.FC = (): ReactElement => {
   return (
     <div className="create-article">
       <Header className="create-article__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="create-article__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />

@@ -14,6 +14,7 @@ import ViewMeetupPage from "./pages/viewMeetup/ViewMeetupPage";
 import ViewNewsPage from "./pages/viewNewsPage/ViewNewsPage";
 import CreateArticlePage from "./pages/createArticle/CreateArticlePage";
 import EditArticlePage from "./pages/editArticle/EditArticlePage";
+import ErrorPage from "./pages/error/ErrorPage";
 
 const App: React.FC = (): ReactElement => {
   return (
@@ -124,8 +125,22 @@ const App: React.FC = (): ReactElement => {
               </PrivateRoute>
             }
           />
+          <Route
+            path={routes.error}
+            element={
+              <PrivateRoute>
+                <ErrorPage />
+              </PrivateRoute>
+            }
+          />
           <Route path={routes.login} element={<LoginPage />} />
-          <Route path="*" element={<Navigate replace to={routes.meetups} />} />
+          <Route
+            path={`${routes.meetups}`}
+            element={
+              <Navigate replace to={`${routes.meetups}/${routes.themes}`} />
+            }
+          />
+          <Route path="*" element={<Navigate replace to={routes.error} />} />
         </Routes>
         <Notifications />
       </BrowserRouter>

@@ -33,7 +33,7 @@ const NewsPage: React.FC = observer((): ReactElement => {
     return (
       <div className="news-page">
         <Header className="header-outer">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="header-logo-outer" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />

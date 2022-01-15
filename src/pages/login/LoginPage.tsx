@@ -52,7 +52,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
     };
     await authStore.login(loginData);
     if (authStore.isAuthenticated) {
-      navigate(routes.meetups);
+      navigate(`${routes.meetups}/${routes.themes}`);
     } else {
       setValidationError(true);
     }

@@ -1,0 +1,24 @@
+@import "../../constants.scss";
+
+.error-page {
+  height: 100%;
+  overflow: auto;
+}
+
+.error-page__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.error-page__header-logo {
+  width: 8rem;
+  text-align: left;
+}
+
+@media (min-width: $mobile-width) {
+  .error-page__header-logo {
+    width: 30rem;
+  }
+}

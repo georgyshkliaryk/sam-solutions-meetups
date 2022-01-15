@@ -93,7 +93,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     return (
       <div className="edit-meetup">
         <Header className="edit-meetup__header">
-          <LinkComponent to={routes.meetups}>
+          <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
             <LogoSam className="edit-meetup__header-logo" />
           </LinkComponent>
           <HeaderNavbar items={navItems.header} />
@@ -180,7 +180,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   return (
     <div className="edit-meetup">
       <Header className="edit-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="edit-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -352,7 +352,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <div className="edit-meetup-data-buttons">
                 <button
                   className="edit-meetup-data-buttons-button-back"
-                  onClick={() => navigate(routes.meetups)}
+                  onClick={() => navigate(`${routes.meetups}/${routes.themes}`)}
                 >
                   {t("buttons.commonButtons.cancel")}
                 </button>
