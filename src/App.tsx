@@ -139,6 +139,18 @@ const App: React.FC = (): ReactElement => {
             </PrivateRoute>
           }
         />
+        <Route
+          path={routes.accessDenied}
+          element={
+            <PrivateRoute>
+              <ErrorPage
+                errorTitle="403"
+                errorDescription={t("pageErrors.accessDenied")}
+                errorIconName="lock"
+              />
+            </PrivateRoute>
+          }
+        />
         <Route path={routes.login} element={<LoginPage />} />
         <Route
           path={routes.meetups}

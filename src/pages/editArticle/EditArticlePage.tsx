@@ -13,7 +13,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { loadingColor, navItems, routes } from "../../constants";
+import { loadingColor, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
@@ -21,6 +21,7 @@ import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import { IEditedArticle } from "../../repositories/interfaces/INewsRepository";
 import { getBase64 } from "../../helpers/getBase64";
+import { hasUserRights } from "../../helpers/hasUserRights";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -70,8 +71,12 @@ const EditArticlePage: React.FC = (): ReactElement => {
     return <Navigate to={routes.login} />;
   }
 
+  if (authStore.user.roles !== UserRoles.CHIEF) {
+    return <Navigate to={routes.accessDenied} />;
+  }
+
   if (newsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (article === undefined) {

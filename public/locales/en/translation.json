@@ -43,7 +43,8 @@
       "save": "Save",
       "preview": "Preview",
       "create": "Create",
-      "next": "Next"
+      "next": "Next",
+      "toMain": "Go to Home"
     },
     "cardButtons": {
       "voteForTheme": "Support",

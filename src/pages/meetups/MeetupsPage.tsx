@@ -41,7 +41,7 @@ const MeetupsPage: React.FC = observer((): ReactElement => {
           <MainTitle>{t("pageTitles.meetups")}</MainTitle>
           <MainNavbar items={navItems.meetups} className="main__navbar-outer" />
           <Routes>
-            <Route path={`${routes.themes}/*`} element={<ThemesPage />} />
+            <Route path={routes.themes} element={<ThemesPage />} />
             <Route path={routes.drafts} element={<DraftsPage />} />
             <Route path={routes.future} element={<FuturePage />} />
             <Route path={routes.past} element={<PastPage />} />

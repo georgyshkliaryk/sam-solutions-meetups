@@ -21,6 +21,7 @@ import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
 import { useTranslation } from "react-i18next";
 import LoadingPage from "../loading/LoadingPage";
+import { hasUserRights } from "../../helpers/hasUserRights";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -86,11 +87,15 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {
     return <LoadingPage />;
+  }
+
+  if (!hasUserRights(authStore.user, meetup)) {
+    return <Navigate to={routes.accessDenied} />;
   }
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

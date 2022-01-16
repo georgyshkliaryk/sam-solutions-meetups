@@ -43,7 +43,8 @@
       "save": "Speichern",
       "preview": "Vorschau",
       "create": "Erstellen",
-      "next": "Nächste"
+      "next": "Nächste",
+      "toMain": "Zur Startseite"
     },
     "cardButtons": {
       "voteForTheme": "Unterstützung",

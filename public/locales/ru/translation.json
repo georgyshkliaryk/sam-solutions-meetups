@@ -43,7 +43,8 @@
       "save": "Сохранить",
       "preview": "Предпросмотр",
       "create": "Создать",
-      "next": "Далее"
+      "next": "Далее",
+      "toMain": "На главную"
     },
     "cardButtons": {
       "voteForTheme": "Поддержать",

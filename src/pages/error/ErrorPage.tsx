@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
@@ -19,6 +20,7 @@ interface IProps {
 
 const ErrorPage: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore } = useContext(StoreContext);
+  const { t } = useTranslation();
 
   if (authStore.user === undefined) {
     return <Navigate to={routes.login} />;
@@ -51,7 +53,7 @@ const ErrorPage: React.FC<IProps> = observer((props): ReactElement => {
             to={`${routes.meetups}/${routes.themes}`}
           >
             <span className="material-icons-round">home</span>
-            <span>На главную</span>
+            <span>{t("buttons.commonButtons.toMain")}</span>
           </LinkComponent>
         </div>
       </Main>

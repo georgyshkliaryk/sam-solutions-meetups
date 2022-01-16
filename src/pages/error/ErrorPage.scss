@@ -25,13 +25,14 @@
 .error-page-content-title {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   gap: 1rem;
 }
 
 .error-page-content-description {
+  text-align: left;
   color: $color-secondary-text;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .error-page-content-title__text {
