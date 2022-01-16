@@ -8,6 +8,7 @@ interface IProps {
   className?: string;
   img?: string;
   user: Pick<IUser, "name" | "surname">;
+  isAdmin?: boolean;
 }
 
 const Avatar: React.FC<IProps> = (props): ReactElement => {
@@ -25,6 +26,11 @@ const Avatar: React.FC<IProps> = (props): ReactElement => {
         <p>
           {generateAvatarData(props.user.name, props.user.surname).initials}
         </p>
+      )}
+      {props.isAdmin && (
+        <span className="material-icons-round avatar__admin-icon">
+          admin_panel_settings
+        </span>
       )}
     </div>
   );
