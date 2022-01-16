@@ -15,6 +15,10 @@
   "pageDescriptions": {
     "newMeetup": "Füllen Sie die erforderlichen Felder unten genauer aus, um vollständige Informationen über die bevorstehende Veranstaltung zu erhalten."
   },
+  "pageErrors": {
+    "notFound": "Der Link, auf den Sie geklickt haben, ist möglicherweise defekt oder die Seite wurde möglicherweise entfernt oder umbenannt.",
+    "accessDenied": "Zugriff abgelehnt. Sie haben keinen Zugriff auf diese Seite."
+  },
   "navbar": {
     "header": {
       "meetups": "Treffen",

@@ -1,4 +1,5 @@
 import { t } from "i18next";
+import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import Loader from "react-loader-spinner";
 import { Navigate } from "react-router-dom";
@@ -13,7 +14,7 @@ import { loadingColor, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./LoadingPage.scss";
 
-const LoadingPage: React.FC = (): ReactElement => {
+const LoadingPage: React.FC = observer((): ReactElement => {
   const { authStore } = useContext(StoreContext);
 
   if (authStore.user === undefined) {
@@ -35,6 +36,6 @@ const LoadingPage: React.FC = (): ReactElement => {
       </Main>
     </div>
   );
-};
+});
 
 export default LoadingPage;

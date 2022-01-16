@@ -45,7 +45,10 @@ const MeetupsPage: React.FC = observer((): ReactElement => {
             <Route path={routes.drafts} element={<DraftsPage />} />
             <Route path={routes.future} element={<FuturePage />} />
             <Route path={routes.past} element={<PastPage />} />
-            <Route path="*" element={<Navigate replace to="/error" />} />
+            <Route
+              path="*"
+              element={<Navigate replace to={routes.notFound} />}
+            />
           </Routes>
         </Main>
       </div>

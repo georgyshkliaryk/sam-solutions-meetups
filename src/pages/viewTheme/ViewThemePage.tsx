@@ -53,7 +53,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {

@@ -15,6 +15,10 @@
   "pageDescriptions": {
     "newMeetup": "Fill in the required fields below in more detail, this will give complete information about the upcoming event."
   },
+  "pageErrors": {
+    "notFound": "The link you clicked may be broken or the page may have been removed or renamed.",
+    "accessDenied": "Access denied. You do not have access to this page."
+  },
   "navbar": {
     "header": {
       "meetups": "Meetups",

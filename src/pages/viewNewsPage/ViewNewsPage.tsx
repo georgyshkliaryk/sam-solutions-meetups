@@ -53,7 +53,7 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
   }
 
   if (newsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (article === undefined) {

@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
@@ -6,12 +7,17 @@ import HeaderProfile from "../../components/header/HeaderProfile/HeaderProfile";
 import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
-import MainTitle from "../../components/main/MainTitle/MainTitle";
 import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ErrorPage.scss";
 
-const ErrorPage: React.FC = (): ReactElement => {
+interface IProps {
+  errorTitle: string;
+  errorDescription: string;
+  errorIconName: string;
+}
+
+const ErrorPage: React.FC<IProps> = observer((props): ReactElement => {
   const { authStore } = useContext(StoreContext);
 
   if (authStore.user === undefined) {
@@ -28,10 +34,29 @@ const ErrorPage: React.FC = (): ReactElement => {
         <HeaderProfile user={authStore.user} />
       </Header>
       <Main>
-        <MainTitle>Error 404</MainTitle>
+        <div className="error-page-content">
+          <p className="error-page-content-title">
+            <span className="material-icons-round error-page-content-title__icon">
+              {props.errorIconName}
+            </span>
+            <span className="error-page-content-title__text">
+              {props.errorTitle}
+            </span>
+          </p>
+          <p className="error-page-content-description">
+            {props.errorDescription}
+          </p>
+          <LinkComponent
+            className="error-page-content-button"
+            to={`${routes.meetups}/${routes.themes}`}
+          >
+            <span className="material-icons-round">home</span>
+            <span>На главную</span>
+          </LinkComponent>
+        </div>
       </Main>
     </div>
   );
-};
+});
 
 export default ErrorPage;

@@ -17,6 +17,48 @@
   text-align: left;
 }
 
+.error-page-content-title__icon {
+  font-size: 7rem;
+  color: $color-primary1;
+}
+
+.error-page-content-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.error-page-content-description {
+  color: $color-secondary-text;
+  margin-bottom: 3rem;
+}
+
+.error-page-content-title__text {
+  font-size: 5rem;
+}
+
+.error-page-content {
+  margin-top: 15rem;
+}
+
+.error-page-content-button {
+  @include button-secondary;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.error-page-content-button:active {
+  @include button-secondary-active;
+}
+
+.error-page-content-button:hover {
+  @include button-secondary-hover;
+}
+
 @media (min-width: $mobile-width) {
   .error-page__header-logo {
     width: 30rem;

@@ -7,7 +7,7 @@ export const routes = {
   future: "future",
   past: "past",
   create: "create",
-  error: "/error",
+  notFound: "/notFound",
 } as const;
 
 export interface NavItem {
