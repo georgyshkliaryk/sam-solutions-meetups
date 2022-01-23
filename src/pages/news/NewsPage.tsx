@@ -7,7 +7,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes, UserRoles } from "../../constants";
+import { loadingColor, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./NewsPage.scss";
 import NewsCard from "../../components/main/cards/NewsCard/NewsCard";
@@ -16,6 +16,8 @@ import { useTranslation } from "react-i18next";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import { observer } from "mobx-react-lite";
 import { sortByDate } from "../../helpers/sortByDate";
+import NoDataPlaceholder from "../../components/NoDataPlaceholder/NoDataPlaceholder";
+import Loader from "react-loader-spinner";
 
 const NewsPage: React.FC = observer((): ReactElement => {
   const { authStore, newsStore } = useContext(StoreContext);
@@ -53,9 +55,18 @@ const NewsPage: React.FC = observer((): ReactElement => {
             )}
           </MainTitle>
           <div className="news-page-list">
-            {sortedNews.map((n: INews) => (
-              <NewsCard item={n} key={n.id} />
-            ))}
+            {newsStore.loadState ? (
+              <Loader
+                type="Puff"
+                color={loadingColor}
+                height={100}
+                width={100}
+              />
+            ) : sortedNews.length === 0 ? (
+              <NoDataPlaceholder text={t("placeholders.noNews")} />
+            ) : (
+              sortedNews.map((n: INews) => <NewsCard item={n} key={n.id} />)
+            )}
           </div>
         </Main>
       </div>

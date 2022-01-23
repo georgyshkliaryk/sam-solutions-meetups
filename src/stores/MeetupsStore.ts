@@ -14,6 +14,7 @@ import { t } from "i18next";
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   errorState = false;
+  loadState = false;
   buttonInLoading = "";
   participantsMap = new Map<string, IParticipant[]>();
   votedUsersMap = new Map<string, IParticipant[]>();
@@ -27,7 +28,9 @@ export class MeetupsStore {
   }
 
   async getAllMeetups(): Promise<void> {
+    this.loadState = true;
     this.meetups = await this.meetupsRepository.getAllMeetups();
+    this.loadState = false;
   }
 
   get themes(): IMeetup[] {

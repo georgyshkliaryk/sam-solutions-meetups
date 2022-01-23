@@ -62,7 +62,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
 
   const approveTheme = async () => {
     await meetupsStore.approveTheme(meetup.id);
-    navigate(routes.themes);
+    navigate(`${routes.meetups}/${routes.themes}`);
   };
 
   const handleDeleteTheme = () => {
