@@ -61,7 +61,22 @@ export class MeetupsStore {
     if (this.meetups.length === 0) {
       this.getAllMeetups();
     }
-    return this.meetups.filter((m: IMeetup) => m.isOver);
+    return this.meetups.filter((m: IMeetup) => {
+      if (
+        m.finish !== undefined &&
+        new Date(m.finish).getTime() < new Date().getTime()
+      ) {
+        return true;
+      }
+      if (
+        m.start !== undefined &&
+        m.finish === undefined &&
+        new Date(m.start).getTime() < new Date().getTime()
+      ) {
+        return true;
+      }
+      return false;
+    });
   }
 
   async getMeetupById(id: string): Promise<IMeetup | undefined> {
