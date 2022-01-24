@@ -13,7 +13,13 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { loadingColor, navItems, routes, UserRoles } from "../../constants";
+import {
+  fileMaxSize,
+  loadingColor,
+  navItems,
+  routes,
+  UserRoles,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
@@ -106,7 +112,10 @@ const EditArticlePage: React.FC = (): ReactElement => {
       URL.revokeObjectURL(image);
     }
     setFile(e.target.files ? e.target.files[0] : null);
-    if (e.target.files !== null) {
+    if (e.target.files !== null && e.target.files[0].size > fileMaxSize) {
+      alert("max file size!");
+      setFile(null);
+    } else if (e.target.files !== null) {
       setImage(URL.createObjectURL(e.target.files[0]));
     }
   };

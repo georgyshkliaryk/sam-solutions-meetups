@@ -1,13 +1,13 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { INews } from "../../../../repositories/interfaces/INewsRepository";
 import "./NewsCard.scss";
 import defaultImage from "./assets/newsDefaultImage.svg";
 import { truncText } from "../../../../helpers/truncText";
 import { useTranslation } from "react-i18next";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
-import ReactMarkdown from "react-markdown";
 
-import stripMarkdown from "strip-markdown";
+import { remark } from "remark";
+import strip from "strip-markdown";
 import remarkGfm from "remark-gfm";
 
 interface IProps {
@@ -16,6 +16,17 @@ interface IProps {
 
 const NewsCard: React.FC<IProps> = (props): ReactElement => {
   const { t } = useTranslation();
+  const [trimmedNewsText, setTrimmedNewsText] = useState<string>("");
+
+  useEffect(() => {
+    remark()
+      .use(remarkGfm)
+      .use(strip)
+      .process(props.item.description)
+      .then((text) => {
+        setTrimmedNewsText(truncText(90, String(text)));
+      });
+  }, [props.item.description]);
 
   return (
     <LinkComponent className="news-card" to={props.item.id}>
@@ -31,11 +42,7 @@ const NewsCard: React.FC<IProps> = (props): ReactElement => {
           })}
         </time>
         <p className="news-card-content__title">{props.item.title}</p>
-        <div className="news-card-content__description">
-          <ReactMarkdown remarkPlugins={[stripMarkdown, remarkGfm]}>
-            {truncText(90, props.item.description)}
-          </ReactMarkdown>
-        </div>
+        <div className="news-card-content__description">{trimmedNewsText}</div>
       </div>
     </LinkComponent>
   );
