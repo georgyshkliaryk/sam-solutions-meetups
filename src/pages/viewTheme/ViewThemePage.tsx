@@ -18,6 +18,7 @@ import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "../loading/LoadingPage";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -52,25 +53,11 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="view-theme">
-        <Header className="view-theme__header">
-          <LinkComponent to={routes.meetups}>
-            <LogoSam className="view-theme__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>{t("loading")}...</MainTitle>
-          <Loader type="Puff" color={loadingColor} height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const approveTheme = async () => {
@@ -91,7 +78,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   return (
     <div className="view-theme">
       <Header className="view-theme__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-theme__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -221,7 +208,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             <div className="view-theme-data-buttons">
               <LinkComponent
                 className="view-theme-data-buttons-button-back"
-                to={`${routes.meetups}`}
+                to={`${routes.meetups}/${routes.themes}`}
               >
                 {t("buttons.meetupPageButtons.goBack")}
               </LinkComponent>

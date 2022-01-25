@@ -1,6 +1,5 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Loader from "react-loader-spinner";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/header/Header/Header";
 import HeaderNavbar from "../../components/header/HeaderNavbar/HeaderNavbar";
@@ -9,7 +8,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { loadingColor, navItems, routes, UserRoles } from "../../constants";
+import { navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { INews } from "../../repositories/interfaces/INewsRepository";
 import "./ViewNewsPage.scss";
@@ -20,6 +19,7 @@ import { observer } from "mobx-react-lite";
 
 import rehypeExternalLinks from "rehype-external-links";
 import remarkGfm from "remark-gfm";
+import LoadingPage from "../loading/LoadingPage";
 
 const ViewNewsPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -53,25 +53,11 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
   }
 
   if (newsStore.errorState === true) {
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (article === undefined) {
-    return (
-      <div className="view-article">
-        <Header className="view-article__header">
-          <LinkComponent to={routes.meetups}>
-            <LogoSam className="view-article__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>{t("loading")}...</MainTitle>
-          <Loader type="Puff" color={loadingColor} height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const handleDeleteArticle = () => {
@@ -82,7 +68,7 @@ const ViewNewsPage: React.FC = observer((): ReactElement => {
   return (
     <div className="view-article">
       <Header className="view-article__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-article__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />

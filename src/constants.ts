@@ -7,6 +7,8 @@ export const routes = {
   future: "future",
   past: "past",
   create: "create",
+  notFound: "/notFound",
+  accessDenied: "/accessDenied",
 } as const;
 
 export interface NavItem {
