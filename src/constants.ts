@@ -7,6 +7,8 @@ export const routes = {
   future: "future",
   past: "past",
   create: "create",
+  notFound: "/notFound",
+  accessDenied: "/accessDenied",
 } as const;
 
 export interface NavItem {
@@ -80,6 +82,7 @@ export enum UserRoles {
 
 export const apiUrls = {
   meetups: "/meetups",
+  news: "/news",
   users: "/users",
   login: "/login",
   logout: "/logout",
@@ -134,6 +137,8 @@ export const avatarColors: string[] = [
   "darkslateblue",
   "crimson",
 ];
+
+export const loadingColor = "#314ad7" as const;
 
 export const fileMaxSize = 1000000;
 

@@ -1,11 +1,14 @@
 import { apiUrls } from "./../../constants";
 import {
+  IEditedArticleToServer,
   IEditedMeetupToServer,
   ILoginData,
   ILoginResponse,
   IMeetupFromServer,
   IMeetupToServer,
   INetworkRepository,
+  INewsFromServer,
+  INewsToServer,
   IParticipant,
 } from "./../interfaces/INetworkRepository";
 import axios from "axios";
@@ -16,8 +19,18 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async getAllNews(): Promise<INewsFromServer[]> {
+    const response = await axios.get(apiUrls.news);
+    return await response.data;
+  }
+
   async getMeetupById(id: string): Promise<IMeetupFromServer> {
     const response = await axios.get(`${apiUrls.meetups}/${id}`);
+    return await response.data;
+  }
+
+  async getArticleById(id: string): Promise<INewsFromServer> {
+    const response = await axios.get(`${apiUrls.news}/${id}`);
     return await response.data;
   }
 
@@ -67,6 +80,14 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async createArticle(articleData: INewsToServer): Promise<INewsFromServer> {
+    const response = await axios.post(apiUrls.news, articleData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
   async editMeetup(
     meetupData: IEditedMeetupToServer
   ): Promise<IMeetupFromServer> {
@@ -77,8 +98,27 @@ export class NetworkRepository implements INetworkRepository {
     return await response.data;
   }
 
+  async editArticle(
+    id: string,
+    articleData: IEditedArticleToServer
+  ): Promise<INewsFromServer> {
+    const response = await axios.put(`${apiUrls.news}/${id}`, articleData);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
   async deleteMeetup(id: string) {
     const response = await axios.delete(`${apiUrls.meetups}/${id}`);
+    if (response.status !== 200) {
+      throw new Error(response.data);
+    }
+    return await response.data;
+  }
+
+  async deleteArticle(id: string) {
+    const response = await axios.delete(`${apiUrls.news}/${id}`);
     if (response.status !== 200) {
       throw new Error(response.data);
     }

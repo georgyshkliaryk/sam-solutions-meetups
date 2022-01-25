@@ -1,0 +1,45 @@
+@import "../../../../constants.scss";
+
+.news-card {
+  @include card;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.news-card:hover {
+  box-shadow: 0 0 0 0.125rem $color-primary1;
+  cursor: pointer;
+}
+
+.news-card__image {
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  transform: translate(-1rem, -1rem);
+  box-shadow: 3px 5px 8px rgba(105, 112, 127, 0.336293);
+  border-radius: 0.313rem;
+}
+
+.news-card-content {
+  text-align: left;
+  padding: 1rem 1.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.news-card-content__title {
+  font-size: 1.125rem;
+}
+
+.news-card-content__description {
+  @include font-semi-light;
+  color: $color-secondary-text;
+}
+
+.news-card-content__date {
+  @include font-light;
+  color: $color-secondary-text;
+}

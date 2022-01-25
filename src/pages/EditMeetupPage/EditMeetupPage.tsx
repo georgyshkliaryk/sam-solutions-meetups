@@ -11,7 +11,6 @@ import { navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
-import Loader from "react-loader-spinner";
 import DatePicker from "react-datepicker";
 import { getBase64 } from "../../helpers/getBase64";
 import { IEditedMeetup } from "../../repositories/interfaces/IMeetupsRepository";
@@ -21,6 +20,8 @@ import ValidationForInput from "../../components/ValidationForInput/ValidationFo
 import classNames from "classnames";
 import PreviewMeetup from "../../components/PreviewMeetup/PreviewMeetup";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "../loading/LoadingPage";
+import { hasUserRights } from "../../helpers/hasUserRights";
 
 const EditMeetupPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -86,26 +87,15 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    //alert("Meetup not found!");
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="edit-meetup">
-        <Header className="edit-meetup__header">
-          <LinkComponent to={routes.meetups}>
-            <LogoSam className="edit-meetup__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
+  }
+
+  if (!hasUserRights(authStore.user, meetup)) {
+    return <Navigate to={routes.accessDenied} />;
   }
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,7 +171,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
   return (
     <div className="edit-meetup">
       <Header className="edit-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="edit-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -353,7 +343,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <div className="edit-meetup-data-buttons">
                 <button
                   className="edit-meetup-data-buttons-button-back"
-                  onClick={() => navigate(routes.meetups)}
+                  onClick={() => navigate(`${routes.meetups}/${routes.themes}`)}
                 >
                   {t("buttons.commonButtons.cancel")}
                 </button>

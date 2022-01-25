@@ -4,6 +4,7 @@ import Avatar from "../../../Avatar/Avatar";
 import "./MeetupsCard.scss";
 import LinkComponent from "../../../LinkComponent/LinkComponent";
 import {
+  loadingColor,
   MeetupPageTypes,
   NumberDeclination,
   routes,
@@ -111,7 +112,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
                   {props.buttonInLoading === props.item.id ? (
                     <Loader
                       type="ThreeDots"
-                      color="#00BFFF"
+                      color={loadingColor}
                       height="0.8rem"
                       width={30}
                     />
@@ -148,7 +149,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
               <div className="meetups-card-footer__button-loading">
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height="0.8rem"
                   width={30}
                 />

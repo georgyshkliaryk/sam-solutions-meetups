@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
-import { NumberDeclination } from "../../../../constants";
+import { loadingColor, NumberDeclination } from "../../../../constants";
 import { numberDeclination } from "../../../../helpers/declination";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import {
@@ -92,7 +92,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
                 {props.buttonInLoading === props.item.id ? (
                   <Loader
                     type="ThreeDots"
-                    color="#00BFFF"
+                    color={loadingColor}
                     height="0.8rem"
                     width={30}
                   />
@@ -127,7 +127,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
             <div className="themes-card-footer__button-loading">
               <Loader
                 type="ThreeDots"
-                color="#00BFFF"
+                color={loadingColor}
                 height="0.8rem"
                 width={30}
               />

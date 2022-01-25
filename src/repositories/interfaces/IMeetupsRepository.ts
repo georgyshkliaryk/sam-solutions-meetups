@@ -1,7 +1,5 @@
 import {
-  IEditedMeetupToServer,
   IMeetupFromServer,
-  IMeetupToServer,
   IParticipant,
   ISpeaker,
 } from "./INetworkRepository";
@@ -53,4 +51,5 @@ export interface IMeetupsRepository {
   createMeetup: (meetupData: INewMeetup) => Promise<IMeetup>;
   editMeetup: (meetupData: IEditedMeetup) => Promise<void>;
   getParticipantsById: (id: string) => Promise<IParticipant[]>;
+  getVotedUsersById: (id: string) => Promise<IParticipant[]>;
 }

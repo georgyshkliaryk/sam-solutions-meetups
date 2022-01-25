@@ -9,7 +9,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes, UserRoles } from "../../constants";
+import { loadingColor, navItems, routes, UserRoles } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import { IParticipant } from "../../repositories/interfaces/INetworkRepository";
 import "./ViewThemePage.scss";
@@ -18,6 +18,7 @@ import { hasUserRights } from "../../helpers/hasUserRights";
 import { IMeetup } from "../../repositories/interfaces/IMeetupsRepository";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import { useTranslation } from "react-i18next";
+import LoadingPage from "../loading/LoadingPage";
 
 const ViewThemePage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
@@ -52,26 +53,11 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    //alert("Theme not found!");
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="view-meetup">
-        <Header className="view-meetup__header">
-          <LinkComponent to={routes.meetups}>
-            <LogoSam className="view-meetup__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const approveTheme = async () => {
@@ -92,7 +78,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
   return (
     <div className="view-theme">
       <Header className="view-theme__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-theme__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -162,19 +148,19 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
               <div className="view-theme-data-content">
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />
                 <Loader
                   type="ThreeDots"
-                  color="#00BFFF"
+                  color={loadingColor}
                   height={30}
                   width={30}
                 />
@@ -222,7 +208,7 @@ const ViewThemePage: React.FC = observer((): ReactElement => {
             <div className="view-theme-data-buttons">
               <LinkComponent
                 className="view-theme-data-buttons-button-back"
-                to={`${routes.meetups}`}
+                to={`${routes.meetups}/${routes.themes}`}
               >
                 {t("buttons.meetupPageButtons.goBack")}
               </LinkComponent>

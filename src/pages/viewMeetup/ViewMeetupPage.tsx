@@ -9,7 +9,13 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { MeetupPageTypes, navItems, routes, UserRoles } from "../../constants";
+import {
+  loadingColor,
+  MeetupPageTypes,
+  navItems,
+  routes,
+  UserRoles,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./ViewMeetupPage.scss";
 import MeetupDefaultImage from "./assets/MeetupDefaultImage.svg";
@@ -23,6 +29,7 @@ import {
   dateLocalization,
   timeLocalization,
 } from "../../helpers/dateTimeLocalization";
+import LoadingPage from "../loading/LoadingPage";
 
 interface IProps {
   type: string;
@@ -90,26 +97,11 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   }
 
   if (meetupsStore.errorState === true) {
-    //alert("Meetup not found!");
-    return <Navigate to={routes.login} />;
+    return <Navigate to={routes.notFound} />;
   }
 
   if (meetup === undefined) {
-    return (
-      <div className="view-meetup">
-        <Header className="view-meetup__header">
-          <LinkComponent to={routes.meetups}>
-            <LogoSam className="view-meetup__header-logo" />
-          </LinkComponent>
-          <HeaderNavbar items={navItems.header} />
-          <HeaderProfile user={authStore.user} />
-        </Header>
-        <Main>
-          <MainTitle>Загрузка...</MainTitle>
-          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
-        </Main>
-      </div>
-    );
+    return <LoadingPage />;
   }
 
   const publishMeetup = async () => {
@@ -136,7 +128,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   return (
     <div className="view-meetup">
       <Header className="view-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="view-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -355,7 +347,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
-                            color="#00BFFF"
+                            color={loadingColor}
                             height="1rem"
                             width={30}
                           />
@@ -381,7 +373,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                         {meetupsStore.buttonInLoading ? (
                           <Loader
                             type="ThreeDots"
-                            color="#00BFFF"
+                            color={loadingColor}
                             height="1rem"
                             width={30}
                           />
@@ -396,7 +388,7 @@ const ViewMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                     <div>
                       <Loader
                         type="ThreeDots"
-                        color="#00BFFF"
+                        color={loadingColor}
                         height="1rem"
                         width={30}
                       />

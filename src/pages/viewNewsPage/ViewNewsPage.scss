@@ -1,0 +1,143 @@
+@import "../../constants.scss";
+
+.view-article {
+  height: 100%;
+  overflow: auto;
+}
+
+.view-article__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.view-article__header-logo {
+  width: 8rem;
+  text-align: left;
+}
+
+.view-article-content__image {
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 0.313rem 0.313rem 0 0;
+}
+
+.view-article-content-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background-color: #ffff;
+  text-align: left;
+  box-shadow: 0px 4px 7px rgba(215, 221, 232, 0.398055);
+  border-radius: 0 0 0.313rem 0.313rem;
+  padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+}
+
+.view-article-content-text__title {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+}
+
+.view-article-content-text__description {
+  @include font-semi-light;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  white-space: pre-line;
+}
+
+.view-article-buttons {
+  display: flex;
+  align-items: center;
+  background-color: #ffff;
+  margin-top: 1rem;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0.313rem;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+
+.view-article-buttons-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.view-article-buttons__back {
+  @include button-default;
+  padding: 0.688rem 1.375rem;
+  text-decoration: none;
+  line-height: 1.5rem;
+}
+
+.view-article-buttons__back:hover {
+  @include button-default-hover;
+}
+
+.view-article-buttons__back:active {
+  @include button-default-active;
+}
+
+.view-article-buttons-right__delete {
+  @include button-secondary;
+  padding: 0.688rem 1.375rem;
+  line-height: 1.5rem;
+}
+
+.view-article-buttons-right__edit {
+  @include button-secondary;
+  border-color: $color-primary2;
+  color: $color-primary2;
+  padding: 0.688rem 1.375rem;
+  text-decoration: none;
+}
+
+.view-article-buttons-right__delete:hover,
+.view-article-buttons-right__edit:hover {
+  @include button-secondary-hover;
+}
+
+.view-article-buttons-right__delete:active,
+.view-article-buttons-right__edit:active {
+  @include button-secondary-active;
+}
+
+.view-article-modal-buttons__delete {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-error;
+  border-color: $color-error;
+}
+
+.view-article-modal-buttons__delete:hover {
+  background-color: #ef0800bb;
+  color: #ffff;
+}
+
+.view-article-modal-buttons__delete:active {
+  background-color: $color-error;
+  color: #ffff;
+}
+
+.view-article-modal-buttons__cancel {
+  @include button-default;
+  padding: 0.5rem 1rem;
+  color: $color-primary1;
+  border-color: $color-primary1;
+}
+
+.view-article-modal-buttons__cancel:hover {
+  @include button-secondary-hover;
+}
+
+.view-article-modal-buttons__cancel:active {
+  @include button-secondary-active;
+}
+
+@media (min-width: $mobile-width) {
+  .view-article__header-logo {
+    width: 30rem;
+  }
+}

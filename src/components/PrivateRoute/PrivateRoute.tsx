@@ -12,6 +12,7 @@ const PrivateRoute: React.FC<IProps> = observer(
   ({ children }): ReactElement => {
     const location = useLocation();
     const { authStore } = useContext(StoreContext);
+
     return (
       <>
         {authStore.isAuthenticated ? (

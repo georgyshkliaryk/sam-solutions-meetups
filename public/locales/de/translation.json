@@ -3,14 +3,21 @@
     "meetups": "Treffen",
     "news": "Nachrichten",
     "newMeetup": "Neues Meetup",
+    "newArticle": "Neuer Artikel",
     "viewTheme": "Thema durchsuchen",
     "viewMeetup": "Meetup durchsuchen",
+    "viewArticle": "Nachrichten ansehen",
     "editMeetup": "Meetup-Bearbeitung",
+    "editArticle": "Artikelbearbeitung",
     "previewMeetup": "Meetup-Vorschau",
     "login": "Melden Sie sich an, um Meetups anzuzeigen"
   },
   "pageDescriptions": {
     "newMeetup": "Füllen Sie die erforderlichen Felder unten genauer aus, um vollständige Informationen über die bevorstehende Veranstaltung zu erhalten."
+  },
+  "pageErrors": {
+    "notFound": "Der Link, auf den Sie geklickt haben, ist möglicherweise defekt oder die Seite wurde möglicherweise entfernt oder umbenannt.",
+    "accessDenied": "Zugriff abgelehnt. Sie haben keinen Zugriff auf diese Seite."
   },
   "navbar": {
     "header": {
@@ -31,11 +38,13 @@
   "buttons": {
     "commonButtons": {
       "createMeetup": "Thema erstellen",
+      "createNews": "Artikel erstellen",
       "cancel": "Abbrechen",
       "save": "Speichern",
       "preview": "Vorschau",
       "create": "Erstellen",
-      "next": "Nächste"
+      "next": "Nächste",
+      "toMain": "Zur Startseite"
     },
     "cardButtons": {
       "voteForTheme": "Unterstützung",
@@ -72,7 +81,10 @@
     "uploadedImage": "Hochgeladenes Bild",
     "loginName": "Benutzername eingeben",
     "loginPassword": "Passwort eingeben",
-    "changeLanguage": "Sprache ändern"
+    "changeLanguage": "Sprache ändern",
+    "headline": "Üerschrift",
+    "text": "Text",
+    "image": "Bild"
   },
   "fillers": {
     "noSupporters": "Bisher hat noch niemand das Thema unterstützt",
@@ -144,11 +156,18 @@
     "descriptions": {
       "createMeetupSuccess": "Das Treffen wurde erfolgreich erstellt.",
       "createMeetupError": "Fehler beim Erstellen eines Meetups.",
+      "createArticleSuccess": "Die Nachricht wurde erfolgreich erstellt.",
+      "createArticleError": "Nachrichten konnten nicht erstellt werden.",
       "loadMeetupError": "Treffen konnte nicht geladen werden.",
+      "loadArticleError": "Nachrichten konnten nicht geladen werden.",
       "editMeetupSuccess": "Das Treffen wurde erfolgreich bearbeitet.",
       "editMeetupError": "Treffen konnte nicht bearbeitet werden.",
+      "editArticleSuccess": "Artikel wurde erfolgreich bearbeitet.",
+      "editArticleError": "Fehler beim Bearbeiten des Artikels.",
       "deleteMeetupSuccess": "Das Treffen wurde erfolgreich gelöscht.",
       "deleteMeetupError": "Treffen konnte nicht gelöscht werden.",
+      "deleteArticleSuccess": "Die Nachricht wurde erfolgreich gelöscht.",
+      "deleteArticleError": "Nachrichten konnten nicht gelöscht werden.",
       "approveThemeSuccess": "Thema wurde erfolgreich genehmigt.",
       "approveThemeError": "Design konnte nicht genehmigt werden.",
       "publishMeetupSuccess": "Meetup wurde erfolgreich veröffentlicht.",
@@ -176,6 +195,7 @@
       "logout": "Von Ihrem Konto abmelden?",
       "deleteMeetup": "Treffen löschen?",
       "deleteTheme": "Thema löschen?",
+      "deleteArticle": "Nachrichten löschen?",
       "publishMeetup": "Treffen veröffentlichen?",
       "approveTheme": "Treffen veröffentlichen?"
     },
@@ -195,5 +215,10 @@
       "incorrectLoginOrPassword": "Falscher Benutzername oder Passwort!"
     }
   },
-  "intlDateTime": "{{val, datetime}}"
+  "intlDateTime": "{{val, datetime}}",
+  "loading": "Wird geladen",
+  "markdown": {
+    "write": "Schreiben",
+    "preview": "Vorschau"
+  }
 }

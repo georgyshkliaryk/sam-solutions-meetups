@@ -19,6 +19,21 @@ export interface IMeetupFromServer {
   image?: string | null;
 }
 
+export interface INewsFromServer {
+  id: string;
+  publicationDate: string;
+  title: string;
+  text: string;
+  image: string;
+}
+
+export interface INewsToServer {
+  publicationDate: string;
+  title: string;
+  text: string;
+  image: string | null;
+}
+
 export interface IMeetupToServer {
   subject: string;
   excerpt: string;
@@ -42,6 +57,13 @@ export interface IEditedMeetupToServer {
   place?: string;
   image?: string | null;
   status?: string;
+}
+
+export interface IEditedArticleToServer {
+  id: string;
+  title?: string;
+  text?: string;
+  image?: string | null;
 }
 
 export interface IParticipant {
@@ -75,12 +97,18 @@ export interface ILoginData {
 
 export interface INetworkRepository {
   getAllMeetups: () => Promise<IMeetupFromServer[]>;
+  getAllNews: () => Promise<INewsFromServer[]>;
   getMeetupById: (id: string) => Promise<IMeetupFromServer>;
+  getArticleById: (id: string) => Promise<INewsFromServer>;
   getParticipantsOfMeetup: (id: string) => Promise<IParticipant[]>;
   participateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
   stopParticipateInMeetup: (meetupId: string) => Promise<IParticipant[]>;
   createMeetup: (meetupData: IMeetupToServer) => Promise<IMeetupFromServer>;
   editMeetup: (meetupData: IEditedMeetupToServer) => Promise<IMeetupFromServer>;
+  editArticle: (
+    id: string,
+    articleData: IEditedArticleToServer
+  ) => Promise<INewsFromServer>;
   login: (loginData: ILoginData) => Promise<ILoginResponse>;
   loginWithCookies: () => Promise<ILoginResponse>;
   logout: () => void;

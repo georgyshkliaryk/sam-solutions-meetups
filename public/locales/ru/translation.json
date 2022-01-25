@@ -3,14 +3,21 @@
     "meetups": "Митапы",
     "news": "Новости",
     "newMeetup": "Новый митап",
+    "newArticle": "Создание новости",
     "viewTheme": "Просмотр темы",
     "viewMeetup": "Просмотр митапа",
+    "viewArticle": "Просмотр новости",
     "editMeetup": "Редактирование митапа",
+    "editArticle": "Редактирование новости",
     "previewMeetup": "Предпросмотр митапа",
     "login": "Войдите для просмотра митапов"
   },
   "pageDescriptions": {
     "newMeetup": "Заполните необходимые поля ниже наиболее подробно, это даст полную информацию о предстоящем событии."
+  },
+  "pageErrors": {
+    "notFound": "Ссылка, по которой вы перешли, может быть сломана или страница была удалена либо переименована.",
+    "accessDenied": "Доступ ограничен. У вас нет доступа к этой странице."
   },
   "navbar": {
     "header": {
@@ -31,11 +38,13 @@
   "buttons": {
     "commonButtons": {
       "createMeetup": "Создать тему",
+      "createNews": "Создать новость",
       "cancel": "Отмена",
       "save": "Сохранить",
       "preview": "Предпросмотр",
       "create": "Создать",
-      "next": "Далее"
+      "next": "Далее",
+      "toMain": "На главную"
     },
     "cardButtons": {
       "voteForTheme": "Поддержать",
@@ -72,7 +81,10 @@
     "uploadedImage": "Загруженное изображение",
     "loginName": "Введите имя пользователя",
     "loginPassword": "Введите пароль",
-    "changeLanguage": "Сменить язык"
+    "changeLanguage": "Сменить язык",
+    "headline": "Заголовок",
+    "text": "Текст",
+    "image": "Изображение"
   },
   "fillers": {
     "noSupporters": "Пока никто не поддержал тему",
@@ -144,11 +156,18 @@
     "descriptions": {
       "createMeetupSuccess": "Митап успешно создан.",
       "createMeetupError": "Ошибка при создании митапа.",
+      "createArticleSuccess": "Новость успешно создана.",
+      "createArticleError": "Не удалось создать новость.",
       "loadMeetupError": "Не удалось загрузить митап.",
+      "loadArticleError": "Не удалось загрузить новость.",
       "editMeetupSuccess": "Митап успешно изменен.",
       "editMeetupError": "Не удалось изменить митап.",
+      "editArticleSuccess": "Новость успешно изменена.",
+      "editArticleError": "Не удалось изменить новость.",
       "deleteMeetupSuccess": "Митап успешно удален.",
       "deleteMeetupError": "Не удалось удалить митап.",
+      "deleteArticleSuccess": "Новость успешно удалена.",
+      "deleteArticleError": "Не удалось удалить новость.",
       "approveThemeSuccess": "Тема одобрена.",
       "approveThemeError": "Не удалось одобрить тему.",
       "publishMeetupSuccess": "Митап опубликован.",
@@ -176,6 +195,7 @@
       "logout": "Выйти из аккаунта?",
       "deleteMeetup": "Удалить митап?",
       "deleteTheme": "Удалить тему?",
+      "deleteArticle": "Удалить новость?",
       "publishMeetup": "Опубликовать митап?",
       "approveTheme": "Одобрить тему?"
     },
@@ -195,5 +215,10 @@
       "incorrectLoginOrPassword": "Неверный логин или пароль!"
     }
   },
-  "intlDateTime": "{{val, datetime}}"
+  "intlDateTime": "{{val, datetime}}",
+  "loading": "Загрузка",
+  "markdown": {
+    "write": "Писать",
+    "preview": "Просмотр"
+  }
 }
