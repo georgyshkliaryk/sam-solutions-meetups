@@ -132,9 +132,9 @@ const App: React.FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <ErrorPage
-                errorTitle="404"
-                errorDescription={t("pageErrors.notFound")}
-                errorIconName="warning"
+                title="404"
+                description={t("pageErrors.notFound")}
+                iconName="warning"
               />
             </PrivateRoute>
           }
@@ -144,9 +144,9 @@ const App: React.FC = (): ReactElement => {
           element={
             <PrivateRoute>
               <ErrorPage
-                errorTitle="403"
-                errorDescription={t("pageErrors.accessDenied")}
-                errorIconName="lock"
+                title="403"
+                description={t("pageErrors.accessDenied")}
+                iconName="lock"
               />
             </PrivateRoute>
           }

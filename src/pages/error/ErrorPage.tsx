@@ -13,9 +13,9 @@ import { StoreContext } from "../../context/StoreContext";
 import "./ErrorPage.scss";
 
 interface IProps {
-  errorTitle: string;
-  errorDescription: string;
-  errorIconName: string;
+  title: string;
+  description: string;
+  iconName: string;
 }
 
 const ErrorPage: React.FC<IProps> = observer((props): ReactElement => {
@@ -39,15 +39,13 @@ const ErrorPage: React.FC<IProps> = observer((props): ReactElement => {
         <div className="error-page-content">
           <p className="error-page-content-title">
             <span className="material-icons-round error-page-content-title__icon">
-              {props.errorIconName}
+              {props.iconName}
             </span>
             <span className="error-page-content-title__text">
-              {props.errorTitle}
+              {props.title}
             </span>
           </p>
-          <p className="error-page-content-description">
-            {props.errorDescription}
-          </p>
+          <p className="error-page-content-description">{props.description}</p>
           <LinkComponent
             className="error-page-content-button"
             to={`${routes.meetups}/${routes.themes}`}
