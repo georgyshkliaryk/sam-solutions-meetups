@@ -3,15 +3,21 @@
     "meetups": "Meetups",
     "news": "News",
     "newMeetup": "New Meetup",
+    "newArticle": "New Article",
     "viewTheme": "Browse Theme",
     "viewMeetup": "Browse Meetup",
     "viewArticle": "Browse Article",
     "editMeetup": "Meetup Editing",
+    "editArticle": "Article Editing",
     "previewMeetup": "Meetup Prewview",
     "login": "Sign In to View Meetups"
   },
   "pageDescriptions": {
     "newMeetup": "Fill in the required fields below in more detail, this will give complete information about the upcoming event."
+  },
+  "pageErrors": {
+    "notFound": "The link you clicked may be broken or the page may have been removed or renamed.",
+    "accessDenied": "Access denied. You do not have access to this page."
   },
   "navbar": {
     "header": {
@@ -37,7 +43,8 @@
       "save": "Save",
       "preview": "Preview",
       "create": "Create",
-      "next": "Next"
+      "next": "Next",
+      "toMain": "Go to Home"
     },
     "cardButtons": {
       "voteForTheme": "Support",
@@ -74,7 +81,10 @@
     "uploadedImage": "Uploaded image",
     "loginName": "Enter username",
     "loginPassword": "Enter password",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "headline": "Headline",
+    "text": "Text",
+    "image": "Image"
   },
   "fillers": {
     "noSupporters": "So far no one has supported the topic",
@@ -146,10 +156,14 @@
     "descriptions": {
       "createMeetupSuccess": "The meetup has been successfully created.",
       "createMeetupError": "Error while creating a meetup.",
+      "createArticleSuccess": "Article has been successfully created.",
+      "createArticleError": "Error while creating an article.",
       "loadMeetupError": "Failed to load meetup.",
       "loadArticleError": "Failed to load article.",
       "editMeetupSuccess": "The meetup was successfully edited.",
       "editMeetupError": "Failed to edit meetup.",
+      "editArticleSuccess": "Article was successfully edited.",
+      "editArticleError": "Failed to edit the article.",
       "deleteMeetupSuccess": "The meetup was successfully deleted.",
       "deleteMeetupError": "Failed to delete meetup.",
       "deleteArticleSuccess": "Article has been successfully deleted.",
@@ -202,5 +216,9 @@
     }
   },
   "intlDateTime": "{{val, datetime}}",
-  "loading": "Loading"
+  "loading": "Loading",
+  "markdown": {
+    "write": "Write",
+    "preview": "Preview"
+  }
 }

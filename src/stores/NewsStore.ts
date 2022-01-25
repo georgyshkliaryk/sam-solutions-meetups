@@ -2,7 +2,11 @@ import { t } from "i18next";
 import { makeAutoObservable } from "mobx";
 import { NetworkRepository } from "../repositories/NetworkRepository/NetworkRepository";
 import { NewsRepository } from "../repositories/NewsRepository/NewsRepository";
-import { INews } from "./../repositories/interfaces/INewsRepository";
+import {
+  IEditedArticle,
+  INewArticle,
+  INews,
+} from "./../repositories/interfaces/INewsRepository";
 import { NotificationsStore } from "./NotificationsStore";
 
 export class NewsStore {
@@ -62,6 +66,41 @@ export class NewsStore {
         type: "error",
         title: t("notifications.titles.error"),
         description: t("notifications.descriptions.deleteArticleError"),
+      });
+    }
+  }
+
+  async updateArticle(id: string, articleData: IEditedArticle): Promise<void> {
+    try {
+      await this.newsRepository.editArticle(id, articleData);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.editArticleSuccess"),
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.editArticleError"),
+      });
+    }
+  }
+
+  async createNewArticle(articleData: INewArticle): Promise<void> {
+    try {
+      const newArticle = await this.newsRepository.createArticle(articleData);
+      this.newsList.push(newArticle);
+      this.notificationsStore.setNotification({
+        type: "success",
+        title: t("notifications.titles.success"),
+        description: t("notifications.descriptions.createArticleSuccess"),
+      });
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: t("notifications.descriptions.createArticleError"),
       });
     }
   }

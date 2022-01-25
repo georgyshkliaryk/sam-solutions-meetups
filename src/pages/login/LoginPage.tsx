@@ -11,6 +11,12 @@ import { StoreContext } from "../../context/StoreContext";
 import { ILoginData } from "../../repositories/interfaces/INetworkRepository";
 import "./LoginPage.scss";
 
+type ILocationState = {
+  from: {
+    pathname: string;
+  };
+};
+
 const LoginPage: React.FC = observer((): ReactElement => {
   const { t } = useTranslation();
 
@@ -21,7 +27,8 @@ const LoginPage: React.FC = observer((): ReactElement => {
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState(false);
 
-  const from = location.state?.from?.pathname ?? routes.meetups;
+  const from =
+    (location.state as ILocationState)?.from?.pathname ?? routes.meetups;
 
   if (authStore.isAuthenticated) {
     return <Navigate replace to={from} />;
@@ -45,7 +52,7 @@ const LoginPage: React.FC = observer((): ReactElement => {
     };
     await authStore.login(loginData);
     if (authStore.isAuthenticated) {
-      navigate(routes.meetups);
+      navigate(`${routes.meetups}/${routes.themes}`);
     } else {
       setValidationError(true);
     }

@@ -112,6 +112,13 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
     }
   };
 
+  const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target.files ? e.target.files[0] : null);
+    if (e.target.files !== null) {
+      setUrlImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const handleCreateMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (authStore.user === undefined) {
@@ -155,7 +162,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
   return (
     <div className="create-meetup">
       <Header className="create-meetup__header">
-        <LinkComponent to={routes.meetups}>
+        <LinkComponent to={`${routes.meetups}/${routes.themes}`}>
           <LogoSam className="create-meetup__header-logo" />
         </LinkComponent>
         <HeaderNavbar items={navItems.header} />
@@ -294,7 +301,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
               <div className="create-meetup-data-buttons">
                 <LinkComponent
                   className="create-meetup-data-buttons-button-back"
-                  to={routes.meetups}
+                  to={`${routes.meetups}/${routes.themes}`}
                 >
                   {t("buttons.meetupPageButtons.goBack")}
                 </LinkComponent>
@@ -429,8 +436,6 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         {
                           "create-meetup-data-content-dragndrop-active":
                             isDragActive,
-                        },
-                        {
                           "create-meetup-data-content-dragndrop-rejected":
                             isDragReject,
                         }
@@ -454,12 +459,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       type="file"
                       id="image-upload"
                       accept=".png,.jpeg,.jpg"
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setFile(e.target.files ? e.target.files[0] : null);
-                        if (e.target.files !== null) {
-                          setUrlImage(URL.createObjectURL(e.target.files[0]));
-                        }
-                      }}
+                      onChange={handleUploadImage}
                       style={{ display: "none" }}
                     />
                     <p

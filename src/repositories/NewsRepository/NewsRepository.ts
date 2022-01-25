@@ -1,5 +1,14 @@
-import { INewsFromServer } from "../interfaces/INetworkRepository";
-import { INews, INewsRepository } from "../interfaces/INewsRepository";
+import {
+  IEditedArticleToServer,
+  INewsFromServer,
+  INewsToServer,
+} from "./../interfaces/INetworkRepository";
+import {
+  IEditedArticle,
+  INewArticle,
+  INews,
+  INewsRepository,
+} from "../interfaces/INewsRepository";
 import { NetworkRepository } from "../NetworkRepository/NetworkRepository";
 
 export class NewsRepository implements INewsRepository {
@@ -17,6 +26,19 @@ export class NewsRepository implements INewsRepository {
     return this.parseNews(articleFromServer);
   }
 
+  async createArticle(articleData: INewArticle): Promise<INews> {
+    const newArticleForServer = this.parseArticleForServer(articleData);
+    const response = await this.networkRepository.createArticle(
+      newArticleForServer
+    );
+    return this.parseNews(response);
+  }
+
+  async editArticle(id: string, articleData: IEditedArticle): Promise<void> {
+    const editedArticle = this.parseEditedArticleForServer(articleData);
+    await this.networkRepository.editArticle(id, editedArticle);
+  }
+
   private parseNews(news: INewsFromServer): INews {
     return {
       id: news.id,
@@ -24,6 +46,26 @@ export class NewsRepository implements INewsRepository {
       title: news.title,
       description: news.text,
       image: news.image,
+    };
+  }
+
+  private parseArticleForServer(article: INewArticle): INewsToServer {
+    return {
+      title: article.title,
+      text: article.description,
+      publicationDate: article.date,
+      image: article.image,
+    };
+  }
+
+  private parseEditedArticleForServer(
+    article: IEditedArticle
+  ): IEditedArticleToServer {
+    return {
+      id: article.id,
+      title: article.title,
+      text: article.description,
+      image: article.image,
     };
   }
 }
