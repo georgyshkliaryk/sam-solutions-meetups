@@ -112,6 +112,13 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
     }
   };
 
+  const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target.files ? e.target.files[0] : null);
+    if (e.target.files !== null) {
+      setUrlImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   const handleCreateMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (authStore.user === undefined) {
@@ -452,12 +459,7 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                       type="file"
                       id="image-upload"
                       accept=".png,.jpeg,.jpg"
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setFile(e.target.files ? e.target.files[0] : null);
-                        if (e.target.files !== null) {
-                          setUrlImage(URL.createObjectURL(e.target.files[0]));
-                        }
-                      }}
+                      onChange={handleUploadImage}
                       style={{ display: "none" }}
                     />
                     <p
