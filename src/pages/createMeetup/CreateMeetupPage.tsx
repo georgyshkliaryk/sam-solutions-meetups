@@ -429,8 +429,6 @@ const CreateMeetupPage: React.FC = observer((): ReactElement => {
                         {
                           "create-meetup-data-content-dragndrop-active":
                             isDragActive,
-                        },
-                        {
                           "create-meetup-data-content-dragndrop-rejected":
                             isDragReject,
                         }

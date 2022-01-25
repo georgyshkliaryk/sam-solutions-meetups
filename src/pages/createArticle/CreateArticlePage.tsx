@@ -220,15 +220,10 @@ const CreateArticlePage: React.FC = (): ReactElement => {
               ) : (
                 <div
                   {...getRootProps({
-                    className: classNames(
-                      "create-article-form-dragndrop",
-                      {
-                        "create-article-form-dragndrop-active": isDragActive,
-                      },
-                      {
-                        "create-article-form-dragndrop-rejected": isDragReject,
-                      }
-                    ),
+                    className: classNames("create-article-form-dragndrop", {
+                      "create-article-form-dragndrop-active": isDragActive,
+                      "create-article-form-dragndrop-rejected": isDragReject,
+                    }),
                   })}
                 >
                   <img
