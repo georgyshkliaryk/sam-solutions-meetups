@@ -227,6 +227,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.participateInMeetupSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -247,6 +248,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.voteForThemeSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -277,6 +279,7 @@ export class MeetupsStore {
         ),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -304,6 +307,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.unvoteForThemeSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),

@@ -42,17 +42,18 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   return (
     <div className="header-dropdown" onBlur={handleDropdownBlur}>
       <button
-        className={classNames("header-dropdown-expand-button", {
-          "header-dropdown-expand-button-rotated": isMenuOpen,
-        })}
+        className={classNames(
+          "header-dropdown-expand-button material-icons-round header-dropdown-expand-button-icon",
+          {
+            "header-dropdown-expand-button-rotated": isMenuOpen,
+          }
+        )}
         onClick={handleExpandButtonClick}
       >
-        <span className="material-icons-round header-dropdown-expand-button-icon">
-          expand_more
-        </span>
+        expand_more
       </button>
       {isMenuOpen && (
-        <div className="header-dropdown-list" tabIndex={0}>
+        <div className="header-dropdown-list" tabIndex={-1}>
           <div className="header-dropdown-list-item">
             <LocaleChange />
           </div>

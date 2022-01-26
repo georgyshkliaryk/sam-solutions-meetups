@@ -27,7 +27,6 @@ import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import { IEditedArticle } from "../../repositories/interfaces/INewsRepository";
 import { getBase64 } from "../../helpers/getBase64";
-import { hasUserRights } from "../../helpers/hasUserRights";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -112,10 +111,7 @@ const EditArticlePage: React.FC = (): ReactElement => {
       URL.revokeObjectURL(image);
     }
     setFile(e.target.files ? e.target.files[0] : null);
-    if (e.target.files !== null && e.target.files[0].size > fileMaxSize) {
-      alert("max file size!");
-      setFile(null);
-    } else if (e.target.files !== null) {
+    if (e.target.files !== null) {
       setImage(URL.createObjectURL(e.target.files[0]));
     }
   };

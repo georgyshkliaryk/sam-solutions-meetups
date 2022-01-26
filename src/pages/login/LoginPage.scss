@@ -6,6 +6,7 @@
   min-height: 100%;
   display: flex;
   align-items: center;
+  padding: 0 2rem;
 }
 
 .login-page-form {
@@ -98,5 +99,8 @@
   }
   .login-page-form__input-password {
     width: 21.5rem;
+  }
+  .login-page {
+    padding: 0;
   }
 }

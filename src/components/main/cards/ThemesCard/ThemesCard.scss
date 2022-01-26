@@ -157,6 +157,10 @@
   @include button-primary-active;
 }
 
+.themes-card-footer__button-participating:focus {
+  outline: #000 2px solid;
+}
+
 .themes-card-footer__button-loading {
   width: 8rem;
 }

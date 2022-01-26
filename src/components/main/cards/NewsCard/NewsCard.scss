@@ -17,7 +17,7 @@
   width: 9rem;
   height: 9rem;
   object-fit: cover;
-  transform: translate(-1rem, -1rem);
+  transform: translate(0rem, -1.5rem);
   box-shadow: 3px 5px 8px rgba(105, 112, 127, 0.336293);
   border-radius: 0.313rem;
 }
@@ -42,4 +42,13 @@
 .news-card-content__date {
   @include font-light;
   color: $color-secondary-text;
+}
+
+@media (min-width: $mobile-width) {
+  .news-card__image {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+    transform: translate(-1rem, -1rem);
+  }
 }
