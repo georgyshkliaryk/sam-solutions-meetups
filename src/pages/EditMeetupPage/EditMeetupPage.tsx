@@ -260,7 +260,10 @@ const EditMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                   )}
                 </div>
                 <fieldset className="edit-meetup-data-item-date">
-                  <div className="edit-meetup-data-item-date-item">
+                  <div
+                    className="edit-meetup-data-item-date-item"
+                    id="editStartDateBlock"
+                  >
                     <label
                       htmlFor="editStartDate"
                       className="edit-meetup-data-item__label"
@@ -370,10 +373,21 @@ const EditMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
                     disabled={
                       title?.trim() === "" || description?.trim() === ""
                     }
-                    className="edit-meetup-data-buttons-button-preview"
+                    className="edit-meetup-data-buttons-button-preview edit-meetup-data-buttons-button-preview-large"
                     onClick={() => setPreviewOpen(true)}
                   >
                     {t("buttons.commonButtons.preview")}
+                  </button>
+                  <button
+                    disabled={
+                      title?.trim() === "" || description?.trim() === ""
+                    }
+                    className="edit-meetup-data-buttons-button-preview edit-meetup-data-buttons-button-preview-small"
+                    onClick={() => setPreviewOpen(true)}
+                  >
+                    <span className="material-icons-outlined">
+                      remove_red_eye
+                    </span>
                   </button>
                   <button
                     disabled={

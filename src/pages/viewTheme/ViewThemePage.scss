@@ -106,6 +106,7 @@
 
 .view-theme-data-buttons-button-submit {
   @include button-primary;
+  width: auto;
 }
 
 .view-theme-data-buttons-button-submit:active {

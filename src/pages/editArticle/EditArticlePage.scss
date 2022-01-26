@@ -32,7 +32,7 @@
 }
 
 .edit-article-form-inputs {
-  padding: 2.125rem 2.5rem 2.5rem 2.5rem;
+  padding: 2.125rem 1rem 2.5rem 1rem;
 }
 
 .edit-article-form-inputs {
@@ -136,7 +136,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2.5rem;
+  padding: 1rem 1rem;
 }
 
 .edit-article-form-buttons__back {
@@ -156,6 +156,7 @@
 
 .edit-article-form-buttons__submit {
   @include button-primary;
+  width: auto;
   line-height: 1.5rem;
 }
 
@@ -170,5 +171,11 @@
 @media (min-width: $mobile-width) {
   .edit-article__header-logo {
     width: 30rem;
+  }
+  .edit-article-form-inputs {
+    padding: 2.125rem 2.5rem 2.5rem 2.5rem;
+  }
+  .edit-article-form-buttons {
+    padding: 1rem 2.5rem;
   }
 }
