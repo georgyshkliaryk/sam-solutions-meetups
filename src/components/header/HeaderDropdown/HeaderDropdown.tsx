@@ -49,6 +49,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
           }
         )}
         onClick={handleExpandButtonClick}
+        data-cy="header-button-header-dropdown"
       >
         expand_more
       </button>
@@ -60,6 +61,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
           <button
             className="header-dropdown-list-item header-dropdown-button-logout"
             onClick={handleLogoutModal}
+            data-cy="header-button-logout"
           >
             <span className="material-icons-outlined">logout</span>
             {t("buttons.authButtons.logout")}
@@ -74,7 +76,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={props.handleLogout}
-          data-cy="meetup-card-modal-button-delete"
+          data-cy="header-button-logout-confirm"
         >
           {t("modalWindow.buttons.logout")}
         </button>

@@ -163,6 +163,10 @@
   @include button-secondary-active;
 }
 
+.meetups-card-footer__button-participating:focus {
+  outline: #000 2px solid;
+}
+
 .meetups-card-footer__button-not-participating:active {
   @include button-primary-active;
 }

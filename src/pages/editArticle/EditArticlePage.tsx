@@ -116,15 +116,6 @@ const EditArticlePage: React.FC = (): ReactElement => {
     }
   };
 
-  const handleDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setFile(null);
-    if (image) {
-      URL.revokeObjectURL(image);
-    }
-    setImage(undefined);
-  };
-
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (articleId.id !== undefined) {
@@ -186,17 +177,6 @@ const EditArticlePage: React.FC = (): ReactElement => {
                   file_upload
                 </span>
               </label>
-              <button
-                className={classNames("edit-article__image-delete", {
-                  "edit-article__image-delete-visible": file !== null || image,
-                })}
-                title={t("htmlTitles.deleteImage")}
-                onClick={handleDeleteImage}
-              >
-                <span className="material-icons-round edit-article__image-delete-icon">
-                  delete_forever
-                </span>
-              </button>
             </div>
             <div className="edit-article-form-inputs-item">
               <label
