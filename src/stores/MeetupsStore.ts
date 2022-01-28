@@ -28,9 +28,17 @@ export class MeetupsStore {
   }
 
   async getAllMeetups(): Promise<void> {
-    this.loadState = true;
-    this.meetups = await this.meetupsRepository.getAllMeetups();
-    this.loadState = false;
+    try {
+      this.loadState = true;
+      this.meetups = await this.meetupsRepository.getAllMeetups();
+      this.loadState = false;
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: "Не удалось загрузить митапы. Ошибка сервера.",
+      });
+    }
   }
 
   get themes(): IMeetup[] {

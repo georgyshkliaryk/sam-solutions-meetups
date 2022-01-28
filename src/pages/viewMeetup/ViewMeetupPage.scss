@@ -206,11 +206,12 @@
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
+  width: auto;
 }
 
 .view-meetup-data-buttons-button-participating,
 .view-meetup-data-buttons-button-not-participating {
-  width: 10rem;
+  width: auto;
 }
 
 .view-meetup-data-buttons-button-participating:hover {
