@@ -12,6 +12,7 @@ import { NotificationsStore } from "./NotificationsStore";
 export class NewsStore {
   newsList: INews[] = [];
   errorState = false;
+  loadState = false;
 
   constructor(
     private readonly newsRepository: NewsRepository,
@@ -22,7 +23,9 @@ export class NewsStore {
   }
 
   async getAllNews(): Promise<void> {
+    this.loadState = true;
     this.newsList = await this.newsRepository.getAllNews();
+    this.loadState = false;
   }
 
   get news(): INews[] {

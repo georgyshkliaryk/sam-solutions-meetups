@@ -13,7 +13,13 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { loadingColor, navItems, routes, UserRoles } from "../../constants";
+import {
+  fileMaxSize,
+  loadingColor,
+  navItems,
+  routes,
+  UserRoles,
+} from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditArticlePage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
@@ -21,7 +27,6 @@ import classNames from "classnames";
 import ValidationForInput from "../../components/ValidationForInput/ValidationForInput";
 import { IEditedArticle } from "../../repositories/interfaces/INewsRepository";
 import { getBase64 } from "../../helpers/getBase64";
-import { hasUserRights } from "../../helpers/hasUserRights";
 
 const EditArticlePage: React.FC = (): ReactElement => {
   const { t } = useTranslation();
@@ -111,15 +116,6 @@ const EditArticlePage: React.FC = (): ReactElement => {
     }
   };
 
-  const handleDeleteImage = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setFile(null);
-    if (image) {
-      URL.revokeObjectURL(image);
-    }
-    setImage(undefined);
-  };
-
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (articleId.id !== undefined) {
@@ -181,17 +177,6 @@ const EditArticlePage: React.FC = (): ReactElement => {
                   file_upload
                 </span>
               </label>
-              <button
-                className={classNames("edit-article__image-delete", {
-                  "edit-article__image-delete-visible": file !== null || image,
-                })}
-                title={t("htmlTitles.deleteImage")}
-                onClick={handleDeleteImage}
-              >
-                <span className="material-icons-round edit-article__image-delete-icon">
-                  delete_forever
-                </span>
-              </button>
             </div>
             <div className="edit-article-form-inputs-item">
               <label

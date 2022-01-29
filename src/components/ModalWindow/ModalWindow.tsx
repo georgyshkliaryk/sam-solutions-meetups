@@ -33,7 +33,7 @@ const ModalWindow: React.FC<IProps> = (props): ReactElement => {
       })}
     >
       <div className="modal-cover" onClick={resetActive}></div>
-      <div className="modal">
+      <div className="modal" role="dialog" aria-modal={true}>
         <button className="modal-close" onClick={resetActive}>
           <span className="material-icons-round modal-close-icon">close</span>
         </button>

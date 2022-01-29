@@ -7,7 +7,7 @@ describe("tests meetups functionality", () => {
   const themeSpeaker = "Test User";
 
   beforeEach(() => {
-    login({ login: "Robbie", password: "private" });
+    login({ login: "Onie", password: "private" });
     visitHome();
   });
 
@@ -44,7 +44,9 @@ describe("tests meetups functionality", () => {
   });
 
   it("logs out", () => {
+    cy.get("[data-cy=header-button-header-dropdown]").click();
     cy.get("[data-cy=header-button-logout]").click();
+    cy.get("[data-cy=header-button-logout-confirm]").click();
     cy.get("[data-cy=login]").should("exist").should("be.empty");
     cy.get("[data-cy=password]").should("exist").should("be.empty");
     cy.get("[data-cy=login-button]").should("exist").should("be.disabled");

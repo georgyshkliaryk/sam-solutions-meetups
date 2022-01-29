@@ -3,6 +3,7 @@
 .main {
   min-height: 100%;
   background: $background-primary;
+  margin: 0 0.5rem;
 }
 
 .main__wrapper {
@@ -16,5 +17,6 @@
     background-position: bottom right;
     background-attachment: fixed;
     background-blend-mode: multiply;
+    margin: 0;
   }
 }

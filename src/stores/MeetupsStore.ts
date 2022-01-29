@@ -14,6 +14,7 @@ import { t } from "i18next";
 export class MeetupsStore {
   meetups: IMeetup[] = [];
   errorState = false;
+  loadState = false;
   buttonInLoading = "";
   participantsMap = new Map<string, IParticipant[]>();
   votedUsersMap = new Map<string, IParticipant[]>();
@@ -27,7 +28,17 @@ export class MeetupsStore {
   }
 
   async getAllMeetups(): Promise<void> {
-    this.meetups = await this.meetupsRepository.getAllMeetups();
+    try {
+      this.loadState = true;
+      this.meetups = await this.meetupsRepository.getAllMeetups();
+      this.loadState = false;
+    } catch {
+      this.notificationsStore.setNotification({
+        type: "error",
+        title: t("notifications.titles.error"),
+        description: "Не удалось загрузить митапы. Ошибка сервера.",
+      });
+    }
   }
 
   get themes(): IMeetup[] {
@@ -61,7 +72,22 @@ export class MeetupsStore {
     if (this.meetups.length === 0) {
       this.getAllMeetups();
     }
-    return this.meetups.filter((m: IMeetup) => m.isOver);
+    return this.meetups.filter((m: IMeetup) => {
+      if (
+        m.finish !== undefined &&
+        new Date(m.finish).getTime() < new Date().getTime()
+      ) {
+        return true;
+      }
+      if (
+        m.start !== undefined &&
+        m.finish === undefined &&
+        new Date(m.start).getTime() < new Date().getTime()
+      ) {
+        return true;
+      }
+      return false;
+    });
   }
 
   async getMeetupById(id: string): Promise<IMeetup | undefined> {
@@ -209,6 +235,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.participateInMeetupSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -229,6 +256,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.voteForThemeSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -259,6 +287,7 @@ export class MeetupsStore {
         ),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),
@@ -286,6 +315,7 @@ export class MeetupsStore {
         description: t("notifications.descriptions.unvoteForThemeSuccess"),
       });
     } catch {
+      this.buttonInLoading = "";
       this.notificationsStore.setNotification({
         type: "error",
         title: t("notifications.titles.error"),

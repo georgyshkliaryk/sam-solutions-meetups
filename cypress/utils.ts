@@ -6,5 +6,5 @@ export function login({ login, password }) {
 }
 
 export function visitHome() {
-  cy.visit("/");
+  cy.visit("/meetups/themes");
 }

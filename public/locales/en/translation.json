@@ -135,7 +135,12 @@
   },
   "placeholders": {
     "loginName": "Username",
-    "loginPassword": "Password"
+    "loginPassword": "Password",
+    "noThemes": "Currently there are no themes.",
+    "noDrafts": "Currently there are no drafts.",
+    "noFuture": "Currently there are no planned meetups.",
+    "noPast": "Currently there are no past meetups.",
+    "noNews": "Currently there are no published news."
   },
   "htmlTitles": {
     "showPassword": "Show password",

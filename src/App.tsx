@@ -75,7 +75,7 @@ const App: React.FC = (): ReactElement => {
           path={`${routes.meetups}/${routes.drafts}/:id/edit`}
           element={
             <PrivateRoute>
-              <EditMeetupPage />
+              <EditMeetupPage type={MeetupPageTypes.DRAFT} />
             </PrivateRoute>
           }
         />
@@ -83,7 +83,7 @@ const App: React.FC = (): ReactElement => {
           path={`${routes.meetups}/${routes.future}/:id/edit`}
           element={
             <PrivateRoute>
-              <EditMeetupPage />
+              <EditMeetupPage type={MeetupPageTypes.FUTURE} />
             </PrivateRoute>
           }
         />
@@ -91,7 +91,7 @@ const App: React.FC = (): ReactElement => {
           path={`${routes.meetups}/${routes.past}/:id/edit`}
           element={
             <PrivateRoute>
-              <EditMeetupPage />
+              <EditMeetupPage type={MeetupPageTypes.PAST} />
             </PrivateRoute>
           }
         />

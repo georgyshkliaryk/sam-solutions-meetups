@@ -27,11 +27,6 @@ export class AuthStore {
       this.user = response.user;
     } catch (err) {
       this.resetAuth();
-      this.notificationsStore.setNotification({
-        type: "warning",
-        title: t("notifications.titles.warning"),
-        description: t("notifications.descriptions.auth.loginExpired"),
-      });
     }
   }
 

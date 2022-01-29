@@ -7,7 +7,7 @@ import LinkComponent from "../../components/LinkComponent/LinkComponent";
 import LogoSam from "../../components/LogoSam/LogoSam";
 import Main from "../../components/main/Main/Main";
 import MainTitle from "../../components/main/MainTitle/MainTitle";
-import { navItems, routes } from "../../constants";
+import { MeetupPageTypes, navItems, routes } from "../../constants";
 import { StoreContext } from "../../context/StoreContext";
 import "./EditMeetupPage.scss";
 import DefaultImage from "./assets/EditDefaultImage.svg";
@@ -23,7 +23,11 @@ import { useTranslation } from "react-i18next";
 import LoadingPage from "../loading/LoadingPage";
 import { hasUserRights } from "../../helpers/hasUserRights";
 
-const EditMeetupPage: React.FC = observer((): ReactElement => {
+interface IProps {
+  type: string;
+}
+
+const EditMeetupPage: React.FC<IProps> = observer((props): ReactElement => {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -131,6 +135,16 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
     }
   };
 
+  const chooseLocationAndNavigate = (page: string): void => {
+    if (page === MeetupPageTypes.DRAFT) {
+      navigate(`${routes.meetups}/${routes.drafts}`);
+    } else if (page === MeetupPageTypes.FUTURE) {
+      navigate(`${routes.meetups}/${routes.future}`);
+    } else if (page === MeetupPageTypes.PAST) {
+      navigate(`${routes.meetups}/${routes.past}`);
+    }
+  };
+
   const handleEditMeetup = async (event: React.FormEvent) => {
     event.preventDefault();
     if (meetupId.id !== undefined) {
@@ -164,8 +178,12 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
       }
 
       await meetupsStore.updateMeetup(editedData);
-      navigate(routes.meetups);
+      chooseLocationAndNavigate(props.type);
     }
+  };
+
+  const handleGoBackClick = () => {
+    chooseLocationAndNavigate(props.type);
   };
 
   return (
@@ -242,7 +260,10 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                   )}
                 </div>
                 <fieldset className="edit-meetup-data-item-date">
-                  <div className="edit-meetup-data-item-date-item">
+                  <div
+                    className="edit-meetup-data-item-date-item"
+                    id="editStartDateBlock"
+                  >
                     <label
                       htmlFor="editStartDate"
                       className="edit-meetup-data-item__label"
@@ -343,7 +364,7 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
               <div className="edit-meetup-data-buttons">
                 <button
                   className="edit-meetup-data-buttons-button-back"
-                  onClick={() => navigate(`${routes.meetups}/${routes.themes}`)}
+                  onClick={handleGoBackClick}
                 >
                   {t("buttons.commonButtons.cancel")}
                 </button>
@@ -352,10 +373,21 @@ const EditMeetupPage: React.FC = observer((): ReactElement => {
                     disabled={
                       title?.trim() === "" || description?.trim() === ""
                     }
-                    className="edit-meetup-data-buttons-button-preview"
+                    className="edit-meetup-data-buttons-button-preview edit-meetup-data-buttons-button-preview-large"
                     onClick={() => setPreviewOpen(true)}
                   >
                     {t("buttons.commonButtons.preview")}
+                  </button>
+                  <button
+                    disabled={
+                      title?.trim() === "" || description?.trim() === ""
+                    }
+                    className="edit-meetup-data-buttons-button-preview edit-meetup-data-buttons-button-preview-small"
+                    onClick={() => setPreviewOpen(true)}
+                  >
+                    <span className="material-icons-outlined">
+                      remove_red_eye
+                    </span>
                   </button>
                   <button
                     disabled={

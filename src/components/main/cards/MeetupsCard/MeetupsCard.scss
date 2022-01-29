@@ -12,7 +12,7 @@
 
 .meetups-card-footer__avatar {
   height: 1.875rem;
-  width: 1.875rem;
+  min-width: 1.875rem;
   color: white;
 }
 
@@ -161,6 +161,10 @@
 
 .meetups-card-footer__button-participating:active {
   @include button-secondary-active;
+}
+
+.meetups-card-footer__button-participating:focus {
+  outline: #000 2px solid;
 }
 
 .meetups-card-footer__button-not-participating:active {

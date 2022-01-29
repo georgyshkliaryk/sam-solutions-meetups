@@ -19,6 +19,7 @@
 
 .create-meetup-nav {
   display: flex;
+  flex-wrap: wrap !important;
   align-items: center;
   justify-content: center;
   line-height: 1.25rem;
@@ -86,7 +87,7 @@
   background-color: rgba(49, 74, 215, 0.6);
   color: #ffff;
   border-radius: 50%;
-  width: 1.5rem;
+  min-width: 1.5rem;
   height: 1.5rem;
   margin-right: 1rem;
 }

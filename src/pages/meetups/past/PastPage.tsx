@@ -1,9 +1,16 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import Loader from "react-loader-spinner";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { MeetupPageTypes, NumberDeclination, routes } from "../../../constants";
+import NoDataPlaceholder from "../../../components/NoDataPlaceholder/NoDataPlaceholder";
+import {
+  loadingColor,
+  MeetupPageTypes,
+  NumberDeclination,
+  routes,
+} from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { hasUserRights } from "../../../helpers/hasUserRights";
@@ -31,16 +38,22 @@ const PastPage: React.FC = observer((): ReactElement => {
         </p>
       </div>
       <div className="past-page-wrapper">
-        {meetupsStore.past.map((card: IMeetup) => (
-          <MeetupsCard
-            key={card.id}
-            item={card}
-            editRights={hasUserRights(currentUser, card)}
-            type={MeetupPageTypes.PAST}
-            user={currentUser}
-            deleteMeetup={handleDeleteMeetup}
-          />
-        ))}
+        {meetupsStore.loadState ? (
+          <Loader type="Puff" color={loadingColor} height={100} width={100} />
+        ) : meetupsStore.past.length === 0 ? (
+          <NoDataPlaceholder text={t("placeholders.noPast")} />
+        ) : (
+          meetupsStore.past.map((card: IMeetup) => (
+            <MeetupsCard
+              key={card.id}
+              item={card}
+              editRights={hasUserRights(currentUser, card)}
+              type={MeetupPageTypes.PAST}
+              user={currentUser}
+              deleteMeetup={handleDeleteMeetup}
+            />
+          ))
+        )}
       </div>
     </section>
   );

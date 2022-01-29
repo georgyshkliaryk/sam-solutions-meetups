@@ -1,9 +1,16 @@
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import Loader from "react-loader-spinner";
 import { Navigate } from "react-router-dom";
 import MeetupsCard from "../../../components/main/cards/MeetupsCard/MeetupsCard";
-import { MeetupPageTypes, NumberDeclination, routes } from "../../../constants";
+import NoDataPlaceholder from "../../../components/NoDataPlaceholder/NoDataPlaceholder";
+import {
+  loadingColor,
+  MeetupPageTypes,
+  NumberDeclination,
+  routes,
+} from "../../../constants";
 import { StoreContext } from "../../../context/StoreContext";
 import { numberDeclination } from "../../../helpers/declination";
 import { hasUserRights } from "../../../helpers/hasUserRights";
@@ -52,20 +59,26 @@ const FuturePage: React.FC = observer((): ReactElement => {
         </p>
       </div>
       <div className="future-page-wrapper">
-        {meetupsStore.future.map((card: IMeetup) => (
-          <MeetupsCard
-            key={card.id}
-            item={card}
-            editRights={hasUserRights(currentUser, card)}
-            type={MeetupPageTypes.FUTURE}
-            participants={meetupsStore.participantsMap.get(card.id)}
-            buttonInLoading={meetupsStore.buttonInLoading}
-            user={currentUser}
-            deleteMeetup={handleDeleteMeetup}
-            participateInMeetup={handleParticipateInMeetup}
-            stopParticipateInMeetup={handleStopParticipateInMeetup}
-          />
-        ))}
+        {meetupsStore.loadState ? (
+          <Loader type="Puff" color={loadingColor} height={100} width={100} />
+        ) : meetupsStore.future.length === 0 ? (
+          <NoDataPlaceholder text={t("placeholders.noFuture")} />
+        ) : (
+          meetupsStore.future.map((card: IMeetup) => (
+            <MeetupsCard
+              key={card.id}
+              item={card}
+              editRights={hasUserRights(currentUser, card)}
+              type={MeetupPageTypes.FUTURE}
+              participants={meetupsStore.participantsMap.get(card.id)}
+              buttonInLoading={meetupsStore.buttonInLoading}
+              user={currentUser}
+              deleteMeetup={handleDeleteMeetup}
+              participateInMeetup={handleParticipateInMeetup}
+              stopParticipateInMeetup={handleStopParticipateInMeetup}
+            />
+          ))
+        )}
       </div>
     </section>
   );

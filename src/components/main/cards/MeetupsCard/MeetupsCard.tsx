@@ -19,6 +19,7 @@ import Loader from "react-loader-spinner";
 import { numberDeclination } from "../../../../helpers/declination";
 import { useTranslation } from "react-i18next";
 import { fullDateTimeLocalization } from "../../../../helpers/dateTimeLocalization";
+import { truncText } from "../../../../helpers/truncText";
 
 interface IProps {
   item: IMeetup;
@@ -80,7 +81,7 @@ const MeetupsCard: React.FC<IProps> = observer((props): ReactElement => {
           {props.item.title}
         </p>
         <p className="meetups-card-main__description">
-          {props.item.description}
+          {truncText(360, props.item.description)}
         </p>
       </LinkComponent>
       <div className="meetups-card-footer">

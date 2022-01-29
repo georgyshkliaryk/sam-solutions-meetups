@@ -42,23 +42,26 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
   return (
     <div className="header-dropdown" onBlur={handleDropdownBlur}>
       <button
-        className={classNames("header-dropdown-expand-button", {
-          "header-dropdown-expand-button-rotated": isMenuOpen,
-        })}
+        className={classNames(
+          "header-dropdown-expand-button material-icons-round header-dropdown-expand-button-icon",
+          {
+            "header-dropdown-expand-button-rotated": isMenuOpen,
+          }
+        )}
         onClick={handleExpandButtonClick}
+        data-cy="header-button-header-dropdown"
       >
-        <span className="material-icons-round header-dropdown-expand-button-icon">
-          expand_more
-        </span>
+        expand_more
       </button>
       {isMenuOpen && (
-        <div className="header-dropdown-list" tabIndex={0}>
+        <div className="header-dropdown-list" tabIndex={-1}>
           <div className="header-dropdown-list-item">
             <LocaleChange />
           </div>
           <button
             className="header-dropdown-list-item header-dropdown-button-logout"
             onClick={handleLogoutModal}
+            data-cy="header-button-logout"
           >
             <span className="material-icons-outlined">logout</span>
             {t("buttons.authButtons.logout")}
@@ -73,7 +76,7 @@ const HeaderDropdown: React.FC<IProps> = (props): ReactElement => {
         <button
           className="meetups-card-modal-buttons__delete"
           onClick={props.handleLogout}
-          data-cy="meetup-card-modal-button-delete"
+          data-cy="header-button-logout-confirm"
         >
           {t("modalWindow.buttons.logout")}
         </button>

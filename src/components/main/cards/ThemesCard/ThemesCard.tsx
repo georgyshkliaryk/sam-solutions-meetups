@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Loader from "react-loader-spinner";
 import { loadingColor, NumberDeclination } from "../../../../constants";
 import { numberDeclination } from "../../../../helpers/declination";
+import { truncText } from "../../../../helpers/truncText";
 import { IMeetup } from "../../../../repositories/interfaces/IMeetupsRepository";
 import {
   IParticipant,
@@ -66,7 +67,7 @@ const ThemesCard: React.FC<IProps> = (props): ReactElement => {
           className="themes-card-main__description"
           data-cy="theme-card-description"
         >
-          {props.item.description}
+          {truncText(360, props.item.description)}
         </p>
       </LinkComponent>
       <div className="themes-card-footer">
