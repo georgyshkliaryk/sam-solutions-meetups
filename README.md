@@ -2,7 +2,7 @@
 
 Full-stack web application built by Heorhi Shkliaryk for Sam-Solutions FE Internship.
 
-Technologies used in the project:  
+Technologies used in the project:   
 -React  
 -TypeScript  
 -MobX  
